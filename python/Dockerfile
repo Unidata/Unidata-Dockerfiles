@@ -22,4 +22,6 @@ RUN conda create -n unidata --yes python=2 numpy matplotlib cartopy ipython ipyt
 
 RUN mkdir -p ~/notebooks
 
+WORKDIR ~/notebooks
+
 EXPOSE 8888
