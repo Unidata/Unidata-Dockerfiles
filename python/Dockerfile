@@ -20,8 +20,10 @@ RUN conda config --add channels https://conda.binstar.org/Unidata
 
 RUN conda create -n unidata --yes python=2 numpy matplotlib cartopy ipython ipython-notebook netcdf4 owslib pyudl networkx basemap iris biggus
 
-RUN mkdir -p ~/notebooks
+RUN mkdir -p /notebooks
 
-WORKDIR ~/notebooks
+WORKDIR /notebooks
+
+VOLUME /notebooks
 
 EXPOSE 8888
