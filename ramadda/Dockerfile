@@ -25,8 +25,6 @@ RUN groupadd -r tomcat && \
 
 WORKDIR $DATA_DIR
 
-EXPOSE 8080
-
 USER tomcat
 
 CMD ["catalina.sh", "run"]
