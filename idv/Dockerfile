@@ -1,4 +1,9 @@
 #####
+# Used to generate the 'unidata/idv' docker container.
+# Visit us on the web at http://www.unidata.ucar.edu
+#####
+
+#####
 # Common stuff goes at the front,
 # so that we can take advantage of the
 # shared layers that docker provides.
@@ -59,8 +64,8 @@ ADD IDV5.tar.bz2 /home/dockuser
 # just for ease of use.
 ###
 
-COPY Dockerfile /home/dockuser
-COPY run_idv.sh /home/dockuser
+COPY Dockerfile /home/dockuser/
+COPY run_idv.sh /home/dockuser/
 
 ###
 # Configure fluxbox.
