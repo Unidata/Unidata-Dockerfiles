@@ -54,6 +54,15 @@ RUN echo "/usr/bin/startfluxbox" >> ~/.xinitrc
 ADD IDV5.tar.bz2 /home/dockuser
 
 ###
+# Include Dockerfile,
+# utility script to run the IDV
+# just for ease of use.
+###
+
+COPY Dockerfile /home/dockuser
+COPY run_idv.sh /home/dockuser
+
+###
 # Configure fluxbox.
 ###
 
