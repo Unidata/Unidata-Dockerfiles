@@ -9,6 +9,6 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-set -x    
+set -x
 
-docker run -p 5900:5900 $1 
+docker run -p 5901:5901 $1 
