@@ -1,4 +1,4 @@
-FROM unidata/idv-base
+FROM unidata:idv-base
 
 USER root
 
