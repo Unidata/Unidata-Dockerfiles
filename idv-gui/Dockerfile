@@ -47,4 +47,5 @@ ENV APORT 5901
 EXPOSE 5901
 
 RUN bash -c 'echo "/home/idv/IDV/runIDV && shutdown -h now" >> ~/.fluxbox/startup'
+COPY xinit.sh /home/idv/
 CMD ["xinit", "--", "/usr/bin/Xvfb", ":1", "-screen", "0", "1024x768x24"]

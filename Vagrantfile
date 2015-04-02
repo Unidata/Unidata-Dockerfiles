@@ -18,15 +18,15 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "docker64", primary: true do |v|
     v.vm.provision :shell, :path => "bootstrap_vm.sh"
-    v.vm.hostname = "docker-dev"
-    v.vm.box = "ubuntu/trusty64"
+    v.vm.hostname = "docker64"
+    v.vm.box = "unicorn64"
     v.vm.network "forwarded_port", guest: 5901, host: 5901
   end
 
   config.vm.define "docker32", primary: true do |v|
     v.vm.provision :shell, :path => "bootstrap_vm.sh"
-    v.vm.hostname = "docker-dev"
-    v.vm.box = "ubuntu/trusty32"
+    v.vm.hostname = "docker32"
+    v.vm.box = "unicorn32"
     v.vm.network "forwarded_port", guest: 5902, host: 5902
   end
 
