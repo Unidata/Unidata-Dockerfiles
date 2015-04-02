@@ -48,5 +48,3 @@ RUN tar xvfj ~/IDV.tar.bz2
 ###
 
 COPY Dockerfile /home/idv/
-
-CMD ["tail", "-f", "/home/idv/Dockerfile"]
