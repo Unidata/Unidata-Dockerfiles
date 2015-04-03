@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><object class="java.util.Hashtable">
+  <method name="put">
+    <string>datasources</string>
+    <object class="java.util.ArrayList"/>
+  </method>
+  <method name="put">
+    <string>mischashtable</string>
+    <object class="java.util.Hashtable">
+      <method name="put">
+        <string>dataholderbounds</string>
+        <object class="java.util.Hashtable">
+          <method name="put">
+            <string>ucar.unidata.idv.ui.DataSelector</string>
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>496</int>
+                <int>102</int>
+                <int>703</int>
+                <int>421</int>
+              </constructor>
+            </object>
+          </method>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>commandstorun</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <string>idv.showColorTableEditor ('default');</string>
+      </method>
+      <method name="add">
+        <string>idv.showDefaultsEditor ();</string>
+      </method>
+      <method name="add">
+        <string>idv.showStationModelEditor ();</string>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>viewmanagers</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.idv.MapViewManager">
+          <property name="ShowCursor">
+            <boolean>true</boolean>
+          </property>
+          <property name="MapState">
+            <string>&lt;maps position="-0.99" &gt;
+  &lt;latitude color="-10040116"  linestyle="1"  linewidth="1.0"  maxvalue="90"  minvalue="-90"  spacing="15.0"  visible="false" /&gt;
+  &lt;longitude color="-10040116"  linestyle="1"  linewidth="1.0"  maxvalue="180"  minvalue="-180"  spacing="15.0"  visible="false" /&gt;
+  &lt;map color="-16776961"  description="World Coastlines"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/OUTLSUPW"  visible="true" /&gt;
+  &lt;map color="-65536"  description="World Political Boundaries"  linestyle="3"  linewidth="1.0"  source="/auxdata/maps/OUTLHPOL"  visible="false" /&gt;
+  &lt;map color="-16724992"  description="World Country Outlines"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/Countries.zip"  visible="false" /&gt;
+  &lt;map color="-16776961"  description="North &amp;amp; Central America"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/OUTLUSAM"  visible="false" /&gt;
+  &lt;map color="-16776961"  description="Hi-Res US"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/OUTLSUPU"  visible="false" /&gt;
+  &lt;map color="-16776961"  description="U.S. County Outlines"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/OUTLCNTY"  visible="false" /&gt;
+  &lt;map color="-16711681"  description="US Interstate Highways"  linestyle="0"  linewidth="1.0"  source="/auxdata/maps/OUTUSINT"  visible="false" /&gt;
+&lt;/maps&gt;
+</string>
+          </property>
+          <property name="Clipping">
+            <boolean>false</boolean>
+          </property>
+          <property name="DisplayMatrix">
+            <parray class="double" length="16">0.7153846153846153,0.0,0.0,0.0,0.0,0.5,0.0,0.0,0.0,0.0,0.2,0.0,0.0,0.0,0.0,1.0</parray>
+          </property>
+          <property name="MainProjection">
+            <object class="ucar.visad.ProjectionCoordinateSystem">
+              <constructor>
+                <object class="ucar.unidata.geoloc.projection.LambertConformal">
+                  <property name="OriginLat">
+                    <double>25.0</double>
+                  </property>
+                  <property name="OriginLon">
+                    <double>-95.0</double>
+                  </property>
+                  <property name="ParallelOne">
+                    <double>25.0</double>
+                  </property>
+                  <property name="ParallelTwo">
+                    <double>25.0</double>
+                  </property>
+                  <property name="Name">
+                    <string stringvalue=""/>
+                  </property>
+                  <property name="DefaultMapArea">
+                    <object class="ucar.unidata.geoloc.ProjectionRect">
+                      <constructor>
+                        <double>-4342.305265119194</double>
+                        <double>-926.1561781315531</double>
+                        <double>3367.061794880805</double>
+                        <double>4462.111121868446</double>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </constructor>
+            </object>
+          </property>
+          <property name="AniReadout">
+            <boolean>false</boolean>
+          </property>
+          <property name="VerticalRange">
+            <parray class="double" length="2">0.0,16000.0</parray>
+          </property>
+          <property name="ShowMap">
+            <boolean>true</boolean>
+          </property>
+          <property name="UseProjectionFromData">
+            <boolean>true</boolean>
+          </property>
+          <property name="BgColor">
+            <boolean>true</boolean>
+          </property>
+          <property name="Wireframe">
+            <boolean>true</boolean>
+          </property>
+          <property name="MainProjectionName">
+            <string>LambertConformal from: Contour Plan View</string>
+          </property>
+          <property name="MapConfigFile">
+            <string null="true"/>
+          </property>
+          <property name="UseGlobeDisplay">
+            <boolean>false</boolean>
+          </property>
+          <property name="WindowBounds">
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>591</int>
+                <int>75</int>
+                <int>636</int>
+                <int>553</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="ViewDescriptor">
+            <object class="ucar.unidata.idv.ViewDescriptor">
+              <property name="Name">
+                <string>MAIN3D</string>
+              </property>
+            </object>
+          </property>
+          <property name="HasWindow">
+            <boolean>true</boolean>
+          </property>
+          <property name="Sharing">
+            <boolean>false</boolean>
+          </property>
+          <property name="ShareGroup">
+            <string>All</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>displaycontrols</string>
+    <object class="java.util.ArrayList"/>
+  </method>
+</object>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?><object class="java.util.Hashtable">
+  <method name="put">
+    <string>datasources</string>
+    <object class="java.util.ArrayList"/>
+  </method>
+  <method name="put">
+    <string>version</string>
+    <string>1.2b2</string>
+  </method>
+  <method name="put">
+    <string>mischashtable</string>
+    <object class="java.util.Hashtable">
+      <method name="put">
+        <string>dataholderbounds</string>
+        <object class="java.util.Hashtable">
+          <method name="put">
+            <string>ucar.unidata.idv.ui.DataSelector</string>
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>0</int>
+                <int>0</int>
+                <int>703</int>
+                <int>424</int>
+              </constructor>
+            </object>
+          </method>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>windows</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.idv.ui.WindowInfo">
+          <property name="ViewManagers">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.idv.MapViewManager" id="id9">
+                  <property name="MainProjection">
+                    <object class="ucar.visad.ProjectionCoordinateSystem">
+                      <constructor>
+                        <object class="ucar.unidata.geoloc.projection.LambertConformal">
+                          <property name="ParallelTwo">
+                            <double>25.0</double>
+                          </property>
+                          <property name="ParallelOne">
+                            <double>25.0</double>
+                          </property>
+                          <property name="OriginLon">
+                            <double>-95.0</double>
+                          </property>
+                          <property name="OriginLat">
+                            <double>25.0</double>
+                          </property>
+                          <property name="Name">
+                            <string>US&gt;CONUS</string>
+                          </property>
+                          <property name="DefaultMapArea">
+                            <object class="ucar.unidata.geoloc.ProjectionRect">
+                              <constructor>
+                                <double>-3718.9811314976646</double>
+                                <double>-1318.7048434428925</double>
+                                <double>2559.253047605616</double>
+                                <double>4959.529335660388</double>
+                              </constructor>
+                            </object>
+                          </property>
+                        </object>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="VerticalRangeUnit">
+                    <object class="visad.BaseUnit" name="m">
+                      <string>m</string>
+                    </object>
+                  </property>
+                  <property name="VerticalRange">
+                    <parray class="double" length="2">0.0,16000.0</parray>
+                  </property>
+                  <property name="DisplayMatrix">
+                    <parray class="double" length="16">0.5,0.0,0.0,0.0,0.0,0.5,0.0,0.0,0.0,0.0,0.2,0.0,0.0,0.0,0.0,1.0</parray>
+                  </property>
+                  <property name="ViewDescriptor">
+                    <object class="ucar.unidata.idv.ViewDescriptor">
+                      <property name="Name">
+                        <string>view_1110828067370_0.8186846134843814_5</string>
+                      </property>
+                    </object>
+                  </property>
+                  <property name="Idv">
+                    <object idref="idv"/>
+                  </property>
+                  <property name="UniqueId">
+                    <string>view_1110828067370_0.8186846134843814_5</string>
+                  </property>
+                  <property name="WindowBounds">
+                    <object class="java.awt.Rectangle">
+                      <constructor>
+                        <int>305</int>
+                        <int>163</int>
+                        <int>898</int>
+                        <int>608</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="AnimationInfo">
+                    <object class="ucar.visad.display.AnimationInfo"/>
+                  </property>
+                  <property name="HasWindow">
+                    <boolean>true</boolean>
+                  </property>
+                  <property name="SideDividerLocation">
+                    <int>605</int>
+                  </property>
+                  <property name="SideLegend">
+                    <object class="ucar.unidata.idv.ui.SideLegend">
+                      <property name="CategoryToPanelOpen">
+                        <object class="java.util.Hashtable">
+                          <method name="put">
+                            <string>Maps</string>
+                            <java.lang.Boolean>true</java.lang.Boolean>
+                          </method>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="Bounds">
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>305</int>
+                <int>163</int>
+                <int>898</int>
+                <int>608</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="SkinPath">
+            <string>/ucar/unidata/idv/resources/skin.xml</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>viewmanagers</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object idref="id9"/>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>displaycontrols</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.idv.control.MapDisplayControl">
+          <property name="CanDoRemoveAll">
+            <boolean>false</boolean>
+          </property>
+          <property name="InitialMap">
+            <string>/auxdata/maps/OUTLSUPW</string>
+          </property>
+          <property name="InitialMapDescription">
+            <string>World Coastlines</string>
+          </property>
+          <property name="MapStates">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Coastlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLSUPW</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>204</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="Visible">
+                    <boolean>true</boolean>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Political Boundaries</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLHPOL</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>255</int>
+                        <int>0</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="LineStyle">
+                    <int>3</int>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Country Outlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/Countries.zip</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>North &amp; Central America</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLUSAM</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>Hi-Res US</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLSUPU</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>U.S. County Outlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLCNTY</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>255</int>
+                        <int>0</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>US Interstate Highways</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTUSINT</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>255</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="LatState">
+            <object class="ucar.unidata.idv.control.MapDisplayControl$LatLonState">
+              <property name="Color">
+                <object class="java.awt.Color" id="id39">
+                  <constructor>
+                    <int>128</int>
+                    <int>128</int>
+                    <int>128</int>
+                  </constructor>
+                </object>
+              </property>
+              <property name="MaxValue">
+                <float>90.0</float>
+              </property>
+              <property name="MinValue">
+                <float>-90.0</float>
+              </property>
+              <property name="LineWidth">
+                <float>1.0</float>
+              </property>
+              <property name="Visible">
+                <boolean>false</boolean>
+              </property>
+              <property name="LineStyle">
+                <int>1</int>
+              </property>
+              <property name="Spacing">
+                <float>15.0</float>
+              </property>
+            </object>
+          </property>
+          <property name="LonState">
+            <object class="ucar.unidata.idv.control.MapDisplayControl$LatLonState">
+              <property name="Color">
+                <object idref="id39"/>
+              </property>
+              <property name="MaxValue">
+                <float>180.0</float>
+              </property>
+              <property name="MinValue">
+                <float>-180.0</float>
+              </property>
+              <property name="LineWidth">
+                <float>1.0</float>
+              </property>
+              <property name="Visible">
+                <boolean>false</boolean>
+              </property>
+              <property name="LineStyle">
+                <int>1</int>
+              </property>
+              <property name="Spacing">
+                <float>15.0</float>
+              </property>
+              <property name="IsLatitude">
+                <boolean>false</boolean>
+              </property>
+            </object>
+          </property>
+          <property name="IsDefaultMap">
+            <boolean>true</boolean>
+          </property>
+          <property name="DisplayName">
+            <string>Background Maps</string>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id41"/>
+          </property>
+          <property name="DisplayId">
+            <string>mapdisplay</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>Maps</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>MAP</string>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:mapdisplay</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id41"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>621</int>
+                <int>284</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="DefaultView">
+            <string>view_1110828067370_0.8186846134843814_5</string>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110828067370_0.8186846134843814_14</string>
+          </property>
+        </object>
+      </method>
+      <method name="add">
+        <object class="ucar.unidata.idv.control.TextDisplayControl">
+          <property name="History">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <string>/tmp/data/test.html</string>
+              </method>
+              <method name="add">
+                <string>/tmp/data/test.html</string>
+              </method>
+            </object>
+          </property>
+          <property name="HistoryIdx">
+            <int>1</int>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id48">
+              <method name="add">
+                <object class="ucar.unidata.data.DirectDataChoice">
+                  <property name="DataSource">
+                    <object class="ucar.unidata.data.text.TextDataSource">
+                      <property name="Name">
+                        <string>/tmp/data/test.html</string>
+                      </property>
+                      <property name="Properties">
+                        <object class="java.util.Hashtable"/>
+                      </property>
+                      <property name="Description">
+                        <string>Text data source</string>
+                      </property>
+                      <property name="Descriptor">
+                        <object class="ucar.unidata.data.DataSourceDescriptor">
+                          <property name="Properties">
+                            <object class="java.util.Hashtable">
+                              <method name="put">
+                                <string>show_in_tree</string>
+                                <string>false</string>
+                              </method>
+                              <method name="put">
+                                <string>default_display</string>
+                                <string>textdisplay</string>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="DataManager">
+                            <object idref="datamanager"/>
+                          </property>
+                          <property name="Id">
+                            <string>file.text</string>
+                          </property>
+                          <property name="Label">
+                            <string>Text or HTML files</string>
+                          </property>
+                          <property name="FileSelection">
+                            <boolean>true</boolean>
+                          </property>
+                          <property name="Patterns">
+                            <string>\.htm$,\.html$,\.txt$,\.text$</string>
+                          </property>
+                        </object>
+                      </property>
+                      <property name="PollingInfo">
+                        <object class="ucar.unidata.util.PollingInfo">
+                          <property name="FilePattern">
+                            <string>\.htm$,\.html$,\.txt$,\.text$</string>
+                          </property>
+                        </object>
+                      </property>
+                      <property name="UniqueId">
+                        <string>sharable_1110828067370_0.8186846134843814_10</string>
+                      </property>
+                    </object>
+                  </property>
+                  <property name="Name">
+                    <string>/tmp/data/test.html</string>
+                  </property>
+                  <property name="Description">
+                    <string>/tmp/data/test.html</string>
+                  </property>
+                  <property name="Id">
+                    <string>/tmp/data/test.html</string>
+                  </property>
+                  <property name="Categories">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>html</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>/tmp/data/test.html</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="DisplayId">
+            <string>textdisplay</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>General</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>text</string>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>html</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:textdisplay</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id48"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>466</int>
+                <int>629</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="WindowVisible">
+            <boolean>true</boolean>
+          </property>
+          <property name="HadDataChoices">
+            <boolean>true</boolean>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110828067370_0.8186846134843814_18</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+</object>

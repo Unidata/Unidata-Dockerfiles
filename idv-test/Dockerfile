@@ -10,9 +10,5 @@ RUN curl -SL \
 
 RUN tar xvfj /tmp/data.tar.bz2 -C /tmp
 
-RUN curl -SL \
-  https://motherlode.ucar.edu/repository/entry/get/RAMADDA/IDV%20Community%20Resources/Test%20Bundles/test-bundles.tar.bz2?entryid=2b9c6cd5-71ab-413a-92d9-ba94306b77e7 \
-  -o ~/test-bundles.tar.bz2
-
-RUN tar xvfj ~/test-bundles.tar.bz2
+ADD test-bundles /home/idv/test-bundles
 

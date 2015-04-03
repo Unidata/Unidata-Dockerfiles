@@ -1,0 +1,1937 @@
+<?xml version="1.0" encoding="UTF-8"?><object class="java.util.Hashtable">
+  <method name="put">
+    <string>datasources</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.data.grid.GeoGridDataSource" id="id7">
+          <property name="Name">
+            <string>/tmp/data/2004081312_ETA.nc</string>
+          </property>
+          <property name="Properties">
+            <object class="java.util.Hashtable"/>
+          </property>
+          <property name="Description">
+            <string>Geogrid data source</string>
+          </property>
+          <property name="Descriptor">
+            <object class="ucar.unidata.data.DataSourceDescriptor">
+              <property name="Properties">
+                <object class="java.util.Hashtable"/>
+              </property>
+              <property name="DataManager">
+                <object idref="datamanager"/>
+              </property>
+              <property name="Id">
+                <string>netcdf.grid</string>
+              </property>
+              <property name="Label">
+                <string>Grid files (netCDF/GRIB/OPeNDAP)</string>
+              </property>
+              <property name="FileSelection">
+                <boolean>true</boolean>
+              </property>
+              <property name="Patterns">
+                <string>\.nc$,\.cdf$,.*netcdf.*,\.ncml$,\.wmo$,\.wmo$,\.grb$,\.grib$</string>
+              </property>
+            </object>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110230781034_0.0422674131218892_10</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>version</string>
+    <string>1.2b2</string>
+  </method>
+  <method name="put">
+    <string>mischashtable</string>
+    <object class="java.util.Hashtable">
+      <method name="put">
+        <string>dataholderbounds</string>
+        <object class="java.util.Hashtable">
+          <method name="put">
+            <string>ucar.unidata.idv.ui.DataSelector</string>
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>8</int>
+                <int>14</int>
+                <int>734</int>
+                <int>446</int>
+              </constructor>
+            </object>
+          </method>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>windows</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.idv.ui.WindowInfo">
+          <property name="ViewManagers">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.idv.MapViewManager" id="id14">
+                  <property name="MainProjection">
+                    <object class="ucar.visad.ProjectionCoordinateSystem">
+                      <constructor>
+                        <object class="ucar.unidata.geoloc.projection.LambertConformal">
+                          <property name="OriginLat">
+                            <double>25.0</double>
+                          </property>
+                          <property name="OriginLon">
+                            <double>-95.0</double>
+                          </property>
+                          <property name="ParallelOne">
+                            <double>25.0</double>
+                          </property>
+                          <property name="ParallelTwo">
+                            <double>25.0</double>
+                          </property>
+                          <property name="DefaultMapArea">
+                            <object class="ucar.unidata.geoloc.ProjectionRect">
+                              <constructor>
+                                <double>-4342.324501141344</double>
+                                <double>-926.1599683345457</double>
+                                <double>3367.042558858655</double>
+                                <double>4462.107331665454</double>
+                              </constructor>
+                            </object>
+                          </property>
+                        </object>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="VerticalRangeUnit">
+                    <object class="visad.BaseUnit" name="m" id="id18">
+                      <string>m</string>
+                    </object>
+                  </property>
+                  <property name="VerticalRange">
+                    <parray class="double" length="2">0.0,16000.0</parray>
+                  </property>
+                  <property name="ShowCursor">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="UseProjectionFromData">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="Wireframe">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="Clipping">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="AniReadout">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="DisplayMatrix">
+                    <parray class="double" length="16">0.45762138399013697,0.27115950775348335,-0.10893891050714209,0.0,0.06664727499576537,0.32436070899939495,0.1510604122605481,0.0,0.5458167802290294,-0.26695065426460124,0.07289077873908434,0.0,0.0,0.0,0.0,1.0</parray>
+                  </property>
+                  <property name="MainProjectionName">
+                    <string>LambertConformal from: Vector Plan View</string>
+                  </property>
+                  <property name="ViewDescriptor">
+                    <object class="ucar.unidata.idv.ViewDescriptor">
+                      <property name="Name">
+                        <string>view_1110230781034_0.0422674131218892_5</string>
+                      </property>
+                    </object>
+                  </property>
+                  <property name="Idv">
+                    <object idref="idv"/>
+                  </property>
+                  <property name="UniqueId">
+                    <string>view_1110230781034_0.0422674131218892_5</string>
+                  </property>
+                  <property name="WindowBounds">
+                    <object class="java.awt.Rectangle">
+                      <constructor>
+                        <int>288</int>
+                        <int>305</int>
+                        <int>898</int>
+                        <int>610</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="AnimationStringVisible">
+                    <boolean>false</boolean>
+                  </property>
+                  <property name="AnimationInfo">
+                    <object class="ucar.visad.display.AnimationInfo"/>
+                  </property>
+                  <property name="HasWindow">
+                    <boolean>true</boolean>
+                  </property>
+                  <property name="SideDividerLocation">
+                    <int>605</int>
+                  </property>
+                  <property name="SideLegend">
+                    <object class="ucar.unidata.idv.ui.SideLegend">
+                      <property name="CategoryToPanelOpen">
+                        <object class="java.util.Hashtable">
+                          <method name="put">
+                            <string>3D Surface</string>
+                            <java.lang.Boolean>true</java.lang.Boolean>
+                          </method>
+                          <method name="put">
+                            <string>Soundings</string>
+                            <java.lang.Boolean>true</java.lang.Boolean>
+                          </method>
+                          <method name="put">
+                            <string>Maps</string>
+                            <java.lang.Boolean>true</java.lang.Boolean>
+                          </method>
+                          <method name="put">
+                            <string>Flow Displays</string>
+                            <java.lang.Boolean>true</java.lang.Boolean>
+                          </method>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="Bounds">
+            <object class="java.awt.Rectangle">
+              <constructor>
+                <int>288</int>
+                <int>305</int>
+                <int>898</int>
+                <int>610</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="SkinPath">
+            <string>/ucar/unidata/idv/resources/skin.xml</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>viewmanagers</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object idref="id14"/>
+      </method>
+    </object>
+  </method>
+  <method name="put">
+    <string>displaycontrols</string>
+    <object class="java.util.ArrayList">
+      <method name="add">
+        <object class="ucar.unidata.idv.control.MapDisplayControl">
+          <property name="CanDoRemoveAll">
+            <boolean>false</boolean>
+          </property>
+          <property name="MapPosition">
+            <double>-0.9900000095367432</double>
+          </property>
+          <property name="InitialMap">
+            <string>/auxdata/maps/OUTLSUPW</string>
+          </property>
+          <property name="InitialMapDescription">
+            <string>World Coastlines</string>
+          </property>
+          <property name="MapStates">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Coastlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLSUPW</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>204</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="Visible">
+                    <boolean>true</boolean>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Political Boundaries</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLHPOL</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>255</int>
+                        <int>0</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="LineStyle">
+                    <int>3</int>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>World Country Outlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/Countries.zip</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>North &amp; Central America</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLUSAM</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>Hi-Res US</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLSUPU</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>0</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                  <property name="Visible">
+                    <boolean>true</boolean>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>U.S. County Outlines</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTLCNTY</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>255</int>
+                        <int>0</int>
+                        <int>0</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.idv.control.MapDisplayControl$MapState">
+                  <property name="Description">
+                    <string>US Interstate Highways</string>
+                  </property>
+                  <property name="Source">
+                    <string>/auxdata/maps/OUTUSINT</string>
+                  </property>
+                  <property name="Color">
+                    <object class="java.awt.Color">
+                      <constructor>
+                        <int>0</int>
+                        <int>255</int>
+                        <int>255</int>
+                      </constructor>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="LatState">
+            <object class="ucar.unidata.idv.control.MapDisplayControl$LatLonState">
+              <property name="Color">
+                <object class="java.awt.Color">
+                  <constructor>
+                    <int>128</int>
+                    <int>128</int>
+                    <int>128</int>
+                  </constructor>
+                </object>
+              </property>
+              <property name="MaxValue">
+                <float>90.0</float>
+              </property>
+              <property name="MinValue">
+                <float>-90.0</float>
+              </property>
+              <property name="LineWidth">
+                <float>1.0</float>
+              </property>
+              <property name="Visible">
+                <boolean>false</boolean>
+              </property>
+              <property name="LineStyle">
+                <int>1</int>
+              </property>
+              <property name="Spacing">
+                <float>15.0</float>
+              </property>
+            </object>
+          </property>
+          <property name="LonState">
+            <object class="ucar.unidata.idv.control.MapDisplayControl$LatLonState">
+              <property name="Color">
+                <object class="java.awt.Color">
+                  <constructor>
+                    <int>128</int>
+                    <int>128</int>
+                    <int>128</int>
+                  </constructor>
+                </object>
+              </property>
+              <property name="MaxValue">
+                <float>180.0</float>
+              </property>
+              <property name="MinValue">
+                <float>-180.0</float>
+              </property>
+              <property name="LineWidth">
+                <float>1.0</float>
+              </property>
+              <property name="Visible">
+                <boolean>false</boolean>
+              </property>
+              <property name="LineStyle">
+                <int>1</int>
+              </property>
+              <property name="Spacing">
+                <float>15.0</float>
+              </property>
+              <property name="IsLatitude">
+                <boolean>false</boolean>
+              </property>
+            </object>
+          </property>
+          <property name="IsDefaultMap">
+            <boolean>true</boolean>
+          </property>
+          <property name="DisplayName">
+            <string>Background Maps</string>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id47"/>
+          </property>
+          <property name="DisplayId">
+            <string>mapdisplay</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>Maps</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>MAP</string>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:mapdisplay</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id47"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>621</int>
+                <int>284</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="WindowX">
+            <int>659</int>
+          </property>
+          <property name="WindowY">
+            <int>396</int>
+          </property>
+          <property name="DefaultView">
+            <string>view_1110230781034_0.0422674131218892_5</string>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110230781034_0.0422674131218892_17</string>
+          </property>
+        </object>
+      </method>
+      <method name="add">
+        <object class="ucar.unidata.idv.control.FlowPlanViewControl">
+          <property name="SkipValue">
+            <int>2</int>
+          </property>
+          <property name="FlowScale">
+            <float>6.0</float>
+          </property>
+          <property name="Level">
+            <object class="visad.Real">
+              <constructor>
+                <object class="visad.RealType">
+                  <object class="java.util.ArrayList">
+                    <method name="add">
+                      <string>level</string>
+                    </method>
+                    <method name="add">
+                      <object class="visad.ScaledUnit" name="hectopascals" id="id54">
+                        <string>100.0 Pa</string>
+                      </object>
+                    </method>
+                    <method name="add">
+                      <null/>
+                    </method>
+                    <method name="add">
+                      <java.lang.Integer>0</java.lang.Integer>
+                    </method>
+                  </object>
+                </object>
+                <double>1000.0</double>
+                <object idref="id54"/>
+                <null class="visad.ErrorEstimate"/>
+              </constructor>
+            </object>
+          </property>
+          <property name="DisplayName">
+            <string>Vector Plan View</string>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id57">
+              <method name="add">
+                <object class="ucar.unidata.data.DerivedDataChoice">
+                  <property name="DataContext">
+                    <object idref="idv"/>
+                  </property>
+                  <property name="Formula">
+                    <string>DerivedGridFactory.createFlowVectors (D1, D2)</string>
+                  </property>
+                  <property name="Choices">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DirectDataChoice">
+                          <property name="DataSource">
+                            <object idref="id7"/>
+                          </property>
+                          <property name="Name">
+                            <string>GridRelative_u</string>
+                          </property>
+                          <property name="Properties">
+                            <object class="java.util.Hashtable" id="id61">
+                              <method name="put">
+                                <string>INITIAL_PROBE_EARTHLOCATION</string>
+                                <object class="visad.georef.EarthLocationTuple">
+                                  <constructor>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object class="visad.RealType" id="id64">
+                                          <object class="java.util.ArrayList">
+                                            <method name="add">
+                                              <string>Latitude</string>
+                                            </method>
+                                            <method name="add">
+                                              <object class="visad.ScaledUnit" name="deg" id="id63">
+                                                <string>0.017453292519943295 rad</string>
+                                              </object>
+                                            </method>
+                                            <method name="add">
+                                              <null/>
+                                            </method>
+                                            <method name="add">
+                                              <java.lang.Integer>0</java.lang.Integer>
+                                            </method>
+                                          </object>
+                                        </object>
+                                        <double>34.38456059807822</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object class="visad.RealType" id="id67">
+                                          <object class="java.util.ArrayList">
+                                            <method name="add">
+                                              <string>Longitude</string>
+                                            </method>
+                                            <method name="add">
+                                              <object idref="id63"/>
+                                            </method>
+                                            <method name="add">
+                                              <null/>
+                                            </method>
+                                            <method name="add">
+                                              <java.lang.Integer>0</java.lang.Integer>
+                                            </method>
+                                          </object>
+                                        </object>
+                                        <double>-90.82992936830024</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object class="visad.RealType" id="id70">
+                                          <object class="java.util.ArrayList">
+                                            <method name="add">
+                                              <string>Altitude</string>
+                                            </method>
+                                            <method name="add">
+                                              <object idref="id18"/>
+                                            </method>
+                                            <method name="add">
+                                              <null/>
+                                            </method>
+                                            <method name="add">
+                                              <java.lang.Integer>0</java.lang.Integer>
+                                            </method>
+                                          </object>
+                                        </object>
+                                        <double>0.0</double>
+                                        <object idref="id18"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                  </constructor>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="Description">
+                            <string>u-component of wind at isobaric levels</string>
+                          </property>
+                          <property name="Id">
+                            <string>u</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id74">
+                                  <property name="Name">
+                                    <string>3D grid</string>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id75">
+                                  <property name="Name">
+                                    <string>GRID</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>3D</string>
+                                      </property>
+                                      <property name="Child">
+                                        <object class="ucar.unidata.data.DataCategory">
+                                          <property name="Name">
+                                            <string>TIME</string>
+                                          </property>
+                                        </object>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id78">
+                                  <property name="Name">
+                                    <string>param:u</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id79">
+                                  <property name="Name">
+                                    <string>param:U</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DirectDataChoice">
+                          <property name="DataSource">
+                            <object idref="id7"/>
+                          </property>
+                          <property name="Name">
+                            <string>GridRelative_v</string>
+                          </property>
+                          <property name="Properties">
+                            <object class="java.util.Hashtable" id="id81">
+                              <method name="put">
+                                <string>INITIAL_PROBE_EARTHLOCATION</string>
+                                <object class="visad.georef.EarthLocationTuple">
+                                  <constructor>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id64"/>
+                                        <double>34.38456059807822</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id67"/>
+                                        <double>-90.82992936830024</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id70"/>
+                                        <double>0.0</double>
+                                        <object idref="id18"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                  </constructor>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="Description">
+                            <string>v-component of wind at isobaric levels</string>
+                          </property>
+                          <property name="Id">
+                            <string>v</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object idref="id74"/>
+                              </method>
+                              <method name="add">
+                                <object idref="id75"/>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id87">
+                                  <property name="Name">
+                                    <string>param:v</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id88">
+                                  <property name="Name">
+                                    <string>param:V</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                  <property name="UserSelectedChoices">
+                    <object class="java.util.Hashtable"/>
+                  </property>
+                  <property name="Name">
+                    <string>flowvectors</string>
+                  </property>
+                  <property name="Properties">
+                    <object class="java.util.Properties"/>
+                  </property>
+                  <property name="Description">
+                    <string>Flow Vectors (from GridRelative_u &amp; GridRelative_v)</string>
+                  </property>
+                  <property name="Id">
+                    <string>flowvectors</string>
+                  </property>
+                  <property name="Categories">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>3D grid</string>
+                          </property>
+                          <property name="Child">
+                            <object class="ucar.unidata.data.DataCategory">
+                              <property name="Name">
+                                <string>Derived</string>
+                              </property>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>flowvector</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>param:flowvectors</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="DisplayId">
+            <string>planviewflow</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>Flow Displays</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>*</string>
+                  </property>
+                  <property name="Child">
+                    <object class="ucar.unidata.data.DataCategory">
+                      <property name="Name">
+                        <string>flowvector</string>
+                      </property>
+                      <property name="Child">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>*</string>
+                          </property>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:planviewflow</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="Color">
+            <object class="java.awt.Color">
+              <constructor>
+                <int>0</int>
+                <int>255</int>
+                <int>0</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="Range">
+            <object class="ucar.unidata.util.Range">
+              <property name="Min">
+                <double>-43.70787048339844</double>
+              </property>
+              <property name="Max">
+                <double>50.6475830078125</double>
+              </property>
+            </object>
+          </property>
+          <property name="DataSelection">
+            <object class="ucar.unidata.data.DataSelection">
+              <property name="Times">
+                <object class="java.util.ArrayList">
+                  <method name="add">
+                    <java.lang.Integer>0</java.lang.Integer>
+                  </method>
+                </object>
+              </property>
+            </object>
+          </property>
+          <property name="DisplayUnitName">
+            <string>m/s</string>
+          </property>
+          <property name="ContourInfo">
+            <object class="ucar.unidata.util.ContourInfo">
+              <property name="Base">
+                <float>-25.0</float>
+              </property>
+              <property name="Min">
+                <float>-25.0</float>
+              </property>
+              <property name="Max">
+                <float>60.0</float>
+              </property>
+              <property name="Interval">
+                <float>5.0</float>
+              </property>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id57"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>602</int>
+                <int>186</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="WindowX">
+            <int>62</int>
+          </property>
+          <property name="WindowY">
+            <int>114</int>
+          </property>
+          <property name="DefaultView">
+            <string>view_1110230781034_0.0422674131218892_5</string>
+          </property>
+          <property name="ColorUnitName">
+            <string>m/s</string>
+          </property>
+          <property name="HadDataChoices">
+            <boolean>true</boolean>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110230781034_0.0422674131218892_19</string>
+          </property>
+        </object>
+      </method>
+      <method name="add">
+        <object class="ucar.unidata.idv.control.ThreeDSurfaceControl">
+          <property name="LevelSliderPercent">
+            <double>0.3125</double>
+          </property>
+          <property name="DisplayName">
+            <string>3D Isosurface</string>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id108">
+              <method name="add">
+                <object class="ucar.unidata.data.DerivedDataChoice">
+                  <property name="Code">
+                    <string>DerivedGridFactory.combineGrids(D1, Other_Parameter)</string>
+                  </property>
+                  <property name="DataContext">
+                    <object idref="idv"/>
+                  </property>
+                  <property name="Choices">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DerivedDataChoice">
+                          <property name="DataContext">
+                            <object idref="idv"/>
+                          </property>
+                          <property name="Formula">
+                            <string>DerivedGridFactory.createWindSpeed (D1, D2)</string>
+                          </property>
+                          <property name="Choices">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object class="ucar.unidata.data.DirectDataChoice">
+                                  <property name="DataSource">
+                                    <object idref="id7"/>
+                                  </property>
+                                  <property name="Name">
+                                    <string>GridRelative_u</string>
+                                  </property>
+                                  <property name="Properties">
+                                    <object idref="id61"/>
+                                  </property>
+                                  <property name="Description">
+                                    <string>u-component of wind at isobaric levels</string>
+                                  </property>
+                                  <property name="Id">
+                                    <string>u</string>
+                                  </property>
+                                  <property name="Categories">
+                                    <object class="java.util.ArrayList">
+                                      <method name="add">
+                                        <object idref="id74"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id75"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id78"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id79"/>
+                                      </method>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DirectDataChoice">
+                                  <property name="DataSource">
+                                    <object idref="id7"/>
+                                  </property>
+                                  <property name="Name">
+                                    <string>GridRelative_v</string>
+                                  </property>
+                                  <property name="Properties">
+                                    <object idref="id81"/>
+                                  </property>
+                                  <property name="Description">
+                                    <string>v-component of wind at isobaric levels</string>
+                                  </property>
+                                  <property name="Id">
+                                    <string>v</string>
+                                  </property>
+                                  <property name="Categories">
+                                    <object class="java.util.ArrayList">
+                                      <method name="add">
+                                        <object idref="id74"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id75"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id87"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id88"/>
+                                      </method>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="UserSelectedChoices">
+                            <object class="java.util.Hashtable"/>
+                          </property>
+                          <property name="Name">
+                            <string>windspeed</string>
+                          </property>
+                          <property name="Properties">
+                            <object class="java.util.Properties"/>
+                          </property>
+                          <property name="Description">
+                            <string>Windspeed (from GridRelative_u &amp; GridRelative_v)</string>
+                          </property>
+                          <property name="Id">
+                            <string>windspeed</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id120">
+                                  <property name="Name">
+                                    <string>3D grid</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:U</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:u</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>GRID</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>3D</string>
+                                      </property>
+                                      <property name="Child">
+                                        <object class="ucar.unidata.data.DataCategory">
+                                          <property name="Name">
+                                            <string>TIME</string>
+                                          </property>
+                                          <property name="Child">
+                                            <object class="ucar.unidata.data.DataCategory">
+                                              <property name="Name">
+                                                <string>Derived</string>
+                                              </property>
+                                            </object>
+                                          </property>
+                                        </object>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:windspeed</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DirectDataChoice" id="id131">
+                          <property name="DataSource">
+                            <object idref="id7"/>
+                          </property>
+                          <property name="Name">
+                            <string>T</string>
+                          </property>
+                          <property name="Properties">
+                            <object class="java.util.Hashtable" id="id132">
+                              <method name="put">
+                                <string>INITIAL_PROBE_EARTHLOCATION</string>
+                                <object class="visad.georef.EarthLocationTuple">
+                                  <constructor>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id64"/>
+                                        <double>34.38456059807822</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id67"/>
+                                        <double>-90.82992936830024</double>
+                                        <object idref="id63"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                    <object class="visad.Real">
+                                      <constructor>
+                                        <object idref="id70"/>
+                                        <double>0.0</double>
+                                        <object idref="id18"/>
+                                        <null class="visad.ErrorEstimate"/>
+                                      </constructor>
+                                    </object>
+                                  </constructor>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="Description">
+                            <string>Temperature at isobaric levels</string>
+                          </property>
+                          <property name="Id">
+                            <string>T</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object idref="id74"/>
+                              </method>
+                              <method name="add">
+                                <object idref="id75"/>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id138">
+                                  <property name="Name">
+                                    <string>param:T</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory" id="id139">
+                                  <property name="Name">
+                                    <string>param:TEMP</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="DataSelection">
+                            <object class="ucar.unidata.data.DataSelection">
+                              <property name="Times">
+                                <object class="java.util.ArrayList">
+                                  <method name="add">
+                                    <java.lang.Integer>0</java.lang.Integer>
+                                  </method>
+                                </object>
+                              </property>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                  <property name="UserSelectedChoices">
+                    <object class="java.util.Hashtable">
+                      <method name="put">
+                        <string>Other_Parameter</string>
+                        <object idref="id131"/>
+                      </method>
+                    </object>
+                  </property>
+                  <property name="Name">
+                    <string>windspeed</string>
+                  </property>
+                  <property name="Properties">
+                    <object class="java.util.Properties"/>
+                  </property>
+                  <property name="Description">
+                    <string>Windspeed (from GridRelative_u &amp; GridRelative_v)</string>
+                  </property>
+                  <property name="Id">
+                    <string>windspeed</string>
+                  </property>
+                  <property name="Categories">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object idref="id120"/>
+                      </method>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="DisplayId">
+            <string>isosurfacebyanother</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>3D Surface</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>GRID</string>
+                  </property>
+                  <property name="Child">
+                    <object class="ucar.unidata.data.DataCategory">
+                      <property name="Name">
+                        <string>3D</string>
+                      </property>
+                      <property name="Child">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>*</string>
+                          </property>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>RADAR</string>
+                  </property>
+                  <property name="Child">
+                    <object class="ucar.unidata.data.DataCategory">
+                      <property name="Name">
+                        <string>3D</string>
+                      </property>
+                      <property name="Child">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>*</string>
+                          </property>
+                        </object>
+                      </property>
+                    </object>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:isosurfacebyanother</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="Range">
+            <object class="ucar.unidata.util.Range">
+              <property name="Min">
+                <double>-90.0</double>
+              </property>
+              <property name="Max">
+                <double>45.0</double>
+              </property>
+            </object>
+          </property>
+          <property name="DataSelection">
+            <object class="ucar.unidata.data.DataSelection">
+              <property name="Times">
+                <object class="java.util.ArrayList">
+                  <method name="add">
+                    <java.lang.Integer>0</java.lang.Integer>
+                  </method>
+                </object>
+              </property>
+            </object>
+          </property>
+          <property name="ColorTable">
+            <object class="ucar.unidata.util.ColorTable">
+              <property name="Name">
+                <string>Temperature</string>
+              </property>
+              <property name="Id">
+                <string>TEMPERATURE</string>
+              </property>
+              <property name="Table">
+                <array class="[F" length="3">
+                  <parray class="float">rO0ABXVyAAJbRgucgYki4AxCAgAAeHAAAACHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAA9tu/UPjbv1D6JM98+tu/UPuSryT8JM98/IBHZPzbv1D9Nzc4/gAAAP4AAAD+AAAA/
+gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+A
+AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAA</parray>
+                  <parray class="float">rO0ABXVyAAJbRgucgYki4AxCAgAAeHAAAACHAAAAADw0evQ8tHr0PQdcNj00evQ9YZmxPYdcNj2d
+65Y9tHr0PcsKUj3hmbE9+CkPPgdcNj4So+Y+HeuWPikzRT40evQ+P8KjPksKUj5WUgE+YZmxPmzh
+YD54KQ8+gbhfPodcNj6NAA4+kqPmPphHvj6d65Y+o49tPqkzRT6u1xw+tHr0ProezD6/wqM+xWZ6
+PssKUj7Qrik+1lIBPtv12j7hmbE+5z2JPuzhYD7yhTc++CkPPv3M5z8BuF8/BIpLPwdcNj8KLiI/
+DQAOPw/R+j8So+Y/FXXSPxhHvj8bGak/HeuWPyC9gj8jj20/JmFZPykzRT8sBTA/LtccPzGpCD80
+evQ/N0zgPzoezD888Lc/P8KjP0KUjz9FZno/SDhmP0sKUj9N3D4/UK4pP1OAFT9WUgE/WSPtP1v1
+2j9ex8Y/YZmxP2RrnT9nPYk/ag90P2zhYD9vs0w/coU3P3VXIz94KQ8/gAAAP4AAAD+AAAA/gAAA
+P4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP3h4eD9w8PE/
+aWlpP2Hh4j9aWlo/UtLTP0tLSz9Dw8Q/PDw8PzS0tT8tLS0/JaWmPx4eHj8Wlpc/Dw8PPweHiD8A
+AAA+8PDxPuHh4j7S0tM+w8PEPrS0tT6lpaY+lpaXPoeHiD5w8PE+UtLTPjS0tT4Wlpc98PDx</parray>
+                  <parray class="float">rO0ABXVyAAJbRgucgYki4AxCAgAAeHAAAACHP3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96
++vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6
++z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7
+P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/
+evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96
++vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6
++z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/evr7P3r6+z96+vs/gAAAP0yMjT8ZGRk+y0tL
+PkjIyQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</parray>
+                </array>
+              </property>
+            </object>
+          </property>
+          <property name="DisplayUnitName">
+            <string>m/s</string>
+          </property>
+          <property name="ContourInfo">
+            <object class="ucar.unidata.util.ContourInfo">
+              <property name="Max">
+                <float>65.0</float>
+              </property>
+              <property name="Interval">
+                <float>5.0</float>
+              </property>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id108"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>515</int>
+                <int>137</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="WindowX">
+            <int>765</int>
+          </property>
+          <property name="WindowY">
+            <int>524</int>
+          </property>
+          <property name="DefaultView">
+            <string>view_1110230781034_0.0422674131218892_5</string>
+          </property>
+          <property name="ColorUnitName">
+            <string>celsius</string>
+          </property>
+          <property name="HadDataChoices">
+            <boolean>true</boolean>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110230781034_0.0422674131218892_21</string>
+          </property>
+        </object>
+      </method>
+      <method name="add">
+        <object class="ucar.unidata.idv.control.GriddedSoundingControl">
+          <property name="DisplayName">
+            <string>Skew-T</string>
+          </property>
+          <property name="DataChoices">
+            <object class="java.util.ArrayList" id="id160">
+              <method name="add">
+                <object class="ucar.unidata.data.DerivedDataChoice">
+                  <property name="DataContext">
+                    <object idref="idv"/>
+                  </property>
+                  <property name="Formula">
+                    <string>DerivedGridFactory.combineGrids (D1, D2)</string>
+                  </property>
+                  <property name="Choices">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DirectDataChoice">
+                          <property name="DataSource">
+                            <object idref="id7"/>
+                          </property>
+                          <property name="Name">
+                            <string>T</string>
+                          </property>
+                          <property name="Properties">
+                            <object idref="id132"/>
+                          </property>
+                          <property name="Description">
+                            <string>Temperature at isobaric levels</string>
+                          </property>
+                          <property name="Id">
+                            <string>T</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object idref="id74"/>
+                              </method>
+                              <method name="add">
+                                <object idref="id75"/>
+                              </method>
+                              <method name="add">
+                                <object idref="id138"/>
+                              </method>
+                              <method name="add">
+                                <object idref="id139"/>
+                              </method>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DerivedDataChoice">
+                          <property name="DataContext">
+                            <object idref="idv"/>
+                          </property>
+                          <property name="Formula">
+                            <string>DerivedGridFactory.createDewpoint (D1, D2)</string>
+                          </property>
+                          <property name="Choices">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object class="ucar.unidata.data.DirectDataChoice">
+                                  <property name="DataSource">
+                                    <object idref="id7"/>
+                                  </property>
+                                  <property name="Name">
+                                    <string>T</string>
+                                  </property>
+                                  <property name="Properties">
+                                    <object idref="id132"/>
+                                  </property>
+                                  <property name="Description">
+                                    <string>Temperature at isobaric levels</string>
+                                  </property>
+                                  <property name="Id">
+                                    <string>T</string>
+                                  </property>
+                                  <property name="Categories">
+                                    <object class="java.util.ArrayList">
+                                      <method name="add">
+                                        <object idref="id74"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id75"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id138"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id139"/>
+                                      </method>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DirectDataChoice">
+                                  <property name="DataSource">
+                                    <object idref="id7"/>
+                                  </property>
+                                  <property name="Name">
+                                    <string>RH</string>
+                                  </property>
+                                  <property name="Properties">
+                                    <object class="java.util.Hashtable">
+                                      <method name="put">
+                                        <string>INITIAL_PROBE_EARTHLOCATION</string>
+                                        <object class="visad.georef.EarthLocationTuple">
+                                          <constructor>
+                                            <object class="visad.Real">
+                                              <constructor>
+                                                <object idref="id64"/>
+                                                <double>34.38456059807822</double>
+                                                <object idref="id63"/>
+                                                <null class="visad.ErrorEstimate"/>
+                                              </constructor>
+                                            </object>
+                                            <object class="visad.Real">
+                                              <constructor>
+                                                <object idref="id67"/>
+                                                <double>-90.82992936830024</double>
+                                                <object idref="id63"/>
+                                                <null class="visad.ErrorEstimate"/>
+                                              </constructor>
+                                            </object>
+                                            <object class="visad.Real">
+                                              <constructor>
+                                                <object idref="id70"/>
+                                                <double>0.0</double>
+                                                <object idref="id18"/>
+                                                <null class="visad.ErrorEstimate"/>
+                                              </constructor>
+                                            </object>
+                                          </constructor>
+                                        </object>
+                                      </method>
+                                    </object>
+                                  </property>
+                                  <property name="Description">
+                                    <string>Relative humidity at isobaric levels</string>
+                                  </property>
+                                  <property name="Id">
+                                    <string>RH</string>
+                                  </property>
+                                  <property name="Categories">
+                                    <object class="java.util.ArrayList">
+                                      <method name="add">
+                                        <object idref="id74"/>
+                                      </method>
+                                      <method name="add">
+                                        <object idref="id75"/>
+                                      </method>
+                                      <method name="add">
+                                        <object class="ucar.unidata.data.DataCategory">
+                                          <property name="Name">
+                                            <string>param:RH</string>
+                                          </property>
+                                          <property name="ForDisplay">
+                                            <boolean>false</boolean>
+                                          </property>
+                                        </object>
+                                      </method>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                          <property name="UserSelectedChoices">
+                            <object class="java.util.Hashtable"/>
+                          </property>
+                          <property name="Name">
+                            <string>dewpoint</string>
+                          </property>
+                          <property name="Properties">
+                            <object class="java.util.Properties"/>
+                          </property>
+                          <property name="Description">
+                            <string>Dewpoint (from T &amp; RH)</string>
+                          </property>
+                          <property name="Id">
+                            <string>dewpoint</string>
+                          </property>
+                          <property name="Categories">
+                            <object class="java.util.ArrayList">
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>3D grid</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:TEMP</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:T</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>Derived</string>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>GRID</string>
+                                  </property>
+                                  <property name="Child">
+                                    <object class="ucar.unidata.data.DataCategory">
+                                      <property name="Name">
+                                        <string>3D</string>
+                                      </property>
+                                      <property name="Child">
+                                        <object class="ucar.unidata.data.DataCategory">
+                                          <property name="Name">
+                                            <string>TIME</string>
+                                          </property>
+                                          <property name="Child">
+                                            <object class="ucar.unidata.data.DataCategory">
+                                              <property name="Name">
+                                                <string>Derived</string>
+                                              </property>
+                                            </object>
+                                          </property>
+                                        </object>
+                                      </property>
+                                    </object>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:dewpoint</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                              <method name="add">
+                                <object class="ucar.unidata.data.DataCategory">
+                                  <property name="Name">
+                                    <string>param:DEWPOINT</string>
+                                  </property>
+                                  <property name="ForDisplay">
+                                    <boolean>false</boolean>
+                                  </property>
+                                </object>
+                              </method>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                  <property name="UserSelectedChoices">
+                    <object class="java.util.Hashtable"/>
+                  </property>
+                  <property name="Name">
+                    <string>sounding_nowind</string>
+                  </property>
+                  <property name="Properties">
+                    <object class="java.util.Properties"/>
+                  </property>
+                  <property name="Description">
+                    <string>Sounding Data (T &amp; dewpoint only)</string>
+                  </property>
+                  <property name="Id">
+                    <string>sounding_nowind</string>
+                  </property>
+                  <property name="Categories">
+                    <object class="java.util.ArrayList">
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>3D grid</string>
+                          </property>
+                          <property name="Child">
+                            <object class="ucar.unidata.data.DataCategory">
+                              <property name="Name">
+                                <string>Derived</string>
+                              </property>
+                            </object>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>GRID_SOUNDING</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                      <method name="add">
+                        <object class="ucar.unidata.data.DataCategory">
+                          <property name="Name">
+                            <string>param:sounding_nowind</string>
+                          </property>
+                          <property name="ForDisplay">
+                            <boolean>false</boolean>
+                          </property>
+                        </object>
+                      </method>
+                    </object>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="DisplayId">
+            <string>grid_skewt</string>
+          </property>
+          <property name="DisplayCategory">
+            <string>Soundings</string>
+          </property>
+          <property name="Categories">
+            <object class="java.util.ArrayList">
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>GRID_SOUNDING</string>
+                  </property>
+                </object>
+              </method>
+              <method name="add">
+                <object class="ucar.unidata.data.DataCategory">
+                  <property name="Name">
+                    <string>display:grid_skewt</string>
+                  </property>
+                  <property name="ForDisplay">
+                    <boolean>false</boolean>
+                  </property>
+                </object>
+              </method>
+            </object>
+          </property>
+          <property name="Color">
+            <object class="java.awt.Color">
+              <constructor>
+                <int>255</int>
+                <int>0</int>
+                <int>255</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="DataSelection">
+            <object class="ucar.unidata.data.DataSelection">
+              <property name="Times">
+                <object class="java.util.ArrayList">
+                  <method name="add">
+                    <java.lang.Integer>0</java.lang.Integer>
+                  </method>
+                </object>
+              </property>
+            </object>
+          </property>
+          <property name="ZPosition">
+            <double>-1.0</double>
+          </property>
+          <property name="InitDataChoices">
+            <object idref="id160"/>
+          </property>
+          <property name="Viewer">
+            <object idref="idv"/>
+          </property>
+          <property name="WindowSize">
+            <object class="java.awt.Dimension">
+              <constructor>
+                <int>846</int>
+                <int>553</int>
+              </constructor>
+            </object>
+          </property>
+          <property name="WindowVisible">
+            <boolean>true</boolean>
+          </property>
+          <property name="DefaultView">
+            <string>view_1110230781034_0.0422674131218892_5</string>
+          </property>
+          <property name="HadDataChoices">
+            <boolean>true</boolean>
+          </property>
+          <property name="UniqueId">
+            <string>sharable_1110230781034_0.0422674131218892_23</string>
+          </property>
+        </object>
+      </method>
+    </object>
+  </method>
+</object>

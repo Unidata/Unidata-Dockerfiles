@@ -5,6 +5,7 @@ sleep 5
 export DISPLAY=localhost:1 
 #/home/idv/IDV/testIDV ~/test-bundles/addeimage1.xidv ~/test-output
 
-for file in test-bundles/* ; do 
+for file in test-bundles/* ; do
+    echo TESTING $file
     /home/idv/IDV/testIDV $file ~/test-output
 done
