@@ -7,7 +7,7 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>http://thredds.ucar.edu/thredds/dodsC/model/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20100929_1200.grib1</string>
+                <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20100929_1200.grib1</string>
               </method>
             </object>
           </property>
@@ -42,23 +42,23 @@
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/thredds/catalog/model/NCEP/GFS/CONUS_80km/latest.xml</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/CONUS_80km/latest.xml</string>
               </method>
               <method name="put">
                 <string>documentlinks</string>
                 <object class="java.util.ArrayList">
                   <method name="add">
-                    <string>/thredds/modelInventory/model/NCEP/GFS/CONUS_80km/</string>
+                    <string>/thredds/modelInventory/grib/NCEP/GFS/CONUS_80km/</string>
                   </method>
                 </object>
               </method>
               <method name="put">
                 <string>prop.service.wcs</string>
-                <string>http://thredds.ucar.edu/thredds/wcs/model/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20070924_1200.grib1</string>
+                <string>http://thredds.ucar.edu/thredds/wcs/grib/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20070924_1200.grib1</string>
               </method>
               <method name="put">
                 <string>prop.service.ncserver</string>
-                <string>http://thredds.ucar.edu/thredds/ncServer/model/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20070924_1200.grib1</string>
+                <string>http://thredds.ucar.edu/thredds/ncServer/grib/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20070924_1200.grib1</string>
               </method>
               <method name="put">
                 <string>TITLE</string>
@@ -66,7 +66,7 @@
               </method>
               <method name="put">
                 <string>prop.service.http</string>
-                <string>http://thredds.ucar.edu/thredds/fileServer/model/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20100929_1200.grib1</string>
+                <string>http://thredds.ucar.edu/thredds/fileServer/grib/NCEP/GFS/CONUS_80km/GFS_CONUS_80km_20100929_1200.grib1</string>
               </method>
               <method name="put">
                 <string>Thredds.CatalogUrl</string>

@@ -7,7 +7,7 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>http://thredds.ucar.edu/thredds/dodsC/model/NCEP/NAM/CONUS_12km/NAM_CONUS_12km_20100929_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/NAM/CONUS_12km/NAM_CONUS_12km_20100929_1800.grib2</string>
               </method>
             </object>
           </property>
@@ -42,13 +42,13 @@
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/thredds/catalog/model/NCEP/NAM/CONUS_12km/latest.xml</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/NAM/CONUS_12km/latest.xml</string>
               </method>
               <method name="put">
                 <string>documentlinks</string>
                 <object class="java.util.ArrayList">
                   <method name="add">
-                    <string>/thredds/modelInventory/model/NCEP/NAM/CONUS_12km/</string>
+                    <string>/thredds/modelInventory/grib/NCEP/NAM/CONUS_12km/</string>
                   </method>
                 </object>
               </method>
@@ -70,7 +70,7 @@
               </method>
               <method name="put">
                 <string>prop.service.http</string>
-                <string>http://thredds.ucar.edu/thredds/fileServer/model/NCEP/NAM/CONUS_12km/NAM_CONUS_12km_20100929_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/fileServer/grib/NCEP/NAM/CONUS_12km/NAM_CONUS_12km_20100929_1800.grib2</string>
               </method>
             </object>
           </property>

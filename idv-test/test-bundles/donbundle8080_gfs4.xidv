@@ -10,7 +10,7 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>http://thredds.ucar.edu/thredds/dodsC/model/NCEP/GFS/Global_0p5deg/GFS_Global_0p5deg_20121210_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GFS/Global_0p5deg/GFS_Global_0p5deg_20121210_1800.grib2</string>
               </method>
             </object>
           </property>
@@ -45,13 +45,13 @@
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/thredds/catalog/model/NCEP/GFS/Global_0p5deg/latest.xml</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_0p5deg/latest.xml</string>
               </method>
               <method name="put">
                 <string>documentlinks</string>
                 <object class="java.util.ArrayList">
                   <method name="add">
-                    <string>/thredds/modelInventory/model/NCEP/GFS/Global_0p5deg/?suffix=grib2</string>
+                    <string>/thredds/modelInventory/grib/NCEP/GFS/Global_0p5deg/?suffix=grib2</string>
                   </method>
                 </object>
               </method>
@@ -69,7 +69,7 @@
               </method>
               <method name="put">
                 <string>prop.service.http</string>
-                <string>http://thredds.ucar.edu/thredds/fileServer/model/NCEP/GFS/Global_0p5deg/GFS_Global_0p5deg_20121210_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/fileServer/grib/NCEP/GFS/Global_0p5deg/GFS_Global_0p5deg_20121210_1800.grib2</string>
               </method>
               <method name="put">
                 <string>Thredds.CatalogUrl</string>
@@ -143,7 +143,7 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>http://thredds.ucar.edu/thredds/dodsC/model/NCEP/GFS/Global_2p5deg/GFS_Global_2p5deg_20121210_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/GFS/Global_2p5deg/GFS_Global_2p5deg_20121210_1800.grib2</string>
               </method>
             </object>
           </property>
@@ -178,13 +178,13 @@
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/thredds/catalog/model/NCEP/GFS/Global_2p5deg/latest.xml</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/GFS/Global_2p5deg/latest.xml</string>
               </method>
               <method name="put">
                 <string>documentlinks</string>
                 <object class="java.util.ArrayList">
                   <method name="add">
-                    <string>/thredds/modelInventory/model/NCEP/GFS/Global_2p5deg/</string>
+                    <string>/thredds/modelInventory/grib/NCEP/GFS/Global_2p5deg/</string>
                   </method>
                 </object>
               </method>
@@ -206,7 +206,7 @@
               </method>
               <method name="put">
                 <string>prop.service.http</string>
-                <string>http://thredds.ucar.edu/thredds/fileServer/model/NCEP/GFS/Global_2p5deg/GFS_Global_2p5deg_20121210_1800.grib2</string>
+                <string>http://thredds.ucar.edu/thredds/fileServer/grib/NCEP/GFS/Global_2p5deg/GFS_Global_2p5deg_20121210_1800.grib2</string>
               </method>
             </object>
           </property>
