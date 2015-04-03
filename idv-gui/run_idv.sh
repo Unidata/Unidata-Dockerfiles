@@ -11,4 +11,4 @@ fi
 
 set -x
 
-docker run -p 5901:5901 $1 
+docker run -p 5901:5901 --rm -it $1 /home/idv/startidv.sh
