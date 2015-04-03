@@ -41,10 +41,21 @@ COPY run_idv.sh /home/idv/
 
 RUN mkdir ~/.fluxbox/
 RUN bash -c 'echo "xterm &" >> ~/.fluxbox/startup'
-RUN echo "/usr/bin/fluxbox -log ~/.fluxbox/log &" >> ~/.fluxbox/startup
+RUN echo "/usr/bin/fluxbox -log ~/.fluxbox/log" >> ~/.fluxbox/startup
 
 ENV APORT 5901
 EXPOSE 5901
 
-RUN bash -c 'echo "/home/idv/IDV/runIDV && shutdown -h now" >> ~/.fluxbox/startup'
-CMD ["xinit", "--", "/usr/bin/Xvfb", ":1", "-screen", "0", "1024x768x24"]
+##
+# We can parameterize screen dimensions
+# with the following variables.
+# e.g.
+#    docker run -p 5901:5901 -e SIZEH=800 -e SIZEW=640 -e CDEPTH=8 \
+#                       -it unidata/idv-gui ./startidv.sh
+##
+ENV SIZEH 1024
+ENV SIZEW 768
+ENV CDEPTH 24
+
+COPY startidv.sh /home/idv/
+#CMD ["xinit", "--", "/usr/bin/Xvfb", ":1", "-screen", "0", "1024x768x24"]

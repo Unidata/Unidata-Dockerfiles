@@ -29,16 +29,6 @@ if [ -f $SFILE ]; then
     cp $SFILE $TFILE
 fi
 
-##
-# Download the IDV file used by
-# the dockerfile, if need be.
-##
-if [ ! -f /vagrant/dockerfile-idv/IDV5.tar.bz2 ]; then
-    curl -O ftp://ftp.unidata.ucar.edu/pub/netcdf/IDV5.tar.bz2
-    mv IDV5.tar.bz2 /vagrant/dockerfile-idv/
-fi
-
-
 #####
 # Cleanup
 #####
