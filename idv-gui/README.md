@@ -12,6 +12,32 @@ To build the docker image, you would run the following command from this directo
 
 ## Running the Docker Image
 
+The docker image may be run one of two ways. Either from the command line, or via the `run_idv.sh` utility script.  The latter is easier, but the former is more configurable.
+
+### Script
+
+    $ ./run_idv.sh unidata/idv-gui
+    
+### Command Line
+
+    $ docker run -p 5901:5901 -it unidata/idv-gui ./startidv.sh
+    
+Note that you can modify the X11 screen dimensions using the following parameters:
+
+Parameter | Default | Note
+----|---- | ----
+SIZEH | 1024 | Screen Height
+SIZEW | 768 | Screen Width
+CDEPTH | 24  | Color Depth
+
+You would use these parameters as follows:
+
+    $ docker run -p 5901:5901 -e SIZEH=1440 -e SIZEW=900 -e CDEPTH=8 -it unidata/idv-gui ./startidv.sh
+    
+You would, of course, replace the values with your desired dimensions.
+
+### Note: Exposing ports
+
 In order to run this docker image, we need to expose a port which will be mapped to `5901` on the container.  Note that the `5901 port is already exposed in the `Dockerfile`.  We need to specify the port mapping when invoking `docker run`.  
 
 Invoke `docker run` in one of the following fashions:
