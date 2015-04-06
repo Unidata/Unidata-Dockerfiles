@@ -9,7 +9,7 @@
               <method name="add">
                 <object class="ucar.unidata.data.imagery.AddeImageDescriptor">
                   <property name="Source">
-                    <string>adde://adde.cise-nsf.gov/imagedata?&amp;PORT=112&amp;COMPRESS=gzip&amp;USER=idv&amp;PROJ=0&amp;VERSION=1&amp;DEBUG=false&amp;TRACE=0&amp;GROUP=GINIEAST&amp;DESCRIPTOR=GE1KVIS&amp;BAND=1&amp;LATLON=43.10000 -74.00000&amp;PLACE=CENTER&amp;SIZE=800 800&amp;UNIT=BRIT&amp;MAG=1 1&amp;SPAC=1&amp;NAV=X&amp;AUX=YES&amp;DOC=X&amp;POS=0</string>
+                    <string>adde://adde.ucar.edu/imagedata?&amp;PORT=112&amp;COMPRESS=gzip&amp;USER=idv&amp;PROJ=0&amp;VERSION=1&amp;DEBUG=false&amp;TRACE=0&amp;GROUP=GINIEAST&amp;DESCRIPTOR=GE1KVIS&amp;BAND=1&amp;LATLON=43.10000 -74.00000&amp;PLACE=CENTER&amp;SIZE=800 800&amp;UNIT=BRIT&amp;MAG=1 1&amp;SPAC=1&amp;NAV=X&amp;AUX=YES&amp;DOC=X&amp;POS=0</string>
                   </property>
                   <property name="Directory">
                     <object class="edu.wisc.ssec.mcidas.AreaDirectory">
@@ -57,7 +57,7 @@
                         <string>GINIEAST</string>
                       </property>
                       <property name="Host">
-                        <string>adde.cise-nsf.gov</string>
+                        <string>adde.ucar.edu</string>
                       </property>
                       <property name="RequestType">
                         <string>imagedata</string>
@@ -179,7 +179,7 @@
               <method name="add">
                 <object class="ucar.unidata.data.imagery.AddeImageDescriptor">
                   <property name="Source">
-                    <string>adde://adde.cise-nsf.gov/imagedata?&amp;PORT=112&amp;COMPRESS=gzip&amp;USER=idv&amp;PROJ=0&amp;VERSION=1&amp;DEBUG=false&amp;TRACE=0&amp;GROUP=NEXRCOMP&amp;DESCRIPTOR=1KN0R-NAT&amp;BAND=27&amp;LATLON=43.10000 -74.00000&amp;PLACE=CENTER&amp;SIZE=800 800&amp;UNIT=ECHO&amp;MAG=1 1&amp;SPAC=4&amp;NAV=X&amp;AUX=YES&amp;DOC=X&amp;POS=0</string>
+                    <string>adde://adde.ucar.edu/imagedata?&amp;PORT=112&amp;COMPRESS=gzip&amp;USER=idv&amp;PROJ=0&amp;VERSION=1&amp;DEBUG=false&amp;TRACE=0&amp;GROUP=NEXRCOMP&amp;DESCRIPTOR=1KN0R-NAT&amp;BAND=27&amp;LATLON=43.10000 -74.00000&amp;PLACE=CENTER&amp;SIZE=800 800&amp;UNIT=ECHO&amp;MAG=1 1&amp;SPAC=4&amp;NAV=X&amp;AUX=YES&amp;DOC=X&amp;POS=0</string>
                   </property>
                   <property name="Directory">
                     <object class="edu.wisc.ssec.mcidas.AreaDirectory">
@@ -227,7 +227,7 @@
                         <string>NEXRCOMP</string>
                       </property>
                       <property name="Host">
-                        <string>adde.cise-nsf.gov</string>
+                        <string>adde.ucar.edu</string>
                       </property>
                       <property name="RequestType">
                         <string>imagedata</string>
