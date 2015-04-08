@@ -7,18 +7,18 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>http://thredds.ucar.edu/thredds/dodsC/modelsNc/NCEP/NAM/CONUS_80km/NAM_CONUS_80km_20060417_1200.nc</string>
+                <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/NAM/CONUS_80km/NAM_CONUS_80km_20060417_1200.nc</string>
               </method>
             </object>
           </property>
           <property name="Name">
-            <string>http://thredds.ucar.edu/thredds/dodsC/modelsNc/NCEP/NAM/CONUS_80km/NAM_CONUS_80km_20060417_1200.nc</string>
+            <string>http://thredds.ucar.edu/thredds/dodsC/grib/NCEP/NAM/CONUS_80km/NAM_CONUS_80km_20060417_1200.nc</string>
           </property>
           <property name="Properties">
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/dqcServlet/latestModel?eta_211</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/NAM/CONUS_80km/latest.xml</string>
               </method>
               <method name="put">
                 <string>datatypeid</string>

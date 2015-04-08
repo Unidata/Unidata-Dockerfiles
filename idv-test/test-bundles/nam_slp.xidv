@@ -5,13 +5,13 @@
       <method name="add">
         <object class="ucar.unidata.data.grid.DodsGeoGridDataSource" id="id7">
           <property name="Name">
-            <string>dods://thredds.ucar.edu/cgi-bin/dods/DODS-3.2.1/nph-dods/dods/model/2005031012_eta_211.nc</string>
+            <string>dods://thredds.ucar.edu/thredds/dodsC/grib/NCEP/NAM/CONUS_80km/NAM_CONUS_80km_20060417_1200.grib2</string>
           </property>
           <property name="Properties">
             <object class="java.util.Hashtable">
               <method name="put">
                 <string>RESOLVERURL</string>
-                <string>http://thredds.ucar.edu/dqcServlet/latestModel?eta_211</string>
+                <string>http://thredds.ucar.edu/thredds/catalog/grib/NCEP/NAM/CONUS_80km/latest.xml</string>
               </method>
               <method name="put">
                 <string>datatypeid</string>
@@ -19,7 +19,7 @@
               </method>
               <method name="put">
                 <string>TITLE</string>
-                <string>Latest Eta 80km CONUS (2005/03/10 12Z)</string>
+                <string>Latest NAM 80km CONUS (2005/03/10 12Z)</string>
               </method>
             </object>
           </property>
@@ -588,7 +588,7 @@
                             <string>Geopotential height at isobaric levels</string>
                           </property>
                           <property name="Id">
-                            <string>Z</string>
+                            <string>Geopotential_height</string>
                           </property>
                           <property name="Categories">
                             <object class="java.util.ArrayList">
@@ -934,7 +934,7 @@
                     </object>
                   </property>
                   <property name="Description">
-                    <string>Mean sea level pressure (ETA model reduction) at mean sea level</string>
+                    <string>Mean sea level pressure (NAM model reduction) at mean sea level</string>
                   </property>
                   <property name="Id">
                     <string>Psl_et</string>
