@@ -3091,7 +3091,7 @@
                     <object idref="id20"/>
                   </property>
                   <property name="Name">
-                    <string>MOP03/Data Fields/Surface Temperature Day</string>
+                    <string>MOP03/Data_Fields/Surface_Temperature_Day</string>
                   </property>
                   <property name="Properties">
                     <object class="java.util.Hashtable">
@@ -3151,10 +3151,10 @@
                     </object>
                   </property>
                   <property name="Id">
-                    <string>MOP03/Data Fields/Surface Temperature Day</string>
+                    <string>MOP03/Data_Fields/Surface_Temperature_Day</string>
                   </property>
                   <property name="Description">
-                    <string>MOP03/Data Fields/Surface Temperature Day</string>
+                    <string>MOP03/Data_Fields/Surface_Temperature_Day</string>
                   </property>
                   <property name="Categories">
                     <object class="java.util.ArrayList" id="id293">
@@ -3192,7 +3192,7 @@
                       <method name="add">
                         <object class="ucar.unidata.data.DataCategory">
                           <property name="Name">
-                            <string>param:MOP03/Data Fields/Surface Temperature Day</string>
+                            <string>param:MOP03/Data_Fields/Surface_Temperature_Day</string>
                           </property>
                           <property name="ForDisplay">
                             <boolean>false</boolean>
@@ -3275,7 +3275,7 @@
           <property name="ColorScaleInfo">
             <object class="ucar.visad.display.ColorScaleInfo">
               <property name="Name">
-                <string>MOP03/Data Fields/Surface Temperature Day</string>
+                <string>MOP03/Data_Fields/Surface_Temperature_Day</string>
               </property>
               <property name="LabelColor">
                 <object idref="id279"/>
