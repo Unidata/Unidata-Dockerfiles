@@ -62,12 +62,12 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>/share/idv/test/data/satellite/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
+                <string>/tmp/data/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
               </method>
             </object>
           </property>
           <property name="Name">
-            <string>/share/idv/test/data/satellite/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
+            <string>/tmp/data/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
           </property>
           <property name="Descriptor">
             <object class="ucar.unidata.data.DataSourceDescriptor">
@@ -111,7 +111,7 @@
                   <property name="FilePaths">
                     <object class="java.util.ArrayList">
                       <method name="add">
-                        <string>/share/idv/test/data/satellite/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
+                        <string>/tmp/data/MOP03-20081201-L3V1.0.1.hdf.ncml</string>
                       </method>
                     </object>
                   </property>

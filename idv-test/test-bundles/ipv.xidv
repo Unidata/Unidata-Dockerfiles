@@ -756,7 +756,7 @@
                                     <string>Temperature at isobaric levels</string>
                                   </property>
                                   <property name="Id">
-                                    <string>T</string>
+                                    <string>Temperature_isobaric</string>
                                   </property>
                                   <property name="Categories">
                                     <object class="java.util.ArrayList">
@@ -872,7 +872,7 @@
                                             <string>u-component of wind at isobaric levels</string>
                                           </property>
                                           <property name="Id">
-                                            <string>u</string>
+                                            <string>u_wind</string>
                                           </property>
                                           <property name="Categories">
                                             <object class="java.util.ArrayList">
@@ -953,7 +953,7 @@
                                             <string>v-component of wind at isobaric levels</string>
                                           </property>
                                           <property name="Id">
-                                            <string>v</string>
+                                            <string>v_wind</string>
                                           </property>
                                           <property name="Categories">
                                             <object class="java.util.ArrayList">
@@ -1258,7 +1258,7 @@
                             <string>Geopotential height at isobaric levels</string>
                           </property>
                           <property name="Id">
-                            <string>Z</string>
+                            <string>Geopotential_height</string>
                           </property>
                           <property name="Categories">
                             <object class="java.util.ArrayList">
@@ -1698,7 +1698,7 @@ AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAA</parray
                             <string>Temperature at isobaric levels</string>
                           </property>
                           <property name="Id">
-                            <string>T</string>
+                            <string>Temperature_isobaric</string>
                           </property>
                           <property name="Categories">
                             <object class="java.util.ArrayList">
@@ -1748,7 +1748,7 @@ AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAA</parray
                                     <string>u-component of wind at isobaric levels</string>
                                   </property>
                                   <property name="Id">
-                                    <string>u</string>
+                                    <string>u_wind</string>
                                   </property>
                                   <property name="Categories">
                                     <object class="java.util.ArrayList">
@@ -1788,7 +1788,7 @@ AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAA</parray
                                     <string>v-component of wind at isobaric levels</string>
                                   </property>
                                   <property name="Id">
-                                    <string>v</string>
+                                    <string>v_wind</string>
                                   </property>
                                   <property name="Categories">
                                     <object class="java.util.ArrayList">
@@ -2226,7 +2226,7 @@ AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAA</parray
                     <string>v-component of wind at isobaric levels</string>
                   </property>
                   <property name="Id">
-                    <string>v</string>
+                    <string>v_wind</string>
                   </property>
                   <property name="FixedRequestProperties">
                     <object class="java.util.Hashtable">
