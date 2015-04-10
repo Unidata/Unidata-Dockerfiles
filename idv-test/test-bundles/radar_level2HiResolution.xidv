@@ -7,7 +7,7 @@
           <property name="Sources">
             <object class="java.util.ArrayList">
               <method name="add">
-                <string>/tmp/data/fosr1_2007_06_20_07_21_56.bz2</string>
+                <string>/tmp/data/fosr1_2007_06_20_06_36_26.bz2</string>
               </method>
             </object>
           </property>
@@ -50,7 +50,7 @@
                   <property name="FilePaths">
                     <object class="java.util.ArrayList">
                       <method name="add">
-                        <string>/tmp/data/fosr1_2007_06_20_07_21_56.bz2</string>
+                        <string>/tmp/data/fosr1_2007_06_20_06_36_26.bz2</string>
                       </method>
                     </object>
                   </property>

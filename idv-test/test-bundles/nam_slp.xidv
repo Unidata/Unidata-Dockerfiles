@@ -896,7 +896,7 @@
                     <object idref="id7"/>
                   </property>
                   <property name="Name">
-                    <string>Psl_et</string>
+                    <string>Mean_Sea_Level_Pressure_NAM_Model_Reduction_msl</string>
                   </property>
                   <property name="Properties">
                     <object class="java.util.Hashtable">
@@ -934,10 +934,10 @@
                     </object>
                   </property>
                   <property name="Description">
-                    <string>Mean sea level pressure (NAM model reduction) at mean sea level</string>
+                    <string><![CDATA[Mean Sea Level Pressure NAM Model Reduction @ Mean sea level]]></string>
                   </property>
                   <property name="Id">
-                    <string>Psl_et</string>
+                    <string><![CDATA[Mean_Sea_Level_Pressure_NAM_Model_Reduction_msl]]></string>
                   </property>
                   <property name="Categories">
                     <object class="java.util.ArrayList">
@@ -975,7 +975,7 @@
                       <method name="add">
                         <object class="ucar.unidata.data.DataCategory" id="id109">
                           <property name="Name">
-                            <string>param:Psl_et</string>
+                            <string>param:Mean_Sea_Level_Pressure_NAM_Model_Reduction_msl</string>
                           </property>
                           <property name="ForDisplay">
                             <boolean>false</boolean>
@@ -1236,7 +1236,7 @@ P4AAAD+AAAA/gAAA</parray>
                     <object idref="id7"/>
                   </property>
                   <property name="Name">
-                    <string>Psl_et</string>
+                    <string>Mean_Sea_Level_Pressure_NAM_Model_Reduction_msl</string>
                   </property>
                   <property name="Properties">
                     <object class="java.util.Hashtable">
@@ -1250,7 +1250,7 @@ P4AAAD+AAAA/gAAA</parray>
                     <string>Mean sea level pressure (ETA model reduction) at mean sea level</string>
                   </property>
                   <property name="Id">
-                    <string>Psl_et</string>
+                    <string>Mean_Sea_Level_Pressure_NAM_Model_Reduction_msl</string>
                   </property>
                   <property name="Categories">
                     <object class="java.util.ArrayList">
