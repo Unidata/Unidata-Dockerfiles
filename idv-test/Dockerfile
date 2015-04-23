@@ -12,8 +12,10 @@ RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 
 RUN python get-pip.py
 
+RUN pip install --upgrade pip
+
 # A couple of Python HTML conveniences for generating HTML output
-RUN pip install pyhiccup html5print
+RUN pip install pyhiccup html5print pillow
 
 USER idv
 
