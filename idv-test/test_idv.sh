@@ -2,6 +2,7 @@
 #
 # Convienence script to launch a docker container version of the IDV with all of the appropriate arguments.
 
+# Note: If running with boot2docker, the output dir may have to be at or below ~
 
 if [ $# -ne 2 ]
 then
