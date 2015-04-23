@@ -5,12 +5,12 @@ from os.path import isfile, join
 
 mypath = "/home/idv/test-output/results/"
 
-onlyfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
+myfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
 
-data = ['table', [['tr',
-                   ['td', ['img', {'src' : str("./baseline/" + x)}]],
-                   ['td', ['img', {'src' : str("./results/" + x)}]]]
-                  for x in onlyfiles]]
+data = [['ul', {'align' : 'left'} ], [['li',
+                   ['img', {'src' : str("./baseline/" + x)}],
+                   ['img', {'src' : str("./results/" + x)}]]
+                  for x in myfiles]]
 
 myhtml = html(data)
 
