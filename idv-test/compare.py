@@ -7,7 +7,8 @@ from PIL import ImageChops
 from PIL import Image
 
 # Path for test images
-mypath = "/home/idv/test-output/results/"
+TEST_PATH = "/home/idv/test-output/"
+mypath = TEST_PATH + "results/"
 
 myfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
 
@@ -22,23 +23,25 @@ def rmsdiff(i1, i2):
     rms = math.sqrt(sum_of_squares/float(im1.size[0] * im1.size[1]))
     return rms
 
-myfiles = [("./temp/baseline/" + f,
-             "./temp/results/" + f,
-             rmsdiff("./temp/baseline/" + f, "./temp/results/" + f))
+myfiles = [("./baseline/" + f,
+             "./results/" + f,
+             rmsdiff(TEST_PATH + "baseline/" + f, TEST_PATH + "results/" + f))
              for f in listdir(mypath) if isfile(join(mypath,f)) ]
 
 sortimgs = sorted(myfiles, key=lambda img: img[2])
 
 data = [['ul', {'align' : 'left'} ],
         [['li',
-          ['img', {'src' : x[0]}],
-          ['img', {'src' : x[1]}]]
+          ['p', x[0]],
+          [[['span', {'style':'white-space: nowrap'}],
+            ['img', {'src' : x[0]}],
+            ['img', {'src' : x[1]}]]]]
          for x in sortimgs[::-1]]]
 
 myhtml = html(data)
 
 pretty = HTMLBeautifier.beautify(myhtml, 2)
 
-f = open('./test-output/compare.html','w')
+f = open(TEST_PATH + 'compare.html','w')
 f.write(pretty)
 f.close()
