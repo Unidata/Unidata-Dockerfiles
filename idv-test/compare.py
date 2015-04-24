@@ -6,10 +6,12 @@ from os.path import isfile, join
 from PIL import ImageChops
 from PIL import Image
 
+# Path for test images
 mypath = "/home/idv/test-output/results/"
 
 myfiles = [ f for f in listdir(mypath) if isfile(join(mypath,f)) ]
 
+# http://code.activestate.com/recipes/577630-comparing-two-images/
 def rmsdiff(i1, i2):
     "Calculate the root-mean-square difference between two images"
     im1, im2 = Image.open(i1), Image.open(i2)
