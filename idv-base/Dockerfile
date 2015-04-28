@@ -36,7 +36,7 @@ WORKDIR /home/idv
 ###
 
 RUN curl -SL \
-  http://motherlode.ucar.edu/repository/entry/get/RAMADDA/IDV%20Community%20Resources/IDV%20Docker/IDV.tar.bz2?entryid=169b8f17-b3b2-4347-bec0-2fe0d95d0a55 \
+  http://motherlode.ucar.edu/repository/entry/get/RAMADDA/IDV%20Community%20Resources/IDV%20Docker/IDV.tar.bz2?entryid=18e6168c-d715-4c41-8bbb-d202481c9559 \
   -o ~/IDV.tar.bz2
 
 RUN tar xvfj ~/IDV.tar.bz2
