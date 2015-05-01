@@ -24,11 +24,9 @@ The docker image may be run one of two ways. Either from the command line, or vi
     
 Note that you can modify the X11 screen dimensions using the following parameters:
 
-Parameter | Default | Note
-----|---- | ----
-SIZEH | 1024 | Screen Height
-SIZEW | 768 | Screen Width
-CDEPTH | 24  | Color Depth
+* SIZEH: Screen Height, default 1024
+* SIZEW: Screen Width, default 768
+* CDEPTH: Color Depth, default 24
 
 You would use these parameters as follows:
 
@@ -42,10 +40,8 @@ In order to run this docker image, we need to expose a port which will be mapped
 
 Invoke `docker run` in one of the following fashions:
 
-Invocation | Note
-----|----
-$ docker run -p 5901 | Map 5900 to a random port on the host.
-$ docker run -p 5901:5901 | Map 5900 on container to 5901 on host.
+* `$ docker run -p 5901` - Map 5901 to a random port on the host.
+* `$ docker run -p 5901:5901` - Map 5901 on container to 5901 on host.
 
 You can see how ports are mapped via either `docker ps` or `docker port`, e.g.
 
@@ -54,3 +50,22 @@ You can see how ports are mapped via either `docker ps` or `docker port`, e.g.
 or 
 
 > $ docker port [container name]
+
+## Connecting to the Docker Image
+
+Once you are running the docker image, you would connect to it with the `VNC` client of your choice. The method by which you connect will depend on your platform:
+
+
+### Connecting on Linux
+
+From the command line on Linux, this would be accomplished as follows:
+
+    $ vncviewer localhost:5901
+    
+### Connecting on Windows and OSX
+
+Since Windows and OSX require that `docker` be run via the `Boot2Docker` utility, you would connect your VNC client as follows:
+
+    $ vncviewer [IP Address]:5901
+    
+where [IP Address] is determined by running `$ boot2docker ip`.
