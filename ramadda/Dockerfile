@@ -13,8 +13,7 @@ VOLUME $DATA_DIR
 
 ENV JAVA_OPTS -d64 -Xmx4048m -Xms512m \
   -Dorg.apache.catalina.security.SecurityListener.UMASK=0007 -server \
-  -Dramadda_home=$DATA_DIR -XX:PermSize=256m -XX:MaxPermSize=256m \
-  -Dfile.encoding=utf-8
+  -Dramadda_home=$DATA_DIR -Dfile.encoding=utf-8
 
 ENV CATALINA_OPTS -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true
 
