@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -d ~/repository]
+if [ ! -d ~/repository ]
   then
     mkdir -p ~/repository
 fi
