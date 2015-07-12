@@ -1,29 +1,69 @@
-FROM fedora
+# Dockerfile that contains Unidata Python and ancillary technology (e.g.,IPyNB)
+
+FROM ubuntu
 
 MAINTAINER Julien Chastang <chastang@ucar.edu>
 
-RUN yum -y install tar git bzip2
+# anaconda works better with bash
 
-RUN mkdir -p ~/downloads
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN cd ~/downloads && curl -SL http://repo.continuum.io/miniconda/Miniconda-3.8.3-Linux-x86_64.sh -o Miniconda-3.8.3-Linux-x86_64.sh
+# House keeping
 
-RUN /bin/bash ~/downloads/Miniconda-3.8.3-Linux-x86_64.sh -b -p ~/anaconda/
+RUN apt-get update
 
-ENV PATH ~/anaconda/bin:$PATH 
+RUN apt-get -y upgrade
+
+# Install some Linux packages
+
+RUN apt-get install -y curl git
+
+# In case the user wants to run a IPyNB
+
+EXPOSE 8888
+
+# Set up python user account
+
+RUN useradd -ms /bin/bash python
+
+RUN adduser python sudo
+
+RUN echo 'python:docker' | chpasswd
+
+USER python
+
+ENV HOME /home/python
+
+WORKDIR /home/python
+
+# Install miniconda
+
+RUN mkdir -p /home/python/downloads
+
+RUN cd /home/python/downloads && curl -SL \
+  http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -o \
+  Miniconda-latest-Linux-x86_64.sh
+
+RUN /bin/bash /home/python/downloads/Miniconda-latest-Linux-x86_64.sh -b -p \
+  /home/python/anaconda/
+
+ENV PATH /home/python/anaconda/bin:$PATH 
 
 RUN conda update --yes --quiet conda
 
-RUN conda config --add channels https://conda.binstar.org/rsignell
-
 RUN conda config --add channels https://conda.binstar.org/Unidata
 
-RUN conda create -n unidata --yes python=2 numpy matplotlib cartopy ipython ipython-notebook netcdf4 owslib pyudl networkx basemap iris biggus
+RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4 \
+  matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado jsonschema
 
-RUN mkdir -p /notebooks
+RUN mkdir -p /home/python/work
 
-WORKDIR /notebooks
+WORKDIR /home/python/work
 
-VOLUME /notebooks
+VOLUME /home/python/work
 
-EXPOSE 8888
+USER root
+
+RUN chown -R python:python /home/python/
+
+USER python
