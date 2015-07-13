@@ -34,5 +34,5 @@ do
     shift # past argument or value
 done
 
-docker --tlsverify=false run -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
-  unidata/python
+docker run -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
+    unidata/python
