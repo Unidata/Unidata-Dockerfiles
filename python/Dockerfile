@@ -47,14 +47,14 @@ RUN cd /home/python/downloads && curl -SL \
 RUN /bin/bash /home/python/downloads/Miniconda-latest-Linux-x86_64.sh -b -p \
   /home/python/anaconda/
 
-ENV PATH /home/python/anaconda/bin:$PATH 
+ENV PATH /home/python/anaconda/bin:$PATH
 
 RUN conda update --yes --quiet conda
 
 RUN conda config --add channels https://conda.binstar.org/Unidata
 
 RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4 \
-  matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado jsonschema
+  matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado jsonschema networkx
 
 RUN mkdir -p /home/python/work
 
