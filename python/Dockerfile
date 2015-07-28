@@ -53,9 +53,11 @@ RUN conda update --yes --quiet conda
 
 RUN conda config --add channels https://conda.binstar.org/unidata
 
-RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4
-    matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado jsonschema
-    networkx binstar
+RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4 \
+    matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado \
+    jsonschema networkx
+
+RUN conda install -n unidata --yes --quiet binstar
 
 RUN mkdir -p /home/python/work
 
