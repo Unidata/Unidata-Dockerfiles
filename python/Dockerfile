@@ -1,6 +1,6 @@
 # Dockerfile that contains Unidata Python and ancillary technology (e.g.,IPyNB)
 
-FROM ubuntu
+FROM ubuntu:15.10
 
 MAINTAINER Julien Chastang <chastang@ucar.edu>
 
@@ -16,7 +16,7 @@ RUN apt-get -y upgrade
 
 # Install some Linux packages
 
-RUN apt-get install -y curl git
+RUN apt-get install -y curl git bzip2
 
 # In case the user wants to run a IPyNB
 
@@ -57,7 +57,7 @@ RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4 \
     matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado \
     jsonschema networkx
 
-RUN conda install -n unidata --yes --quiet binstar
+RUN conda install -n unidata --yes --quiet conda-server
 
 RUN mkdir -p /home/python/work
 
