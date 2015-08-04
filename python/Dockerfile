@@ -55,7 +55,7 @@ RUN conda config --add channels https://conda.binstar.org/unidata
 
 RUN conda create -n unidata --yes --quiet python=3 ipython numpy netcdf4 \
     matplotlib cartopy OWSLib siphon MetPy xray pyzmq jinja2 tornado \
-    jsonschema networkx
+    jsonschema networkx anaconda-client
 
 RUN conda install -n unidata --yes --quiet conda-server
 
