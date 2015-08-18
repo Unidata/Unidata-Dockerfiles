@@ -7,3 +7,5 @@ jupyterhub:
    - ./jupyterhub.env
   volumes:
    - /var/run/docker.sock:/var/run/docker.sock
+   - ./ssl/:/srv/oauthenticator/ssl/
+   - ./userlist:/srv/oauthenticator/userlist

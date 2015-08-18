@@ -10,12 +10,13 @@ RUN pip3 install git+git://github.com/jupyter/dockerspawner.git
 RUN mkdir /srv/oauthenticator
 WORKDIR /srv/oauthenticator
 ENV OAUTHENTICATOR_DIR /srv/oauthenticator
-ADD userlist /srv/oauthenticator/userlist
-ADD ssl /srv/oauthenticator/ssl
 RUN chmod 700 /srv/oauthenticator
 ADD nesteddockerspawner.py /srv/jupyterhub/nesteddockerspawner.py
 
+VOLUME [/srv/oauthenticator/ssl]
+
 # Are these only needed for local?
+ADD userlist /srv/oauthenticator/userlist
 ADD addusers.sh /srv/oauthenticator/addusers.sh
 RUN ["sh", "/srv/oauthenticator/addusers.sh"]
 
