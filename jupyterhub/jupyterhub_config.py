@@ -21,9 +21,8 @@ c.DockerSpawner.hub_ip_connect = public_ips()[0]
 c.DockerSpawner.remove_containers = True
 
 # Authenticate with GitHub
-#c.JupyterHub.authenticator_class = 'oauthenticator.LocalGitHubOAuthenticator'
-#c.LocalGitHubOAuthenticator.create_system_users = True
-#c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
+c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
+c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 
 c.Authenticator.whitelist = whitelist = set()
 c.Authenticator.admin_users = admin = set()

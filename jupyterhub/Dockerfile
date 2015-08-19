@@ -13,12 +13,5 @@ ENV OAUTHENTICATOR_DIR /srv/oauthenticator
 RUN chmod 700 /srv/oauthenticator
 ADD nesteddockerspawner.py /srv/jupyterhub/nesteddockerspawner.py
 
-VOLUME [/srv/oauthenticator/ssl]
-
-# Are these only needed for local?
-ADD userlist /srv/oauthenticator/userlist
-ADD addusers.sh /srv/oauthenticator/addusers.sh
-RUN ["sh", "/srv/oauthenticator/addusers.sh"]
-
-# Eventually, this should just be relying upon github
-RUN echo dopplershift:hackme | chpasswd
+# ssl cert/key mounted from outside container
+VOLUME /srv/oauthenticator/ssl
