@@ -18,7 +18,7 @@ from jupyter_client.localinterfaces import public_ips
 c.JupyterHub.hub_ip = '0.0.0.0'
 c.JupyterHub.proxy_api_ip = '0.0.0.0'
 c.DockerSpawner.hub_ip_connect = public_ips()[0]
-c.DockerSpawner.remove_containers = True
+c.NestedDockerSpawner.external_pattern = '/Users/{0.user.name}/work'
 
 # Authenticate with GitHub
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
