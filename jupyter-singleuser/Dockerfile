@@ -3,8 +3,8 @@ FROM continuumio/miniconda3
 
 MAINTAINER Ryan May <rmay@ucar.edu>
 
-# Install git
-RUN apt-get -y install git
+# Install git and ffmpeg
+RUN apt-get -y install git ffmpeg
 
 # fetch juptyerhub-singleuser entrypoint
 ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
