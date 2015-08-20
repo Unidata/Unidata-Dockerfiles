@@ -3,13 +3,14 @@ A Spawner for JupyterHub that runs each user's server in a separate docker conta
 """
 import os
 import docker
+from docker.errors import APIError
 from tornado import gen
 from traitlets import Unicode
 from dockerspawner import DockerSpawner
 
 class NestedDockerSpawner(DockerSpawner):
 
-    external_pattern = Unicode('/home/{0.user.name}/work', config=True)
+    data_image = Unicode('unidata/python-workshop', config=True)
 
     _client = None
     @property
@@ -39,9 +40,26 @@ class NestedDockerSpawner(DockerSpawner):
             cls._client = client
         return cls._client
 
+    @property
+    def data_container_name(self):
+        return "{}-data".format(self.escaped_name)
+
     @gen.coroutine
     def start(self, *args, **kwargs):
-        self.volumes.update({self.external_pattern.format(self):'/home/jupyter/work'})
+        data_container = yield self.get_data_container()
+        if data_container is None:
+            # create the container
+            resp = yield self.docker('create_container', volumes='/notebooks',
+                    name=self.data_container_name, image=self.data_image,
+                    command='/bin/true')
+            data_container_id = resp['Id']
+            self.log.info(
+                "Created container '%s' (id: %s) from image %s",
+                self.data_container_name, data_container_id[:7],
+                self.data_image)
+
+        kwargs.setdefault('extra_host_config', dict())['volumes_from'] = [self.data_container_name]
+        #self.volumes.update({self.external_pattern.format(self):'/home/jupyter/work'})
         yield DockerSpawner.start(self, *args, **kwargs)
 
         # get the internal Docker ip
@@ -49,3 +67,18 @@ class NestedDockerSpawner(DockerSpawner):
         self.user.server.ip = resp['NetworkSettings']['IPAddress']
         self.user.server.port = 8888
         self.log.info('Set user server to %s', self.user.server)
+
+    @gen.coroutine
+    def get_data_container(self):
+        self.log.debug("Getting data container '%s'", self.data_container_name)
+        try:
+            container = yield self.docker(
+                'inspect_container', self.data_container_name
+            )
+        except APIError as e:
+            if e.response.status_code == 404:
+                self.log.info("Container '%s' is gone", self.data_container_name)
+                container = None
+            else:
+                raise
+        return container

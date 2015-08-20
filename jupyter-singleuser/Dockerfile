@@ -28,18 +28,16 @@ RUN conda create -n py2 --yes --quiet python=2 ipython-notebook numpy netcdf4 \
   matplotlib cartopy OWSLib siphon MetPy xray networkx
 RUN bash /srv/singleuser/setup_kernel.sh py2
 
-# jupyter is our user
-RUN useradd -m -s /bin/bash jupyter
+# jupyter is our user -- set uid/gid to match base data image
+RUN groupadd -g 1001 jupyter
+RUN useradd -u 1001 -g jupyter -m -s /bin/bash -d /notebooks jupyter
 
 USER jupyter
-ENV HOME /home/jupyter
+ENV HOME /notebooks
 ENV SHELL /bin/bash
 ENV USER jupyter
 
-WORKDIR /home/jupyter/
-VOLUME /home/jupyter/work
-
-# Add unidata workshop notebooks
-RUN git clone --depth=1 http://github.com/unidata/unidata-python-workshop
+WORKDIR /notebooks
+VOLUME /notebooks
 
 CMD ["bash", "/srv/singleuser/singleuser.sh"]
