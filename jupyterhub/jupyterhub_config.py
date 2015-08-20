@@ -17,9 +17,10 @@ c.JupyterHub.spawner_class = 'nesteddockerspawner.NestedDockerSpawner'
 from jupyter_client.localinterfaces import public_ips
 c.JupyterHub.hub_ip = '0.0.0.0'
 c.JupyterHub.proxy_api_ip = '0.0.0.0'
-c.DockerSpawner.hub_ip_connect = public_ips()[0]
+#c.DockerSpawner.hub_ip_connect = public_ips()[0]
+c.DockerSpawner.hub_ip_connect = 'hub'
 c.DockerSpawner.container_image = 'unidata/jupyter-singleuser'
-c.NestedDockerSpawner.external_pattern = '/home/{0.user.name}/work'
+c.NestedDockerSpawner.data_image = 'unidata/python-workshop'
 
 # Authenticate with GitHub
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'

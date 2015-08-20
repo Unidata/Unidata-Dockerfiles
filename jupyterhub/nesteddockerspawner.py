@@ -58,13 +58,18 @@ class NestedDockerSpawner(DockerSpawner):
                 self.data_container_name, data_container_id[:7],
                 self.data_image)
 
-        kwargs.setdefault('extra_host_config', dict())['volumes_from'] = [self.data_container_name]
-        #self.volumes.update({self.external_pattern.format(self):'/home/jupyter/work'})
+        host_config = kwargs.setdefault('extra_host_config', dict())
+        host_config['volumes_from'] = [self.data_container_name]
+        # We'll use the hostname here
+        self.log.info('Using hostname: %s', os.environ['HOSTNAME'])
+        host_config['links'] = [(os.environ['HOSTNAME'], 'hub')]
         yield DockerSpawner.start(self, *args, **kwargs)
 
         # get the internal Docker ip
-        resp = yield self.docker('inspect_container', container=self.container_id)
-        self.user.server.ip = resp['NetworkSettings']['IPAddress']
+        # resp = yield self.docker('inspect_container', container=self.container_id)
+        # self.user.server.ip = resp['NetworkSettings']['IPAddress']
+        # Rely on linking and just use the container name
+        self.user.server.ip = self.container_name
         self.user.server.port = 8888
         self.log.info('Set user server to %s', self.user.server)
 
