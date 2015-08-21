@@ -66,10 +66,10 @@ class NestedDockerSpawner(DockerSpawner):
         yield DockerSpawner.start(self, *args, **kwargs)
 
         # get the internal Docker ip
-        # resp = yield self.docker('inspect_container', container=self.container_id)
-        # self.user.server.ip = resp['NetworkSettings']['IPAddress']
-        # Rely on linking and just use the container name
-        self.user.server.ip = self.container_name
+        resp = yield self.docker('inspect_container', container=self.container_id)
+        self.user.server.ip = resp['NetworkSettings']['IPAddress']
+        # Rely on linking and just use the container name (needs Docker >= 1.6)
+        # self.user.server.ip = self.container_name
         self.user.server.port = 8888
         self.log.info('Set user server to %s', self.user.server)
 
