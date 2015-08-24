@@ -60,9 +60,10 @@ class NestedDockerSpawner(DockerSpawner):
                 self.data_container_name, data_container_id[:7],
                 self.data_image)
 
+        extra_kwargs = kwargs.setdefault('extra_create_kwargs', dict())
+        extra_kwargs['mem_limit'] = self.memory_limit
+        extra_kwargs['cpu_shares'] = self.cpu_share
         host_config = kwargs.setdefault('extra_host_config', dict())
-        host_config['mem_limit'] = self.memory_limit
-        host_config['cpu_shares'] = self.cpu_share
         host_config['volumes_from'] = [self.data_container_name]
         # We'll use the hostname here
         self.log.info('Using hostname: %s', os.environ['HOSTNAME'])
