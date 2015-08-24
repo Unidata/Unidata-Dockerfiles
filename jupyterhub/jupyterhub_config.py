@@ -21,6 +21,8 @@ c.JupyterHub.proxy_api_ip = '0.0.0.0'
 c.DockerSpawner.hub_ip_connect = 'hub'
 c.DockerSpawner.container_image = 'unidata/jupyter-singleuser'
 c.NestedDockerSpawner.data_image = 'unidata/python-workshop'
+c.NestedDockerSpawner.memory_limit = os.environ.get('DOCKER_MEM_LIMIT', '800m')
+c.NestedDockerSpawner.cpu_share = os.environ.get('DOCKER_CPU_SHARE', 1.0)
 
 # Authenticate with GitHub
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'

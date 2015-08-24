@@ -5,12 +5,14 @@ import os
 import docker
 from docker.errors import APIError
 from tornado import gen
-from traitlets import Unicode
+from traitlets import Unicode, Float
 from dockerspawner import DockerSpawner
 
 class NestedDockerSpawner(DockerSpawner):
 
     data_image = Unicode('unidata/python-workshop', config=True)
+    memory_limit = Unicode('4g', config=True)
+    cpu_share = Float(1.0, config=True)
 
     _client = None
     @property
@@ -59,6 +61,8 @@ class NestedDockerSpawner(DockerSpawner):
                 self.data_image)
 
         host_config = kwargs.setdefault('extra_host_config', dict())
+        host_config['mem_limit'] = self.memory_limit
+        host_config['cpu_shares'] = self.cpu_share
         host_config['volumes_from'] = [self.data_container_name]
         # We'll use the hostname here
         self.log.info('Using hostname: %s', os.environ['HOSTNAME'])
