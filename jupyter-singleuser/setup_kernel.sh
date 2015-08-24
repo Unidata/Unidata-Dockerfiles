@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source activate $@
-ipython kernelspec install-self
+ipython kernelspec install-self --user
