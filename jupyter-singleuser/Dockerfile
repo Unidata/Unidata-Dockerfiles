@@ -1,10 +1,7 @@
 # Dockerfile for running a single user jupyter server
-FROM ubuntu:15.04
+FROM unidata/ubuntu-dev
 
 MAINTAINER Ryan May <rmay@ucar.edu>
-
-# Install git and ffmpeg
-RUN apt-get update && apt-get -y install git ffmpeg ca-certificates bzip2 curl && apt-get clean
 
 # fetch juptyerhub-singleuser entrypoint
 ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
