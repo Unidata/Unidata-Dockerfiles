@@ -5,14 +5,14 @@ import os
 import docker
 from docker.errors import APIError
 from tornado import gen
-from traitlets import Unicode, Float
+from traitlets import Unicode, Int
 from dockerspawner import DockerSpawner
 
 class NestedDockerSpawner(DockerSpawner):
 
     data_image = Unicode('unidata/python-workshop', config=True)
     memory_limit = Unicode('4g', config=True)
-    cpu_share = Float(1.0, config=True)
+    cpu_share = Int(2, config=True)
 
     _client = None
     @property
@@ -60,11 +60,19 @@ class NestedDockerSpawner(DockerSpawner):
                 self.data_container_name, data_container_id[:7],
                 self.data_image)
 
+
         extra_kwargs = kwargs.setdefault('extra_create_kwargs', dict())
-        extra_kwargs['mem_limit'] = self.memory_limit
         extra_kwargs['cpu_shares'] = self.cpu_share
         host_config = kwargs.setdefault('extra_host_config', dict())
         host_config['volumes_from'] = [self.data_container_name]
+
+        # Needs conditional based on API
+        resp = yield self.docker('version')
+        if resp['ApiVersion'] < '1.19':
+            extra_kwargs['mem_limit'] = self.memory_limit
+        else:
+            host_config['mem_limit'] = self.memory_limit
+
         # We'll use the hostname here
         self.log.info('Using hostname: %s', os.environ['HOSTNAME'])
         host_config['links'] = [(os.environ['HOSTNAME'], 'hub')]
