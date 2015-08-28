@@ -5,6 +5,7 @@ import sys
 
 here = os.path.dirname(__file__)
 sys.path.insert(0, here)
+join = os.path.join
 
 c = get_config()
 
@@ -17,6 +18,7 @@ c.JupyterHub.spawner_class = 'nesteddockerspawner.NestedDockerSpawner'
 from jupyter_client.localinterfaces import public_ips
 c.JupyterHub.hub_ip = '0.0.0.0'
 c.JupyterHub.proxy_api_ip = '0.0.0.0'
+c.JupyterHub.db_url = join('/jpydb/', 'jupyterhub.sqlite')
 #c.DockerSpawner.hub_ip_connect = public_ips()[0]
 c.DockerSpawner.hub_ip_connect = 'hub'
 c.DockerSpawner.container_image = 'unidata/jupyter-singleuser'
@@ -28,23 +30,12 @@ c.NestedDockerSpawner.cpu_share = int(os.environ.get('DOCKER_CPU_SHARE', 2))
 c.JupyterHub.authenticator_class = 'oauthenticator.GitHubOAuthenticator'
 c.GitHubOAuthenticator.oauth_callback_url = os.environ['OAUTH_CALLBACK_URL']
 
-c.Authenticator.whitelist = whitelist = set()
-c.Authenticator.admin_users = admin = set()
-
-# Find the user list and add the users
-root = os.environ.get('OAUTHENTICATOR_DIR', here)
-join = os.path.join
-with open(join(root, 'userlist')) as f:
-    for line in f:
-        if not line:
-            continue
-        parts = line.split()
-        name = parts[0]
-        whitelist.add(name)
-        if len(parts) > 1 and parts[1] == 'admin':
-            admin.add(name)
+# Just add me as the admin. This should be persisted outside docker in the db
+c.Authenticator.whitelist = set(['dopplershift'])
+c.Authenticator.admin_users = set(['dopplershift'])
 
 # ssl config
+root = os.environ.get('OAUTHENTICATOR_DIR', here)
 ssl = join(root, 'ssl')
 keyfile = join(ssl, 'ssl.key')
 certfile = join(ssl, 'ssl.cert')

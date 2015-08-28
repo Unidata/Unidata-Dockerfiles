@@ -18,11 +18,10 @@ RUN pip3 install git+git://github.com/jupyter/dockerspawner.git
 ADD jupyterhub_config.py nesteddockerspawner.py /srv/jupyterhub/
 
 # Create oauthenticator directory and put necessary files in it
-ENV OAUTHENTICATOR_DIR /srv/oauthenticator
+ENV OAUTHENTICATOR_DIR /srv/oauthenticator/
 RUN mkdir -p /srv/oauthenticator && chmod 700 /srv/oauthenticator
 
-# ssl cert/key mounted from outside container
-VOLUME /srv/oauthenticator/ssl
+VOLUME /jpydb
 
 WORKDIR /srv/jupyterhub
 EXPOSE 8000

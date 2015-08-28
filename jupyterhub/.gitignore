@@ -1,4 +1,4 @@
-Dockerfile.bak
+Dockerfile.*
 jupyterhub.env
 notebooks/
 oauth.env*

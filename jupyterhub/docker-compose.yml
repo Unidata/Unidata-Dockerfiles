@@ -1,11 +1,13 @@
 jupyterhub:
-  image: unidata/jupyterhub
+  build: .
+  dockerfile: Dockerfile.local
   ports:
    - "8000:8000"
-  env_file: 
-   - ./oauth.env
-   - ./jupyterhub.env
   volumes:
    - /var/run/docker.sock:/var/run/docker.sock
-   - ./ssl/:/srv/oauthenticator/ssl/
-   - ./userlist:/srv/oauthenticator/userlist
+  volumes_from:
+   - hub-data
+
+hub-data:
+  build: .
+  dockerfile: Dockerfile.data
