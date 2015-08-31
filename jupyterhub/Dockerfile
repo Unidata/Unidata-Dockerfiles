@@ -24,5 +24,5 @@ RUN mkdir -p /srv/oauthenticator && chmod 700 /srv/oauthenticator
 VOLUME /jpydb
 
 WORKDIR /srv/jupyterhub
-EXPOSE 8000
+EXPOSE 443
 ENTRYPOINT ["jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
