@@ -1,4 +1,5 @@
 FROM unidata/idv-base
+MAINTAINER Ward Fisher <wfisher@ucar.edu>
 
 USER root
 
