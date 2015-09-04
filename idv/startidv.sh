@@ -21,5 +21,5 @@
 xinit -- /usr/bin/Xvfb :1 -screen 0 $SIZEH\x$SIZEW\x$CDEPTH &
 sleep 5
 export DISPLAY=localhost:1
-bash -c 'sleep 25; wmctrl -r Dashboard -b add,fullscreen; wmctrl -r "Unidata IDV - Map View - One Pane" -b add,fullscreen; wmctrl -c "IDV Help Tips"' &
+bash -c 'sleep 25; wmctrl -r Dashboard -b add,fullscreen; wmctrl -r "Unidata IDV - Map View - One Pane" -b add,fullscreen' &
 /home/idv/IDV/runIDV
