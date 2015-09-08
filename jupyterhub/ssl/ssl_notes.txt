@@ -29,3 +29,7 @@ To issue new certificate:
 
 6) (optional) Verify trust:
    openssl verify -CAfile CA/cacert.pem ssl.cert
+
+
+To revoke (e.g. need to update IP address):
+   openssl ca -revoke ./CA/certs/100001.pem -config openssl.cnf
