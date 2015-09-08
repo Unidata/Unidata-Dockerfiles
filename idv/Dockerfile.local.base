@@ -39,9 +39,10 @@ WORKDIR /home/idv
 # Download IDV
 ###
 
-COPY IDV.tar.bz2 /home/idv
+COPY IDV.tar.bz2 /home/idv/
 
 RUN tar xvfj ~/IDV.tar.bz2
+RUN rm IDV.tar.bz2
 
 ###
 # Include Dockerfile,
