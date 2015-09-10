@@ -24,6 +24,8 @@ RUN groupadd -r tomcat && \
 
 WORKDIR $DATA_DIR
 
+RUN chown -R tomcat /data/repository
+
 USER tomcat
 
 CMD ["catalina.sh", "run"]
