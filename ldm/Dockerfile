@@ -8,8 +8,6 @@ RUN apt-get -y upgrade
 
 RUN apt-get install -y wget pax gcc zlib1g-dev libxml2-dev make libpng-dev rsyslog
 
-RUN echo "root:root" | chpasswd
-
 # rsyslog
 
 ADD rsyslog.conf /etc/
