@@ -1,21 +1,14 @@
 # See https://www.unidata.ucar.edu/software/ldm/ldm-current/basics/platform.html
 
-FROM ubuntu
+FROM centos
 
-RUN apt-get update
+RUN yum update  yum
 
-RUN apt-get -y upgrade
-
-RUN apt-get install -y wget pax gcc zlib1g-dev libxml2-dev make libpng-dev rsyslog
+RUN yum install -y wget pax gcc libxml2-devel make libpng-dev rsyslog perl zlib-devel
 
 # rsyslog
 
 ADD rsyslog.conf /etc/
-
-# port for rsyslog
-EXPOSE 514
-
-EXPOSE 514/udp
 
 # Set up ldm directory
 
@@ -25,8 +18,13 @@ ENV HOME /home/ldm
 
 WORKDIR /home/ldm
 
+# Output directory
+
+RUN mkdir /tmp/output
+
 # Install the ldm
 
 COPY install_ldm.sh /home/ldm/
 
 CMD bash -C '/home/ldm/install_ldm.sh';'bash'
+
