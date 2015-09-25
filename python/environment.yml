@@ -1,0 +1,18 @@
+ name: unidata
+ channels:
+   - https://conda.binstar.org/scitools
+   - https://conda.binstar.org/Unidata
+ dependencies:
+   - python=3.4
+   - numpy
+   - matplotlib
+   - cartopy
+   - ipython-notebook
+   - networkx
+   - netcdf4
+   - owslib
+   - metpy
+   - siphon
+   - xray
+   - anaconda-client
+
