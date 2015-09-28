@@ -53,6 +53,8 @@ ENV SIZEH 1024
 ENV SIZEW 768
 ENV CDEPTH 24
 
+ENV USENOVNC TRUE
+
 ###
 # Add the default Unidata bundle.
 ###
@@ -61,7 +63,7 @@ COPY startidv.sh /home/idv/
 COPY run_idv.sh /home/idv/
 COPY Dockerfile.gui /home/idv/
 COPY README.md /home/idv/
-
+COPY self_unsigned.pem /home/idv/self.pem
 
 
 CMD /home/idv/startidv.sh
