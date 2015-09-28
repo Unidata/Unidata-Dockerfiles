@@ -55,7 +55,7 @@ RUN conda config --add channels https://conda.binstar.org/unidata
 
 ADD environment.yml /home/python/
 
-RUN conda env create --quiet /home/python/environment.yml
+RUN conda env create --quiet -f /home/python/environment.yml
 
 RUN mkdir -p /home/python/work
 
