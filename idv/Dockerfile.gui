@@ -3,7 +3,7 @@ MAINTAINER Ward Fisher <wfisher@ucar.edu>
 
 USER root
 
-RUN apt-get install -y x11vnc xvfb xinit fluxbox wmctrl
+RUN apt-get install -y x11vnc xvfb xinit fluxbox wmctrl git python
 
 USER idv
 ENV HOME /home/idv
@@ -38,6 +38,9 @@ RUN echo "/usr/bin/fluxbox -log ~/.fluxbox/log" >> ~/.fluxbox/startup
 
 ENV APORT 5901
 EXPOSE ${APORT}
+EXPOSE 6080
+
+RUN git clone git://github.com/kanaka/noVNC
 
 ##
 # We can parameterize screen dimensions
@@ -58,5 +61,7 @@ COPY startidv.sh /home/idv/
 COPY run_idv.sh /home/idv/
 COPY Dockerfile.gui /home/idv/
 COPY README.md /home/idv/
+
+
 
 CMD /home/idv/startidv.sh
