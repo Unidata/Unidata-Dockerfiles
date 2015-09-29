@@ -16,7 +16,7 @@ WORKDIR /home/idv
 ###
 
 RUN mkdir ~/.vnc
-RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+#RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 
 ###
 # Create a .xinitrc file.
@@ -25,7 +25,8 @@ RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 # overridden when invoking 'docker run', e.g.
 #   $ docker run -e APORT=4435
 ###
-RUN echo '/usr/bin/x11vnc -usepw -display :1 -autoport $APORT -forever &' >> ~/.xinitrc
+#RUN echo '/usr/bin/x11vnc -usepw -display :1 -autoport $APORT -forever &' >> ~/.xinitrc
+RUN echo '/usr/bin/x11vnc -display :1 -autoport $APORT &' >> ~/.xinitrc
 RUN echo "/usr/bin/startfluxbox" >> ~/.xinitrc
 
 ###
@@ -37,10 +38,10 @@ RUN bash -c 'echo "xterm &" >> ~/.fluxbox/startup'
 RUN echo "/usr/bin/fluxbox -log ~/.fluxbox/log" >> ~/.fluxbox/startup
 
 ENV APORT 5901
-EXPOSE ${APORT}
 EXPOSE 6080
 
 RUN git clone git://github.com/kanaka/noVNC
+RUN ln -s /home/idv/noVNC/vnc_auto.html /home/idv/noVNC/index.html
 
 ##
 # We can parameterize screen dimensions
