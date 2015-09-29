@@ -5,7 +5,7 @@ CloudIDV is run in the following fashion:
     $ docker run -p 6080:6080 -it unidata/cloudidv
 
 
-## Connecting to the CloudIDV Session
+### Connecting to the CloudIDV Session
 
 The CloudIDV uses a web browser to connect.  You will use the IP address of the docker server, and port 6080.  On linux, the IP address will typically be **127.0.0.1**.  On Windows or OSX, you will use the `docker-machine` command to determine the IP address.  Assuming you are using the `default` docker machine, you would discover the IP as follows:
 
