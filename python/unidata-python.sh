@@ -3,8 +3,8 @@
 usage="$(basename "$0") [-h] [-v, --volume directory] [-p, --port port] -- 
 script to start Unidata Python Docker container where:\n
     -h  show this help text\n
-    -v, --volume A local host dicrectory that will be bound to the 
-/home/python/work direcotry. The default is the PWD.\n
+    -v, --volume A local host directory that will be bound to the 
+/home/python/work directory. The default is the PWD.\n
     -p, --port  Forward port 8888 to the specified port. Useful for running
 IPyNB, for example.\n"
 
