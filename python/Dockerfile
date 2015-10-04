@@ -68,3 +68,6 @@ USER root
 RUN chown -R python:python /home/python/
 
 USER python
+
+ADD .bashrc /home/python/
+
