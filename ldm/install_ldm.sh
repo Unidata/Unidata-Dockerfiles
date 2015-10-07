@@ -19,11 +19,20 @@ cd /home/ldm/ldm-${v}/src
 make install >make.log 2>&1
 
 make root-actions
+
+make distclean
+
 cd /home/ldm
+
 rm ldm-${v}.tar.gz
 
 rm install_ldm.sh
 
-tar -cvzf /tmp/output/ldm.tar.gz .
+# Don't want these in the LDM distribution for Docker
+rm -rf /home/ldm/etc
+
+rm -rf /home/ldm/var
+
+tar cvfj /tmp/output/ldm.tar.bz2 .
 
 cp /etc/rsyslog.conf /tmp/output

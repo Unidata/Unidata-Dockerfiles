@@ -1,0 +1,35 @@
+FROM centos
+
+RUN yum update  yum
+
+RUN yum install -y wget rsyslog git bzip2
+
+# rsyslog
+
+ADD rsyslog.conf /etc/
+
+ENV HOME /home/ldm
+
+WORKDIR /home/ldm
+
+# Volumes
+
+VOLUME /home/ldm/etc
+
+VOLUME /home/ldm/var
+
+###
+# Download LDM
+###
+
+RUN curl -SL \
+  https://motherlode.ucar.edu/repository/entry/get/ldm.tar.bz2?entryid=b1d327b5-207c-4c2e-8d23-b7a611627764 \
+  -o ~/ldm.tar.bz2
+
+RUN tar xvfj ~/ldm.tar.bz2
+
+RUN rm ~/ldm.tar.bz2
+
+ENV PATH /home/ldm/bin:$PATH
+
+CMD bash

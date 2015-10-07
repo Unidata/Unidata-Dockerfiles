@@ -4,7 +4,8 @@ FROM centos
 
 RUN yum update  yum
 
-RUN yum install -y wget pax gcc libxml2-devel make libpng-dev rsyslog perl zlib-devel
+RUN yum install -y wget pax gcc libxml2-devel make libpng-dev rsyslog perl \
+    zlib-devel bzip2
 
 # rsyslog
 
@@ -27,4 +28,3 @@ RUN mkdir /tmp/output
 COPY install_ldm.sh /home/ldm/
 
 CMD bash -C '/home/ldm/install_ldm.sh';'bash'
-
