@@ -35,7 +35,5 @@ do
     shift # past argument or value
 done
 
-exit 0
-
 docker run -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
     unidata/python
