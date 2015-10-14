@@ -1,12 +1,13 @@
 #!/bin/bash
 
-usage="$(basename "$0") [-h] [-v, --volume directory] [-p, --port port] -- 
-script to start Unidata Python Docker container where:\n
-    -h  show this help text\n
+usage="$(basename "$0") [-h --help] [-v, --volume directory] [-p, --port port]\n
+-- script to start Unidata Python Docker container where:\n
+    -h, --help  show this help text\n
     -v, --volume A local host directory that will be bound to the 
-/home/python/work directory. The default is the PWD.\n
+/home/python/work\n directory. The default is the PWD.\n
     -p, --port  Forward port 8888 to the specified port. Useful for running
-IPyNB, for example.\n"
+IPyNB, \nfor example. The default is 9321."
+
 
 # Set some defaults
 
@@ -33,6 +34,8 @@ do
     esac
     shift # past argument or value
 done
+
+exit 0
 
 docker run -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
     unidata/python
