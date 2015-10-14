@@ -2,7 +2,7 @@ FROM tomcat:jre8
 
 # Grab RAMADDA
 RUN curl -SL \
-  http://sourceforge.net/projects/ramadda/files/ramadda1.7/repository.war \
+  http://sourceforge.net/projects/ramadda/files/ramadda2.1b/repository.war \
   -o webapps/repository.war
 
 ENV DATA_DIR /data/repository
@@ -24,7 +24,7 @@ RUN groupadd -r tomcat && \
 
 WORKDIR $DATA_DIR
 
-RUN chown -R tomcat /data/repository
+RUN chown -R tomcat:tomcat /data/repository
 
 USER tomcat
 
