@@ -16,7 +16,7 @@ WORKDIR /home/idv
 ###
 
 RUN mkdir ~/.vnc
-#RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
+RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 
 ###
 # Create a .xinitrc file.
@@ -25,8 +25,8 @@ RUN mkdir ~/.vnc
 # overridden when invoking 'docker run', e.g.
 #   $ docker run -e APORT=4435
 ###
-#RUN echo '/usr/bin/x11vnc -usepw -display :1 -autoport $APORT -forever &' >> ~/.xinitrc
-RUN echo '/usr/bin/x11vnc -display :1 -autoport $APORT &' >> ~/.xinitrc
+RUN echo '/usr/bin/x11vnc -usepw -display :1 -autoport $APORT -forever &' >> ~/.xinitrc
+#RUN echo '/usr/bin/x11vnc -display :1 -autoport $APORT &' >> ~/.xinitrc
 RUN echo "/usr/bin/startfluxbox" >> ~/.xinitrc
 
 ###
