@@ -34,4 +34,4 @@ ENV PATH /home/ldm/bin:$PATH
 
 COPY runldm.sh /home/ldm/
 
-CMD runldm.sh
+CMD /home/ldm/runldm.sh
