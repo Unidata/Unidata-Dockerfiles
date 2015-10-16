@@ -32,4 +32,6 @@ RUN rm ~/ldm.tar.bz2
 
 ENV PATH /home/ldm/bin:$PATH
 
-CMD bash
+COPY runldm.sh /home/ldm/
+
+CMD runldm.sh
