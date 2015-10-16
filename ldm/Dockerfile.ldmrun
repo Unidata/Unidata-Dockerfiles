@@ -44,7 +44,7 @@ RUN echo "" > /etc/rsyslog.d/listen.conf
 # Copy over some files.
 ##
 COPY runldm.sh /home/ldm/
-COPY USAGE.md /home/ldm/
+COPY README.md /home/ldm/
 
 ##
 # Execute script.
