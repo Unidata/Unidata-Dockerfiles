@@ -5,9 +5,15 @@ set -x
 export PATH=/home/ldm/bin:$PATH
 trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 
-mkdir -p /home/ldm/var/queues/
-
 /usr/sbin/rsyslogd
 
-ldmadmin mkqueue
+ldmadmin mkqueue -f
 ldmadmin start
+ldmadmin watch
+
+#sleep 10
+
+#echo ""
+#echo ""
+#echo "Hit [RETURN] to exit"
+#read

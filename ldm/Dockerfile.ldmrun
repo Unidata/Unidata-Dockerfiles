@@ -5,7 +5,7 @@
 # See http://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/ for information re: rsyslogd in centos/redhat/etc.
 ####
 
-FROM centos
+FROM centos:7
 
 ###
 # Update the system.
@@ -37,6 +37,8 @@ RUN rm ~/ldm.tar.bz2
 # Set up some environmental variables.
 ##
 ENV PATH /home/ldm/bin:$PATH
+RUN mkdir -p /home/ldm/var/queues
+RUN echo "" > /etc/rsyslog.d/listen.conf
 
 ##
 # Copy over some files.
