@@ -1,25 +1,27 @@
+####
+# Docker container for running the LDM.
+# Using a CentOS base.
+####
+
 FROM centos
 
-RUN yum update  yum
+###
+# Update the system.
+###
 
+RUN yum update yum
 RUN yum install -y wget rsyslog git bzip2
 
-# rsyslog
-
+###
+# Copy over rsyslog configuration, set
+# up home environment.
+###
 ADD rsyslog.conf /etc/
-
 ENV HOME /home/ldm
-
 WORKDIR /home/ldm
 
-# Volumes
-
-VOLUME /home/ldm/etc
-
-VOLUME /home/ldm/var
-
 ###
-# Download LDM
+# Download, decompress LDM
 ###
 
 RUN curl -SL \
@@ -27,11 +29,20 @@ RUN curl -SL \
   -o ~/ldm.tar.bz2
 
 RUN tar xvfj ~/ldm.tar.bz2
-
 RUN rm ~/ldm.tar.bz2
 
+##
+# Set up some environmental variables.
+##
 ENV PATH /home/ldm/bin:$PATH
 
+##
+# Copy over some files.
+##
 COPY runldm.sh /home/ldm/
+COPY USAGE.md /home/ldm/
 
+##
+# Execute script.
+##
 CMD /home/ldm/runldm.sh
