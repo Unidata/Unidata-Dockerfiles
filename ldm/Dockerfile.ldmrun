@@ -1,6 +1,8 @@
 ####
 # Docker container for running the LDM.
 # Using a CentOS base.
+#
+# See http://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/ for information re: rsyslogd in centos/redhat/etc.
 ####
 
 FROM centos
@@ -10,7 +12,7 @@ FROM centos
 ###
 
 RUN yum update yum
-RUN yum install -y wget rsyslog git bzip2
+RUN yum install -y wget rsyslog git bzip2 curl perl
 
 ###
 # Copy over rsyslog configuration, set

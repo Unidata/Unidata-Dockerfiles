@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <registry>
   <delete-info-files>0</delete-info-files>
-  <hostname>270616bc870e</hostname>
+  <hostname>270616bc870e.docker</hostname>
   <insertion-check-interval>300</insertion-check-interval>
   <reconciliation-mode>do nothing</reconciliation-mode>
   <check-time>
