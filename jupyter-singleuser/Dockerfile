@@ -31,6 +31,12 @@ RUN conda create -n py2 --yes --quiet python=2 ipython-notebook numpy netcdf4 ip
   matplotlib cartopy OWSLib siphon MetPy xray networkx && \
   bash /srv/singleuser/setup_kernel.sh py2
 
+# Add config for notebook
+ADD ipython_kernel_config.py /home/jupyter/.ipython/profile_default/
+USER root
+RUN chown -R jupyter:jupyter /home/jupyter/.ipython
+USER jupyter
+
 VOLUME /notebooks
 WORKDIR /notebooks
 EXPOSE 8888
