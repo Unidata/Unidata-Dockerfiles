@@ -22,10 +22,14 @@ RUN groupadd -r tomcat && \
 	useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c \
   "Tomcat user" tomcat && chown -R tomcat:tomcat ${CATALINA_HOME}
 
+RUN echo "tomcat ALL=NOPASSWD: ALL" >> /etc/sudoers
+
 WORKDIR $DATA_DIR
+
+COPY startram.sh $DATA_DIR/
 
 RUN chown -R tomcat:tomcat /data/repository
 
 USER tomcat
 
-CMD ["catalina.sh", "run"]
+CMD $DATA_DIR/startram.sh
