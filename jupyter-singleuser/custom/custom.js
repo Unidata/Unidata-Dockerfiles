@@ -4,12 +4,13 @@ function top_level_mods() {
   $('body').append('<div id="footer" />');
 }
 
-$([IPython.events]).on('app_initialized.DashboardApp', function() {
+$([Jupyter.events]).on('app_initialized.DashboardApp', function() {
   top_level_mods();
   $('div#ipython-main-app').prepend('<div id="notice" >');
   $('#notice').html('This is a proof-of-concept demonstration server. For more information see <a href="https://www.unidata.ucar.edu/projects/index.html#python">here</a>.');
 });
 
-$([IPython.events]).on('app_initialized.NotebookApp', function() {
+$([Jupyter.events]).on('app_initialized.NotebookApp', function() {
   top_level_mods();
 });
+
