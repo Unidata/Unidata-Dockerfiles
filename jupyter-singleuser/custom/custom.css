@@ -1,0 +1,24 @@
+#header-container, #footer {
+    background-color: #06778F;
+    width: auto;
+}
+
+#header, #menubar-container, #menus, #site {
+    background-color: #E3E4E6;
+}
+
+#logo {
+    margin-left: 2em;
+}
+
+#tab_content, #notice {
+    padding-left: 2em;
+    padding-right: 2em;
+    background-color: #FFFFFF;
+}
+
+#notice {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.3em;
+}

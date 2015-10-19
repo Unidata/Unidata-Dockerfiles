@@ -33,8 +33,9 @@ RUN conda create -n py2 --yes --quiet python=2 ipython-notebook numpy netcdf4 ip
 
 # Add config for notebook
 ADD ipython_kernel_config.py /home/jupyter/.ipython/profile_default/
+ADD custom/ /home/jupyter/.jupyter/custom
 USER root
-RUN chown -R jupyter:jupyter /home/jupyter/.ipython
+RUN chown -R jupyter:jupyter /home/jupyter/.ipython /home/jupyter/.jupyter
 USER jupyter
 
 VOLUME /notebooks
