@@ -11,3 +11,11 @@ jupyterhub:
 hub-data:
   build: .
   dockerfile: Dockerfile.data
+
+idle-cull:
+  build: .
+  dockerfile: Dockerfile.idle
+  links:
+    - jupyterhub
+  env_file:
+    - jpy_api.env
