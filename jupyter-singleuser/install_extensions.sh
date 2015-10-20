@@ -1,6 +1,7 @@
 #!/bin/bash
 source activate py3
 git clone --depth=1 https://github.com/merqurio/jupyter_themes
+sed -e "s/\.CodeMirror pre/.NOMATCH/g" -i jupyter_themes/themes/*.css
 
 jupyter nbextension install --user jupyter_themes
 jupyter nbextension enable jupyter_themes/theme_selector
