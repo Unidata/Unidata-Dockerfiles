@@ -37,11 +37,11 @@ RUN echo "tomcat ALL=NOPASSWD: ALL" >> /etc/sudoers
 
 WORKDIR $DATA_DIR
 
-COPY startram.sh $DATA_DIR/
+COPY startram.sh ${CATALINA_HOME}/bin/
 
 RUN chown -R tomcat:tomcat /data/repository
 
 USER tomcat
 
-CMD $DATA_DIR/startram.sh
+CMD ${CATALINA_HOME}/bin/startram.sh
 
