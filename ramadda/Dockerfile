@@ -1,6 +1,17 @@
 FROM tomcat:jre8
 
+###
+# Usual maintenance
+###
+
+RUN apt-get update
+
+RUN apt-get -y install sudo
+
+###
 # Grab RAMADDA
+###
+
 RUN curl -SL \
   http://sourceforge.net/projects/ramadda/files/ramadda2.1b/repository.war \
   -o webapps/repository.war
@@ -33,3 +44,4 @@ RUN chown -R tomcat:tomcat /data/repository
 USER tomcat
 
 CMD $DATA_DIR/startram.sh
+
