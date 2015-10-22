@@ -1,5 +1,7 @@
 FROM tomcat:jre8
 
+ENV VERSION 2.1b
+
 ###
 # Usual maintenance
 ###
@@ -13,7 +15,7 @@ RUN apt-get -y install sudo
 ###
 
 RUN curl -SL \
-  http://sourceforge.net/projects/ramadda/files/ramadda2.1b/repository.war \
+  https://motherlode.ucar.edu/repository/entry/get/repository-${VERSION}.war?entryid=21405142-70bb-48f7-88c2-22a828955018 \
   -o webapps/repository.war
 
 ENV DATA_DIR /data/repository
