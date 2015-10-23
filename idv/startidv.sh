@@ -23,6 +23,11 @@ set -e
 
 trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 
+if [ "x${HELP}" != "x" ]; then
+    cat README.md
+    exit
+fi
+
 if [ "x${USEPASS}" == "x" ]; then
     cp /home/idv/.xinitrc.nopassword /home/idv/.xinitrc
 else
