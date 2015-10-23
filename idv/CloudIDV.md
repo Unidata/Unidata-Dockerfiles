@@ -1,9 +1,14 @@
-# Running the CloudIDV Docker Image
+# CloudIDV
 
-CloudIDV is run in the following fashion:
+This docker image contains an instance of the Unidata Integrated Data Viewer (IDV) running within a virtual X11 environment.  It is accessed via a web browser, once it is up and running.
+
+#### Running the CloudIDV Docker Image
+
+CloudIDV is started in the following fashion:
 
     $ docker run -p 6080:6080 -it unidata/cloudidv
 
+Alternatively, if you wish to run multiple sessions, or leverage 
 
 ### Connecting to the CloudIDV Session
 
@@ -27,6 +32,6 @@ The following advanced options are available when running the cloudidv docker im
 
 You would use these parameters as follows:
 
-    $ docker run -p 6080:6080 -e SIZEH=1440 -e SIZEW=900 -e CDEPTH=8 -it unidata/cloudidv ./startidv.sh
+    $ docker run -p 6080:6080 -e SIZEH=1440 -e SIZEW=900 -e CDEPTH=8 -it unidata/cloudidv
 
 You would, of course, replace the values with your desired dimensions.
