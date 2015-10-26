@@ -1,3 +1,7 @@
+###
+# Dockerfile for RAMADDA
+###
+
 FROM tomcat:jre8
 
 ENV VERSION 2.1b
@@ -30,7 +34,10 @@ ENV JAVA_OPTS -d64 -Xmx4048m -Xms512m \
 
 ENV CATALINA_OPTS -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true
 
+###
 # Create tomcat user
+###
+
 RUN groupadd -r tomcat && \
 	useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c \
   "Tomcat user" tomcat && chown -R tomcat:tomcat ${CATALINA_HOME}
@@ -46,4 +53,3 @@ RUN chown -R tomcat:tomcat /data/repository
 USER tomcat
 
 CMD ${CATALINA_HOME}/bin/startram.sh
-

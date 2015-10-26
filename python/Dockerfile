@@ -1,28 +1,40 @@
+###
 # Dockerfile that contains Unidata Python and ancillary technology (e.g.,IPyNB)
+###
 
 FROM ubuntu:15.10
 
-MAINTAINER Julien Chastang <chastang@ucar.edu>
+MAINTAINER Unidata Cloud Team
 
+###
 # anaconda works better with bash
+###
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
+###
 # House keeping
+###
 
 RUN apt-get update
 
 RUN apt-get -y upgrade
 
+###
 # Install some Linux packages
+###
 
 RUN apt-get install -y curl git bzip2
 
+###
 # In case the user wants to run a IPyNB
+###
 
 EXPOSE 8888
 
+###
 # Set up python user account
+###
 
 RUN useradd -ms /bin/bash python
 
@@ -36,7 +48,9 @@ ENV HOME /home/python
 
 WORKDIR /home/python
 
+###
 # Install miniconda
+###
 
 RUN mkdir -p /home/python/downloads
 
