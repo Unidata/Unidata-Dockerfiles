@@ -9,7 +9,7 @@
 # shared layers that docker provides.
 #####
 
-FROM ubuntu:utopic
+FROM ubuntu:trusty
 MAINTAINER Ward Fisher <wfisher@ucar.edu>
 
 RUN apt-get update

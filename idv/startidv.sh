@@ -1,9 +1,10 @@
 #!/bin/bash
 
 ###
-# This script does 2 things:
+# This script does several things:
 #
-# 1. Starts up the X session in a virtual framebuffer.
+# 1. Starts up the X session in a virtual framebuffer; password
+#    use is dictated by value of USEPASS environmental variable.
 # 2. Launches the IDV, using the VFB as the display.
 #
 # This is necessary to do here; if we put the xinit command
@@ -18,11 +19,27 @@
 # This has the added benefit of killing the image when the IDV exits.
 ###
 
+set -e
+
+trap "echo TRAPed signal" HUP INT QUIT KILL TERM
+
+if [ "x${HELP}" != "x" ]; then
+    cat CloudIDV.md
+    exit
+fi
+
+if [ "x${USEPASS}" == "x" ]; then
+    cp /home/idv/.xinitrc.nopassword /home/idv/.xinitrc
+else
+    mkdir -p /home/idv/.vnc
+    cp /home/idv/.xinitrc.password /home/idv/.xinitrc
+    x11vnc -storepasswd "${USEPASS}" /home/idv/.vnc/passwd
+fi
+
 xinit -- /usr/bin/Xvfb :1 -screen 0 $SIZEH\x$SIZEW\x$CDEPTH &
 sleep 5
+
 export DISPLAY=localhost:1
-#bash -c 'sleep 25; wmctrl -r Dashboard -b add,fullscreen; wmctrl -r "Unidata IDV - Map View - One Pane" -b add,fullscreen' &
-#sleep 3
 
 if [ "x${USENOVNC}" == "xTRUE" ]; then
     mv /home/idv/self.pem /home/idv/noVNC/utils/

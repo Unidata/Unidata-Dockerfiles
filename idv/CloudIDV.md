@@ -8,7 +8,18 @@ CloudIDV is started in the following fashion:
 
     $ docker run -p 6080:6080 -it unidata/cloudidv
 
-Alternatively, if you wish to run multiple sessions, or leverage 
+Alternatively, if you wish to run multiple sessions, or leverage dynamic port mapping, you would start CloudIDV as follows:
+
+    $ docker run -P -it unidata/cloudidv
+
+By default, CloudIDV does not use a password. You may secure your CloudIDV session with a password by using the `USEPASS` environmental variable to set a password for the session.  
+
+    $ docker run -e USEPASS="password" -P -it unidata/cloudidv
+    
+Finally, you may view this help file by setting the `HELP` environmental variable to any non-empty string, e.g.
+
+    $ docker run -e HELP=YES -it unidata/cloudidv
+
 
 ### Connecting to the CloudIDV Session
 
