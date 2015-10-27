@@ -67,8 +67,6 @@ ENV PATH /home/python/anaconda/bin:$PATH
 
 RUN conda update --yes --quiet conda
 
-RUN conda config --add channels https://conda.binstar.org/unidata
-
 ADD environment.yml /home/python/
 
 RUN conda env update --name root -f /home/python/environment.yml
