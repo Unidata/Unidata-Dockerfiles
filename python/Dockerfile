@@ -99,3 +99,5 @@ USER python
 
 ADD .bashrc /home/python/
 
+CMD bash
+
