@@ -24,7 +24,7 @@ RUN apt-get -y upgrade
 # Install some Linux packages
 ###
 
-RUN apt-get install -y curl git bzip2
+RUN apt-get install -y curl git bzip2 sudo
 
 ###
 # In case the user wants to run a IPyNB
