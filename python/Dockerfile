@@ -71,17 +71,29 @@ ADD environment.yml /home/python/
 
 RUN conda env update --name root -f /home/python/environment.yml
 
+###
+# Work volume
+###
+
 RUN mkdir -p /home/python/work
 
 WORKDIR /home/python/work
 
 VOLUME /home/python/work
 
+###
+# Wrapping up some stuff
+###
+
 USER root
 
 RUN rm -rf /home/python/downloads/*
 
 RUN chown -R python:python /home/python/
+
+###
+# Start container
+###
 
 USER python
 
