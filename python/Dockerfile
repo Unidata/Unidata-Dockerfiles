@@ -79,6 +79,8 @@ VOLUME /home/python/work
 
 USER root
 
+RUN rm -rf /home/python/downloads/*
+
 RUN chown -R python:python /home/python/
 
 USER python
