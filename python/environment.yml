@@ -1,4 +1,4 @@
- name: unidata
+ name: root
  channels:
    - https://conda.binstar.org/scitools
    - https://conda.binstar.org/Unidata
