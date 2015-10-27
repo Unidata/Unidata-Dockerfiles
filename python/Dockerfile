@@ -40,6 +40,8 @@ RUN useradd -ms /bin/bash python
 
 RUN adduser python sudo
 
+RUN echo "python ALL=NOPASSWD: ALL" >> /etc/sudoers
+
 RUN echo 'python:docker' | chpasswd
 
 USER python
