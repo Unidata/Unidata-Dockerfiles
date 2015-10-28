@@ -1,0 +1,19 @@
+Welcome to the Unidata Python Docker environment.
+
+To start a Jupyter notebook:
+
+ipython notebook --ip=* --no-browser
+
+for your convenience, this command has been aliased to 'ip'
+
+To navigate to this notebook in your browser, you will enter a URL that looks
+something like this https://[ip address]:[port]. For example,
+
+http://192.168.99.101:9321/
+
+If running this Docker container with docker-machine, you can run the command:
+
+docker-machine ip
+
+to discover the IP address of the container.
+

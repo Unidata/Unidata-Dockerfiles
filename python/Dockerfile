@@ -99,5 +99,7 @@ USER python
 
 ADD .bashrc $HOME/
 
+ADD login-msg.txt $HOME/
+
 CMD bash
 

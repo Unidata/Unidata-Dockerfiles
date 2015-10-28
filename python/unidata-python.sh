@@ -35,5 +35,6 @@ do
     shift # past argument or value
 done
 
-docker run -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
-    unidata/python
+# To remove login msg, remove HELP env var below. Could be parameterized.
+docker run -e HELP=YES -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
+       unidata/python
