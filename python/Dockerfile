@@ -48,38 +48,38 @@ USER python
 
 ENV HOME /home/python
 
-WORKDIR /home/python
+WORKDIR $HOME
 
 ###
 # Install miniconda
 ###
 
-RUN mkdir -p /home/python/downloads
+RUN mkdir -p $HOME/downloads
 
-RUN cd /home/python/downloads && curl -SL \
+RUN cd $HOME/downloads && curl -SL \
   http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -o \
   Miniconda-latest-Linux-x86_64.sh
 
-RUN /bin/bash /home/python/downloads/Miniconda-latest-Linux-x86_64.sh -b -p \
-  /home/python/anaconda/
+RUN /bin/bash $HOME/downloads/Miniconda-latest-Linux-x86_64.sh -b -p \
+  $HOME/anaconda/
 
-ENV PATH /home/python/anaconda/bin:$PATH
+ENV PATH $HOME/anaconda/bin:$PATH
 
 RUN conda update --yes --quiet conda
 
-ADD environment.yml /home/python/
+ADD environment.yml $HOME/
 
-RUN conda env update --name root -f /home/python/environment.yml
+RUN conda env update --name root -f $HOME/environment.yml
 
 ###
 # Work volume
 ###
 
-RUN mkdir -p /home/python/work
+RUN mkdir -p $HOME/work
 
-WORKDIR /home/python/work
+WORKDIR $HOME/work
 
-VOLUME /home/python/work
+VOLUME $HOME/work
 
 ###
 # Wrapping up some stuff
@@ -87,9 +87,9 @@ VOLUME /home/python/work
 
 USER root
 
-RUN rm -rf /home/python/downloads/*
+RUN rm -rf $HOME/downloads/*
 
-RUN chown -R python:python /home/python/
+RUN chown -R python:python $HOME/
 
 ###
 # Start container
@@ -97,7 +97,7 @@ RUN chown -R python:python /home/python/
 
 USER python
 
-ADD .bashrc /home/python/
+ADD .bashrc $HOME/
 
 CMD bash
 
