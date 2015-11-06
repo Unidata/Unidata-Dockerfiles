@@ -1,0 +1,25 @@
+FROM unidata/ldm
+
+MAINTAINER Unidata Cloud Team
+
+USER root
+
+###
+# Setting up directories and soft links to make TDS container happy
+###
+
+RUN mkdir /data
+
+RUN ln -s ~/var/data/  /data/ldm
+
+RUN ln -s ~/var/data/ ~/data
+
+###
+# chowning. Probably over kill, but it cannot hurt.
+###
+
+RUN chown -R ldm:ldm $HOME/
+
+RUN chown -R ldm:ldm /data
+
+USER ldm

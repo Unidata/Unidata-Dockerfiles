@@ -1,29 +1,21 @@
+####
+# Docker container for building the LDM.
+# Using a CentOS base.
+#
 # See https://www.unidata.ucar.edu/software/ldm/ldm-current/basics/platform.html
+####
 
-FROM centos
+FROM unidata/ldmbase
 
-RUN yum update  yum
-
-RUN yum install -y wget pax gcc libxml2-devel make libpng-dev rsyslog perl \
-    zlib-devel bzip2
-
-# rsyslog
-
-ADD rsyslog.conf /etc/
-
-# Set up ldm directory
-
-RUN mkdir /home/ldm
-
-ENV HOME /home/ldm
-
-WORKDIR /home/ldm
-
+###
 # Output directory
+###
 
 RUN mkdir /tmp/output
 
+###
 # Install the ldm
+###
 
 COPY install_ldm.sh /home/ldm/
 

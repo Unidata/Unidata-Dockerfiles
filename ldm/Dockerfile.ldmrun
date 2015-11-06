@@ -5,22 +5,7 @@
 # See http://www.projectatomic.io/blog/2014/09/running-syslog-within-a-docker-container/ for information re: rsyslogd in centos/redhat/etc.
 ####
 
-FROM centos:7
-
-###
-# Update the system.
-###
-
-RUN yum update yum
-RUN yum install -y wget rsyslog git bzip2 curl perl
-
-###
-# Copy over rsyslog configuration, set
-# up home environment.
-###
-ADD rsyslog.conf /etc/
-ENV HOME /home/ldm
-WORKDIR /home/ldm
+FROM unidata/ldmbase
 
 ###
 # Download, decompress LDM
@@ -31,22 +16,40 @@ RUN curl -SL \
   -o ~/ldm.tar.bz2
 
 RUN tar xvfj ~/ldm.tar.bz2
+
 RUN rm ~/ldm.tar.bz2
 
 ##
 # Set up some environmental variables.
 ##
-ENV PATH /home/ldm/bin:$PATH
-RUN mkdir -p /home/ldm/var/queues
-RUN echo "" > /etc/rsyslog.d/listen.conf
+
+ENV PATH $HOME/bin:$PATH
+
+##
+# Create ldm directories conistent with registry.xml
+##
+
+RUN mkdir -p $HOME/var/queues
+
+# This directory will ultimately be mounted outside the container
+RUN mkdir -p $HOME/var/data
 
 ##
 # Copy over some files.
 ##
-COPY runldm.sh /home/ldm/
-COPY README.md /home/ldm/
+
+COPY runldm.sh $HOME/
+
+COPY README.md $HOME/
+
+user root
+
+RUN chown ldm:ldm runldm.sh README.md
+
+user ldm
 
 ##
 # Execute script.
 ##
-CMD /home/ldm/runldm.sh
+
+CMD $HOME/runldm.sh
