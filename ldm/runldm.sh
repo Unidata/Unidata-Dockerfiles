@@ -9,6 +9,10 @@ trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 
 ldmadmin mkqueue -f
 ldmadmin start
+
+# never exit
+while true; do sleep 10000; done
+
 #ldmadmin watch
 
 # never exit
