@@ -40,9 +40,7 @@ ADD rsyslog.conf /etc/
 RUN echo "" > /etc/rsyslog.d/listen.conf
 
 # So rsyslogd can run as user ldm
-RUN touch /var/run/syslogd.pid
-
-RUN chmod 606 /var/run/syslogd.pid /etc/rsyslog.d/listen.conf
+RUN chmod +s /sbin/rsyslogd
 
 ##
 # Make ldm directories owned by ldm
