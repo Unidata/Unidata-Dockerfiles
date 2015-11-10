@@ -1,0 +1,17 @@
+ldm:
+  image: unidata/ldmtds:latest
+  ports:
+    - "388:388"
+  volumes:
+    - ~/etc/:/home/ldm/etc/
+    - /data/ldm/:/home/ldm/var/data/
+    - ~/var/logs/:/home/ldm/var/logs/
+tds:
+  image: unidata/tds:v4.6.3
+  ports:
+    - "80:8080"
+    # SSL port
+    - "8443:8443"
+  volumes:
+    - /data/:/data/
+    - ~/tdsconfig:/usr/local/tomcat/content/thredds/

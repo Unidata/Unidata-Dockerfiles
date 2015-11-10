@@ -1,0 +1,5 @@
+tdm:
+  image: unidata/tdm:4.6
+  volumes:
+    - /data/:/data/
+    - ~/tdsconfig/:/usr/local/tomcat/content/thredds/
