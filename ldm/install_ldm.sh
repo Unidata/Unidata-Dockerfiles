@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 set -x
 
 # Run RSyslog daemon
-exec /usr/sbin/rsyslogd &
+/usr/sbin/rsyslogd
 
 v=6.12.14
 
@@ -13,20 +13,23 @@ gunzip -c ldm-${v}.tar.gz | pax -r '-s:/:/src/:'
 
 cd /home/ldm/ldm-${v}/src
 
+while [ ! -S /dev/log ]; do
+    sleep 5
+done
+
 ./configure --disable-root-actions
 
-make install >make.log 2>&1
+make install > make.log 2>&1
 
 make root-actions
 
-make distclean
+# optional
+# make distclean
 
 cd /home/ldm
 
 rm ldm-${v}.tar.gz
 
-rm install_ldm.sh
-
-tar cvfj /tmp/output/ldm.tar.bz2 .
+tar cvfj /tmp/output/ldm-${v}.tar.bz2 .
 
 cp /etc/rsyslog.conf /tmp/output

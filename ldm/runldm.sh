@@ -15,9 +15,6 @@ while true; do sleep 10000; done
 
 #ldmadmin watch
 
-# never exit
-while true; do sleep 10000; done
-
 #sleep 10
 
 #echo ""
