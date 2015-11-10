@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Create spool directory
-mkdir -p /var/spool/rsyslog
+set -x
 
 # Run RSyslog daemon
 exec /usr/sbin/rsyslogd &
