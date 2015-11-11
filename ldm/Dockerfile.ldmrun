@@ -11,13 +11,15 @@ FROM unidata/ldmbase
 # Download, decompress LDM
 ###
 
+ENV LDM_VERSION 6.12.14
+
 RUN curl -SL \
-    https://motherlode.ucar.edu/repository/entry/get/ldm-6.12.14.tar.bz2?entryid=f4d94fce-b785-42c9-8a6c-4aae9170706a \
-    -o ~/ldm-6.12.14.tar.bz2
+    https://motherlode.ucar.edu/repository/entry/get/ldm-${LDM_VERSION}.tar.bz2?entryid=f4d94fce-b785-42c9-8a6c-4aae9170706a \
+    -o ~/ldm-${LDM_VERSION}.tar.bz2
 
-RUN tar xvfj ~/ldm-6.12.14.tar.bz2
+RUN tar xvfj ~/ldm-${LDM_VERSION}.tar.bz2
 
-RUN rm ~/ldm-6.12.14.tar.bz2
+RUN rm ~/ldm-${LDM_VERSION}.tar.bz2
 
 ##
 # Set up some environmental variables.

@@ -21,7 +21,7 @@ done
 
 make install > make.log 2>&1
 
-make root-actions
+sudo make root-actions
 
 # optional
 # make distclean

@@ -18,5 +18,3 @@ RUN mkdir /tmp/output
 ###
 
 COPY install_ldm.sh /home/ldm/
-
-CMD bash -C '/home/ldm/install_ldm.sh';'bash'

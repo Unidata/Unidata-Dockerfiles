@@ -1,0 +1,5 @@
+ldmbuild:
+  dockerfile: Dockerfile.ldmbuild
+  image: unidata/ldmbuild
+  volumes:
+   - ./output/:/tmp/output
