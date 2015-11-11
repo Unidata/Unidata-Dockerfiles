@@ -10,8 +10,10 @@ FROM centos:7
 
 RUN yum update yum
 
+# clean up (optimize now)
+
 RUN yum install -y wget pax gcc libxml2-devel make libpng-dev rsyslog perl \
-    zlib-devel bzip2 git curl perl sudo
+    zlib-devel bzip2 git curl perl sudo cronie 
 
 ###
 # Set up ldm user account
@@ -41,6 +43,9 @@ RUN echo "" > /etc/rsyslog.d/listen.conf
 
 # So rsyslogd can run as user ldm
 RUN chmod +s /sbin/rsyslogd
+
+# So crond can run as user ldm
+RUN chmod +s /sbin/crond
 
 ##
 # Make ldm directories owned by ldm
