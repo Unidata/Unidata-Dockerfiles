@@ -1,5 +1,4 @@
 ldm:
-  dockerfile: Dockerfile.ldmrun
   image: unidata/ldm:latest
   volumes:
     # Some defaults that you will probably want to change
