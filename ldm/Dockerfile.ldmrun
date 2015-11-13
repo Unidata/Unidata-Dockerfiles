@@ -18,13 +18,13 @@ RUN curl -SL \
     -o ~/ldm-${LDM_VERSION}.tar.bz2
 
 # unpack as root to preserve setuids
-user root
+USER root
 
 RUN tar xvfj ~/ldm-${LDM_VERSION}.tar.bz2
 
 RUN rm ~/ldm-${LDM_VERSION}.tar.bz2
 
-user ldm
+USER ldm
 
 ##
 # Set up some environmental variables.
@@ -49,7 +49,7 @@ COPY runldm.sh $HOME/
 
 COPY README.md $HOME/
 
-user root
+USER root
 
 RUN chown ldm:ldm runldm.sh README.md
 
