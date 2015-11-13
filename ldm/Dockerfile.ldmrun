@@ -17,9 +17,14 @@ RUN curl -SL \
     https://motherlode.ucar.edu/repository/entry/get/ldm-${LDM_VERSION}.tar.bz2?entryid=f4d94fce-b785-42c9-8a6c-4aae9170706a \
     -o ~/ldm-${LDM_VERSION}.tar.bz2
 
+# unpack as root to preserve setuids
+user root
+
 RUN tar xvfj ~/ldm-${LDM_VERSION}.tar.bz2
 
 RUN rm ~/ldm-${LDM_VERSION}.tar.bz2
+
+user ldm
 
 ##
 # Set up some environmental variables.
