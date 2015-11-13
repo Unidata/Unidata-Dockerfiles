@@ -7,6 +7,8 @@ trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 
 /usr/sbin/rsyslogd
 
+/usr/sbin/crond
+
 ldmadmin mkqueue -f
 ldmadmin start
 

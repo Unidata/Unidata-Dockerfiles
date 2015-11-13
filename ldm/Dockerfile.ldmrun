@@ -53,7 +53,15 @@ user root
 
 RUN chown ldm:ldm runldm.sh README.md
 
-user ldm
+# crontab for scouring
+
+COPY crontab /var/spool/cron/ldm
+
+RUN chown ldm:ldm /var/spool/cron/ldm
+
+RUN chmod 600 /var/spool/cron/ldm
+
+USER ldm
 
 ##
 # Execute script.
