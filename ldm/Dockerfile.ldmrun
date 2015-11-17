@@ -17,20 +17,29 @@ RUN curl -SL \
     https://motherlode.ucar.edu/repository/entry/get/ldm-${LDM_VERSION}.tar.bz2?entryid=f4d94fce-b785-42c9-8a6c-4aae9170706a \
     -o ~/ldm-${LDM_VERSION}.tar.bz2
 
-# unpack as root to preserve setuids
-USER root
-
 RUN tar xvfj ~/ldm-${LDM_VERSION}.tar.bz2
 
 RUN rm ~/ldm-${LDM_VERSION}.tar.bz2
-
-USER ldm
 
 ##
 # Set up some environmental variables.
 ##
 
 ENV PATH $HOME/bin:$PATH
+
+##
+# Fix setuids
+##
+
+USER root
+
+RUN chmod +s $HOME/bin/hupsyslog
+RUN chown root $HOME/bin/hupsyslog
+
+RUN chmod +s $HOME/bin/ldmd
+RUN chown root $HOME/bin/ldmd
+
+USER ldm
 
 ##
 # Create ldm directories conistent with registry.xml
