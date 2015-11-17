@@ -40,4 +40,10 @@ At this point:
 
     docker push unidata/ldm:latest
 
+Also for the TDS flavored LDM you can:
+
+    docker build -f Dockerfile.ldmtds -t unidata/ldmtds:latest .
+
+    docker push unidata/ldmtds:latest
+
 You are done deploying the LDM.
