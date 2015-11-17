@@ -10,16 +10,10 @@ USER root
 
 RUN mkdir /data
 
-RUN ln -s ~/var/data/  /data/ldm
-
-RUN ln -s ~/var/data/ ~/data
-
-###
-# chowning. Probably over kill, but it cannot hurt.
-###
-
-RUN chown -R ldm:ldm $HOME/
-
 RUN chown -R ldm:ldm /data
 
 USER ldm
+
+RUN ln -s ~/var/data/  /data/ldm
+
+RUN ln -s ~/var/data/ ~/data
