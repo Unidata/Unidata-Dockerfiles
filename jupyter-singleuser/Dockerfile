@@ -6,7 +6,7 @@ MAINTAINER Ryan May <rmay@ucar.edu>
 # fetch juptyerhub-singleuser entrypoint
 ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/jupyterhub/singleuser.py /usr/local/bin/jupyterhub-singleuser
 RUN chmod 755 /usr/local/bin/jupyterhub-singleuser
-ADD singleuser.sh setup_kernel.sh /srv/singleuser/
+ADD singleuser.sh /srv/singleuser/
 
 # jupyter is our user -- set uid/gid to match base data image
 RUN groupadd -g 1001 jupyter && useradd -u 1001 -g jupyter -m -s /bin/bash -d /home/jupyter jupyter
@@ -19,17 +19,18 @@ RUN curl https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh >
   /bin/bash conda.sh -bfp $HOME/conda && rm conda.sh
 
 # Update conda and add channels
-RUN conda update --yes --quiet conda && conda config --add channels https://conda.binstar.org/scitools --add channels https://conda.binstar.org/Unidata
+RUN conda update --yes --quiet conda
+
+# Add the environment files
+ADD env-python3.yml env-python2.yml $HOME/
 
 # Create Python 3 environment
-RUN conda create -n py3 --yes --quiet python=3 jupyter numpy netcdf4\
- matplotlib cartopy OWSLib siphon MetPy xray networkx && \
- bash /srv/singleuser/setup_kernel.sh py3
+RUN conda env create -f env-python3.yml
+RUN conda/envs/py3/bin/ipython kernel install --user
 
 # Create Python 2 environment
-RUN conda create -n py2 --yes --quiet python=2 jupyter numpy netcdf4\
-  matplotlib cartopy OWSLib siphon MetPy xray networkx && \
-  bash /srv/singleuser/setup_kernel.sh py2
+RUN conda env create -f env-python2.yml
+RUN conda/envs/py2/bin/ipython kernel install --user
 
 # Add config for notebook
 ADD ipython_kernel_config.py /home/jupyter/.ipython/profile_default/

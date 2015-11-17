@@ -1,0 +1,17 @@
+ name: py3
+ channels:
+   - https://conda.binstar.org/scitools
+   - https://conda.binstar.org/Unidata
+ dependencies:
+   - python=3.4
+   - numpy
+   - matplotlib
+   - cartopy
+   - jupyter
+   - networkx
+   - netcdf4
+   - owslib
+   - metpy
+   - siphon
+   - xray
+
