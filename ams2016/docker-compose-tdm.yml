@@ -1,5 +1,10 @@
 tdm:
-  image: unidata/tdm:4.6
+  image: unidata/tdm:latest
   volumes:
     - /data/:/data/
     - ~/tdsconfig/:/usr/local/tomcat/content/thredds/
+  # update with your configuration
+  environment:
+    - TDM_PW=CHANGEME!
+    # that trailing slash is important
+    - TDS_HOST=http://change.me!/
