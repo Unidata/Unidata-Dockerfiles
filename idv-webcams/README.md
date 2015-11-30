@@ -18,4 +18,4 @@ To access your new IDV webcam server, please locate the `.rbi` in your `~/.unida
 
 Note, you will have to change the name of the webcam URL (the `resource location` element) to wherever on the Internet your Docker image lives. You will also have to open port 80 to let web traffic for the IDV to grab images. Finally, apart from the IDV, it is always fun to examine the latest images at:
 
-[http://idv-webcams.cloudapp.net/index.html](http://idv-webcams.cloudapp.net/latest.html)
+[http://idv-webcams.cloudapp.net/latest.html](http://idv-webcams.cloudapp.net/latest.html)
