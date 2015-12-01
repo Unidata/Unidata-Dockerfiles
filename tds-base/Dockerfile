@@ -52,6 +52,14 @@ COPY thredds.war ${CATALINA_HOME}/webapps/thredds##04.06.04-SNAPSHOT.war
 #
 RUN chown -R tomcat:tomcat ${CATALINA_HOME} 
 
+# Clean up non-essential web apps
+
+RUN rm -rf ${CATALINA_HOME}/webapps/ROOT \
+           ${CATALINA_HOME}/webapps/docs \
+           ${CATALINA_HOME}/webapps/examples \
+           ${CATALINA_HOME}/webapps/host-manager \
+           ${CATALINA_HOME}/webapps/manager
+
 #
 # Switch to user tomcat
 #
