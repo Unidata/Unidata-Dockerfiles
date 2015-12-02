@@ -1,17 +1,31 @@
 ldm:
   image: unidata/ldmtds:latest
-  ports:
-    - "388:388"
   volumes:
     - ~/etc/:/home/ldm/etc/
     - /data/ldm/:/home/ldm/var/data/
     - ~/var/logs/:/home/ldm/var/logs/
-tds:
-  image: unidata/tds:v4.6.3
   ports:
-    - "80:8080"
-    # SSL port
-    - "8443:8443"
+    - "388:388"
+tds:
+  image: unidata/tds:latest
   volumes:
     - /data/:/data/
     - ~/tdsconfig:/usr/local/tomcat/content/thredds/
+    - ~/logs/tds-tomcat/:/usr/local/tomcat/logs/
+  ports:
+    - "80:8080"
+    - "8005:8005"
+    - "8080:8080"
+    # SSL port for TDM
+    - "8443:8443"
+    - "8009:8009"
+ramadda:
+  image: unidata/ramadda:latest
+  volumes:
+    - /data/repository/:/data/repository/
+    - ~/logs/ramadda-tomcat/:/usr/local/tomcat/logs/
+  ports:
+    - "8006:8006"
+    - "8081:8081"
+    - "8444:8444"
+    - "8010:8010"
