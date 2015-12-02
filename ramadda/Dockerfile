@@ -51,12 +51,6 @@ COPY startram.sh ${CATALINA_HOME}/bin/
 RUN chown -R tomcat:tomcat /data/repository
 
 ###
-# server.xml with ports that will not conflict with TDS
-###
-
-COPY server.xml ${CATALINA_HOME}/conf/
-
-###
 # Clean up non-essential web apps
 ###
 
