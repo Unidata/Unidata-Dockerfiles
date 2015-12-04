@@ -50,8 +50,6 @@ COPY startram.sh ${CATALINA_HOME}/bin/
 
 COPY server.xml ${CATALINA_HOME}/conf/
 
-RUN chown -R tomcat:tomcat /data/repository
-
 ###
 # Clean up non-essential web apps
 ###
