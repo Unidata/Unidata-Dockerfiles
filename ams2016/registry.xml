@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <registry>
   <delete-info-files>0</delete-info-files>
-  <hostname>unidata-server-2.azure.unidata.ucar.edu</hostname>
+  <hostname>unidata-server.azure.unidata.ucar.edu</hostname>
   <insertion-check-interval>300</insertion-check-interval>
   <reconciliation-mode>do nothing</reconciliation-mode>
   <check-time>
