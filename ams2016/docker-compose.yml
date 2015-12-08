@@ -23,7 +23,7 @@ tdm:
     # change the password
     - TDM_PW=CHANGEME!
     # that trailing slash is important
-    - TDS_HOST=http://unidata-server-2.cloudapp.net/
+    - TDS_HOST=http://unidata-server.cloudapp.net/
 
 ###
 # TDS
