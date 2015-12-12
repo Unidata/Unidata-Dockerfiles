@@ -1,7 +1,0 @@
-ldm:
-  image: unidata/ldm:latest
-  volumes:
-    # Some defaults that you will probably want to change
-   - ~/etc/:/home/ldm/etc/
-   - ~/var/data/:/home/ldm/var/data/
-   - ~/var/logs/:/home/ldm/var/logs/

@@ -1,9 +1,0 @@
-FROM unidata/jupyterhub
-MAINTAINER Ryan May <rmay@ucar.edu>
-
-RUN apt-get install -y python3-dateutil
-
-# Add cull script
-ADD https://raw.githubusercontent.com/jupyter/jupyterhub/master/examples/cull-idle/cull_idle_servers.py /srv/jupyterhub/
-
-ENTRYPOINT ["python3", "/srv/jupyterhub/cull_idle_servers.py", "--url=http://jupyterhub:8081/hub", "--logging=debug"]

@@ -1,6 +1,0 @@
-# image to hold data for running locally
-FROM unidata/jupyterhub
-
-VOLUME /jpydb
-
-ENTRYPOINT /bin/true

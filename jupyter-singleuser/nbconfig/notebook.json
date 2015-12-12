@@ -1,9 +1,0 @@
-{
-  "load_extensions": {
-    "hide-input/main": true,
-    "runtools/main": true,
-    "ruler/main": true
-  },
-  "ruler_column": 90,
-  "ruler_color": "#A3A4A6"
-}

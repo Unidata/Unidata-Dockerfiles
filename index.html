@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2015-12-11 Fri 20:29 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>AMS 2016: UniCloud, Docker at Unidata</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Julien Chastang" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">AMS 2016: UniCloud, Docker at Unidata</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline34">1. LDM, TDS, and RAMADDA on Microsoft Azure VM</a>
+<ul>
+<li><a href="#orgheadline2">1.1. Preamble</a>
+<ul>
+<li><a href="#orgheadline1">1.1.1. <code>docker-machine</code></a></li>
+</ul>
+</li>
+<li><a href="#orgheadline11">1.2. Preliminary Setup on Azure</a>
+<ul>
+<li><a href="#orgheadline3">1.2.1. Create a VM on Azure.</a></li>
+<li><a href="#orgheadline4">1.2.2. Configure Unix Shell to Interact with New Azure VM.</a></li>
+<li><a href="#orgheadline5">1.2.3. <code>ssh</code> into VM with <code>docker-machine</code></a></li>
+<li><a href="#orgheadline6">1.2.4. Install Package(s) with <code>apt-get</code></a></li>
+<li><a href="#orgheadline7">1.2.5. Add <code>ubuntu</code> User to <code>docker</code> Group and Restart Docker</a></li>
+<li><a href="#orgheadline8">1.2.6. Restart Azure VM</a></li>
+<li><a href="#orgheadline9">1.2.7. <code>ssh</code> into VM</a></li>
+<li><a href="#orgheadline10">1.2.8. Install <code>docker-compose</code> on VM</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline27">1.3. LDM and TDS Configuration</a>
+<ul>
+<li><a href="#orgheadline14">1.3.1. Background</a></li>
+<li><a href="#orgheadline15">1.3.2. <code>git clone</code> Repositories</a></li>
+<li><a href="#orgheadline24">1.3.3. Configuring the LDM</a></li>
+<li><a href="#orgheadline26">1.3.4. Configuring the TDS</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline28">1.4. Setting up Data Volumes</a></li>
+<li><a href="#orgheadline29">1.5. RAMADDA Configuration</a></li>
+<li><a href="#orgheadline30">1.6. Opening Ports</a></li>
+<li><a href="#orgheadline31">1.7. Tomcat Logging for TDS and RAMADDA</a></li>
+<li><a href="#orgheadline32">1.8. Starting the LDM TDS RAMADDA TDM</a></li>
+<li><a href="#orgheadline33">1.9. Check What is Running</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34"><span class="section-number-2">1</span> LDM, TDS, and RAMADDA on Microsoft Azure VM</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2"><span class="section-number-3">1.1</span> Preamble</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The following instructions describe how to configure a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a> serving data with the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a>. This document assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also assume familiarity with Unix, Docker, and Unidata technology in general. You will have to be comfortable entering command at the Unix command line. We will be using Docker images defined here:<br  />
+</p>
+
+<p>
+<a href="https://github.com/Unidata/Unidata-Dockerfiles">https://github.com/Unidata/Unidata-Dockerfiles</a><br  />
+</p>
+
+<p>
+in addition to a configuration specifically planned for AMS 2016 demonstrations here:<br  />
+</p>
+
+<p>
+<a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016</a><br  />
+</p>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-4">
+<h4 id="orgheadline1"><span class="section-number-4">1.1.1</span> <code>docker-machine</code></h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+<a href="https://docs.docker.com/machine/install-machine/">Install</a> <code>docker-machine</code> on your local computer. <code>docker-machine</code> is a command line tool that gives users the ability to create Docker VMs on your local computer or on a cloud provider such as Azure.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">1.2</span> Preliminary Setup on Azure</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The instructions assume we will create an Azure VM called <code>unidata-server.cloudapp.net</code> abbreviated to <code>unidata-server</code>. Tailor the VM name for your purposes when following this document. This VM will be our <b>Docker Host</b> from where we will run Docker containers for the LDM, TDS, and RAMADDA.
+</p>
+</div>
+
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3"><span class="section-number-4">1.2.1</span> Create a VM on Azure.</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+The following <code>docker-machine</code> command will create a Docker VM on Azure in which you will run various Docker containers. It will take a few minutes to run (between 5 and 10 minutes). You will have to supply <code>azure-subscription-id</code> and <code>azure-subscription-cert</code> path. See these Azure <code>docker-machine</code> <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-docker-machine/">instructions</a>, if you have questions about this process.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-org">docker-machine -D create -d azure \
+               --azure-subscription-id="3.141" \
+               --azure-subscription-cert="/path/to/mycert.pem" \
+               --azure-size="ExtraLarge" unidata-server
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">1.2.2</span> Configure Unix Shell to Interact with New Azure VM.</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+Execute the following command in your local computer shell environment.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">eval</span> <span style="color: #008000;">"$(docker-machine env unidata-server)"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">1.2.3</span> <code>ssh</code> into VM with <code>docker-machine</code></h4>
+<div class="outline-text-4" id="text-1-2-3">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-machine ssh unidata-server
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">1.2.4</span> Install Package(s) with <code>apt-get</code></h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+At the very least, we will need <code>unzip</code> on the Azure Docker host.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo apt-get -qq update
+sudo apt-get -qq install unzip
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">1.2.5</span> Add <code>ubuntu</code> User to <code>docker</code> Group and Restart Docker</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo usermod -G docker ubuntu
+sudo service docker restart
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8"><span class="section-number-4">1.2.6</span> Restart Azure VM</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<p>
+At this point, we want to restart the VM to get a fresh start. This command may take a little while&#x2026;
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-machine restart unidata-server
+<span style="color: #006FE0;">eval</span> <span style="color: #008000;">"$(docker-machine env unidata-server)"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">1.2.7</span> <code>ssh</code> into VM</h4>
+<div class="outline-text-4" id="text-1-2-7">
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-machine ssh unidata-server
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">1.2.8</span> Install <code>docker-compose</code> on VM</h4>
+<div class="outline-text-4" id="text-1-2-8">
+<p>
+<code>docker-compose</code> is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so <code>docker-compose</code> is perfect for this scenario. Install <code>docker-compose</code> on the Azure Docker host.
+</p>
+
+<p>
+You may have to update version (currently at <code>1.5.2</code>). 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"> curl -L <span style="color: #008000;">\</span>
+https://github.com/docker/compose/releases/download/1.5.2/docker-compose-<span style="color: #FF1493;">`uname -s`</span>-<span style="color: #FF1493;">`uname -m`</span> <span style="color: #008000;">\</span>
+      &gt; docker-compose
+ sudo mv docker-compose /usr/local/bin/
+ sudo chmod +x /usr/local/bin/docker-compose
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">1.3</span> LDM and TDS Configuration</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">1.3.1</span> Background</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+At this point, we have done the preliminary legwork to tackle the next step in this process. We will now want to clone two repositories that will allow us to configure and start running the the LDM, TDS, and RAMADDA. In particular, we will be cloning:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/Unidata/Unidata-Dockerfiles"><code>Unidata-Dockerfiles</code></a></li>
+<li><a href="https://github.com/Unidata/TdsConfig"><code>TdsConfig</code></a></li>
+</ul>
+</div>
+
+<ol class="org-ol"><li><a id="orgheadline12"></a><code>Unidata-Dockerfiles</code><br  /><div class="outline-text-5" id="text-1-3-1-1">
+<p>
+The <code>Unidata-Dockerfiles</code> repository contains a number of Dockerfiles that pertain to various Unidata technologies (e.g., the LDM) and also projects (e.g., ams2016). As a matter of background information, a <code>Dockerfile</code> is a text file that contains commands to build a Docker image containing, for example, a working LDM. These Docker images can subsequently be run by <code>docker</code> command line tools, or <code>docker-compose</code> commands that rely on a <code>docker-compose.yml</code> file. A <code>docker-compose.yml</code> file is a text file that captures exactly how one or more containers run including directory mappings (from outside to within the container), port mappings (from outside to within the container), and other information.
+</p>
+</div></li>
+
+<li><a id="orgheadline13"></a><code>TDSConfig</code><br  /><div class="outline-text-5" id="text-1-3-1-2">
+<p>
+The <code>TDSConfig</code> repository is a project that captures THREDDS and LDM configuration files (e.g., <code>catalog.xml</code>, <code>pqact.conf</code>) for the TDS at <a href="http://thredds.ucar.edu/">http://thredds.ucar.edu/</a>. Specifically, these TDS and LDM configurations were meant to work in harmony with one another. We can re-use this configuration with some minor adjustments for running the TDS on the Azure cloud.
+</p>
+</div></li></ol>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15"><span class="section-number-4">1.3.2</span> <code>git clone</code> Repositories</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+With that background information out of the way, let's clone those repositories by creating <code>~/git</code> directory where our repositories will live and issuing some <code>git</code> commands.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p /home/ubuntu/git
+git clone https://github.com/Unidata/Unidata-Dockerfiles <span style="color: #008000;">\</span>
+    /home/ubuntu/git/Unidata-Dockerfiles
+git clone https://github.com/Unidata/TdsConfig /home/ubuntu/git/TdsConfig
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">1.3.3</span> Configuring the LDM</h4>
+<div class="outline-text-4" id="text-1-3-3">
+</div><ol class="org-ol"><li><a id="orgheadline16"></a>LDM Directories on Docker Host<br  /><div class="outline-text-5" id="text-1-3-3-1">
+<p>
+For anyone who has worked with the LDM, you may be familiar with the following directories:
+</p>
+
+<pre class="example">
+etc/
+var/data
+var/logs
+var/queue
+</pre>
+
+<p>
+The LDM <code>etc</code> directory is where you will find configuration files related to the LDM including <code>ldmd.conf</code>, <code>pqact</code> files, <code>registry.xml</code>, and  <code>scour.conf</code>. We will need the ability to easily observe and manipulate the files from <b>outside</b> the running LDM container. To that end, we need to find a home for <code>etc</code> on the Docker host. The same is true for the <code>var/data</code> and <code>var/logs</code> directories. Later, we will use Docker commands that have been written on your behalf to mount these directories from <b>outside</b> to within the container. The <code>var/queues</code> directory will remain inside the container.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/var/logs 
+mkdir -p ~/etc/TDS
+</pre>
+</div>
+
+<p>
+<code>var/data</code> is a bit different in that it needs to be mounted on data volume on the Docker host. We will be handling that step further on.
+</p>
+</div></li>
+
+<li><a id="orgheadline22"></a>LDM Configuration Files<br  /><div class="outline-text-5" id="text-1-3-3-2">
+<p>
+There is a generic set of LDM configuration files located here <code>~/git/Unidata-Dockerfiles/ldm/etc/</code>. However, we will just grab <code>netcheck.conf</code> which will remain unmodified.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">cp ~/git/Unidata-Dockerfiles/ldm/etc/netcheck.conf ~/etc
+</pre>
+</div>
+
+<p>
+The rest of the LDM configuration files will come from our <code>ams2016</code> project directory.
+</p>
+
+<p>
+Also, remember that these files will be used <b>inside</b> the LDM container that we will set up shortly. We will now be working with these files:
+</p>
+
+<ul class="org-ul">
+<li><code>ldmd.conf</code></li>
+<li><code>registry.xml</code></li>
+<li><code>scour.conf</code></li>
+</ul>
+</div>
+
+<ol class="org-ol"><li><a id="orgheadline17"></a><code>ldmd.conf</code><br  /><div class="outline-text-6" id="text-1-3-3-2-1">
+<div class="org-src-container">
+
+<pre class="src src-sh">cp ~/git/Unidata-Dockerfiles/ams2016/ldmd.conf ~/etc/
+</pre>
+</div>
+
+<p>
+This <code>ldmd.conf</code> has been setup for the AMS 2016 demonstration serving the following data feeds:
+</p>
+<ul class="org-ul">
+<li><a href="http://rapidrefresh.noaa.gov/">13km Rapid Refresh</a></li>
+</ul>
+
+<p>
+In addition, there is a <code>~/git/TdConfig/idd/pqacts/README.txt</code> file that may be helpful in writing a suitable <code>ldmd.conf</code> file.
+</p>
+</div></li>
+
+<li><a id="orgheadline18"></a><code>registry.xml</code><br  /><div class="outline-text-6" id="text-1-3-3-2-2">
+<div class="org-src-container">
+
+<pre class="src src-sh">cp ~/git/Unidata-Dockerfiles/ams2016/registry.xml ~/etc/
+</pre>
+</div>
+
+<p>
+This file has been set up for the AMS 2016 demonstration. Otherwise you would have to edit the <code>registry.xml</code> to ensure the <code>hostname</code> element is correct. For your own cloud VMs, work with <code>support-idd@unidata.ucar.edu</code> to devise a correct <code>hostname</code> element so that LDM statsitics get properly reported. Here is an example <code>hostname</code> element <code>unidata-server.azure.unidata.ucar.edu</code>.
+</p>
+</div></li>
+
+<li><a id="orgheadline19"></a><code>scour.conf</code><br  /><div class="outline-text-6" id="text-1-3-3-2-3">
+<p>
+You need to scour data or else your disk will full up. The crontab entry that runs scour is in the <a href="https://github.com/Unidata/Unidata-Dockerfiles/blob/master/ldm/crontab">LDM Docker container</a>. Scouring is invoked once per day.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">cp ~/git/Unidata-Dockerfiles/ams2016/scour.conf ~/etc/
+</pre>
+</div>
+</div></li>
+
+<li><a id="orgheadline20"></a><code>pqact.conf</code> and TDS configuration<br  /><div class="outline-text-6" id="text-1-3-3-2-4">
+<p>
+In the <code>ldmd.conf</code> file we copied just a moment ago there is a reference to a <code>pqact</code> file; <code>etc/TDS/pqact.forecastModels</code>. We need to ensure that file exists by doing the following instructions. Specifically, explode <code>~/git/TdsConfig/idd/config.zip</code> into <code>~/tdsconfig</code> and <code>cp -r</code> the <code>pqacts</code> directory into <code>~/etc/TDS</code>. <b>Note</b> do NOT use soft links. Docker does not like them.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/tdsconfig/
+cp ~/git/tdsConfig/idd/config.zip ~/tdsconfig/
+unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
+cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
+</pre>
+</div>
+</div></li>
+
+<li><a id="orgheadline21"></a>Edit <code>ldmfile.sh</code><br  /><div class="outline-text-6" id="text-1-3-3-2-5">
+<p>
+As the top of this file indicates, you must edit the <code>logfile</code> to suit your needs. Change the 
+</p>
+
+<pre class="example">
+logfile=logs/ldm-mcidas.log
+</pre>
+
+<p>
+line to
+</p>
+
+<pre class="example">
+logfile=var/logs/ldm-mcidas.log
+</pre>
+
+<p>
+This will ensure <code>ldmfile.sh</code> can properly invoked from the <code>pqact</code> files.
+</p>
+</div></li></ol></li>
+
+<li><a id="orgheadline23"></a>Upstream Data Feed from Unidata or Elsewhere<br  /><div class="outline-text-5" id="text-1-3-3-3">
+<p>
+The LDM operates on a push data model. You will have to find someone who will agree to push you the data. If you are part of the American academic community please send a support email to <code>support-idd@unidata.ucar.edu</code> to discuss your LDM data requirements.
+</p>
+</div></li></ol>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">1.3.4</span> Configuring the TDS</h4>
+<div class="outline-text-4" id="text-1-3-4">
+</div><ol class="org-ol"><li><a id="orgheadline25"></a>Edit TDS catalog.xml Files<br  /><div class="outline-text-5" id="text-1-3-4-1">
+<p>
+The <code>catalog.xml</code> files for TDS configuration are contained within the <code>~/tdsconfig</code> directory. Search for all files terminating in <code>.xml</code> in that directory. Edit the xml files for what data you wish to server. See the <a href="//Www.Unidata.Ucar.Edu/Software/Thredds/Current/Tds/Catalog/Index.Html">TDS Documentation</a> for more information on editing these XML files.
+</p>
+
+<p>
+Let's see what is available in the <code>~/tdsconfig</code> directory.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">find ~/tdsconfig -type f -name <span style="color: #008000;">"*.xml"</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-org">/home/ubuntu/tdsconfig/idd/forecastModels.xml
+/home/ubuntu/tdsconfig/idd/radars.xml
+/home/ubuntu/tdsconfig/idd/obsData.xml
+/home/ubuntu/tdsconfig/idd/forecastProdsAndAna.xml
+/home/ubuntu/tdsconfig/idd/satellite.xml
+/home/ubuntu/tdsconfig/radar/CS039_L2_stations.xml
+/home/ubuntu/tdsconfig/radar/CS039_stations.xml
+/home/ubuntu/tdsconfig/radar/RadarNexradStations.xml
+/home/ubuntu/tdsconfig/radar/RadarTerminalStations.xml
+/home/ubuntu/tdsconfig/radar/RadarL2Stations.xml
+/home/ubuntu/tdsconfig/radar/radarCollections.xml
+/home/ubuntu/tdsconfig/catalog.xml
+/home/ubuntu/tdsconfig/threddsConfig.xml
+/home/ubuntu/tdsconfig/wmsConfig.xml
+</pre>
+</div>
+</div></li></ol>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">1.4</span> Setting up Data Volumes</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+As alluded to earlier, we will have to set up data volumes so that the LDM can write data, and the TDS and RAMADDA can have access to that data. The <code>/mnt</code> volume on Azure is a good place to store data. I do not know what kind of assurances Azure makes about the reliability of storing your data there for the long term. (I remember reading about this once, but I cannot remember where.) For the LDM this should not be too much of a problem, but for RAMADDA you may wish to be careful.
+</p>
+
+<p>
+Let's first display the free disk space with the <code>df</code> command. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">df -H
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Filesystem</td>
+<td class="org-left">Size</td>
+<td class="org-right">Used</td>
+<td class="org-left">Avail</td>
+<td class="org-right">Use%</td>
+<td class="org-left">Mounted</td>
+<td class="org-left">on</td>
+</tr>
+
+<tr>
+<td class="org-left">/dev/sda1</td>
+<td class="org-left">31G</td>
+<td class="org-right">1.8G</td>
+<td class="org-left">28G</td>
+<td class="org-right">6%</td>
+<td class="org-left">/</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">none</td>
+<td class="org-left">4.1k</td>
+<td class="org-right">0</td>
+<td class="org-left">4.1k</td>
+<td class="org-right">0%</td>
+<td class="org-left">/sys/fs/cgroup</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">udev</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">13k</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">1%</td>
+<td class="org-left">/dev</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tmpfs</td>
+<td class="org-left">1.5G</td>
+<td class="org-right">394k</td>
+<td class="org-left">1.5G</td>
+<td class="org-right">1%</td>
+<td class="org-left">/run</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">none</td>
+<td class="org-left">5.3M</td>
+<td class="org-right">0</td>
+<td class="org-left">5.3M</td>
+<td class="org-right">0%</td>
+<td class="org-left">/run/lock</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">none</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">0</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">0%</td>
+<td class="org-left">/run/shm</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">none</td>
+<td class="org-left">105M</td>
+<td class="org-right">0</td>
+<td class="org-left">105M</td>
+<td class="org-right">0%</td>
+<td class="org-left">/run/user</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">none</td>
+<td class="org-left">66k</td>
+<td class="org-right">0</td>
+<td class="org-left">66k</td>
+<td class="org-right">0%</td>
+<td class="org-left">/etc/network/interfaces.dynamic.d</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">/dev/sdb1</td>
+<td class="org-left">640G</td>
+<td class="org-right">73M</td>
+<td class="org-left">607G</td>
+<td class="org-right">1%</td>
+<td class="org-left">/mnt</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Create a <code>/data</code> directory where the LDM can write data soft link to the <code>/mnt</code> directory. Also, create a <code>/repository</code> directory where RAMADDA data will reside.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sudo ln -s /mnt /data
+sudo mkdir /mnt/ldm/
+sudo chown -R ubuntu:docker /data/ldm
+sudo mkdir /mnt/repository/
+sudo chown -R ubuntu:docker /data/repository
+</pre>
+</div>
+
+<p>
+These directories will be used by the LDM, TDS, and RAMADDA docker containers when we mount diretories from the Docker host into these containers.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">1.5</span> RAMADDA Configuration</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+When you fire up RAMADDA for the very first time, you ,ust have  a <code>password.properties</code> file in the RAMADDA home directory which is <code>/data/repository/</code>. See <a href="http://ramadda.org//repository/userguide/toc.html">RAMADDA documentation</a> for more details on setting up RAMADDA.
+</p>
+
+<p>
+Here is a <code>pw.properties</code> file to get you going. Change password below to something more secure!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">echo</span> ramadda.install.password=changeme! &gt; /data/repository/pw.properties
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">1.6</span> Opening Ports</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Ensure these ports are open on the VM where these containers will run. Ask the cloud administrator for these ports to be open.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Service</th>
+<th scope="col" class="org-right">External Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">HTTP</td>
+<td class="org-right">80</td>
+</tr>
+
+<tr>
+<td class="org-left">TDS</td>
+<td class="org-right">8080</td>
+</tr>
+
+<tr>
+<td class="org-left">RAMADDA</td>
+<td class="org-right">8081</td>
+</tr>
+
+<tr>
+<td class="org-left">SSL TDM</td>
+<td class="org-right">8443</td>
+</tr>
+
+<tr>
+<td class="org-left">LDM</td>
+<td class="org-right">388</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Note the TDM is an application that works in conjuction with the TDS. It creates indexes for GRIB data in the background, and notifies the TDS via port 8443 when data have been updated or changed. See <a href="https://www.unidata.ucar.edu/software/thredds/current/tds/reference/collections/TDM.html">here</a> to learn more about the TDM.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">1.7</span> Tomcat Logging for TDS and RAMADDA</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+It is a good idea to mount Tomcat logging directories outside the container so that they can be managed for both the TDS and RAMADDA.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/logs/ramadda-tomcat
+mkdir -p ~/logs/tds-tomcat
+</pre>
+</div>
+
+<p>
+Note there is also a logging directory in <code>~/tdsconfig/logs</code>. All these logging directories should be looked at periodically, not the least to ensure that log files are not filling up your system.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">1.8</span> Starting the LDM TDS RAMADDA TDM</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Edit the <code>docker-compose.yml</code> file and change the <code>TDM_PW</code> to <code>MeIndexer</code>.
+</p>
+
+<p>
+At this point you are almost ready to run the whole kit and caboodle. But first  pull the relevant docker images to make life easier for the subequent <code>docker-compose</code> command.
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker pull unidata/ldmtds:latest
+docker pull unidata/tdm:latest
+docker pull unidata/tds:latest
+docker pull unidata/ramadda:latest
+</pre>
+</div>
+
+<p>
+Now you can run
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-compose -f ~/git/Unidata-Dockerfiles/ams2016/docker-compose.yml up -d
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">1.9</span> Check What is Running</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+At this point, you should have these services running:
+</p>
+
+<ul class="org-ul">
+<li>LDM</li>
+<li>TDS</li>
+<li>TDM</li>
+<li>RAMADDA</li>
+</ul>
+
+<p>
+Verify you have the TDS running by navigating to:
+</p>
+
+<p>
+<a href="http://unidata-server.cloudapp.net/thredds/catalog.html">http://unidata-server.cloudapp.net/thredds/catalog.html</a>
+</p>
+
+<p>
+You should now be able to download the Unidata Integrated Data Viewer and point it to this catalog to access and display data.
+</p>
+
+<p>
+repository?ouptut=thredds.catalog
+</p>
+
+<p>
+Verify you have the RAMADDA running by navigating to:
+</p>
+
+<p>
+<a href="http://unidata-server.cloudapp.net:8081/repository">http://unidata-server.cloudapp.net:8081/repository</a>
+</p>
+
+<p>
+If you are going to RAMADDA for the first time, you will have to do some <a href="http://ramadda.org//repository/userguide/toc.html">RAMADDA set up</a>.
+</p>
+
+<p>
+Also RAMADDA has access to the <code>/data/ldm</code> directory so you may wish to set up <a href="http://ramadda.org//repository/userguide/developer/filesystem.html">server-side view of this part of the file system</a>.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-08 Tue&gt;</span></span></p>
+<p class="author">Author: Julien Chastang</p>
+<p class="date">Created: 2015-12-11 Fri 20:29</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

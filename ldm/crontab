@@ -1,3 +1,0 @@
-MAILTO=""
-# run ldm scour
-0 0 * * * bin/ldmadmin scour
