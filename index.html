@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-13 Sun 23:46 -->
+<!-- 2015-12-14 Mon 16:17 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>AMS 2016: UniCloud, Docker at Unidata</title>
@@ -234,7 +234,7 @@ for the JavaScript code in this tag.
 <h2 id="orgheadline1"><span class="section-number-2">1</span> Preamble</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-The following instructions describe how to configure a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a> serving data with the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a>. This document assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also assume familiarity with Unix, Docker, and Unidata technology in general. You will have to be comfortable entering command at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles">Unidata-Dockerfiles repository</a> in addition to a configuration specifically planned for AMS 2016 demonstrations  project <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>.
+The following instructions describe how to configure a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a> serving data with the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a>. This document assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also assume familiarity with Unix, Docker, and Unidata technology in general. You will have to be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles">Unidata-Dockerfiles repository</a> in addition to a configuration specifically planned for AMS 2016 demonstrations  project <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>.
 </p>
 </div>
 </div>
@@ -451,7 +451,7 @@ var/queue
 </pre>
 
 <p>
-The LDM <code>etc</code> directory is where you will find configuration files related to the LDM including <code>ldmd.conf</code>, <code>pqact</code> files, <code>registry.xml</code>, and  <code>scour.conf</code>. We will need the ability to easily observe and manipulate the files from <b>outside</b> the running LDM container. To that end, we need to find a home for <code>etc</code> on the Docker host. The same is true for the <code>var/data</code> and <code>var/logs</code> directories. Later, we will use Docker commands that have been written on your behalf to mount these directories from <b>outside</b> to within the container. The <code>var/queues</code> directory will remain inside the container.
+The LDM <code>etc</code> directory is where you will find configuration files related to the LDM including <code>ldmd.conf</code>, <code>pqact</code> files, <code>registry.xml</code>, and  <code>scour.conf</code>. We will need the ability to easily observe and manipulate the files from <b>outside</b> the running LDM container. To that end, we need to find a home for <code>etc</code> on the Docker host. The same is true for the <code>var/data</code> and <code>var/logs</code> directories. Later, we will use Docker commands that have been written on your behalf to mount these directories from <b>outside</b> to <b>within</b> the container. The <code>var/queues</code> directory will remain inside the container.
 </p>
 
 <div class="org-src-container">
@@ -507,10 +507,12 @@ This <code>ldmd.conf</code> has been setup for the AMS 2016 demonstration servin
 </p>
 <ul class="org-ul">
 <li><a href="http://rapidrefresh.noaa.gov/">13km Rapid Refresh</a></li>
+<li><a href="http://www.nesdis.noaa.gov/imagery_data.html">NESDIS GOES Satellite Data</a></li>
+<li>Unidata NEXRAD Composites</li>
 </ul>
 
 <p>
-In addition, there is a <code>~/git/TdConfig/idd/pqacts/README.txt</code> file that may be helpful in writing a suitable <code>ldmd.conf</code> file.
+For your information, and for future reference, there is a <code>~/git/TdConfig/idd/pqacts/README.txt</code> file that may be helpful in writing a suitable <code>ldmd.conf</code> file.
 </p>
 </div></li>
 
@@ -546,7 +548,7 @@ In the <code>ldmd.conf</code> file we copied just a moment ago there is a refere
 <div class="org-src-container">
 
 <pre class="src src-sh">mkdir -p ~/tdsconfig/
-cp ~/git/tdsConfig/idd/config.zip ~/tdsconfig/
+cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
 unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
 cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
 </pre>
@@ -593,7 +595,7 @@ The LDM operates on a push data model. You will have to find someone who will ag
 <h4 id="orgheadline25"><span class="section-number-4">3.4.1</span> Edit TDS catalog.xml Files</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
-The <code>catalog.xml</code> files for TDS configuration are contained within the <code>~/tdsconfig</code> directory. Search for all files terminating in <code>.xml</code> in that directory. Edit the xml files for what data you wish to server. See the <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/catalog/index.html">TDS Documentation</a> for more information on editing these XML files.
+The <code>catalog.xml</code> files for TDS configuration are contained within the <code>~/tdsconfig</code> directory. Search for all files terminating in <code>.xml</code> in that directory. Edit the <code>xml</code> files for what data you wish to server. See the <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/catalog/index.html">TDS Documentation</a> for more information on editing these XML files.
 </p>
 
 <p>
@@ -638,7 +640,7 @@ write data, and the TDS and RAMADDA can have access to that data. The <code>/mnt
 volume on Azure is a good place to store data. Check with Azure about the
 assurances Azure makes about the reliability of storing your data there for the
 long term. For the LDM this should not be too much of a problem, but for RAMADDA
-you may wish to be careful.
+you may wish to be careful as there is the potential to lose user data.
 </p>
 </div>
 
@@ -648,10 +650,9 @@ you may wish to be careful.
 <p>
 Let's first display the free disk space with the <code>df</code> command. 
 </p>
-
 <div class="org-src-container">
 
-<pre class="src src-sh">df -H
+<pre class="src src-sh" id="orgsrcblock1">df -H
 </pre>
 </div>
 
@@ -687,9 +688,9 @@ Let's first display the free disk space with the <code>df</code> command.
 <tr>
 <td class="org-left">/dev/sda1</td>
 <td class="org-left">31G</td>
-<td class="org-right">1.8G</td>
+<td class="org-right">2.0G</td>
 <td class="org-left">28G</td>
-<td class="org-right">6%</td>
+<td class="org-right">7%</td>
 <td class="org-left">/</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -707,7 +708,7 @@ Let's first display the free disk space with the <code>df</code> command.
 <tr>
 <td class="org-left">udev</td>
 <td class="org-left">7.4G</td>
-<td class="org-right">13k</td>
+<td class="org-right">8.2k</td>
 <td class="org-left">7.4G</td>
 <td class="org-right">1%</td>
 <td class="org-left">/dev</td>
@@ -796,7 +797,7 @@ sudo chown -R ubuntu:docker /data/repository
 </div>
 
 <p>
-These directories will be used by the LDM, TDS, and RAMADDA docker containers when we mount diretories from the Docker host into these containers.
+These directories will be used by the LDM, TDS, and RAMADDA docker containers when we mount directories from the Docker host into these containers.
 </p>
 </div>
 </div>
@@ -872,7 +873,7 @@ mkdir -p ~/logs/tds-tomcat
 </div>
 
 <p>
-Note there is also a logging directory in <code>~/tdsconfig/logs</code>. All these logging directories should be looked at periodically, not the least to ensure that log files are not filling up your system.
+Note there is also a logging directory in <code>~/tdsconfig/logs</code>. All these logging directories should be looked at periodically, not the least to ensure that <code>log</code> files are not filling up your system.
 </p>
 </div>
 </div>
@@ -899,7 +900,7 @@ When you start RAMADDA for the very first time, you must have  a <code>password.
 <h4 id="orgheadline34"><span class="section-number-4">7.0.2</span> Final Edit to <code>docker-compose.yml</code></h4>
 <div class="outline-text-4" id="text-7-0-2">
 <p>
-When the TDM communicates to the TDS concerning changes in data it observes with data supplied by the LDM, it will communicate via the <code>tdm</code> tomcat user. Edit the <code>docker-compose.yml</code> file and change the <code>TDM_PW</code> to <code>MeIndexer</code>. This is not as insecure as it would seem since the tdm user has few privileges. Optimally, one could change the password hash for the TDM user in the <code>tomcat-users.xml</code> file.
+When the TDM communicates to the TDS concerning changes in data it observes with data supplied by the LDM, it will communicate via the <code>tdm</code> tomcat user. Edit the <code>docker-compose.yml</code> file and change the <code>TDM_PW</code> to <code>MeIndexer</code>. This is not as insecure as it would seem since the <code>tdm</code> user has few privileges. Optimally, one could change the password hash for the TDM user in the <code>tomcat-users.xml</code> file.
 </p>
 </div>
 </div>
@@ -967,7 +968,7 @@ From the shell where you started <code>docker-machine</code> earlier you can exe
 
 <div class="org-src-container">
 
-<pre class="src src-sh">docker ps --format <span style="color: #008000;">"table {{.ID}}\t{{.Image}}\t{{.Status}}"</span>
+<pre class="src src-sh" id="orgsrcblock2">docker ps --format <span style="color: #008000;">"table {{.ID}}\t{{.Image}}\t{{.Status}}"</span>
 </pre>
 </div>
 
@@ -995,40 +996,41 @@ From the shell where you started <code>docker-machine</code> earlier you can exe
 </tr>
 
 <tr>
-<td class="org-left">32d3b20c8329</td>
+<td class="org-left">4ed1c4c18814</td>
 <td class="org-left">unidata/ramadda:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">5</td>
-<td class="org-left">days</td>
+<td class="org-right">17</td>
+<td class="org-left">seconds</td>
 </tr>
 
 <tr>
-<td class="org-left">594577bb15b9</td>
+<td class="org-left">bdfcf5590bc6</td>
 <td class="org-left">unidata/ldmtds:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">5</td>
-<td class="org-left">days</td>
+<td class="org-right">18</td>
+<td class="org-left">seconds</td>
 </tr>
 
 <tr>
-<td class="org-left">d86a3d33216f</td>
+<td class="org-left">aee044cf8e66</td>
 <td class="org-left">unidata/tdm:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">5</td>
-<td class="org-left">days</td>
+<td class="org-right">20</td>
+<td class="org-left">seconds</td>
 </tr>
 
 <tr>
-<td class="org-left">69fc06217d86</td>
+<td class="org-left">4d0208f85b22</td>
 <td class="org-left">unidata/tds:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">5</td>
-<td class="org-left">days</td>
+<td class="org-right">21</td>
+<td class="org-left">seconds</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-orgheadline39" class="outline-3">
 <h3 id="orgheadline39"><span class="section-number-3">8.2</span> TDS and RAMADDA URLs</h3>
@@ -1070,7 +1072,7 @@ RAMADDA has good integration with the IDV and the two technologies work well tog
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-08 Tue&gt;</span></span></p>
 <p class="author">Author: Julien Chastang</p>
-<p class="date">Created: 2015-12-13 Sun 23:46</p>
+<p class="date">Created: 2015-12-14 Mon 16:17</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
