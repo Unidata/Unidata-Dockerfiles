@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-13 Sun 22:28 -->
+<!-- 2015-12-13 Sun 23:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>AMS 2016: UniCloud, Docker at Unidata</title>
@@ -221,7 +221,7 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline42">8.3. Viewing Data with the IDV</a>
 <ul>
 <li><a href="#orgheadline40">8.3.1. Access TDS with the IDV</a></li>
-<li><a href="#orgheadline41">8.3.2. Acess RAMADDAA with the IDV</a></li>
+<li><a href="#orgheadline41">8.3.2. Access RAMADDAA with the IDV</a></li>
 </ul>
 </li>
 </ul>
@@ -522,7 +522,7 @@ In addition, there is a <code>~/git/TdConfig/idd/pqacts/README.txt</code> file t
 </div>
 
 <p>
-This file has been set up for the AMS 2016 demonstration. Otherwise you would have to edit the <code>registry.xml</code> to ensure the <code>hostname</code> element is correct. For your own cloud VMs, work with <code>support-idd@unidata.ucar.edu</code> to devise a correct <code>hostname</code> element so that LDM statsitics get properly reported. Here is an example <code>hostname</code> element <code>unidata-server.azure.unidata.ucar.edu</code>.
+This file has been set up for the AMS 2016 demonstration. Otherwise you would have to edit the <code>registry.xml</code> to ensure the <code>hostname</code> element is correct. For your own cloud VMs, work with <code>support-idd@unidata.ucar.edu</code> to devise a correct <code>hostname</code> element so that LDM statistics get properly reported. Here is an example <code>hostname</code> element <code>unidata-server.azure.unidata.ucar.edu</code>.
 </p>
 </div></li>
 
@@ -852,7 +852,7 @@ Ensure these ports are open on the VM where these containers will run. Ask the c
 </table>
 
 <p>
-Note the TDM is an application that works in conjuction with the TDS. It creates indexes for GRIB data in the background, and notifies the TDS via port 8443 when data have been updated or changed. See <a href="https://www.unidata.ucar.edu/software/thredds/current/tds/reference/collections/TDM.html">here</a> to learn more about the TDM.
+Note the TDM is an application that works in conjunction with the TDS. It creates indexes for GRIB data in the background, and notifies the TDS via port 8443 when data have been updated or changed. See <a href="https://www.unidata.ucar.edu/software/thredds/current/tds/reference/collections/TDM.html">here</a> to learn more about the TDM.
 </p>
 </div>
 </div>
@@ -899,7 +899,7 @@ When you start RAMADDA for the very first time, you must have  a <code>password.
 <h4 id="orgheadline34"><span class="section-number-4">7.0.2</span> Final Edit to <code>docker-compose.yml</code></h4>
 <div class="outline-text-4" id="text-7-0-2">
 <p>
-When the TDM communicates to the TDS concering changes in data it observes with data supplied by the LDM, it will communicate via the <code>tdm</code> tomcat user. Edit the <code>docker-compose.yml</code> file and change the <code>TDM_PW</code> to <code>MeIndexer</code>. This is not as insecure as it would seem since the tdm user has few priviliges. Optimally, one could change the password hash for the TDM user in the <code>tomcat-users.xml</code> file.
+When the TDM communicates to the TDS concerning changes in data it observes with data supplied by the LDM, it will communicate via the <code>tdm</code> tomcat user. Edit the <code>docker-compose.yml</code> file and change the <code>TDM_PW</code> to <code>MeIndexer</code>. This is not as insecure as it would seem since the tdm user has few privileges. Optimally, one could change the password hash for the TDM user in the <code>tomcat-users.xml</code> file.
 </p>
 </div>
 </div>
@@ -908,7 +908,7 @@ When the TDM communicates to the TDS concering changes in data it observes with 
 <h4 id="orgheadline35"><span class="section-number-4">7.0.3</span> Pull Down Images from the DockerHub Registry</h4>
 <div class="outline-text-4" id="text-7-0-3">
 <p>
-At this point you are almost ready to run the whole kit and caboodle. But first  pull the relevant docker images to make this easier for the subequent <code>docker-compose</code> command.
+At this point you are almost ready to run the whole kit and caboodle. But first  pull the relevant docker images to make this easier for the subsequent <code>docker-compose</code> command.
 </p>
 
 
@@ -1057,10 +1057,10 @@ In the <a href="https://www.unidata.ucar.edu/software/idv/docs/userguide/data/ch
 </div>
 
 <div id="outline-container-orgheadline41" class="outline-4">
-<h4 id="orgheadline41"><span class="section-number-4">8.3.2</span> Acess RAMADDAA with the IDV</h4>
+<h4 id="orgheadline41"><span class="section-number-4">8.3.2</span> Access RAMADDAA with the IDV</h4>
 <div class="outline-text-4" id="text-8-3-2">
 <p>
-RAMADDA has good integration with the IDV and the two technolgies work well together. You may wish to install the <a href="http://www.unidata.ucar.edu/software/idv/docs/workshop/savingstate/Ramadda.html">RAMADDA IDV plugin</a> to publish IDV bundles to RAMADDA. RAMADDA also has access to the <code>/data/ldm</code> directory so you may want to set up <a href="http://ramadda.org//repository/userguide/developer/filesystem.html">server-side view of this part of the file system</a>. Finally,  you can enter this catlog URL in the IDV dashbaord to examine data holdings shared bundles, etc. on RAMADDA <a href="http://unidata-server-2.cloudapp.net:8081/repository?output=thredds.catalog">http://unidata-server-2.cloudapp.net:8081/repository?output=thredds.catalog</a>.
+RAMADDA has good integration with the IDV and the two technologies work well together. You may wish to install the <a href="http://www.unidata.ucar.edu/software/idv/docs/workshop/savingstate/Ramadda.html">RAMADDA IDV plugin</a> to publish IDV bundles to RAMADDA. RAMADDA also has access to the <code>/data/ldm</code> directory so you may want to set up <a href="http://ramadda.org//repository/userguide/developer/filesystem.html">server-side view of this part of the file system</a>. Finally,  you can enter this catalog URL in the IDV dashboard to examine data holdings shared bundles, etc. on RAMADDA <a href="http://unidata-server.cloudapp.net:8081/repository?output=thredds.catalog">http://unidata-server.cloudapp.net:8081/repository?output=thredds.catalog</a>.
 </p>
 </div>
 </div>
@@ -1070,7 +1070,7 @@ RAMADDA has good integration with the IDV and the two technolgies work well toge
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-08 Tue&gt;</span></span></p>
 <p class="author">Author: Julien Chastang</p>
-<p class="date">Created: 2015-12-13 Sun 22:28</p>
+<p class="date">Created: 2015-12-13 Sun 23:46</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
