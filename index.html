@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-16 Wed 17:35 -->
+<!-- 2015-12-16 Wed 17:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>AMS 2016: UniCloud, Docker at Unidata</title>
@@ -232,7 +232,7 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline48">10.1. Common Problems</a>
 <ul>
 <li><a href="#orgheadline45">10.1.1. Certificate Regeneration</a></li>
-<li><a href="#orgheadline46">10.1.2. Size of Image is not Large Enough</a></li>
+<li><a href="#orgheadline46">10.1.2. Size of VM is not Large Enough</a></li>
 <li><a href="#orgheadline47">10.1.3. Where is my Data and the Finicky TDM</a></li>
 </ul>
 </li>
@@ -247,7 +247,7 @@ for the JavaScript code in this tag.
 <h2 id="orgheadline1"><span class="section-number-2">1</span> Preamble</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This guide describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a> on a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a>. The document assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have <code>sudo</code> priviliges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles">Unidata-Dockerfiles repository</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>.
+This guide describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a> on a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a>. The document assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have <code>sudo</code> privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles">Unidata-Dockerfiles repository</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>.
 </p>
 </div>
 </div>
@@ -256,7 +256,7 @@ This guide describes how to configure the <a href="http://www.unidata.ucar.edu/s
 <h2 id="orgheadline2"><span class="section-number-2">2</span> Quick Start</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-In order to best understand this configuratation process, it is recommmended to read the complete contents of this document and follow the instructions starting in the next section. If there are problems you will be able to reason about the errors. However, if you are eager to get started, you can follow this quick start section.
+In order to best understand this configuration process, it is recommended to read the complete contents of this document and follow the instructions starting in the next section. If there are problems you will be able to reason about the errors. However, if you are eager to get started, you can follow this quick start section.
 </p>
 
 <ul class="org-ul">
@@ -1254,10 +1254,10 @@ Like the error message says, you may need to restart your Docker containers with
 </div>
 </div>
 <div id="outline-container-orgheadline46" class="outline-4">
-<h4 id="orgheadline46"><span class="section-number-4">10.1.2</span> Size of Image is not Large Enough</h4>
+<h4 id="orgheadline46"><span class="section-number-4">10.1.2</span> Size of VM is not Large Enough</h4>
 <div class="outline-text-4" id="text-10-1-2">
 <p>
-If you see your containers not starting or error messages like this:
+If you see your containers not starting on Azure or error messages like this:
 </p>
 
 <pre class="example">
@@ -1273,7 +1273,7 @@ it is possible you did not create a sufficiently large VM. Try  <a href="https:/
 <h4 id="orgheadline47"><span class="section-number-4">10.1.3</span> <a id="orgtarget6"></a> Where is my Data and the Finicky TDM</h4>
 <div class="outline-text-4" id="text-10-1-3">
 <p>
-If you are not finding the data you expect to see via the THREDDS <code>catalog.xml</code> tree check the TDM logs in <code>~/logs/tdm</code>. Also try restarting the containers on the Azure Docker host as directories may have been added by the LDM after TDS/TDM start up which the TDS/TDM apperently does not like:
+If you are not finding the data you expect to see via the THREDDS <code>catalog.xml</code> tree check the TDM logs in <code>~/logs/tdm</code>. Also try restarting the containers on the Azure Docker host as directories may have been added by the LDM after TDS/TDM start up which the TDS/TDM apparently does not like:
 </p>
 
 <div class="org-src-container">
@@ -1298,7 +1298,7 @@ You may also just have to <b>wait</b>. It can take a few hours for the TDM to ca
 <div id="postamble" class="status">
 <p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-15 Tue&gt;</span></span></p>
 <p class="author">Author: Julien Chastang (UCAR, Unidata)</p>
-<p class="date">Created: 2015-12-16 Wed 17:35</p>
+<p class="date">Created: 2015-12-16 Wed 17:51</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
