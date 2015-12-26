@@ -53,11 +53,7 @@ tds:
 ramadda:
   image: unidata/ramadda:latest
   volumes:
-    # Theoretically, it should be possible just to mount data, but then the
-    # permissions are screwed up. In particular, the /data/repository directory
-    # ends up being owned by root and non-writable by RAMADDA. Mounting the ldm
-    # directory for server-side views of data by RAMADDA.
-    - /data/repository/:/data/repository/
+    - /home/ubuntu/repository/:/data/repository/
     - /data/ldm/:/data/ldm/
     - ~/logs/ramadda-tomcat/:/usr/local/tomcat/logs/
   ports:
