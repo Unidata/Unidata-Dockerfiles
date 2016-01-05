@@ -1,0 +1,212 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:nil arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:t p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:t todo:t |:t
+#+TITLE: idv-webcams
+#+SUBTITLE: Docker Use at Unidata
+#+DATE: <2015-12-28 Mon>
+#+DESCRIPTION: Docker Use at Unidata
+#+KEYWORDS:  RAMADDA TDS LDM Unidata Docker IDV
+#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA)
+#+EMAIL: chastang@ucar.edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 24.5.1 (Org mode 8.3.2)
+
+* Org Export Set up (Internal Only)                                :noexport:
+
+# org-mode stuff. Don't want confirmation for babel exec, nor should babel block be evaluated during export.
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none 
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+# post saving hooks to export in various formats
+
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defun idv-webcams/org-save-and-export ()
+    (interactive)
+    (when (eq major-mode 'org-mode)
+        (progn
+          (org-gfm-export-to-markdown))))
+
+  (add-hook 'after-save-hook 'idv-webcams/org-save-and-export nil t)
+#+END_SRC
+
+
+# Defining the VM we will be working with for the remainder of this org babel session.
+
+#+BEGIN_SRC org :noweb-ref myvm :exports none 
+  idv-webcams
+#+END_SRC
+
+# Setting up noweb
+
+#+NAME: azure-vm
+#+BEGIN_SRC org :results silent :exports none :noweb yes 
+<<myvm>>
+#+END_SRC
+
+# Setting up org babel default arguments for executing ~sh~ commands below. We will be using tramp for the remote execution. You should have something like this in your ssh-config:
+
+#+BEGIN_SRC sh :eval no :exports none 
+Host <<myvm>>
+    User     ubuntu
+    Port     22
+    IdentityFile ~/.docker/machine/machines/<<myvm>>/id_rsa
+    Hostname <<myvm>>.cloudapp.net
+#+END_SRC
+
+# Defaulting to using remote VM. Be careful to specify :dir ~ for the sh blocks where you do not want remote VM execution of commands.
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent :exports none 
+  (setq-local org-babel-default-header-args:sh
+              '((:dir . "/ubuntu@<<myvm>>:")))
+#+END_SRC
+
+* Running IDV Webcams in the Cloud
+
+This is a docker project that ultimately runs a =tcl= script, that goes around the
+web scraping images for the [[http://www.unidata.ucar.edu/software/idv][Unidata Integrated Data Viewer]] (IDV). (See the Display --> Special --> Webcam Display menu in the IDV.) The =getImages.tcl= script is a constantly running script (do not put it in =cron= or you will inadvertently launch a denial of service attack) that fetches images every fifteen minutes. The images are scoured off after a couple of days.
+
+The URL webcam database is in the =defineImages.tcl= file. This file needs to be updated on a regular basis as webcam URLs go quickly out-of-date.
+
+Follow the instructions below to run this project on a cloud service.
+
+* Routine Maintenance
+
+~ssh~ into docker host first.
+
+#+BEGIN_SRC sh :eval no :noweb yes
+  docker-machine ssh <<myvm>>
+#+END_SRC
+
+Do some routine maintenance.
+
+# run on remote host, otherwise you'll hang your emacs session
+#+BEGIN_SRC sh  :eval no :exports code 
+  # update and install packages
+  sudo apt-get -qq update
+  sudo apt-get -qq upgrade
+#+END_SRC
+
+* ~git clone~ Repositories
+
+Let's clone those repositories by creating =~/git= directory where our repositories will live and issuing some ~git~ commands.
+
+#+BEGIN_SRC sh :results silent  
+  # Get the git repositories we will want to work with
+  mkdir -p /home/ubuntu/git
+  git clone https://github.com/Unidata/Unidata-Dockerfiles \
+      /home/ubuntu/git/Unidata-Dockerfiles
+#+END_SRC
+
+
+* Add =ubuntu= User to =docker= Group and Restart Docker
+
+#+BEGIN_SRC sh :results verbatim drawer :exports code 
+  # Add ubuntu to docker group
+  sudo usermod -G docker ubuntu
+
+  # Restart docker service
+  sudo service docker restart
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+* Install ~docker-compose~ on VM
+
+#+BEGIN_SRC org :noweb-ref dcompose-version :exports none 
+  1.5.2
+#+END_SRC
+
+~docker-compose~ is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so ~docker-compose~ is perfect for this scenario. Install ~docker-compose~ on the Azure Docker host.
+
+#+BEGIN_SRC org :noweb yes :results append :exports results 
+  You may have to update version (currently at =<<dcompose-version>=>).
+#+END_SRC
+
+ #+RESULTS:
+ You may have to update version (currently at =1.5.2=).
+
+#+BEGIN_SRC sh :noweb yes :results verbatim drawer :exports code
+  # Get docker-compose
+  curl -L \
+  https://github.com/docker/compose/releases/download/<<dcompose-version>>/\
+docker-compose-`uname -s`-`uname -m` > docker-compose
+  sudo mv docker-compose /usr/local/bin/
+  sudo chmod +x /usr/local/bin/docker-compose
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+:END:
+
+* Create =www= directory
+
+#+BEGIN_SRC sh  :results silent :export code
+  # Create www directory
+  mkdir -p ~/www
+#+END_SRC
+
+* Edit =docker-compose.yml=
+
+Before running, please edit the =docker-compose.yml= file and decide where you want the images to live on the base machine. See the =CHANGEME!= environment variable. Note that the same =docker-compose.yml= references an =nginx= web server image that will serve out the images.
+
+# search for the buffer called docker-compose.yml in your emacs session
+#+BEGIN_SRC emacs-lisp :exports none :results silent :noweb yes 
+  (find-file "/ubuntu@<<myvm>>:/home/ubuntu/git/Unidata-Dockerfiles/idv-webcams/docker-compose.yml")
+#+END_SRC
+
+* ~chown~ for Good Measure
+
+As we are approaching completion, let's ensure all files in =/home/ubuntu= are owned by the =ubuntu= user in the =docker= group.
+
+#+BEGIN_SRC sh :results silent :exports code
+  sudo chown -R ubuntu:docker /home/ubuntu
+#+END_SRC
+
+* Logout/Restart/Login
+
+Best to get a clean start.
+
+#+BEGIN_SRC sh :eval no :exports code :noweb yes
+  exit
+  docker-machine restart <<myvm>>
+  docker-machine ssh <<myvm>>
+#+END_SRC
+
+* Run
+
+# run on host, it takes too long to run in it locally
+#+BEGIN_SRC sh :results silent :eval no 
+  # Docker pull all relavant images
+  docker pull unidata/idv-webcams:latest
+  docker pull nginx
+#+END_SRC
+
+From =~/git/Unidata-Dockerfiles/idv-webcams=
+
+#+BEGIN_SRC sh :results silent :eval no 
+  docker-compose run -d idv-webcams
+  docker-compose run -d  --service-ports nginx
+#+END_SRC
+
+* Access Webcams in the IDV
+
+To access your new IDV webcam server, please locate the =.rbi= in your =~/.unidata= folder for your IDV installation and insert lines that look something like this:
+
+#+BEGIN_EXAMPLE
+  <!-- Defines the image set xml -->
+  <resources name="idv.resource.imagesets" loadmore="true">
+      <resource location="http://idv-webcams.cloudapp.net/index.xml"/>
+  </resources>
+#+END_EXAMPLE
+
+Note, you will have to change the name of the webcam URL (the =resource location= element) to wherever on the Internet your Docker image lives. You will also have to open port 80 to let web traffic for the IDV to grab images. Finally, apart from the IDV, it is always fun to examine the latest images at:
+
+[[http://idv-webcams.cloudapp.net/latest.html]]
