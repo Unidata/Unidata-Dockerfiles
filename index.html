@@ -3,12 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-26 Sat 10:33 -->
+<!-- 2016-01-05 Tue 13:00 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>AMS 2016: UniCloud, Docker at Unidata</title>
+<title>UNICLOUD</title>
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Julien Chastang (UCAR, Unidata)" />
+<meta  name="author" content="Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms" />
+<meta  name="description" content="Docker Use at Unidata"
+ />
+<meta  name="keywords" content="RAMADDA TDS LDM Unidata Docker IDV" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -149,15 +152,15 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">AMS 2016: UniCloud, Docker at Unidata
+<h1 class="title">UNICLOUD
 <br>
-<span class="subtitle">LDM, TDS, and RAMADDA on Microsoft Azure VM</span>
+<span class="subtitle">Docker Use at Unidata</span>
 </h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Preamble</a></li>
+<li><a href="#orgheadline1">1. Introduction</a></li>
 <li><a href="#orgheadline2">2. Quick Start</a></li>
 <li><a href="#orgheadline3">3. Long Form Instructions</a></li>
 <li><a href="#orgheadline12">4. Preliminary Setup on Azure</a>
@@ -234,7 +237,7 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline57">11. Appendix</a>
+<li><a href="#orgheadline58">11. Appendix</a>
 <ul>
 <li><a href="#orgheadline56">11.1. Common Problems</a>
 <ul>
@@ -244,6 +247,7 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline55">11.1.4. Cannot connect to the Docker daemon</a></li>
 </ul>
 </li>
+<li><a href="#orgheadline57">11.2. Acknowledgments</a></li>
 </ul>
 </li>
 </ul>
@@ -251,7 +255,7 @@ for the JavaScript code in this tag.
 </div>
 
 <div id="outline-container-orgheadline1" class="outline-2">
-<h2 id="orgheadline1"><span class="section-number-2">1</span> Preamble</h2>
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This guide is a companion document <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README">(available in HTML, Markdown, text, PDF)</a> to a 2016 American Meteorological Society oral presentation, <a href="https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html"><i>UniCloud: Docker Use at Unidata</i></a>. It describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a> on a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a>. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have <code>sudo</code> privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles"><code>Unidata-Dockerfiles</code> repository</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>.
@@ -278,8 +282,11 @@ For example,
 
 <div class="org-src-container">
 
-<pre class="src src-sh">unicloud-1.sh --azure-host &lt;azure-host&gt; --azure-subscription-id <span style="color: #008000;">"3.14"</span> <span style="color: #008000;">\</span>
-              --azure-subscription-cert <span style="color: #008000;">"/path/to/mycert.pem"</span>
+<pre class="src src-sh">unicloud-1.sh <span style="color: #008000;">\</span>
+  --azure-host &lt;azure-host&gt; <span style="color: #008000;">\</span>
+  --azure-subscription-id <span style="color: #008000;">"3.14"</span> <span style="color: #008000;">\</span>
+  --azure-subscription-cert <span style="color: #008000;">\</span>
+  <span style="color: #008000;">"/path/to/mycert.pem"</span>
 </pre>
 </div>
 
@@ -289,8 +296,9 @@ Now you are ready to do additional configuration on the new Docker host:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">docker-machine ssh &lt;azure-host&gt; <span style="color: #008000;">"bash -s"</span> &lt; <span style="color: #008000;">\</span>
-    Unidata-Dockerfiles/ams2016/unicloud-2.sh
+<pre class="src src-sh">docker-machine <span style="color: #008000;">\</span>
+  ssh &lt;azure-host&gt; <span style="color: #008000;">"bash -s"</span> &lt; <span style="color: #008000;">\</span>
+  Unidata-Dockerfiles/ams2016/unicloud-2.sh
 </pre>
 </div>
 
@@ -345,10 +353,12 @@ The following <code>docker-machine</code> command will create a Docker VM on Azu
 <div class="org-src-container">
 
 <pre class="src src-org"><span style="color: #8D8D84; font-style: italic;"># Create Azure VM via docker-machine</span>
-docker-machine -D create -d azure \
-               --azure-subscription-id=$AZURE_ID \
-               --azure-subscription-cert=$AZURE_CERT \
-               --azure-size=$AZURE_SIZE $AZURE_HOST
+docker-machine \
+  -D create \
+  -d azure \
+  --azure-subscription-id=$AZURE_ID \
+  --azure-subscription-cert=$AZURE_CERT \
+  --azure-size=$AZURE_SIZE $AZURE_HOST
 </pre>
 </div>
 </div>
@@ -416,6 +426,7 @@ At the very least, we will need <code>unzip</code> on the Azure Docker host. The
 
 <pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">update and install packages</span>
 sudo apt-get -qq update
+sudo apt-get -qq upgrade
 sudo apt-get -qq install unzip tree
 </pre>
 </div>
@@ -532,14 +543,12 @@ git clone https://github.com/Unidata/TdsConfig /home/ubuntu/git/TdsConfig
 For anyone who has worked with the LDM, you may be familiar with the following directories:
 </p>
 
-
 <ul class="org-ul">
 <li><code>etc/</code></li>
 <li><code>var/data</code></li>
 <li><code>var/logs</code></li>
 <li><code>var/queue</code></li>
 </ul>
-
 
 <p>
 The LDM <code>etc</code> directory is where you will find configuration files related to the LDM including <code>ldmd.conf</code>, <code>pqact</code> files, <code>registry.xml</code>, and  <code>scour.conf</code>. We will need the ability to easily observe and manipulate the files from <b>outside</b> the running LDM container. To that end, we need to find a home for <code>etc</code> on the Docker host. The same is true for the <code>var/data</code> and <code>var/logs</code> directories. Later, we will use Docker commands that have been written on your behalf to mount these directories from <b>outside</b> to <b>within</b> the container. The <code>var/queues</code> directory will remain inside the container.
@@ -712,16 +721,21 @@ Let's see <b>some</b> of what is available in the <code>~/tdsconfig</code> direc
 
 <div class="org-src-container">
 
-<pre class="src src-sh">find ~/tdsconfig -type f -name <span style="color: #008000;">"*.xml"</span> | head -5
+<pre class="src src-sh">find ~/tdsconfig -name *.xml | awk <span style="color: #008000;">'BEGIN { FS = "/" } ; { print $NF }'</span> | head
 </pre>
 </div>
 
 <pre class="example">
-/home/ubuntu/tdsconfig/idd/forecastModels.xml
-/home/ubuntu/tdsconfig/idd/radars.xml
-/home/ubuntu/tdsconfig/idd/obsData.xml
-/home/ubuntu/tdsconfig/idd/forecastProdsAndAna.xml
-/home/ubuntu/tdsconfig/idd/satellite.xml
+forecastModels.xml
+radars.xml
+obsData.xml
+forecastProdsAndAna.xml
+satellite.xml
+CS039_L2_stations.xml
+CS039_stations.xml
+RadarNexradStations.xml
+RadarTerminalStations.xml
+RadarL2Stations.xml
 </pre>
 
 <p>
@@ -1302,8 +1316,8 @@ Finally,  you can enter this catalog URL in the IDV dashboard to examine data ho
 </div>
 </div>
 
-<div id="outline-container-orgheadline57" class="outline-2">
-<h2 id="orgheadline57"><span class="section-number-2">11</span> Appendix</h2>
+<div id="outline-container-orgheadline58" class="outline-2">
+<h2 id="orgheadline58"><span class="section-number-2">11</span> Appendix</h2>
 <div class="outline-text-2" id="text-11">
 </div><div id="outline-container-orgheadline56" class="outline-3">
 <h3 id="orgheadline56"><span class="section-number-3">11.1</span> Common Problems</h3>
@@ -1396,12 +1410,22 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 </div>
 </div>
 </div>
+<div id="outline-container-orgheadline57" class="outline-3">
+<h3 id="orgheadline57"><span class="section-number-3">11.2</span> Acknowledgments</h3>
+<div class="outline-text-3" id="text-11-2">
+<ul class="org-ul">
+<li>National Science Foundation (Grant NSF-1344155).</li>
+<li>Microsoft "Azure for Research" program</li>
+<li>Tom Yoksas for Unidata operations expertise</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-25 Fri&gt;</span></span></p>
-<p class="author">Author: Julien Chastang (UCAR, Unidata)</p>
-<p class="date">Created: 2015-12-26 Sat 10:33</p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-28 Mon&gt;</span></span></p>
+<p class="author">Author: Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms</p>
+<p class="date">Created: 2016-01-05 Tue 13:00</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
