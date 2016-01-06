@@ -3,6 +3,7 @@ set -x
 
 # update and install packages
 sudo apt-get -qq update
+sudo apt-get -qq upgrade
 sudo apt-get -qq install unzip tree
 
 # Add ubuntu to docker group

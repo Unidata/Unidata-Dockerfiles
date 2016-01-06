@@ -42,10 +42,12 @@ do
 done
 
 # Create Azure VM via docker-machine
-docker-machine -D create -d azure \
-               --azure-subscription-id=$AZURE_ID \
-               --azure-subscription-cert=$AZURE_CERT \
-               --azure-size=$AZURE_SIZE $AZURE_HOST
+docker-machine \
+  -D create \
+  -d azure \
+  --azure-subscription-id=$AZURE_ID \
+  --azure-subscription-cert=$AZURE_CERT \
+  --azure-size=$AZURE_SIZE $AZURE_HOST
 
 # Ensure docker commands will be run with new host
 eval "$(docker-machine env $AZURE_HOST)"
