@@ -117,6 +117,7 @@ defineImage http://www.cs.arizona.edu/camera/view.jpg {Tuscon, AZ} -ll {32.22694
 defineImage http://www.wrh.noaa.gov/images/fgz/webcam/camera1.jpg {Bellemont, AZ} -ll {35.24,-111.84}
 
 defineImage http://www.noao.edu/kpno/kpcam/lastim.jpg {Kitt Peak, AZ} -ll {31.9639671, -111.5998359}
+defineImage http://mtlemmon.com/cam/outside.jpg {Mount Lemmon, AZ} -ll {32.4430, -110.7885}
 
 defineImage http://www.eastmesaweather.com/cams/secam.jpg {Las Cruces, NM} -ll {32.3,-106.7}
 defineImage http://www.cloudcroftwebcam.com/camera2.jpg {Cloudcroft, NM} -ll {32.957313,-105.742485}
