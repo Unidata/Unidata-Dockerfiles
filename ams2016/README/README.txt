@@ -1,19 +1,20 @@
-             _____________________________________________
+   __________________________________________________________________
 
-                 AMS 2016: UNICLOUD, DOCKER AT UNIDATA
-              LDM, TDS, and RAMADDA on Microsoft Azure VM
+                                UNICLOUD
+                         Docker Use at Unidata
 
-                    Julien Chastang (UCAR, Unidata)
-             _____________________________________________
+    Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms
+   __________________________________________________________________
 
 
-                            <2015-12-25 Fri>
+                               2016-01-07
 
 
 Table of Contents
 _________________
 
-1 Preamble
+1 Introduction
+.. 1.1 Demonstration Servers
 2 Quick Start
 3 Long Form Instructions
 4 Preliminary Setup on Azure
@@ -62,13 +63,14 @@ _________________
 ..... 11.1.2 Size of VM is not Large Enough
 ..... 11.1.3 Where is my Data and the Finicky TDM
 ..... 11.1.4 Cannot connect to the Docker daemon
+.. 11.2 Acknowledgments
 
 
 
 
 
-1 Preamble
-==========
+1 Introduction
+==============
 
   This guide is a companion document [(available in HTML, Markdown,
   text, PDF)] to a 2016 American Meteorological Society oral
@@ -106,6 +108,19 @@ _________________
   https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016
 
 
+1.1 Demonstration Servers
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  An example of having followed these instructions can be found with
+  these [TDS] and [RAMADDA] demonstration servers running on the Azure
+  cloud.
+
+
+  [TDS] http://unidata-server.cloudapp.net/thredds/catalog.html
+
+  [RAMADDA] http://unidata-server.cloudapp.net:8081/repository
+
+
 2 Quick Start
 =============
 
@@ -123,16 +138,20 @@ _________________
   For example,
 
   ,----
-  | unicloud-1.sh --azure-host <azure-host> --azure-subscription-id "3.14" \
-  |               --azure-subscription-cert "/path/to/mycert.pem"
+  | unicloud-1.sh \
+  |   --azure-host <azure-host> \
+  |   --azure-subscription-id "3.14" \
+  |   --azure-subscription-cert \
+  |   "/path/to/mycert.pem"
   `----
 
   Now you are ready to do additional configuration on the new Docker
   host:
 
   ,----
-  | docker-machine ssh <azure-host> "bash -s" < \
-  |     Unidata-Dockerfiles/ams2016/unicloud-2.sh
+  | docker-machine \
+  |   ssh <azure-host> "bash -s" < \
+  |   Unidata-Dockerfiles/ams2016/unicloud-2.sh
   `----
 
   Finally,
@@ -190,10 +209,12 @@ _________________
 
   ,----
   | # Create Azure VM via docker-machine
-  | docker-machine -D create -d azure \
-  |                --azure-subscription-id=$AZURE_ID \
-  |                --azure-subscription-cert=$AZURE_CERT \
-  |                --azure-size=$AZURE_SIZE $AZURE_HOST
+  | docker-machine \
+  |   -D create \
+  |   -d azure \
+  |   --azure-subscription-id=$AZURE_ID \
+  |   --azure-subscription-cert=$AZURE_CERT \
+  |   --azure-size=$AZURE_SIZE $AZURE_HOST
   `----
 
 
@@ -254,6 +275,7 @@ _________________
   ,----
   | # update and install packages
   | sudo apt-get -qq update
+  | sudo apt-get -qq upgrade
   | sudo apt-get -qq install unzip tree
   `----
 
@@ -368,12 +390,10 @@ _________________
   For anyone who has worked with the LDM, you may be familiar with the
   following directories:
 
-
   - `etc/'
   - `var/data'
   - `var/logs'
   - `var/queue'
-
 
   The LDM `etc' directory is where you will find configuration files
   related to the LDM including `ldmd.conf', `pqact' files,
@@ -547,15 +567,20 @@ _________________
   Let's see *some* of what is available in the `~/tdsconfig' directory.
 
   ,----
-  | find ~/tdsconfig -type f -name "*.xml" | head -5
+  | find ~/tdsconfig -name *.xml | awk 'BEGIN { FS = "/" } ; { print $NF }' | head
   `----
 
   ,----
-  | /home/ubuntu/tdsconfig/idd/forecastModels.xml
-  | /home/ubuntu/tdsconfig/idd/radars.xml
-  | /home/ubuntu/tdsconfig/idd/obsData.xml
-  | /home/ubuntu/tdsconfig/idd/forecastProdsAndAna.xml
-  | /home/ubuntu/tdsconfig/idd/satellite.xml
+  | forecastModels.xml
+  | radars.xml
+  | obsData.xml
+  | forecastProdsAndAna.xml
+  | satellite.xml
+  | CS039_L2_stations.xml
+  | CS039_stations.xml
+  | RadarNexradStations.xml
+  | RadarTerminalStations.xml
+  | RadarL2Stations.xml
   `----
 
   For the purposes of the AMS demonstration, let's extract some catalog
@@ -1029,3 +1054,11 @@ _________________
   `----
 
   You may have simply forgotten to logout/login.
+
+
+11.2 Acknowledgments
+~~~~~~~~~~~~~~~~~~~~
+
+  - National Science Foundation (Grant NSF-1344155).
+  - Microsoft "Azure for Research" program
+  - Tom Yoksas for Unidata operations expertise

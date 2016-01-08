@@ -2,10 +2,12 @@
 #+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
 #+OPTIONS: num:t p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
 #+OPTIONS: title:t toc:t todo:t |:t
-#+TITLE: AMS 2016: UniCloud, Docker at Unidata
-#+SUBTITLE: LDM, TDS, and RAMADDA on Microsoft Azure VM
-#+DATE: <2015-12-25 Fri>
-#+AUTHOR: Julien Chastang (UCAR, Unidata)
+#+TITLE: UNICLOUD
+#+SUBTITLE: Docker Use at Unidata
+#+DATE: 2016-01-07
+#+DESCRIPTION: Docker Use at Unidata
+#+KEYWORDS:  RAMADDA TDS LDM Unidata Docker IDV
+#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms
 #+EMAIL: chastang@ucar.edu
 #+LANGUAGE: en
 #+SELECT_TAGS: export
@@ -13,8 +15,19 @@
 #+CREATOR: Emacs 24.5.1 (Org mode 8.3.2)
 
 # latex
-
 #+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [onecolumn,9pt]
+
+# two columns is quite challenging on account of all the code/unix commands
+# +LATEX_HEADER: \setlength\columnsep{0.25in}
+
+# latex margins
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+
+# latex header
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancyplain}
+#+LATEX_HEADER: \lhead{\textbf{13B.5}}
 
 # latex footnotes
 #+LATEX_HEADER: \usepackage{bigfoot}
@@ -23,10 +36,19 @@
 #+LATEX_HEADER: \setlength{\parindent}{0em}
 #+LATEX_HEADER: \interfootnotelinepenalty=10000
 
-
 # latex coloring links (does not work right now)
 #+LATEX_HEADER: \usepackage[hyperref,x11names]{xcolor}
 #+LATEX_HEADER: \hypersetup{colorlinks=true,urlcolor={blue!80!black},linkcolor={red!50!black}}
+
+# latex font
+#+LATEX_HEADER: \renewcommand{\familydefault}{\sfdefault} 
+#+LATEX_HEADER: \usepackage{helvet}
+
+# wrapping
+
+#+LATEX_HEADER: \usepackage{microtype}
+#+LATEX_HEADER: \usepackage[htt]{hyphenat}
+#+LATEX_HEADER: \sloppy
 
 #+SETUPFILE: theme-readtheorg.setup
 
@@ -49,7 +71,7 @@
     (when (eq major-mode 'org-mode)
         (progn
           (org-html-export-to-html)
-          (org-md-export-to-markdown)
+          (org-gfm-export-to-markdown)
           (org-latex-export-to-pdf)
           (org-ascii-export-to-ascii))))
 
@@ -86,9 +108,13 @@ Host <<myvm>>
               '((:dir . "/ubuntu@<<myvm>>:")))
 #+END_SRC
 
-* Preamble
+* Introduction
 
-This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README][(available in HTML, Markdown, text, PDF)]] to a 2016 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html][/UniCloud: Docker Use at Unidata/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], and [[http://sourceforge.net/projects/ramadda/][RAMADDA]] on a [[https://azure.microsoft.com][Microsoft Azure VM]]. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have ~sudo~ privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the [[https://github.com/Unidata/Unidata-Dockerfiles][=Unidata-Dockerfiles= repository]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016][AMS 2016 demonstrations  project]].
+This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README][(available in HTML, Markdown, text, PDF)]] to a 2016 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html][/UniCloud: Docker Use at Unidata/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], and [[http://sourceforge.net/projects/ramadda/][RAMADDA]] on a [[https://azure.microsoft.com][Microsoft Azure VM]]. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have ~sudo~ privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the [[https://github.com/Unidata/Unidata-Dockerfiles][=Unidata-Dockerfiles= repository]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016][AMS 2016 demonstrations  project]]. 
+
+** Demonstration Servers
+
+An example of having followed these instructions can be found with these [[http://unidata-server.cloudapp.net/thredds/catalog.html][TDS]] and [[http://unidata-server.cloudapp.net:8081/repository][RAMADDA]] demonstration servers running on the Azure cloud.
 
 * Quick Start
 
@@ -101,15 +127,19 @@ In order to best understand this configuration process, it is recommended to rea
 For example,
 
 #+BEGIN_SRC sh :eval no :exports code
-  unicloud-1.sh --azure-host <azure-host> --azure-subscription-id "3.14" \
-                --azure-subscription-cert "/path/to/mycert.pem"
+  unicloud-1.sh \
+    --azure-host <azure-host> \
+    --azure-subscription-id "3.14" \
+    --azure-subscription-cert \
+    "/path/to/mycert.pem"
 #+END_SRC
 
 Now you are ready to do additional configuration on the new Docker host:
 
 #+BEGIN_SRC sh :eval no :results none
-  docker-machine ssh <azure-host> "bash -s" < \
-      Unidata-Dockerfiles/ams2016/unicloud-2.sh
+  docker-machine \
+    ssh <azure-host> "bash -s" < \
+    Unidata-Dockerfiles/ams2016/unicloud-2.sh
 #+END_SRC
 
 Finally,
@@ -188,11 +218,13 @@ The following ~docker-machine~ command will create a Docker VM on Azure for runn
 
 #+BEGIN_SRC org :dir ~  :eval no :tangle ../unicloud-1.sh :exports code
 
-# Create Azure VM via docker-machine
-docker-machine -D create -d azure \
-               --azure-subscription-id=$AZURE_ID \
-               --azure-subscription-cert=$AZURE_CERT \
-               --azure-size=$AZURE_SIZE $AZURE_HOST
+  # Create Azure VM via docker-machine
+  docker-machine \
+    -D create \
+    -d azure \
+    --azure-subscription-id=$AZURE_ID \
+    --azure-subscription-cert=$AZURE_CERT \
+    --azure-size=$AZURE_SIZE $AZURE_HOST
 #+END_SRC
 
 ** Configure Unix Shell to Interact with New Azure VM
@@ -226,7 +258,7 @@ Mysteriously, when you ~ssh~ (see next section) into the fresh VM, you are immed
 
 ** ~ssh~ into VM with ~docker-machine~
 
-#+BEGIN_SRC sh :eval no :noweb yes 
+#+BEGIN_SRC sh :eval no 
   docker-machine ssh $AZURE_HOST
 #+END_SRC
 
@@ -245,6 +277,7 @@ At the very least, we will need ~unzip~ on the Azure Docker host. The Unix ~tree
 #+BEGIN_SRC sh  :eval no :exports code :tangle ../unicloud-2.sh 
   # update and install packages
   sudo apt-get -qq update
+  sudo apt-get -qq upgrade
   sudo apt-get -qq install unzip tree
 #+END_SRC
 
@@ -277,7 +310,7 @@ In Unix, when adding a user to a group, it is simply easiest to logout and log b
 ~docker-compose~ is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so ~docker-compose~ is perfect for this scenario. Install ~docker-compose~ on the Azure Docker host.
 
 #+BEGIN_SRC org :noweb yes :results append :exports results 
-  You may have to update version (currently at ~<<dcompose-version>>~).
+  You may have to update version (currently at <<dcompose-version>>=).
 #+END_SRC
 
  #+RESULTS:
@@ -330,16 +363,14 @@ With that background information out of the way, let's clone those repositories 
 
 For anyone who has worked with the LDM, you may be familiar with the following directories:
 
-
 - =etc/=
 - =var/data=
 - =var/logs=
 - =var/queue=
 
-
 The LDM =etc= directory is where you will find configuration files related to the LDM including =ldmd.conf=, =pqact= files, =registry.xml=, and  =scour.conf=. We will need the ability to easily observe and manipulate the files from *outside* the running LDM container. To that end, we need to find a home for =etc= on the Docker host. The same is true for the =var/data= and =var/logs= directories. Later, we will use Docker commands that have been written on your behalf to mount these directories from *outside* to *within* the container. The =var/queues= directory will remain inside the container.
 
-#+BEGIN_SRC sh  :results silent :tangle ../unicloud-2.sh
+#+BEGIN_SRC sh  :results silent :export code :tangle ../unicloud-2.sh
   # Create LDM directories
   mkdir -p ~/var/logs 
   mkdir -p ~/etc/TDS
@@ -450,15 +481,22 @@ The =catalog.xml= files for TDS configuration are contained within the =~/tdscon
 Let's see *some* of what is available in the =~/tdsconfig= directory.
 
 #+BEGIN_SRC sh :results verbatim :exports both 
-  find ~/tdsconfig -type f -name "*.xml" | head -5
+  find ~/tdsconfig -name *.xml | awk 'BEGIN { FS = "/" } ; { print $NF }' | head 
 #+END_SRC
 
 #+RESULTS:
-: /home/ubuntu/tdsconfig/idd/forecastModels.xml
-: /home/ubuntu/tdsconfig/idd/radars.xml
-: /home/ubuntu/tdsconfig/idd/obsData.xml
-: /home/ubuntu/tdsconfig/idd/forecastProdsAndAna.xml
-: /home/ubuntu/tdsconfig/idd/satellite.xml
+#+begin_example
+forecastModels.xml
+radars.xml
+obsData.xml
+forecastProdsAndAna.xml
+satellite.xml
+CS039_L2_stations.xml
+CS039_stations.xml
+RadarNexradStations.xml
+RadarTerminalStations.xml
+RadarL2Stations.xml
+#+end_example
 
 For the purposes of the AMS demonstration, let's extract some catalog =xml= files that are consistent with the rest of this configuration:
 
@@ -574,7 +612,7 @@ When the TDM communicates to the TDS concerning changes in data it observes with
 
 As we are approaching completion, let's ensure all files in =/home/ubuntu= are owned by the =ubuntu= user in the =docker= group.
 
-#+BEGIN_SRC sh :results silent :tangle ../unicloud-2.sh
+#+BEGIN_SRC sh :results silent :exports code :tangle ../unicloud-2.sh
   sudo chown -R ubuntu:docker /home/ubuntu
 #+END_SRC
 
@@ -794,3 +832,7 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 #+END_EXAMPLE
 
 [[prelim:dockergroup][You may have simply forgotten to logout/login.]]
+** Acknowledgments
+- National Science Foundation (Grant NSF-1344155).
+- Microsoft "Azure for Research" program
+- Tom Yoksas for Unidata operations expertise
