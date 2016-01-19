@@ -63,7 +63,8 @@ _________________
 ..... 11.1.2 Size of VM is not Large Enough
 ..... 11.1.3 Where is my Data and the Finicky TDM
 ..... 11.1.4 Cannot connect to the Docker daemon
-.. 11.2 Acknowledgments
+.. 11.2 Asking for Help
+.. 11.3 Acknowledgments
 
 
 
@@ -78,13 +79,13 @@ _________________
   configure the [LDM], [TDS], and [RAMADDA] on a [Microsoft Azure
   VM]. It assumes you have access to Azure resources though these
   instructions should be fairly similar on other cloud providers (e.g.,
-  Amazon). They also require familiarity with Unix, Docker, and Unidata
-  technology in general. You must have `sudo' privileges on the Azure
-  host which will hopefully be available you. You must be comfortable
-  entering commands at the Unix command line. We will be using Docker
-  images defined at the [`Unidata-Dockerfiles' repository] in addition
-  to a configuration specifically planned for an [AMS 2016
-  demonstrations project].
+  Amazon). These instructions also require familiarity with Unix,
+  Docker, and Unidata technology in general. You must have `sudo'
+  privileges on the Azure host which will hopefully be available
+  you. You must be comfortable entering commands at the Unix command
+  line. We will be using Docker images defined at the
+  [`Unidata-Dockerfiles' repository] in addition to a configuration
+  specifically planned for an [AMS 2016 demonstrations project].
 
 
   [(available in HTML, Markdown, text, PDF)]
@@ -618,20 +619,25 @@ _________________
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
   Let's first display the free disk space with the `df' command.
+
   ,----
   | df -H
   `----
 
-   Filesystem  Size  Used  Avail  Use%  Mounted                            on 
-   /dev/sda1   31G   2.0G  28G      7%  /                                     
-   none        4.1k     0  4.1k     0%  /sys/fs/cgroup                        
-   udev        7.4G   13k  7.4G     1%  /dev                                  
-   tmpfs       1.5G  394k  1.5G     1%  /run                                  
-   none        5.3M     0  5.3M     0%  /run/lock                             
-   none        7.4G     0  7.4G     0%  /run/shm                              
-   none        105M     0  105M     0%  /run/user                             
-   none        66k      0  66k      0%  /etc/network/interfaces.dynamic.d     
-   /dev/sdb1   640G   73M  607G     1%  /mnt                                  
+  --------------------------------------------------------------------------
+   Filesystem  Size  Used  Avail  Use%  Mounted on                          
+  --------------------------------------------------------------------------
+   udev        7.4G     0  7.4G     0%  /dev                                
+   tmpfs       1.5G   27M  1.5G     2%  /run                                
+   /dev/sda1   31G   6.6G  24G     22%  /                                   
+   tmpfs       7.4G  463k  7.4G     1%  /dev/shm                            
+   tmpfs       5.3M     0  5.3M     0%  /run/lock                           
+   tmpfs       7.4G     0  7.4G     0%  /sys/fs/cgroup                      
+   none        66k      0  66k      0%  /etc/network/interfaces.dynamic.d   
+   /dev/sdb1   640G  187G  421G    31%  /mnt                                
+   cgmfs       103k     0  103k     0%  /run/cgmanager/fs                   
+   tmpfs       1.5G     0  1.5G     0%  /run/user/1000                      
+  --------------------------------------------------------------------------
 
 
 6.2 Create `/data' Directory
@@ -700,7 +706,7 @@ _________________
 8 Tomcat Logging for TDS and RAMADDA
 ====================================
 
-  It is a good idea to mount Tomcat logging directories outside the
+  It is advisable to mount Tomcat logging directories outside the
   container so that they can be managed for both the TDS and RAMADDA.
 
   ,----
@@ -814,11 +820,15 @@ _________________
   | docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}"
   `----
 
-   CONTAINER     ID                      IMAGE  STATUS          
-   32bc33700a2e  unidata/ramadda:latest  Up         39  minutes 
-   478be88dfd7e  unidata/ldmtds:latest   Up         39  minutes 
-   7730dddc6060  unidata/tdm:latest      Up         39  minutes 
-   87f295e566bf  unidata/tds:latest      Up         39  minutes 
+  --------------------------------------------------------
+   CONTAINER ID  IMAGE                   STATUS           
+  --------------------------------------------------------
+   d192f310d3a6  unidata/mcidas          Up      10  days 
+   7615f31c5bf8  unidata/ramadda:latest  Up      13  days 
+   9dbd4e83f15b  unidata/ldmtds:latest   Up      13  days 
+   dbcd457abe75  unidata/tdm:latest      Up      13  days 
+   5a4a13b5671e  unidata/tds:latest      Up      12  days 
+  --------------------------------------------------------
 
 
 10.2 Checking Data Directory
@@ -1056,9 +1066,19 @@ _________________
   You may have simply forgotten to logout/login.
 
 
-11.2 Acknowledgments
+11.2 Asking for Help
 ~~~~~~~~~~~~~~~~~~~~
 
-  - National Science Foundation (Grant NSF-1344155).
+  For problems, help, questions, please submit an [issue on github].
+
+
+  [issue on github]
+  https://github.com/Unidata/Unidata-Dockerfiles/issues
+
+
+11.3 Acknowledgments
+~~~~~~~~~~~~~~~~~~~~
+
+  - National Science Foundation (Grant NSF-1344155)
   - Microsoft "Azure for Research" program
   - Tom Yoksas for Unidata operations expertise

@@ -1,4 +1,4 @@
-% Created 2016-01-07 Thu 21:46
+% Created 2016-01-20 Wed 10:32
 \documentclass[onecolumn,9pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -50,7 +50,7 @@
 \section{Introduction}
 \label{sec:orgheadline2}
 
-This guide is a companion document \href{https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README}{(available in HTML, Markdown, text, PDF)} to a 2016 American Meteorological Society oral presentation, \href{https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html}{\emph{UniCloud: Docker Use at Unidata}}. It describes how to configure the \href{http://www.unidata.ucar.edu/software/ldm/}{LDM}, \href{http://www.unidata.ucar.edu/software/thredds/current/tds/}{TDS}, and \href{http://sourceforge.net/projects/ramadda/}{RAMADDA} on a \href{https://azure.microsoft.com}{Microsoft Azure VM}. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have \texttt{sudo} privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the \href{https://github.com/Unidata/Unidata-Dockerfiles}{\texttt{Unidata-Dockerfiles} repository} in addition to a configuration specifically planned for an \href{https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016}{AMS 2016 demonstrations  project}. 
+This guide is a companion document \href{https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README}{(available in HTML, Markdown, text, PDF)} to a 2016 American Meteorological Society oral presentation, \href{https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html}{\emph{UniCloud: Docker Use at Unidata}}. It describes how to configure the \href{http://www.unidata.ucar.edu/software/ldm/}{LDM}, \href{http://www.unidata.ucar.edu/software/thredds/current/tds/}{TDS}, and \href{http://sourceforge.net/projects/ramadda/}{RAMADDA} on a \href{https://azure.microsoft.com}{Microsoft Azure VM}. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. You must have \texttt{sudo} privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the \href{https://github.com/Unidata/Unidata-Dockerfiles}{\texttt{Unidata-Dockerfiles} repository} in addition to a configuration specifically planned for an \href{https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016}{AMS 2016 demonstrations  project}. 
 
 \subsection{Demonstration Servers}
 \label{sec:orgheadline1}
@@ -188,7 +188,6 @@ sudo service docker restart
 
 
 In Unix, when adding a user to a group, it is simply easiest to logout and log back in for this change to be recognized. Do that by exiting the VM and logging back in with \texttt{docker-machine ssh} command.
-
 
 \subsection{Install \texttt{docker-compose} on VM}
 \label{sec:orgheadline12}
@@ -410,22 +409,27 @@ As alluded to earlier, we will have to set up data volumes so that the LDM can w
 \label{sec:orgheadline30}
 
 Let's first display the free disk space with the \texttt{df} command. 
+
 \begin{verbatim}
 df -H
 \end{verbatim}
 
 \begin{center}
 \begin{tabular}{llrllll}
-Filesystem & Size & Used & Avail & Use\% & Mounted & on\\
-/dev/sda1 & 31G & 2.0G & 28G & 7\% & / & \\
-none & 4.1k & 0 & 4.1k & 0\% & /sys/fs/cgroup & \\
-udev & 7.4G & 13k & 7.4G & 1\% & /dev & \\
-tmpfs & 1.5G & 394k & 1.5G & 1\% & /run & \\
-none & 5.3M & 0 & 5.3M & 0\% & /run/lock & \\
-none & 7.4G & 0 & 7.4G & 0\% & /run/shm & \\
-none & 105M & 0 & 105M & 0\% & /run/user & \\
+\hline
+Filesystem & Size & Used & Avail & Use\% & Mounted on & \\
+\hline
+udev & 7.4G & 0 & 7.4G & 0\% & /dev & \\
+tmpfs & 1.5G & 27M & 1.5G & 2\% & /run & \\
+/dev/sda1 & 31G & 6.6G & 24G & 22\% & / & \\
+tmpfs & 7.4G & 463k & 7.4G & 1\% & /dev/shm & \\
+tmpfs & 5.3M & 0 & 5.3M & 0\% & /run/lock & \\
+tmpfs & 7.4G & 0 & 7.4G & 0\% & /sys/fs/cgroup & \\
 none & 66k & 0 & 66k & 0\% & /etc/network/interfaces.dynamic.d & \\
-/dev/sdb1 & 640G & 73M & 607G & 1\% & /mnt & \\
+/dev/sdb1 & 640G & 187G & 421G & 31\% & /mnt & \\
+cgmfs & 103k & 0 & 103k & 0\% & /run/cgmanager/fs & \\
+tmpfs & 1.5G & 0 & 1.5G & 0\% & /run/user/1000 & \\
+\hline
 \end{tabular}
 \end{center}
 
@@ -478,7 +482,7 @@ The ADDE port \texttt{112} is for future use since we have not dockerized ADDE, 
 \section{Tomcat Logging for TDS and RAMADDA}
 \label{sec:orgheadline36}
 
-It is a good idea to mount Tomcat logging directories outside the container so that they can be managed for both the TDS and RAMADDA.
+It is advisable to mount Tomcat logging directories outside the container so that they can be managed for both the TDS and RAMADDA.
 
 \begin{verbatim}
 # Create Tomcat logging directories
@@ -565,11 +569,15 @@ docker ps --format "table {{.ID}}\t{{.Image}}\t{{.Status}}"
 
 \begin{center}
 \begin{tabular}{lllrl}
-CONTAINER & ID & IMAGE & STATUS & \\
-32bc33700a2e & unidata/ramadda:latest & Up & 39 & minutes\\
-478be88dfd7e & unidata/ldmtds:latest & Up & 39 & minutes\\
-7730dddc6060 & unidata/tdm:latest & Up & 39 & minutes\\
-87f295e566bf & unidata/tds:latest & Up & 39 & minutes\\
+\hline
+CONTAINER ID & IMAGE & STATUS &  & \\
+\hline
+d192f310d3a6 & unidata/mcidas & Up & 10 & days\\
+7615f31c5bf8 & unidata/ramadda:latest & Up & 13 & days\\
+9dbd4e83f15b & unidata/ldmtds:latest & Up & 13 & days\\
+dbcd457abe75 & unidata/tdm:latest & Up & 13 & days\\
+5a4a13b5671e & unidata/tds:latest & Up & 12 & days\\
+\hline
 \end{tabular}
 \end{center}
 
@@ -669,7 +677,7 @@ Finally,  you can enter this catalog URL in the IDV dashboard to examine data ho
 \end{enumerate}
 
 \section{Appendix}
-\label{sec:orgheadline59}
+\label{sec:orgheadline60}
 \subsection{Common Problems}
 \label{sec:orgheadline57}
 \subsubsection{\label{orgtarget5}Certificate Regeneration}
@@ -731,10 +739,13 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 \end{verbatim}
 
 \hyperref[orgtarget6]{You may have simply forgotten to logout/login.}
-\subsection{Acknowledgments}
+\subsection{Asking for Help}
 \label{sec:orgheadline58}
+For problems, help, questions, please submit an \href{https://github.com/Unidata/Unidata-Dockerfiles/issues}{issue on github}.
+\subsection{Acknowledgments}
+\label{sec:orgheadline59}
 \begin{itemize}
-\item National Science Foundation (Grant NSF-1344155).
+\item National Science Foundation (Grant NSF-1344155)
 \item Microsoft "Azure for Research" program
 \item Tom Yoksas for Unidata operations expertise
 \end{itemize}
