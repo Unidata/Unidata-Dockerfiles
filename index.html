@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-01-07 Thu 21:46 -->
+<!-- 2016-01-20 Wed 10:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>UNICLOUD</title>
@@ -241,7 +241,7 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgheadline59">11. Appendix</a>
+<li><a href="#orgheadline60">11. Appendix</a>
 <ul>
 <li><a href="#orgheadline57">11.1. Common Problems</a>
 <ul>
@@ -251,7 +251,8 @@ for the JavaScript code in this tag.
 <li><a href="#orgheadline56">11.1.4. Cannot connect to the Docker daemon</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline58">11.2. Acknowledgments</a></li>
+<li><a href="#orgheadline58">11.2. Asking for Help</a></li>
+<li><a href="#orgheadline59">11.3. Acknowledgments</a></li>
 </ul>
 </li>
 </ul>
@@ -262,7 +263,7 @@ for the JavaScript code in this tag.
 <h2 id="orgheadline2"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This guide is a companion document <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README">(available in HTML, Markdown, text, PDF)</a> to a 2016 American Meteorological Society oral presentation, <a href="https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html"><i>UniCloud: Docker Use at Unidata</i></a>. It describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a> on a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a>. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). They also require familiarity with Unix, Docker, and Unidata technology in general. You must have <code>sudo</code> privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles"><code>Unidata-Dockerfiles</code> repository</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>. 
+This guide is a companion document <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README">(available in HTML, Markdown, text, PDF)</a> to a 2016 American Meteorological Society oral presentation, <a href="https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html"><i>UniCloud: Docker Use at Unidata</i></a>. It describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, and <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a> on a <a href="https://azure.microsoft.com/">Microsoft Azure VM</a>. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. You must have <code>sudo</code> privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the <a href="https://github.com/Unidata/Unidata-Dockerfiles"><code>Unidata-Dockerfiles</code> repository</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016">AMS 2016 demonstrations  project</a>. 
 </p>
 </div>
 
@@ -465,7 +466,6 @@ In Unix, when adding a user to a group, it is simply easiest to logout and log b
 </p>
 </div>
 </div>
-
 
 <div id="outline-container-orgheadline12" class="outline-3">
 <h3 id="orgheadline12"><span class="section-number-3">4.8</span> Install <code>docker-compose</code> on VM</h3>
@@ -780,6 +780,7 @@ As alluded to earlier, we will have to set up data volumes so that the LDM can w
 <p>
 Let's first display the free disk space with the <code>df</code> command. 
 </p>
+
 <div class="org-src-container">
 
 <pre class="src src-sh" id="orgsrcblock1">df -H
@@ -804,43 +805,24 @@ Let's first display the free disk space with the <code>df</code> command.
 
 <col  class="org-left" />
 </colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Filesystem</th>
+<th scope="col" class="org-left">Size</th>
+<th scope="col" class="org-right">Used</th>
+<th scope="col" class="org-left">Avail</th>
+<th scope="col" class="org-right">Use%</th>
+<th scope="col" class="org-left">Mounted on</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
 <tbody>
-<tr>
-<td class="org-left">Filesystem</td>
-<td class="org-left">Size</td>
-<td class="org-right">Used</td>
-<td class="org-left">Avail</td>
-<td class="org-right">Use%</td>
-<td class="org-left">Mounted</td>
-<td class="org-left">on</td>
-</tr>
-
-<tr>
-<td class="org-left">/dev/sda1</td>
-<td class="org-left">31G</td>
-<td class="org-right">2.0G</td>
-<td class="org-left">28G</td>
-<td class="org-right">7%</td>
-<td class="org-left">/</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">none</td>
-<td class="org-left">4.1k</td>
-<td class="org-right">0</td>
-<td class="org-left">4.1k</td>
-<td class="org-right">0%</td>
-<td class="org-left">/sys/fs/cgroup</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
 <tr>
 <td class="org-left">udev</td>
 <td class="org-left">7.4G</td>
-<td class="org-right">13k</td>
+<td class="org-right">0</td>
 <td class="org-left">7.4G</td>
-<td class="org-right">1%</td>
+<td class="org-right">0%</td>
 <td class="org-left">/dev</td>
 <td class="org-left">&#xa0;</td>
 </tr>
@@ -848,15 +830,35 @@ Let's first display the free disk space with the <code>df</code> command.
 <tr>
 <td class="org-left">tmpfs</td>
 <td class="org-left">1.5G</td>
-<td class="org-right">394k</td>
+<td class="org-right">27M</td>
 <td class="org-left">1.5G</td>
-<td class="org-right">1%</td>
+<td class="org-right">2%</td>
 <td class="org-left">/run</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
 <tr>
-<td class="org-left">none</td>
+<td class="org-left">/dev/sda1</td>
+<td class="org-left">31G</td>
+<td class="org-right">6.6G</td>
+<td class="org-left">24G</td>
+<td class="org-right">22%</td>
+<td class="org-left">/</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tmpfs</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">463k</td>
+<td class="org-left">7.4G</td>
+<td class="org-right">1%</td>
+<td class="org-left">/dev/shm</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tmpfs</td>
 <td class="org-left">5.3M</td>
 <td class="org-right">0</td>
 <td class="org-left">5.3M</td>
@@ -866,22 +868,12 @@ Let's first display the free disk space with the <code>df</code> command.
 </tr>
 
 <tr>
-<td class="org-left">none</td>
+<td class="org-left">tmpfs</td>
 <td class="org-left">7.4G</td>
 <td class="org-right">0</td>
 <td class="org-left">7.4G</td>
 <td class="org-right">0%</td>
-<td class="org-left">/run/shm</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left">none</td>
-<td class="org-left">105M</td>
-<td class="org-right">0</td>
-<td class="org-left">105M</td>
-<td class="org-right">0%</td>
-<td class="org-left">/run/user</td>
+<td class="org-left">/sys/fs/cgroup</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 
@@ -898,10 +890,30 @@ Let's first display the free disk space with the <code>df</code> command.
 <tr>
 <td class="org-left">/dev/sdb1</td>
 <td class="org-left">640G</td>
-<td class="org-right">73M</td>
-<td class="org-left">607G</td>
-<td class="org-right">1%</td>
+<td class="org-right">187G</td>
+<td class="org-left">421G</td>
+<td class="org-right">31%</td>
 <td class="org-left">/mnt</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">cgmfs</td>
+<td class="org-left">103k</td>
+<td class="org-right">0</td>
+<td class="org-left">103k</td>
+<td class="org-right">0%</td>
+<td class="org-left">/run/cgmanager/fs</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tmpfs</td>
+<td class="org-left">1.5G</td>
+<td class="org-right">0</td>
+<td class="org-left">1.5G</td>
+<td class="org-right">0%</td>
+<td class="org-left">/run/user/1000</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
@@ -1012,7 +1024,7 @@ The ADDE port <code>112</code> is for future use since we have not dockerized AD
 <h2 id="orgheadline36"><span class="section-number-2">8</span> Tomcat Logging for TDS and RAMADDA</h2>
 <div class="outline-text-2" id="text-8">
 <p>
-It is a good idea to mount Tomcat logging directories outside the container so that they can be managed for both the TDS and RAMADDA.
+It is advisable to mount Tomcat logging directories outside the container so that they can be managed for both the TDS and RAMADDA.
 </p>
 
 <div class="org-src-container">
@@ -1157,45 +1169,54 @@ From the shell where you started <code>docker-machine</code> earlier you can exe
 
 <col  class="org-left" />
 </colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">CONTAINER ID</th>
+<th scope="col" class="org-left">IMAGE</th>
+<th scope="col" class="org-left">STATUS</th>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">&#xa0;</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="org-left">CONTAINER</td>
-<td class="org-left">ID</td>
-<td class="org-left">IMAGE</td>
-<td class="org-right">STATUS</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">d192f310d3a6</td>
+<td class="org-left">unidata/mcidas</td>
+<td class="org-left">Up</td>
+<td class="org-right">10</td>
+<td class="org-left">days</td>
 </tr>
 
 <tr>
-<td class="org-left">32bc33700a2e</td>
+<td class="org-left">7615f31c5bf8</td>
 <td class="org-left">unidata/ramadda:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">39</td>
-<td class="org-left">minutes</td>
+<td class="org-right">13</td>
+<td class="org-left">days</td>
 </tr>
 
 <tr>
-<td class="org-left">478be88dfd7e</td>
+<td class="org-left">9dbd4e83f15b</td>
 <td class="org-left">unidata/ldmtds:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">39</td>
-<td class="org-left">minutes</td>
+<td class="org-right">13</td>
+<td class="org-left">days</td>
 </tr>
 
 <tr>
-<td class="org-left">7730dddc6060</td>
+<td class="org-left">dbcd457abe75</td>
 <td class="org-left">unidata/tdm:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">39</td>
-<td class="org-left">minutes</td>
+<td class="org-right">13</td>
+<td class="org-left">days</td>
 </tr>
 
 <tr>
-<td class="org-left">87f295e566bf</td>
+<td class="org-left">5a4a13b5671e</td>
 <td class="org-left">unidata/tds:latest</td>
 <td class="org-left">Up</td>
-<td class="org-right">39</td>
-<td class="org-left">minutes</td>
+<td class="org-right">12</td>
+<td class="org-left">days</td>
 </tr>
 </tbody>
 </table>
@@ -1329,8 +1350,8 @@ Finally,  you can enter this catalog URL in the IDV dashboard to examine data ho
 </div>
 </div>
 
-<div id="outline-container-orgheadline59" class="outline-2">
-<h2 id="orgheadline59"><span class="section-number-2">11</span> Appendix</h2>
+<div id="outline-container-orgheadline60" class="outline-2">
+<h2 id="orgheadline60"><span class="section-number-2">11</span> Appendix</h2>
 <div class="outline-text-2" id="text-11">
 </div><div id="outline-container-orgheadline57" class="outline-3">
 <h3 id="orgheadline57"><span class="section-number-3">11.1</span> Common Problems</h3>
@@ -1424,10 +1445,18 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 </div>
 </div>
 <div id="outline-container-orgheadline58" class="outline-3">
-<h3 id="orgheadline58"><span class="section-number-3">11.2</span> Acknowledgments</h3>
+<h3 id="orgheadline58"><span class="section-number-3">11.2</span> Asking for Help</h3>
 <div class="outline-text-3" id="text-11-2">
+<p>
+For problems, help, questions, please submit an <a href="https://github.com/Unidata/Unidata-Dockerfiles/issues">issue on github</a>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline59" class="outline-3">
+<h3 id="orgheadline59"><span class="section-number-3">11.3</span> Acknowledgments</h3>
+<div class="outline-text-3" id="text-11-3">
 <ul class="org-ul">
-<li>National Science Foundation (Grant NSF-1344155).</li>
+<li>National Science Foundation (Grant NSF-1344155)</li>
 <li>Microsoft "Azure for Research" program</li>
 <li>Tom Yoksas for Unidata operations expertise</li>
 </ul>
@@ -1438,7 +1467,7 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 <div id="postamble" class="status">
 <p class="date">Date: 2016-01-07</p>
 <p class="author">Author: Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms</p>
-<p class="date">Created: 2016-01-07 Thu 21:46</p>
+<p class="date">Created: 2016-01-20 Wed 10:32</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
