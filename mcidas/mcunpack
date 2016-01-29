@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Check to see if McINST_ROOT is defined to be a valid directory
+#-------
+# Check that $McINST_ROOT directories are okay, and create
+# them if necessary.
+#
+# NOTE: The "src" directory is for backward compatibility,
+# and is currently used only by the HELP command.
+#-------
+ 
+if [ -d "$McINST_ROOT" ]
+then
+	echo ""
+	echo Making installation directories if needed...
+	echo ""
+
+	exit=0
+	for v in    \
+		$McINST_ROOT/admin		\
+		$McINST_ROOT/bin		\
+		$McINST_ROOT/data		\
+		$McINST_ROOT/data/tutorial	\
+		$McINST_ROOT/etc 		\
+		$McINST_ROOT/help		\
+		$McINST_ROOT/inc		\
+		$McINST_ROOT/lib		\
+		$McINST_ROOT/lib/gui		\
+		$McINST_ROOT/man		\
+		$McINST_ROOT/man/man3		\
+		$McINST_ROOT/mcidas		\
+		$McINST_ROOT/mcidas/data	\
+		$McINST_ROOT/savedata		\
+		$McINST_ROOT/tcl		\
+		$McINST_ROOT/workdata
+
+	do
+	if  [ ! -d "$v" ]
+	then    echo "$0: making directory $v"
+		if  mkdir $v
+		then    :
+		else    echo "$0: ERROR in making directory $v"
+			exit=1
+		fi
+	fi
+	done
+	case $exit in
+		1)  echo "$0: Cannot make required directories."
+		exit $exit
+		;;
+	esac
+else
+	echo "     You must define McINST_ROOT as the full pathname of an"
+	echo "     existing directory where you intend to install Unidata"
+	echo "     McIDAS-X Version v2015 first. The standard location is"
+        echo "     /home/mcidas."
+	echo ""
+    echo "     Please define McINST_ROOT and try again..."
+    exit 1
+fi
+
+# Extract all the files from the tar file, they will be put in the 
+# necessary directory
+
+echo ""
+echo "Extracting distribution from compressed tar file..."
+
+gunzip -c mcidasx2015.tar.gz | tar -xvf -
+
+echo ""
+echo "Extraction complete..."
+echo ""
+
+echo ""
+echo "-----------------------------------------------------------------"
+echo ""
+echo "  To build Unidata McIDAS-X v2015 you should now:"
+echo ""
+echo "  1) review the McIDAS-X installation documents at:"
+echo ""
+echo "    http://www.unidata.ucar.edu/content/software/mcidas/2015/users_guide/toc.html"
+echo ""
+echo "    before building executables"
+echo ""
+echo "  2) cd mcidas2015/src"
+echo ""
+echo "    To build only the McIDAS-X package do the following:"
+echo ""
+echo "    type:   'make mcx' "
+echo ""
+echo "    To build the McIDAS-X and -XCD packages do the following:"
+echo ""
+echo "    type:   'make mcx' "
+echo "    type:   'make xcd'   (McIDAS-XCD must be built AFTER McIDAS-X)"
+echo ""
+echo "    ** OR **"
+echo ""
+echo "    type:   'make all' "
+echo ""
+echo "  3) after verifying the functionality of the McIDAS distribution (see"
+echo "    http://www.unidata.ucar.edu/content/software/mcidas/2015/users_guide/toc.html)"
+echo ""
+echo "    type:   'make install.mcx'  to install the McIDAS-X   package"
+echo "    type:   'make install.xcd'  to install the McIDAS-XCD package"
+echo ""
+echo "    OR"
+echo ""
+echo "    type:   'make install.all'  to install both McIDAS-X and -XCD"
+echo ""
+echo "  4) configure your McIDAS-X installation.  For instructions, please"
+echo "     review the installation section of:"
+echo ""
+echo "    http://www.unidata.ucar.edu/content/software/mcidas/2015/users_guide/toc.html"
+echo ""
+echo "  NOTE: Leave the McIDAS-X/-XCD build in the mcidas2015/src directory."
+echo "        This will allow you to update routines without having to"
+echo "        rebuild the entire distribution as bugfixes and additions"
+echo "        are made available."
+echo ""
+echo "-----------------------------------------------------------------"

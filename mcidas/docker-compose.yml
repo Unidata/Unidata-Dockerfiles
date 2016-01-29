@@ -1,0 +1,13 @@
+###
+# McIDAS
+###
+mcidas:
+  image: unidata/mcidas
+  volumes:
+    # Directories outside of the container that need to be accessible
+   - ~/upcworkdata/:/home/mcidas/upcworkdata/
+   - ~/util/:/home/mcidas/util/
+   - ~/decoders/:/home/mcidas/decoders/
+   - /data/ldm/pub:/data/ldm/pub/
+  ports:
+   - "112:112"

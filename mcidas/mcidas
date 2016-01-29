@@ -1,0 +1,12 @@
+#mcidas (port 112)
+service mcidas
+{
+        flags           = REUSE
+        socket_type     = stream
+        protocol        = tcp
+        wait            = no
+        user            = mcidas
+        port            = 112
+        server          = /home/mcidas/bin/mcservsh
+        server_args     = -H /home/mcidas
+}

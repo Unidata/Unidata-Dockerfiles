@@ -1,0 +1,94 @@
+###
+# McIDAS base dockerfile
+###
+
+FROM centos:6.7
+
+###
+# Update the OS and install needed packages
+###
+
+RUN yum update yum
+
+RUN yum -y install which gcc gcc-gfortran gcc-c++ \
+           byacc flex ncurses-devel libXt-devel libXext-devel \
+           gzip make ed sudo tar xinetd
+
+###
+# Set up the mcidas user account
+###
+
+RUN useradd -m -s /bin/bash mcidas
+RUN echo "mcidas ALL=NOPASSWD: ALL" >> /etc/sudoers
+RUN echo 'mcidas:docker' | chpasswd
+
+###
+# So xinetd can run as user mcidas
+###
+
+RUN chmod +s /usr/sbin/xinetd
+
+##
+# Make mcidas directories owned by mcidas
+##
+
+RUN chown -R mcidas:mcidas /home/mcidas
+
+##
+# Setup xinetd entry for ADDE
+#
+# Comment: Ordinarily, 'root' would run the 'mcinet2015.sh'
+#          script from /home/mcidas.  The problem is that
+#          'xinetd' needs to be running before 'mcinet2015.sh'
+#          is run, and 'xinetd' is not run until the container
+#          is created/run.
+##
+
+COPY mcidas /etc/xinetd.d
+COPY hosts.allow /etc
+
+##
+# Create what will eventually be the mount point for LDM-ingested
+# data files
+##
+
+RUN mkdir -p /data/ldm/pub
+RUN mkdir -p /home/mcidas/upcworkdata
+RUN chmod 777 /home/mcidas/upcworkdata
+RUN mkdir -p /home/mcidas/decoders
+RUN chmod 777 /home/mcidas/decoders
+RUN mkdir -p /home/mcidas/util
+RUN chmod 777 /home/mcidas/util
+
+##
+# Make sure that the ADDE port (112) is fully exposed
+##
+
+EXPOSE 112
+
+##
+# Everything from this point on will be done as 'mcidas'
+##
+
+USER mcidas
+
+# Copy in the needed McIDAS distribution files
+
+COPY mcidasx2015.tar.gz /home/mcidas
+COPY mcunpack /home/mcidas
+COPY mcinet2015.sh /home/mcidas
+COPY buildadde.sh /home/mcidas
+
+##
+# Do everything needed to build, install, configure and
+# clean-up the ADDE component of Unidata McIDAS-X/XCD
+#
+##
+
+RUN /home/mcidas/buildadde.sh
+
+##
+# Execute xinetd in the runtime environment
+##
+
+CMD ["/usr/sbin/xinetd", "-dontfork"]
