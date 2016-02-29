@@ -158,8 +158,8 @@ Finally,
 
 - ~ssh~ into new Docker host with  ~docker-machine ssh <azure-host>~
 - [[config:registry][Edit =registry.xml=]] with the correct =hostname= element
-- [[starting:dc][Edit =~git/Unidata-Dockerfiles/ams2016/docker-compose.yml=]] with the correct =TDM_PW= and =TDS_HOST=.
-- Run =~/git/Unidata-Dockerfiles/ams2016/unicloud-3.sh=
+- [[starting:dc][Edit =~/git/Unidata-Dockerfiles/ams2016/docker-compose.yml=]] with the correct =TDM_PW= and =TDS_HOST=.
+- Run =~/git/Unidata-Dockerfiles/ams2016/unicloud-3.sh= on Docker host.
 - [[check][Check]] your setup
 
 * Long Form Instructions
@@ -315,7 +315,7 @@ In Unix, when adding a user to a group, it is simply easiest to logout and log b
 ** Install ~docker-compose~ on VM
 
 #+BEGIN_SRC org :noweb-ref dcompose-version :exports none 
-  1.5.2
+  1.6.2
 #+END_SRC
 
 ~docker-compose~ is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so ~docker-compose~ is perfect for this scenario. Install ~docker-compose~ on the Azure Docker host.
