@@ -853,6 +853,49 @@ Cannot connect to the Docker daemon. Is the docker daemon running on this host?
 #+END_EXAMPLE
 
 [[prelim:dockergroup][You may have simply forgotten to logout/login.]]
+** Production Server Considerations
+*** Regular Maintenance of the VM Docker Host
+
+In order to run these containers on a production server, you will have to ensure the VM remains up-to-date with operating system and security updates. On a time schedule, you will want to issue these commands:
+
+#+BEGIN_SRC sh :eval no :exports code
+  sudo apt-get update        # Fetches the list of available updates
+  sudo apt-get upgrade       # Strictly upgrades the current packages
+  sudo apt-get dist-upgrade  # Installs updates (new ones)
+#+END_SRC
+
+After the update completes, you will want to [[prelim:restart][restart]] the VM.
+
+Caveat: You may run into problems during this process. Rather than spending a unknown quantity of time getting to the bottom of the problem, remember the concept of the throwaway VM, by deleting your VM and starting over.
+
+*** =TDSConfig= and =Unidata-Dockerfiles= project updates
+
+These projects are actively maintained and, as such, the git repositories will have
+to be periodically updated.
+
+#+BEGIN_SRC sh :eval no :exports code
+cd /home/ubuntu/git/TdsConfig && git pull
+cd /home/ubuntu/git/Unidata-Dockerfiles && git pull
+#+END_SRC
+
+After issuing these commands you can [[appendix:tdm][restart your containers]].
+
+*** docker-compose and ~restart: always~
+
+If you wish to have your docker containers automatically restart, you can add ~restart: always~ as an attribute to the containers described in the ~docker-compose.yml~ file. For example:
+
+#+BEGIN_SRC yaml :eval no :exports code
+  ldm:
+    restart: always
+    image: unidata/ldmtds:latest
+    volumes:
+      - ~/etc/:/home/ldm/etc/
+      - /data/ldm/:/home/ldm/var/data/
+      - ~/var/logs/:/home/ldm/var/logs/
+    ports:
+      - "388:388"
+#+END_SRC
+
 ** Asking for Help
 For problems, help, questions, please submit an [[https://github.com/Unidata/Unidata-Dockerfiles/issues][issue on github]].
 ** Acknowledgments
