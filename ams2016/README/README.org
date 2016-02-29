@@ -160,6 +160,7 @@ Finally,
 - [[config:registry][Edit =registry.xml=]] with the correct =hostname= element
 - [[starting:dc][Edit =~/git/Unidata-Dockerfiles/ams2016/docker-compose.yml=]] with the correct =TDM_PW= and =TDS_HOST=.
 - Run =~/git/Unidata-Dockerfiles/ams2016/unicloud-3.sh= on Docker host.
+- [[ports][Open ports]] 80 8080 8081 8443 388 112
 - [[check][Check]] your setup
 
 * Long Form Instructions
