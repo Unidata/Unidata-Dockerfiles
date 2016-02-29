@@ -250,7 +250,7 @@ Execute the following ~eval~ command on your local computer shell environment to
 
 If you see an error message pertaining to ~docker-machine regenerate-certs~, see the [[appendix:certs][Certificate Regeneration section of the Appendix]].
 
-** Restart Azure VM
+** <<prelim:restart>>Restart Azure VM
 
 Mysteriously, when you ~ssh~ (see next section) into the fresh VM, you are immediately told to restart it so let's preempt that message by doing that now.
 
@@ -562,7 +562,7 @@ Create a =/data= directory where the LDM can write data soft link to the =/mnt= 
 
 These directories will be used by the LDM, TDS, and RAMADDA docker containers when we mount directories from the Docker host into these containers.
 
-* Opening Ports 
+* <<ports>>Opening Ports 
 
 [[https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-set-up-endpoints/][Ensure these ports are open]] on the VM where these containers will run.
 
