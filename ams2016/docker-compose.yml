@@ -2,6 +2,7 @@
 # LDM
 ###
 ldm:
+  restart: always
   image: unidata/ldmtds:latest
   volumes:
     - ~/etc/:/home/ldm/etc/
@@ -15,6 +16,7 @@ ldm:
 ###
 
 tdm:
+  restart: always
   image: unidata/tdm:latest
   volumes:
     - /data/:/data/
@@ -30,6 +32,7 @@ tdm:
 ###
   
 tds:
+  restart: always
   image: unidata/tds:latest
   volumes:
     - /data/:/data/
@@ -51,6 +54,7 @@ tds:
 ###
 
 ramadda:
+  restart: always
   image: unidata/ramadda:latest
   volumes:
     - /home/ubuntu/repository/:/data/repository/
