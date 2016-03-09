@@ -6,7 +6,7 @@
 #+SUBTITLE: Docker Use at Unidata
 #+DATE: 2016-01-07
 #+DESCRIPTION: Docker Use at Unidata
-#+KEYWORDS:  RAMADDA TDS LDM Unidata Docker IDV
+#+KEYWORDS:  RAMADDA TDS LDM ADDE Unidata Docker IDV
 #+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA) , Ward Fisher, Sean Arms
 #+EMAIL: chastang@ucar.edu
 #+LANGUAGE: en
@@ -123,6 +123,10 @@ Host <<myvm>>
 * Introduction
 
 This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016/README][(available in HTML, Markdown, text, PDF)]] to a 2016 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/96Annual/webprogram/Paper287336.html][/UniCloud: Docker Use at Unidata/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], and [[http://sourceforge.net/projects/ramadda/][RAMADDA]] on a [[https://azure.microsoft.com][Microsoft Azure VM]]. It assumes you have access to Azure resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. You must have ~sudo~ privileges on the Azure host which will hopefully be available you. You must be comfortable entering commands at the Unix command line. We will be using Docker images defined at the [[https://github.com/Unidata/Unidata-Dockerfiles][=Unidata-Dockerfiles= repository]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/ams2016][AMS 2016 demonstrations  project]]. 
+
+** Note about McIDAS ADDE
+
+This document will also guide you through setting up an McIDAS ADDE server. ADDE, however, has licensing issues that do not allow us to distribute the software via the DockerHub registry. Contact ~support-mcidas@unidata.ucar.edu~ for more information.
 
 ** Demonstration Servers
 
@@ -341,10 +345,10 @@ docker-compose-`uname -s`-`uname -m` > docker-compose
 :RESULTS:
 :END:
  
-* LDM and TDS Configuration
+* LDM, TDS and ADDE Configuration
 ** Background
 
-We have done the preliminary legwork to tackle the next step in this process. We will now want to clone two repositories that will allow us to configure and start running the the LDM, TDS, and RAMADDA. In particular, we will be cloning:
+We have done the preliminary legwork to tackle the next step in this process. We will now want to clone two repositories that will allow us to configure and start running the the LDM, TDS, ADDE, and RAMADDA. In particular, we will be cloning:
 
   - [[https://github.com/Unidata/Unidata-Dockerfiles][=github.com/Unidata/Unidata-Dockerfiles=]]  
   - [[https://github.com/Unidata/TdsConfig][=github.com/Unidata/TdsConfig=]] 
@@ -416,6 +420,7 @@ The rest of the LDM configuration files will come from our =ams2016= project dir
   - [[http://www.nco.ncep.noaa.gov/pmb/products/gfs/][GFS One Degree]]
   - [[http://www.nesdis.noaa.gov/imagery_data.html][NESDIS GOES Satellite Data]]
   - Unidata NEXRAD Composites
+  - TODO
 \\
 For your information, and for future reference, there is a =~/git/TdConfig/idd/pqacts/README.txt= file that may be helpful in writing a suitable =ldmd.conf= file.
 
@@ -481,6 +486,12 @@ We can achieve this change with a bit of ~sed~:
       ~/etc/TDS/util/ldmfile.sh
 #+END_SRC
 
+Also ensure that =ldmfile.sh= is executable.
+
+#+BEGIN_SRC sh :results silent :exports code :tangle ../unicloud-2.sh
+  chmod +x ~/etc/TDS/util/ldmfile.sh
+#+END_SRC
+
 *** Upstream Data Feed from Unidata or Elsewhere
 
 The LDM operates on a push data model. You will have to find an institution who will agree to push you the data. If you are part of the American academic community please send a support email to =support-idd@unidata.ucar.edu= to discuss your LDM data requirements.
@@ -516,6 +527,34 @@ For the purposes of the AMS demonstration, let's extract some catalog =xml= file
   # use catalog xml files that are consistent with our data holdings
   cp -r ~/git/Unidata-Dockerfiles/ams2016/catalogs/* ~/tdsconfig
 #+END_SRC
+
+** Configuring ADDE
+*** ADDE Directories on Docker Host
+
+How ADDE is used in practice at Unidata requires that a couple of directories be in place: =~/upcworkdata=, and =~/decoders=.
+
+#+BEGIN_SRC sh  :results silent :export code :tangle ../unicloud-2.sh
+  # Create ADDE directories
+  mkdir -p ~/decoders
+  mkdir -p ~/upcworkdata
+#+END_SRC
+
+*** ADDE Catalog File 
+
+At this time, we do not have any McIDAS ADDE decoders available as part of this project, but that will hopefully change in the future. We will however need the ADDE server's catalog file =RESOLV.SRV=.
+
+ #+BEGIN_SRC sh :results silent :exports code :tangle ../unicloud-2.sh
+   cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/etc/
+ #+END_SRC
+
+*** McIDAS pqact
+
+We will also need the =pqact.conf_mcidasA= file that is referred to by =ldmd.conf=.
+
+ #+BEGIN_SRC sh :results silent :exports code :tangle ../unicloud-2.sh
+   cp ~/git/Unidata-Dockerfiles/ams2016/pqact.conf_mcidasA ~/etc/
+ #+END_SRC
+
 
 * Setting up Data Volumes 
 
@@ -780,7 +819,7 @@ Another way to verify your work is run the [[https://www.unidata.ucar.edu/softwa
 #+RESULTS:
 In the [[https://www.unidata.ucar.edu/software/idv/docs/userguide/data/choosers/CatalogChooser.html][IDV Dashboard]], you should be able to enter the catalog XML URL: [[http://unidata-server.cloudapp.net/thredds/catalog.xml]].  
 
-*** Access RAMADDAA with the IDV
+*** Access RAMADDA with the IDV
 
 RAMADDA has good integration with the IDV and the two technologies work well together. You may wish to install the [[http://www.unidata.ucar.edu/software/idv/docs/workshop/savingstate/Ramadda.html][RAMADDA IDV plugin]] to publish IDV bundles to RAMADDA. RAMADDA also has access to the =/data/ldm= directory so you may want to set up [[http://ramadda.org//repository/userguide/developer/filesystem.html][server-side view of this part of the file system]]. Finally,  you can enter this catalog URL in the IDV dashboard to examine data holdings shared bundles, etc. on RAMADDA [[http://unidata-server.cloudapp.net:8081/repository?output=thredds.catalog]].
 
