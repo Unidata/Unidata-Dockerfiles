@@ -1,3 +1,7 @@
 MAILTO=""
 # run ldm scour
 0 0 * * * bin/ldmadmin scour
+#
+# Rotate LDM-McIDAS log files
+#
+0 21 * * * bin/newlog var/logs/ldm-mcidas.log 7
