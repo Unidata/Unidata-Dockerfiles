@@ -48,8 +48,18 @@ cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
 sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
     ~/etc/TDS/util/ldmfile.sh
 
+chmod +x ~/etc/TDS/util/ldmfile.sh
+
 # use catalog xml files that are consistent with our data holdings
 cp -r ~/git/Unidata-Dockerfiles/ams2016/catalogs/* ~/tdsconfig
+
+# Create ADDE directories
+mkdir -p ~/decoders
+mkdir -p ~/upcworkdata
+
+cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/etc/
+
+cp ~/git/Unidata-Dockerfiles/ams2016/pqact.conf_mcidasA ~/etc/
 
 # Set up data directories
 sudo ln -s /mnt /data
