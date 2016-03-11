@@ -2,7 +2,7 @@
 # LDM
 ###
 ldm:
-# cannot restart: always on account of potentially corrupting the LDM queue.
+  restart: always
   image: unidata/ldmtds:latest
   volumes:
     - ~/etc/:/home/ldm/etc/
