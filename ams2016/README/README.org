@@ -650,7 +650,7 @@ When you start RAMADDA for the very first time, you must have  a =password.prope
 *** <<starting:dc>>Final Edit to =docker-compose.yml=
 
 #+BEGIN_SRC org :noweb yes :results append :exports results 
-When the TDM communicates to the TDS concerning changes in data it observes with data supplied by the LDM, it will communicate via the =tdm= tomcat user. Edit the =docker-compose.yml= file and change the =TDM_PW= to =MeIndexer=. This is not as insecure as it would seem since the =tdm= user has few privileges. Optimally, one could change the password hash for the TDM user in the =tomcat-users.xml= file. Also endure =TDS_HOST= is pointing to the correct Azure Docker host (e.g., =http://<<myvm>>.cloudapp.net=).
+When the TDM communicates to the TDS concerning changes in data it observes with data supplied by the LDM, it will communicate via the =tdm= tomcat user. Edit the =docker-compose.yml= file and change the =TDM_PW= to =MeIndexer=. This is not as insecure as it would seem since the =tdm= user has few privileges. Optimally, one could change the password hash for the TDM user in the =tomcat-users.xml= file. Also ensure =TDS_HOST= is pointing to the correct Azure Docker host (e.g., =http://<<myvm>>.cloudapp.net=).
 #+END_SRC
 
 #+RESULTS:
