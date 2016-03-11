@@ -9,7 +9,8 @@ trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 
 /usr/sbin/crond
 
-ldmadmin mkqueue -f
+ldmadmin delqueue
+ldmadmin mkqueue
 ldmadmin start
 
 # never exit
