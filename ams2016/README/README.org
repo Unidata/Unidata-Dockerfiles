@@ -555,7 +555,6 @@ We will also need the =pqact.conf_mcidasA= file that is referred to by =ldmd.con
    cp ~/git/Unidata-Dockerfiles/ams2016/pqact.conf_mcidasA ~/etc/
  #+END_SRC
 
-
 * Setting up Data Volumes 
 
 As alluded to earlier, we will have to set up data volumes so that the LDM can write data, and the TDS and RAMADDA can have access to that data. The =/mnt= has lots of space, but the storage is considered *ephemeral* so be careful! Azure makes no effort to backup data on =/mnt=. For the LDM this should not be too much of a problem because real time data is coming in and getting scoured continuously, but for _for any other application you may wish to be careful as there is the potential to lose data_. There is more information about this topic [[https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-how-to-attach-disk/][here]].
