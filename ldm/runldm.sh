@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# limit max number of open files to force pqact to close open file descriptors.
+ulimit -n 1024
+
 set -e
 set -x
 export PATH=/home/ldm/bin:$PATH
