@@ -87,9 +87,9 @@ Do some routine maintenance.
 
 # run on remote host, otherwise you'll hang your emacs session
 #+BEGIN_SRC sh  :eval no :exports code 
-  # update and install packages
-  sudo apt-get -qq update
-  sudo apt-get -qq upgrade
+  sudo apt-get update        # Fetches the list of available updates
+  sudo apt-get upgrade       # Strictly upgrades the current packages
+  sudo apt-get dist-upgrade  # Installs updates (new ones)
 #+END_SRC
 
 * ~git clone~ Repositories
