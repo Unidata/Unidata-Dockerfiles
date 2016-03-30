@@ -121,17 +121,17 @@ Let's clone those repositories by creating =~/git= directory where our repositor
 * Install ~docker-compose~ on VM
 
 #+BEGIN_SRC org :noweb-ref dcompose-version :exports none 
-  1.5.2
+  1.6.2
 #+END_SRC
 
 ~docker-compose~ is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so ~docker-compose~ is perfect for this scenario. Install ~docker-compose~ on the Azure Docker host.
 
 #+BEGIN_SRC org :noweb yes :results append :exports results 
-  You may have to update version (currently at =<<dcompose-version>=>).
+  You may have to update version (currently at =<<dcompose-version>>=).
 #+END_SRC
 
- #+RESULTS:
- You may have to update version (currently at =1.5.2=).
+#+RESULTS:
+You may have to update version (currently at =1.6.2=).
 
 #+BEGIN_SRC sh :noweb yes :results verbatim drawer :exports code
   # Get docker-compose

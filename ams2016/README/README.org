@@ -330,7 +330,7 @@ In Unix, when adding a user to a group, it is simply easiest to logout and log b
 #+END_SRC
 
  #+RESULTS:
- You may have to update version (currently at =1.5.2=).
+ You may have to update version (currently at =1.6.2=).
 
 #+BEGIN_SRC sh :noweb yes :results verbatim drawer :exports code :tangle ../unicloud-2.sh 
   # Get docker-compose
