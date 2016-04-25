@@ -320,7 +320,7 @@ In Unix, when adding a user to a group, it is simply easiest to logout and log b
 ** Install ~docker-compose~ on VM
 
 #+BEGIN_SRC org :noweb-ref dcompose-version :exports none 
-  1.6.2
+  1.7.0
 #+END_SRC
 
 ~docker-compose~ is a tool for defining and running multi-container Docker applications. In our case, we will be running the LDM, TDS, TDM (THREDDS Data Manager) and RAMADDA so ~docker-compose~ is perfect for this scenario. Install ~docker-compose~ on the Azure Docker host.
