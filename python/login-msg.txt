@@ -2,7 +2,7 @@ Welcome to the Unidata Python Docker environment.
 
 To start a Jupyter notebook:
 
-ipython notebook --ip=* --no-browser
+jupyter notebook --ip=* --no-browser
 
 for your convenience, this command has been aliased to 'ip'
 
