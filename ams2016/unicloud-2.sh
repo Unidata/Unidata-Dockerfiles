@@ -73,7 +73,8 @@ mkdir -p ~/logs/ramadda-tomcat
 mkdir -p ~/logs/tds-tomcat
 
 # Create RAMADDA default password
-sudo echo ramadda.install.password=changeme! > ~/repository/pw.properties
+echo ramadda.install.password=changeme! | sudo tee --append \
+  ~/repository/pw.properties > /dev/null
 
 sudo chown -R ubuntu:docker /home/ubuntu
 sudo find /home/ubuntu -type d -exec chmod 775 {} +
