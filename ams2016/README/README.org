@@ -643,7 +643,7 @@ When you start RAMADDA for the very first time, you must have  a =password.prope
 
 #+BEGIN_SRC sh :results silent :tangle ../unicloud-2.sh
   # Create RAMADDA default password
-  echo ramadda.install.password=changeme! > ~/repository/pw.properties
+  sudo echo ramadda.install.password=changeme! > ~/repository/pw.properties
 #+END_SRC
 
 *** <<starting:dc>>Final Edit to =docker-compose.yml=
