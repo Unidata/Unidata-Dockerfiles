@@ -20,10 +20,10 @@ docker-compose-`uname -s`-`uname -m` > docker-compose
   sudo chmod +x /usr/local/bin/docker-compose
 
 # Get the git repositories we will want to work with
-mkdir -p /home/ubuntu/git
+mkdir -p ~/git
 git clone https://github.com/Unidata/Unidata-Dockerfiles \
-    /home/ubuntu/git/Unidata-Dockerfiles
-git clone https://github.com/Unidata/TdsConfig /home/ubuntu/git/TdsConfig
+    ~/git/Unidata-Dockerfiles
+git clone https://github.com/Unidata/TdsConfig ~/git/TdsConfig
 
 # Create LDM directories
 mkdir -p ~/var/logs 
@@ -65,15 +65,15 @@ cp ~/git/Unidata-Dockerfiles/ams2016/pqact.conf_mcidasA ~/etc/
 sudo ln -s /mnt /data
 sudo mkdir /mnt/ldm/
 sudo chown -R ubuntu:docker /data/ldm
-sudo mkdir /home/ubuntu/repository/
-sudo chown -R ubuntu:docker /home/ubuntu/repository
+sudo find /data/ldm -type d -exec chmod 775 {} +
+sudo mkdir ~/repository/
 
 # Create Tomcat logging directories
 mkdir -p ~/logs/ramadda-tomcat
 mkdir -p ~/logs/tds-tomcat
 
 # Create RAMADDA default password
-echo ramadda.install.password=changeme! > \
-  /home/ubuntu/repository/pw.properties
+echo ramadda.install.password=changeme! > ~/repository/pw.properties
 
 sudo chown -R ubuntu:docker /home/ubuntu
+sudo find /home/ubuntu -type d -exec chmod 775 {} +

@@ -57,7 +57,7 @@ ramadda:
   restart: always
   image: unidata/ramadda:latest
   volumes:
-    - /home/ubuntu/repository/:/data/repository/
+    - ~/repository/:/data/repository/
     - /data/ldm/:/data/ldm/
     - ~/logs/ramadda-tomcat/:/usr/local/tomcat/logs/
   ports:
