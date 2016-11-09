@@ -4,7 +4,7 @@ To start a Jupyter notebook:
 
 jupyter notebook --ip=* --no-browser
 
-for your convenience, this command has been aliased to 'ip'
+for your convenience, this command has been aliased to 'jn'
 
 To navigate to this notebook in your browser, you will enter a URL that looks
 something like this https://[ip address]:[port]. For example,
