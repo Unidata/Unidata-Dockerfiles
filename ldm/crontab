@@ -1,8 +1,0 @@
-MAILTO=""
-# run ldm scour
-0 0 * * * bin/ldmadmin scour
-# Rotate LDM-McIDAS log files
-5 0 * * * bin/newlog var/logs/ldm-mcidas.log 7
-# performance metrics
-* * * * * bin/ldmadmin addmetrics 
-0 0 1 * * bin/ldmadmin newmetrics 
