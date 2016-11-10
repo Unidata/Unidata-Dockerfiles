@@ -57,10 +57,10 @@ WORKDIR $HOME
 RUN mkdir -p $HOME/downloads
 
 RUN cd $HOME/downloads && curl -SL \
-  http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -o \
-  Miniconda-latest-Linux-x86_64.sh
+  http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o \
+  Miniconda3-latest-Linux-x86_64.sh
 
-RUN /bin/bash $HOME/downloads/Miniconda-latest-Linux-x86_64.sh -b -p \
+RUN /bin/bash $HOME/downloads/Miniconda3-latest-Linux-x86_64.sh -b -p \
   $HOME/anaconda/
 
 ENV PATH $HOME/anaconda/bin:$PATH
