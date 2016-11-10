@@ -2,7 +2,7 @@
 # Dockerfile that contains Unidata Python and ancillary technology (e.g.,IPyNB)
 ###
 
-FROM ubuntu:15.10
+FROM ubuntu:16.10
 
 MAINTAINER Unidata Cloud Team
 
