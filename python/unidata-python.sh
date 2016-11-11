@@ -6,14 +6,14 @@ usage="$(basename "$0") [-h --help] [-v, --volume directory] [-p, --port port]\n
     -v, --volume A local host directory that will be bound to the 
 /home/python/work\n directory. The default is the PWD.\n
     -p, --port  Forward port 8888 to the specified port. Useful for running
-IPyNB, \nfor example. The default is 9321."
+IPyNB, \nfor example. The default is 8888."
 
 
 # Set some defaults
 
 VOLUME=`pwd`
 
-PORT=9321
+PORT=8888
 
 while [[ $# > 0 ]]
 do
@@ -36,5 +36,7 @@ do
 done
 
 # To remove login msg, remove HELP env var below. Could be parameterized.
-docker run -e HELP=YES -i -t -v "${VOLUME}":/home/python/work -p "${PORT}":8888 \
+docker run -e HELP=YES -i -t  -p "${PORT}":8888 \
+       -v "${VOLUME}":/home/python/work \
+       -v `pwd`/.jupyter:/home/python/.jupyter \
        unidata/python
