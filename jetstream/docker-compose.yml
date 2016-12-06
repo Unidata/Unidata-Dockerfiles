@@ -1,0 +1,91 @@
+###
+# LDM
+###
+ldm:
+  # restart: always
+  image: unidata/ldm-docker:6.13.5
+  container_name: ldm
+  volumes:
+    - ~/etc/:/home/ldm/etc/
+    - /data/:/home/ldm/var/data/
+    - /data/:/data/
+    - /data/queues:/home/ldm/var/queues/
+    - ~/logs/ldm/:/home/ldm/var/logs/
+  ports:
+    - "388:388"
+  ulimits:
+    nofile:
+      soft: 1024
+      hard: 1024
+
+###
+# Reverse proxy for TDS and RAMADDA
+###
+
+traefik:
+  image: traefik
+  command: --web --docker --docker.domain=localhost --accesslogsfile=/log/access_log 
+  ports:
+    - "80:80"
+    - "443:443"
+    - "8080:8080"
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ~/logs/traefik/:/log/
+    - ./files/traefik.toml:/etc/traefik/traefik.toml
+    - ./files/:/config/
+    
+###
+# RAMADDA
+###
+
+ramadda:
+  image: unidata/ramadda-docker:2.2
+  container_name: ramadda
+  volumes:
+    - /repository/:/data/repository/
+    - /data/ldm/:/data/ldm/
+    - ~/logs/ramadda-tomcat/:/usr/local/tomcat/logs/
+    - ~/logs/ramadda/:/data/repository/logs/
+  labels:
+    - "traefik.backend=ramadda"
+    - "traefik.frontend.rule=PathPrefix: /repository"
+
+###
+# THREDDS
+###
+
+thredds-production:
+  image: unidata/thredds-docker:4.6.6
+  container_name: thredds
+  ports:
+    - "8443:8443"
+  volumes:
+    - ~/logs/tds-tomcat/:/usr/local/tomcat/logs/
+    - ~/logs/tds/:/usr/local/tomcat/content/thredds/logs/
+    - ./files/ssl.crt:/usr/local/tomcat/conf/ssl.crt
+    - ./files/ssl.key:/usr/local/tomcat/conf/ssl.key
+    - ./files/server.xml:/usr/local/tomcat/conf/server.xml
+    - ./files/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - /data/:/data/
+    - ~/tdsconfig/:/usr/local/tomcat/content/thredds
+  labels:
+    - "traefik.backend=thredds"
+    - "traefik.frontend.rule=PathPrefix: /thredds"
+
+###
+# TDM
+###
+
+tdm:
+  image: unidata/thredds-docker:tdm-4.6
+  container_name: tdm
+  volumes:
+      - /data/:/data/
+      - ~/tdsconfig/:/usr/local/tomcat/content/thredds/
+      - ~/logs/tdm/:/usr/local/tomcat/content/tdm/
+  environment:
+    # change the password
+    - TDM_PW=CHANGEME!
+    # that trailing slash is important
+    - TDS_HOST=http://CHANGEME/

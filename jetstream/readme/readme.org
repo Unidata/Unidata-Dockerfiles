@@ -1,0 +1,415 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:nil arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:t p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:t todo:t |:t
+#+TITLE: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
+#+SUBTITLE: Unidata on the Jetstream Cloud
+#+DATE: 2017-01-25 Wed
+#+DESCRIPTION: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
+#+KEYWORDS:  RAMADDA TDS LDM Unidata Docker
+#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy
+#+EMAIL: chastang@ucar.edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
+
+# latex
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [onecolumn,9pt]
+
+# two columns is quite challenging on account of all the code/unix commands
+# +LATEX_HEADER: \setlength\columnsep{0.25in}
+
+# latex margins
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+
+# latex header
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancyplain}
+#+LATEX_HEADER: \lhead{\textbf{13B.5}}
+
+# latex footnotes
+#+LATEX_HEADER: \usepackage{bigfoot}
+#+LATEX_HEADER: \DeclareNewFootnote{URL}[arabic]
+#+LATEX_HEADER: \renewcommand{\href}[2]{#2\footnoteURL{\url{#1}}}
+#+LATEX_HEADER: \setlength{\parindent}{0em}
+#+LATEX_HEADER: \interfootnotelinepenalty=10000
+
+# latex coloring links (does not work right now)
+#+LATEX_HEADER: \usepackage[hyperref,x11names]{xcolor}
+#+LATEX_HEADER: \hypersetup{colorlinks=true,urlcolor={blue!80!black},linkcolor={red!50!black}}
+
+# latex font
+#+LATEX_HEADER: \renewcommand{\familydefault}{\sfdefault} 
+#+LATEX_HEADER: \usepackage{helvet}
+
+# wrapping
+
+#+LATEX_HEADER: \usepackage{microtype}
+#+LATEX_HEADER: \usepackage[htt]{hyphenat}
+#+LATEX_HEADER: \sloppy
+
+#+SETUPFILE: theme-readtheorg.setup
+
+#+PROPERTY: header-args :tangle no
+
+* Org Export Set up (Internal Only)                                :noexport:
+
+# org-mode stuff. Don't want confirmation for babel exec, nor should babel block be evaluated during export.
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none 
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+* Introduction
+
+This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream/readme][(available in HTML, Markdown, text, PDF)]] to a 2017 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/97Annual/webprogram/Paper315508.html][/Geoscientific Data Distribution in the XSEDE Jetstream Cloud/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], and [[http://sourceforge.net/projects/ramadda/][RAMADDA]] on [[https://www.xsede.org/jump-on-jetstream][XSEDE Jetstream VMs]]. It assumes you have access to Jetstream resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. We will also be making use of the [[https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API][Jetstream API]]. Obtain permission from the XSEDE Jetstream team to use Jetstream API. You must be comfortable entering commands at the Unix command line. We will be using Docker images available at the [[https://github.com/Unidata][Unidata Github account]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream][AMS 2017 demonstration]]. 
+
+* Obtain Jetstream Resources
+
+[[https://www.xsede.org/jump-on-jetstream][Apply for cloud resource allocations on Jetstream]].
+
+* Preliminary Setup on Jetstream
+** Clone the Unidata-Dockerfiles Repository
+
+We will be making heavy use of the ~Unidata/Unidata-Dockerfiles~ git repository. [[https://www.git-scm.com/book/en/v2/Getting-Started-Installing-Git][Install git]] and clone that repository first:
+
+#+BEGIN_SRC sh :eval no
+  git clone https://github.com/Unidata/Unidata-Dockerfiles 
+#+END_SRC
+
+** Build and Start the Jetstream API Docker Container
+
+We will be using the Jetstream API directly and via convenience scripts. Install Docker (e.g., [[https://docs.docker.com/machine/][docker-machine]]) on your local computing environment because we will be interacting with the Jetstream API in a Docker container.
+
+#+BEGIN_SRC sh :eval no
+  cd Unidata-Dockerfiles/jetstream/openstack
+#+END_SRC
+
+*** Create ssh Keys
+
+Create an =.ssh= directory for your ssh keys:
+
+#+BEGIN_SRC sh :eval no
+ ssh-keygen -b 2048 -t rsa -f .ssh/id_rsa -P ""
+#+END_SRC
+
+*** Download openrc.sh
+
+Download the =openrc.sh= file into the =Unidata-Dockerfiles/jetstream/openstack= directory [[https://iujetstream.atlassian.net/wiki/display/JWT/Setting+up+openrc.sh][according to the Jetstream API instructions]].
+
+Edit the =openrc.sh= file and the supply the TACC resource ~OS_PASSWORD~:
+
+#+BEGIN_SRC sh :eval no
+  export OS_PASSWORD="changeme!"
+#+END_SRC
+
+*** Build the openstack-client Container
+
+Build the ~openstack-client~ container, here done via ~docker-machine~.
+
+#+BEGIN_SRC sh :eval no
+  docker-machine create --driver virtualbox openstack
+  eval "$(docker-machine env openstack)"
+  docker build -t openstack-client .
+#+END_SRC
+
+** Set Up Jetstream API to Create VMs
+
+Start the ~openstack-client~ container with
+
+#+BEGIN_SRC sh :eval no
+  cd Unidata-Dockerfiles/jetstream/openstack
+  sh os.sh
+#+END_SRC
+
+You should be inside the container which has been configured to run openstack ~nova~ and ~neutron~ commands. [[https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line][Go though the following Jetstream API sections]]:
+
+- Create security group
+- Upload SSH key
+- Setup the network
+
+At this point, you should be able to run ~glance image-list~ which should yield something like: 
+
+#+TBLNAME: image-list
++--------------------------------------+------------------------------------+
+| ID                                   | Name                               |
++--------------------------------------+------------------------------------+
+| fd4bf587-39e6-4640-b459-96471c9edb5c | AutoDock Vina Launch at Boot       |
+| 02217ab0-3ee0-444e-b16e-8fbdae4ed33f | AutoDock Vina with ChemBridge Data |
+| b40b2ef5-23e9-4305-8372-35e891e55fc5 | BioLinux 8                         |
++--------------------------------------+------------------------------------+
+
+If not, check your setup.
+
+** Working with Jetstream API to Create VMs
+
+*** IP Numbers
+
+We are ready to fire up VMs. First create an IP number which we will be using shortly:
+
+#+BEGIN_SRC sh :eval no
+  nova floating-ip-create public
+  nova floating-ip-list
+#+END_SRC
+
+or you can just ~nova floating-ip-list~ if you have IP numbers left around from previous VMs.
+
+*** Boot VM
+
+Now you can boot up a VM with something like the following command:
+
+#+BEGIN_SRC sh :eval no
+  boot.sh -n unicloud -s m1.medium -ip 149.165.157.137
+#+END_SRC
+
+The ~boot.sh~ command takes a VM name, size, and IP number created earlier. See ~boot.sh -h~ and ~nova flavor-list~ for more information.
+
+*** Create and Attach Data Volumes
+
+Also, create and attach =/data= and =/repository=  volumes which we will be using shortly via the openstack API:
+
+#+BEGIN_SRC :eval no
+  cinder create 750 --display-name data
+  cinder create 100 --display-name repository
+
+  cinder list && nova list
+
+  nova volume-attach <vm-uid-number> <volume-uid-number> auto
+  nova volume-attach <vm-uid-number> <volume-uid-number> auto
+#+END_SRC
+
+*** ssh Into New VM
+
+~ssh~ into that new minted VM:
+
+#+BEGIN_SRC :eval no
+  ssh ubuntu@149.165.157.137
+#+END_SRC
+
+If you are having trouble logging in remember to delete the =~/.ssh/known_hosts= file. If still have trouble, try ~nova stop <vm-uid-number>~ followed by ~nova stop <vm-uid-number>~.
+
+** Internal org-babel Emacs Tramp Configuration                    :noexport:
+
+# Defining the VM we will be working with for the remainder of this org babel session.
+
+#+BEGIN_SRC org :noweb-ref myvm :exports none 
+  unicloud-jetstream
+#+END_SRC
+
+# Setting up noweb
+
+#+NAME: jetstream-vm
+#+BEGIN_SRC org :results silent :exports none :noweb yes 
+<<myvm>>
+#+END_SRC
+
+# Setting up org babel default arguments for executing ~sh~ commands below. We will be using tramp for the remote execution. You should have something like this in your ssh-config:
+
+#+BEGIN_SRC sh :eval no :exports none 
+Host <<myvm>>
+    User     ubuntu
+    Port     22
+    IdentityFile ~/git/Unidata-Dockerfiles/jetstream/openstack/.ssh/id_rsa
+    Hostname 149.165.157.137
+#+END_SRC
+
+# Defaulting to using remote VM. Be careful to specify :dir ~ for the sh blocks where you do not want remote VM execution of commands.
+
+#+BEGIN_SRC emacs-lisp :noweb yes :results silent :exports none 
+  (setq-local org-babel-default-header-args:sh
+              '((:dir . "/ubuntu@<<myvm>>:")))
+#+END_SRC
+
+** Setting up VM and Cloning Unidata-Dockerfiles Repository
+
+*** VM maintenance and Install git
+
+As root, update, upgrade and install ~git~:
+
+#+BEGIN_SRC sh :eval no :results none
+  apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git
+#+END_SRC
+
+Create a =git= directory for the ~Unidata-Dockerfiles~ project.
+
+#+BEGIN_SRC sh :eval no 
+  mkdir -p ~/git
+#+END_SRC
+
+*** Clone Unidata-Dockerfiles
+
+Clone the the ~Unidata-Dockerfiles~ project.
+
+#+BEGIN_SRC :eval no 
+  git clone https://github.com/Unidata/Unidata-Dockerfiles ~/git/Unidata-Dockerfiles
+#+END_SRC
+
+*** Run the VM Set Up Script and Reboot
+
+#+BEGIN_SRC sh :eval no :tangle ../jetstream-1.sh :shebang "#!/bin/bash"
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+#+END_SRC
+
+Install ~Docker~ and ~docker-compose~ and get the ~ubuntu~ user set up to run docker.
+
+#+BEGIN_SRC sh :eval no :tangle ../jetstream-1.sh
+  bash ~/git/Unidata-Dockerfiles/docker-vm-setup/ubuntu/setup-ubuntu.sh -u ubuntu \
+       -dc 1.8.1 
+#+END_SRC
+
+Reboot
+
+#+BEGIN_SRC :eval no :tangle ../jetstream-1.sh
+  reboot now
+#+END_SRC
+
+*** Check Docker Installation
+
+Log back in to the VM as user ~ubuntu~. Test ~docker~ with
+
+#+BEGIN_SRC sh :eval no 
+  docker run hello-world
+#+END_SRC
+
+If docker gives an error, try as *root*
+
+#+BEGIN_SRC sh :eval no 
+  service docker stop
+  rm -rf /var/lib/docker/aufs
+  service docker start
+#+END_SRC
+
+If the ~hello-world~ container runs smoothly, continue.
+
+*** Mount Data Volumes
+
+As root, run some convenience scripts to mount the data volumes for data being delivered via the LDM (=/data=) and RAMADDA (=/repository=).
+
+#+BEGIN_SRC sh :eval no :tangle ../jetstream-2.sh :shebang "#!/bin/bash"
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ../jetstream-2.sh
+  bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
+       -d /data
+  bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdb \
+       -d /repository
+#+END_SRC
+
+*** Clone Unidata-Dockerfiles and TdsConfig Repositories
+
+We will again be cloning the ~Unidata-Dockerfiles~ repository, this time as user ~ubuntu~.
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh :shebang "#!/bin/bash"
+
+  mkdir -p ~/git
+  git clone https://github.com/Unidata/Unidata-Dockerfiles \
+      ~/git/Unidata-Dockerfiles
+  git clone https://github.com/Unidata/TdsConfig ~/git/TdsConfig
+#+END_SRC
+
+*** Create Log Directories
+
+Create all log directories
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  mkdir -p ~/logs/ldm/ ~/logs/ramadda-tomcat/ ~/logs/ramadda/ ~/logs/tds-tomcat/ \
+        ~/logs/tds/ ~/logs/traefik/ ~/logs/tdm/
+#+END_SRC
+
+*** Configure the LDM
+
+Grab the ldm ~etc~ directory
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+ mkdir -p ~/etc
+ cp -r ~/git/Unidata-Dockerfiles/jetstream/etc/* ~/etc/
+#+END_SRC
+
+In the =~/etc= you will find the usual LDM configuration files (e.g., =ldmd.conf=, =registry.xml=). Configure them to your liking.
+
+In the =ldmd.conf= file we copied just a moment ago, there is a reference to a =pqact= file; =etc/TDS/pqact.forecastModels=. We need to ensure that file exists by doing the following instructions. Specifically, explode =~/git/TdsConfig/idd/config.zip= into =~/tdsconfig= and ~cp -r~ the =pqacts= directory into =~/etc/TDS=. *Note* do NOT use soft links. Docker does not like them.
+
+*** Configure the TDS
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  mkdir -p ~/tdsconfig/ ~/etc/TDS
+  cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
+  unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
+  cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
+#+END_SRC
+
+*** Configure RAMADDA
+
+When you start RAMADDA for the very first time, you must have  a =password.properties= file in the RAMADDA home directory which is =/home/ubuntu/repository/=. See [[http://ramadda.org//repository/userguide/toc.html][RAMADDA documentation]] for more details on setting up RAMADDA. Here is a =pw.properties= file to get you going. Change password below to something more secure!
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  # Create RAMADDA default password
+  echo ramadda.install.password=changeme! | sudo tee --append \
+    /repository/pw.properties > /dev/null
+#+END_SRC
+
+*** Create a Self-Signed Certificates
+
+In the =~/git/Unidata-Dockerfiles/jetstream/files/= directory, generate a self-signed certificate with ~openssl~ (or better yet, obtain a real certificate from a certificate authority).
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj \
+    "/C=US/ST=Colorado/L=Boulder/O=Unidata/CN=tomcat.example.com" \
+    -keyout ~/git/Unidata-Dockerfiles/jetstream/files/ssl.key \
+    -out ~/git/Unidata-Dockerfiles/jetstream/files/ssl.crt
+#+END_SRC
+
+*** TDS Host and TDM User
+
+Ensure the ~TDS_HOST~ URL (with a publicly accessible IP number of the docker host or DNS name) is correct in ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml~. 
+
+In the same ~docker-compose.yml~ file, ensure the ~TDM_PW~ corresponds to the SHA digested password of the ~tdm~ user ~/git/Unidata-Dockerfiles/jetstream/files/tomcat-users.xml~ 
+
+#+BEGIN_SRC :eval no
+  docker run tomcat  /usr/local/tomcat/bin/digest.sh -a "SHA" mysupersecretpassword
+#+END_SRC
+
+*** Configure TDM
+
+[[https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container][TDM logging will not be configurable until TDS 5.0]]. Until then:
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+       -o ~/logs/tdm/tdm.jar
+  curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
+       -o ~/logs/tdm/tdm.sh
+  chmod +x  ~/logs/tdm/tdm.sh
+#+END_SRC
+
+*** Start Everything
+    
+Fire up The whole kit and caboodle with ~docker-compose.yml~ which will start:
+
+- ldm
+- traefik, a reverse proxy that will channel ramadda and tds http request to the right container
+- ramadda
+- thredds-production
+- tdm
+
+#+BEGIN_SRC sh :eval no
+  docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
+#+END_SRC
+
+*** Bootstrapping
+
+The problem at this point is that it will take a little while for the LDM to fill the =/data= directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up with:
+
+#+BEGIN_SRC sh :eval no
+  cd ~/git/Unidata-Dockerfiles/jetstream/
+  docker-compose stop && docker-compose up -d
+#+END_SRC
