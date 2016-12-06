@@ -15,6 +15,12 @@ cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
 unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
 cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
 
+# in place change of logs dir w/ sed
+sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
+    ~/etc/TDS/util/ldmfile.sh
+
+chmod +x ~/etc/TDS/util/ldmfile.sh
+
 # Create RAMADDA default password
 echo ramadda.install.password=changeme! | sudo tee --append \
   /repository/pw.properties > /dev/null

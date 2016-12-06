@@ -4,7 +4,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
-     -d /data
 bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdb \
+     -d /data
+bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
      -d /repository

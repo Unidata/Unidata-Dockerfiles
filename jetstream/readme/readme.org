@@ -71,7 +71,7 @@ This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfi
 
 [[https://www.xsede.org/jump-on-jetstream][Apply for cloud resource allocations on Jetstream]].
 
-* Preliminary Setup on Jetstream
+* Setup on Jetstream
 ** Clone the Unidata-Dockerfiles Repository
 
 We will be making heavy use of the ~Unidata/Unidata-Dockerfiles~ git repository. [[https://www.git-scm.com/book/en/v2/Getting-Started-Installing-Git][Install git]] and clone that repository first:
@@ -223,11 +223,10 @@ Host <<myvm>>
               '((:dir . "/ubuntu@<<myvm>>:")))
 #+END_SRC
 
-** Setting up VM and Cloning Unidata-Dockerfiles Repository
-
+** Set up VM to Run LDM, TDS, and RAMADDA
 *** VM maintenance and Install git
 
-As root, update, upgrade and install ~git~:
+As root (~sudo su -~), update, upgrade and install ~git~:
 
 #+BEGIN_SRC sh :eval no :results none
   apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git
@@ -277,7 +276,14 @@ Log back in to the VM as user ~ubuntu~. Test ~docker~ with
   docker run hello-world
 #+END_SRC
 
-If docker gives an error, try as *root*
+If docker gives an error
+
+#+BEGIN_EXAMPLE
+docker: An error occurred trying to connect: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: read unix @->/var/run/docker.sock: read: connection reset by peer.
+See 'docker run --help'.
+#+END_EXAMPLE
+
+Try as *root*
 
 #+BEGIN_SRC sh :eval no 
   service docker stop
@@ -299,9 +305,9 @@ fi
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle ../jetstream-2.sh
-  bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
-       -d /data
   bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdb \
+       -d /data
+  bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
        -d /repository
 #+END_SRC
 
@@ -346,6 +352,36 @@ In the =ldmd.conf= file we copied just a moment ago, there is a reference to a =
   cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
   unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
   cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
+#+END_SRC
+
+**** Edit ldmfile.sh
+
+Examine the =etc/TDS/util/ldmfile.sh= file. As the top of this file indicates, you must change the =logfile= to suit your needs. Change the 
+
+#+BEGIN_EXAMPLE
+logfile=logs/ldm-mcidas.log
+#+END_EXAMPLE
+
+line to
+
+#+BEGIN_EXAMPLE
+logfile=var/logs/ldm-mcidas.log
+#+END_EXAMPLE
+
+This will ensure =ldmfile.sh= can properly invoked from the =pqact= files.
+
+We can achieve this change with a bit of ~sed~:
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  # in place change of logs dir w/ sed
+  sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
+      ~/etc/TDS/util/ldmfile.sh
+#+END_SRC
+
+Also ensure that =ldmfile.sh= is executable.
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  chmod +x ~/etc/TDS/util/ldmfile.sh
 #+END_SRC
 
 *** Configure RAMADDA
