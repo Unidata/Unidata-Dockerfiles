@@ -343,7 +343,8 @@ Grab the ldm ~etc~ directory
 
 In the =~/etc= you will find the usual LDM configuration files (e.g., =ldmd.conf=, =registry.xml=). Configure them to your liking.
 
-In the =ldmd.conf= file we copied just a moment ago, there is a reference to a =pqact= file; =etc/TDS/pqact.forecastModels=. We need to ensure that file exists by doing the following instructions. Specifically, explode =~/git/TdsConfig/idd/config.zip= into =~/tdsconfig= and ~cp -r~ the =pqacts= directory into =~/etc/TDS=. *Note* do NOT use soft links. Docker does not like them.
+In the =ldmd.conf= file we copied just a moment ago, there is a reference to a =pqact= file; =etc/TDS/pqact.forecastModels=. We need to ensure that file exists by doing the following instructions. Specifically, explode =~/git/TdsConfig/idd/config.zip= into =~/tdsconfig= and ~cp -r~ the =pqacts= directory into =~/etc/TDS=. *Note* do NOT use soft links. Docker does not like them. Be sure to edit =~/tdsconfig/threddsConfig.xml= for contact information in the ~serverInformation~ element.
+
 
 *** Configure the TDS
 
