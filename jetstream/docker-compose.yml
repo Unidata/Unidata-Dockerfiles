@@ -92,3 +92,20 @@ tdm:
     - TDM_PW=CHANGEME!
     # that trailing slash is important
     - TDS_HOST=http://CHANGEME/
+
+###
+# McIDAS
+###
+# ADDE, licensing issues that do not allow us to distribute the software via the DockerHub registry. Contact ~support-mcidas@unidata.ucar.edu~ for more information about obtaining this image.
+# mcidas:
+#   container_name: mcidas
+#   image: unidata/mcidas
+#   volumes:
+#     # Directories outside of the container that need to be accessible
+#    - ~/mcidas/upcworkdata/:/home/mcidas/upcworkdata/
+#    - ~/mcidas/util/:/home/mcidas/util/
+#    - ~/mcidas/decoders/:/home/mcidas/decoders/
+#    - /data/ldm/pub:/data/ldm/pub/
+#   ports:
+#    - "112:112"
+

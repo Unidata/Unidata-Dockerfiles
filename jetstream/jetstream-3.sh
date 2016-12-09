@@ -25,6 +25,10 @@ chmod +x ~/etc/TDS/util/ldmfile.sh
 echo ramadda.install.password=changeme! | sudo tee --append \
   /repository/pw.properties > /dev/null
 
+cp ~/git/Unidata-Dockerfiles/jetstream/mcidas/pqact.conf_mcidasA ~/etc
+mkdir -p ~/mcidas/upcworkdata/ ~/mcidas/decoders/ ~/mcidas/util/
+cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/mcidas/upcworkdata/
+
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj \
   "/C=US/ST=Colorado/L=Boulder/O=Unidata/CN=tomcat.example.com" \
   -keyout ~/git/Unidata-Dockerfiles/jetstream/files/ssl.key \

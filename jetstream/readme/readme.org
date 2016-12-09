@@ -6,7 +6,7 @@
 #+SUBTITLE: Unidata on the Jetstream Cloud
 #+DATE: 2017-01-25 Wed
 #+DESCRIPTION: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
-#+KEYWORDS:  RAMADDA TDS LDM Unidata Docker
+#+KEYWORDS:  ADDE RAMADDA TDS LDM Unidata Docker
 #+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy
 #+EMAIL: chastang@ucar.edu
 #+LANGUAGE: en
@@ -65,7 +65,7 @@
 
 * Introduction
 
-This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream/readme][(available in HTML, Markdown, text, PDF)]] to a 2017 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/97Annual/webprogram/Paper315508.html][/Geoscientific Data Distribution in the XSEDE Jetstream Cloud/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], and [[http://sourceforge.net/projects/ramadda/][RAMADDA]] on [[https://www.xsede.org/jump-on-jetstream][XSEDE Jetstream VMs]]. It assumes you have access to Jetstream resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. We will also be making use of the [[https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API][Jetstream API]]. Obtain permission from the XSEDE Jetstream team to use Jetstream API. You must be comfortable entering commands at the Unix command line. We will be using Docker images available at the [[https://github.com/Unidata][Unidata Github account]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream][AMS 2017 demonstration]]. 
+This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream/readme][(available in HTML, Markdown, text, PDF)]] to a 2017 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/97Annual/webprogram/Paper315508.html][/Geoscientific Data Distribution in the XSEDE Jetstream Cloud/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], [[http://sourceforge.net/projects/ramadda/][RAMADDA]], and [[https://www.ssec.wisc.edu/mcidas/][McIDAS ADDE]] on [[https://www.xsede.org/jump-on-jetstream][XSEDE Jetstream VMs]]. It assumes you have access to Jetstream resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. We will also be making use of the [[https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API][Jetstream API]]. Obtain permission from the XSEDE Jetstream team to use Jetstream API. You must be comfortable entering commands at the Unix command line. We will be using Docker images available at the [[https://github.com/Unidata][Unidata Github account]] in addition to a configuration specifically planned for an [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream][AMS 2017 demonstration]]. 
 
 * Obtain Jetstream Resources
 
@@ -223,7 +223,7 @@ Host <<myvm>>
               '((:dir . "/ubuntu@<<myvm>>:")))
 #+END_SRC
 
-** Set up VM to Run LDM, TDS, and RAMADDA
+** Set up VM to Run LDM, TDS, RAMADDA, ADDE
 *** VM maintenance and Install git
 
 As root (~sudo su -~), update, upgrade and install ~git~:
@@ -345,7 +345,6 @@ In the =~/etc= you will find the usual LDM configuration files (e.g., =ldmd.conf
 
 In the =ldmd.conf= file we copied just a moment ago, there is a reference to a =pqact= file; =etc/TDS/pqact.forecastModels=. We need to ensure that file exists by doing the following instructions. Specifically, explode =~/git/TdsConfig/idd/config.zip= into =~/tdsconfig= and ~cp -r~ the =pqacts= directory into =~/etc/TDS=. *Note* do NOT use soft links. Docker does not like them. Be sure to edit =~/tdsconfig/threddsConfig.xml= for contact information in the ~serverInformation~ element.
 
-
 *** Configure the TDS
 
 #+BEGIN_SRC sh :tangle ../jetstream-3.sh
@@ -395,6 +394,14 @@ When you start RAMADDA for the very first time, you must have  a =password.prope
     /repository/pw.properties > /dev/null
 #+END_SRC
 
+*** Configure McIDAS ADDE
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  cp ~/git/Unidata-Dockerfiles/jetstream/mcidas/pqact.conf_mcidasA ~/etc
+  mkdir -p ~/mcidas/upcworkdata/ ~/mcidas/decoders/ ~/mcidas/util/
+  cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/mcidas/upcworkdata/
+#+END_SRC
+
 *** Create a Self-Signed Certificates
 
 In the =~/git/Unidata-Dockerfiles/jetstream/files/= directory, generate a self-signed certificate with ~openssl~ (or better yet, obtain a real certificate from a certificate authority).
@@ -437,6 +444,7 @@ Fire up The whole kit and caboodle with ~docker-compose.yml~ which will start:
 - ramadda
 - thredds-production
 - tdm
+- McIDAS ADDE
 
 #+BEGIN_SRC sh :eval no
   docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
