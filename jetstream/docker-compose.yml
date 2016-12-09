@@ -67,6 +67,8 @@ thredds-production:
     - ./files/ssl.key:/usr/local/tomcat/conf/ssl.key
     - ./files/server.xml:/usr/local/tomcat/conf/server.xml
     - ./files/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - ./files/tdsCat.css:/usr/local/tomcat/webapps/thredds/tdsCat.css
+    - ./files/folder.gif:/usr/local/tomcat/webapps/thredds/folder.gif
     - /data/:/data/
     - ~/tdsconfig/:/usr/local/tomcat/content/thredds
   labels:
