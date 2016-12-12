@@ -23,18 +23,19 @@ h1 {
   background-image: url('http://jetstream.unidata.ucar.edu/repository/entry/get/jet2.png?entryid=9856f232-7844-4b70-8aca-425b78901d9c');
   background-color: #178F9B;
   background-repeat: no-repeat, no-repeat;
-  color: #000;
+  color: #fff;
   border-left: 1px solid #000;
   border-right: 1px solid #000;
   padding-top: 140px;
   padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 9px;
+  font-size: 15px;
   white-space: nowrap;
   overflow: hidden;
   font-family: monospace;
   text-align: right;
+  background-size: cover;
 }
 
 h2 {
