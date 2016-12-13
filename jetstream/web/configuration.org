@@ -1,0 +1,213 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:nil todo:t |:t
+#+TITLE: Configuration
+#+DATE: <2016-12-13 Tue>
+#+AUTHOR: Julien Chastang
+#+EMAIL: chastang at ucar dot edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
+
+* Imports
+#+BEGIN_SRC emacs-lisp :results none
+  (require 'ob-css)
+  (require 'ox-publish)
+#+END_SRC
+
+* Style
+#+NAME: style
+#+BEGIN_SRC css :results none
+  body {
+    color: #111;
+    font-family: 'Gentium Book Basic', serif;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 auto;
+    max-width: 672px;
+    padding: 0 32px;
+  }
+
+  a:link,
+  a:visited {
+    background-color: #eee;
+    border-bottom: solid #333 1px;
+    color: #111;
+    padding: 0 .2em;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: #333;
+    color: #eee;
+  }
+
+  a:active {
+    border-bottom: solid #f00 1px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'helvetica neue', 'arial', sans-serif;
+    font-weight: normal;
+    line-height: 1.2em;
+  }
+
+  h1.title {
+    border-bottom: solid #d4d4d4 1px;
+    padding-bottom: .2em;
+  }
+
+  #postamble {
+    border-top: solid #d4d4d4 1px;
+    color: #999;
+    font-style: italic;
+    text-align: right;
+    margin-top: 1em;
+  }
+
+  #postamble a.source-link:link,
+  #postamble a.source-link:visited {
+    color: #000;
+    float: left;
+    font-family: monospace;
+    font-style: normal;
+    text-transform: lowercase;
+  }
+
+  #postamble a.source-link:hover,
+  #postamble a.source-link:active {
+    background-color: #000;
+    color: #fff;
+  }
+
+  #postamble a:link, #postamble a:visited {
+    background-color: transparent;
+    border-bottom: none;
+    color: #999;
+  }
+
+  #postamble a:hover {
+    background-color: #777;
+    color: #fff;
+  }
+
+  #postamble a:active {
+   border-bottom: solid 1px #f00;
+  }
+
+  code {
+    background-color: #eee;
+    border-top: solid #d4d4d4 1px;
+    border-bottom: solid #d4d4d4 1px;
+    padding: 0 .2em;
+  }
+
+  pre.src, pre.example {
+    background-color: #eee;
+    border-top: solid #d4d4d4 1px;
+    border-bottom: solid #d4d4d4 1px;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 1em;
+    margin: 0;
+    overflow: auto;
+    max-width: 100%;
+  }
+
+  pre.src:before {
+    background-color: transparent;
+    border: none;
+    top: 0;
+    right: 0;
+  }
+
+  sup {
+    line-height: 0;
+  }
+
+  hr {
+    border-top: solid 1px #d4d4d4;
+    border-bottom: none;
+  }
+
+  li p {
+    margin: 0;
+  }
+
+  .footpara {
+    margin: 0;
+  }
+
+  .footnotes {
+    margin-top: 1em;
+  }
+#+END_SRC
+
+* Header
+#+NAME: header
+#+BEGIN_SRC css :noweb yes :results none
+  <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400i,700' rel='stylesheet' />
+  <style type='text/css'>
+    <<style>>
+  </style>
+#+END_SRC
+
+* Publishing configuration
+#+BEGIN_SRC emacs-lisp :noweb yes :results none
+  (defun create-postamble (options)
+    (let ((input-file (plist-get options :input-file)))
+      (concat
+       "Last updated on "
+       (current-time-string))))
+
+  (defun create-project-configuration (title base-dir publishing-dir)
+    `(
+      (,title
+       :base-directory ,base-dir
+       :publishing-directory ,publishing-dir
+       :base-extension "org"
+       :recursive t
+       :section-numbers nil
+       :publishing-function org-html-publish-to-html
+       :with-author nil
+       :with-toc nil
+       :html-head-include-scripts nil
+       :html-head-extra "
+      <<header>>
+              "
+       :html-validation-link nil
+       :html-footnotes-section "<div class=\"footnotes\" title=\"%s\">%s</div>"
+       :html-postamble ,'create-postamble)))
+
+  (setq
+   org-publish-project-alist
+   `(,@(create-project-configuration
+        "jetstream-site"
+        "."
+        "./publish/")
+     ("jetstream-static"
+      :base-directory "./static/"
+      :publishing-directory "./publish/static/"
+      :base-extension any
+      :recursive t
+      :publishing-function org-publish-attachment)
+     ("jetstream"
+      :components ("jetstream-site"
+                   "jetstream-static"))))
+#+END_SRC
+
+* Publish
+#+BEGIN_SRC emacs-lisp :eval no
+  (org-publish "jetstream" nil)
+  (global-set-key
+   (kbd "C-c c")
+   (lambda ()
+     (interactive)
+     (org-babel-load-file "configuration.org")))
+  ; (org-babel-execute-buffer)
+#+END_SRC

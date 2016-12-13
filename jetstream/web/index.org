@@ -1,0 +1,26 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t c:nil
+#+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
+#+OPTIONS: num:nil p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
+#+OPTIONS: title:t toc:nil todo:t |:t
+#+TITLE: Welcome to Unidata on XSEDE Jetstream Cloud
+#+DATE: <2016-12-13 Tue>
+#+AUTHOR: Julien Chastang
+#+EMAIL: chastang at ucar dot edu
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
+
+
+Welcome to the Unidata Jetstream installation. As part of [[https://www.unidata.ucar.edu/publications/Unidata_2018.pdf][Unidata's 2018 Five-year plan (PDF)]], Unidata is exploring the use of cloud computing. Here you will find
+
+- An [[http://jetstream.unidata.ucar.edu/thredds/catalog.html][operational THREDDS Data server]] supplying a good portion of the data available on the IDD (one day archive).
+- The [[http://jetstream.unidata.ucar.edu/repository][RAMADDA geoscience content management]] system. Therein you will find [[http://jetstream.unidata.ucar.edu/repository/entry/show?entryid=2615c313-f5bc-4e6f-8fc9-b30069d63f5e][IDV bundles]] that retrieve data from Jetstream data servers (e.g., the TDS, RAMADDA, and ADDE running on Jetstream).
+- An ADDE server available at ~jetstream.unidata.ucar.edu~ over the usual port ~112~.
+
+Behind the scenes, there is an LDM relay supplying data to various Unidata VMs on the Jetstream Cloud.
+
+** Under the Hood
+
+The work presented here makes heavy use of the Docker and the containerization efforts
+that have been going on this past year at Unidata. [[file:jetstream.org][See here to learn how this VM was configured]].

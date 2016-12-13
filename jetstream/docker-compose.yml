@@ -35,7 +35,20 @@ traefik:
     - ~/logs/traefik/:/log/
     - ./files/traefik.toml:/etc/traefik/traefik.toml
     - ./files/:/config/
-    
+
+###
+# NGINX
+###
+nginx:
+  image: nginx
+  container_name: nginx
+  volumes:
+    ./web/nginx.conf:/etc/nginx/nginx.conf:ro
+    ./web/publish/:/usr/share/nginx/html:ro
+  labels:
+    - "traefik.backend=nginx"
+    - "traefik.frontend.rule=PathPrefix: /"
+
 ###
 # RAMADDA
 ###

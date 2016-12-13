@@ -1,0 +1,918 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-12-13 Tue 14:19 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jetstream Configuration</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Julien Chastang" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+
+    <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400i,700' rel='stylesheet' />
+    <style type='text/css'>
+      body {
+        color: #111;
+        font-family: 'Gentium Book Basic', serif;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0 auto;
+        max-width: 672px;
+        padding: 0 32px;
+      }
+      
+      a:link,
+      a:visited {
+        background-color: #eee;
+        border-bottom: solid #333 1px;
+        color: #111;
+        padding: 0 .2em;
+        text-decoration: none;
+      }
+      
+      a:hover {
+        background-color: #333;
+        color: #eee;
+      }
+      
+      a:active {
+        border-bottom: solid #f00 1px;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'helvetica neue', 'arial', sans-serif;
+        font-weight: normal;
+        line-height: 1.2em;
+      }
+      
+      h1.title {
+        border-bottom: solid #d4d4d4 1px;
+        padding-bottom: .2em;
+      }
+      
+      #postamble {
+        border-top: solid #d4d4d4 1px;
+        color: #999;
+        font-style: italic;
+        text-align: right;
+        margin-top: 1em;
+      }
+      
+      #postamble a.source-link:link,
+      #postamble a.source-link:visited {
+        color: #000;
+        float: left;
+        font-family: monospace;
+        font-style: normal;
+        text-transform: lowercase;
+      }
+      
+      #postamble a.source-link:hover,
+      #postamble a.source-link:active {
+        background-color: #000;
+        color: #fff;
+      }
+      
+      #postamble a:link, #postamble a:visited {
+        background-color: transparent;
+        border-bottom: none;
+        color: #999;
+      }
+      
+      #postamble a:hover {
+        background-color: #777;
+        color: #fff;
+      }
+      
+      #postamble a:active {
+       border-bottom: solid 1px #f00;
+      }
+      
+      code {
+        background-color: #eee;
+        border-top: solid #d4d4d4 1px;
+        border-bottom: solid #d4d4d4 1px;
+        padding: 0 .2em;
+      }
+      
+      pre.src, pre.example {
+        background-color: #eee;
+        border-top: solid #d4d4d4 1px;
+        border-bottom: solid #d4d4d4 1px;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 1em;
+        margin: 0;
+        overflow: auto;
+        max-width: 100%;
+      }
+      
+      pre.src:before {
+        background-color: transparent;
+        border: none;
+        top: 0;
+        right: 0;
+      }
+      
+      sup {
+        line-height: 0;
+      }
+      
+      hr {
+        border-top: solid 1px #d4d4d4;
+        border-bottom: none;
+      }
+      
+      li p {
+        margin: 0;
+      }
+      
+      .footpara {
+        margin: 0;
+      }
+      
+      .footnotes {
+        margin-top: 1em;
+      }
+    </style>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Jetstream Configuration</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. Introduction</a></li>
+<li><a href="#orgheadline2">2. Obtain Jetstream Resources</a></li>
+<li><a href="#orgheadline32">3. Setup on Jetstream</a>
+<ul>
+<li><a href="#orgheadline3">3.1. Clone the Unidata-Dockerfiles Repository</a></li>
+<li><a href="#orgheadline7">3.2. Build and Start the Jetstream API Docker Container</a>
+<ul>
+<li><a href="#orgheadline4">3.2.1. Create ssh Keys</a></li>
+<li><a href="#orgheadline5">3.2.2. Download openrc.sh</a></li>
+<li><a href="#orgheadline6">3.2.3. Build the openstack-client Container</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline8">3.3. Set Up Jetstream API to Create VMs</a></li>
+<li><a href="#orgheadline13">3.4. Working with Jetstream API to Create VMs</a>
+<ul>
+<li><a href="#orgheadline9">3.4.1. IP Numbers</a></li>
+<li><a href="#orgheadline10">3.4.2. Boot VM</a></li>
+<li><a href="#orgheadline11">3.4.3. Create and Attach Data Volumes</a></li>
+<li><a href="#orgheadline12">3.4.4. ssh Into New VM</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline31">3.5. Set up VM to Run LDM, TDS, RAMADDA, ADDE</a>
+<ul>
+<li><a href="#orgheadline14">3.5.1. VM maintenance and Install git</a></li>
+<li><a href="#orgheadline15">3.5.2. Clone Unidata-Dockerfiles</a></li>
+<li><a href="#orgheadline16">3.5.3. Run the VM Set Up Script and Reboot</a></li>
+<li><a href="#orgheadline17">3.5.4. Check Docker Installation</a></li>
+<li><a href="#orgheadline18">3.5.5. Mount Data Volumes</a></li>
+<li><a href="#orgheadline19">3.5.6. Clone Unidata-Dockerfiles and TdsConfig Repositories</a></li>
+<li><a href="#orgheadline20">3.5.7. Create Log Directories</a></li>
+<li><a href="#orgheadline21">3.5.8. Configure the LDM</a></li>
+<li><a href="#orgheadline23">3.5.9. Configure the TDS</a></li>
+<li><a href="#orgheadline24">3.5.10. Configure RAMADDA</a></li>
+<li><a href="#orgheadline25">3.5.11. Configure McIDAS ADDE</a></li>
+<li><a href="#orgheadline26">3.5.12. Create a Self-Signed Certificates</a></li>
+<li><a href="#orgheadline27">3.5.13. TDS Host and TDM User</a></li>
+<li><a href="#orgheadline28">3.5.14. Configure TDM</a></li>
+<li><a href="#orgheadline29">3.5.15. Start Everything</a></li>
+<li><a href="#orgheadline30">3.5.16. Bootstrapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This guide is a companion document <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream/readme">(available in HTML, Markdown, text, PDF)</a> to a 2017 American Meteorological Society oral presentation, <a href="https://ams.confex.com/ams/97Annual/webprogram/Paper315508.html"><i>Geoscientific Data Distribution in the XSEDE Jetstream Cloud</i></a>. It describes how to configure the <a href="http://www.unidata.ucar.edu/software/ldm/">LDM</a>, <a href="http://www.unidata.ucar.edu/software/thredds/current/tds/">TDS</a>, <a href="http://sourceforge.net/projects/ramadda/">RAMADDA</a>, and <a href="https://www.ssec.wisc.edu/mcidas/">McIDAS ADDE</a> on <a href="https://www.xsede.org/jump-on-jetstream">XSEDE Jetstream VMs</a>. It assumes you have access to Jetstream resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. We will also be making use of the <a href="https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API">Jetstream API</a>. Obtain permission from the XSEDE Jetstream team to use Jetstream API. You must be comfortable entering commands at the Unix command line. We will be using Docker images available at the <a href="https://github.com/Unidata">Unidata Github account</a> in addition to a configuration specifically planned for an <a href="https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream">AMS 2017 demonstration</a>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Obtain Jetstream Resources</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.xsede.org/jump-on-jetstream">Apply for cloud resource allocations on Jetstream</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32"><span class="section-number-2">3</span> Setup on Jetstream</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3"><span class="section-number-3">3.1</span> Clone the Unidata-Dockerfiles Repository</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+We will be making heavy use of the <code>Unidata/Unidata-Dockerfiles</code> git repository. <a href="https://www.git-scm.com/book/en/v2/Getting-Started-Installing-Git">Install git</a> and clone that repository first:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">git clone https://github.com/Unidata/Unidata-Dockerfiles
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7"><span class="section-number-3">3.2</span> Build and Start the Jetstream API Docker Container</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+We will be using the Jetstream API directly and via convenience scripts. Install Docker (e.g., <a href="https://docs.docker.com/machine/">docker-machine</a>) on your local computing environment because we will be interacting with the Jetstream API in a Docker container.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">cd</span> Unidata-Dockerfiles/jetstream/openstack
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4"><span class="section-number-4">3.2.1</span> Create ssh Keys</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+Create an <code>.ssh</code> directory for your ssh keys:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">ssh-keygen -b 2048 -t rsa -f .ssh/id_rsa -P <span style="color: #008000;">""</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5"><span class="section-number-4">3.2.2</span> Download openrc.sh</h4>
+<div class="outline-text-4" id="text-3-2-2">
+<p>
+Download the <code>openrc.sh</code> file into the <code>Unidata-Dockerfiles/jetstream/openstack</code> directory <a href="https://iujetstream.atlassian.net/wiki/display/JWT/Setting+up+openrc.sh">according to the Jetstream API instructions</a>.
+</p>
+
+<p>
+Edit the <code>openrc.sh</code> file and the supply the TACC resource <code>OS_PASSWORD</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">export</span> <span style="color: #BA36A5;">OS_PASSWORD</span>=<span style="color: #008000;">"changeme!"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">3.2.3</span> Build the openstack-client Container</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+Build the <code>openstack-client</code> container, here done via <code>docker-machine</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-machine create --driver virtualbox openstack
+<span style="color: #006FE0;">eval</span> <span style="color: #008000;">"$(docker-machine env openstack)"</span>
+docker build -t openstack-client .
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">3.3</span> Set Up Jetstream API to Create VMs</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Start the <code>openstack-client</code> container with
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">cd</span> Unidata-Dockerfiles/jetstream/openstack
+sh os.sh
+</pre>
+</div>
+
+<p>
+You should be inside the container which has been configured to run openstack <code>nova</code> and <code>neutron</code> commands. <a href="https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line">Go though the following Jetstream API sections</a>:
+</p>
+
+<ul class="org-ul">
+<li>Create security group</li>
+<li>Upload SSH key</li>
+<li>Setup the network</li>
+</ul>
+
+<p>
+At this point, you should be able to run <code>glance image-list</code> which should yield something like: 
+</p>
+
+<!-- This HTML table template is generated by emacs 25.1.2 -->
+<table border="1">
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="left" valign="top">
+      &nbsp;fd4bf587-39e6-4640-b459-96471c9edb5c&nbsp;<br />
+      &nbsp;02217ab0-3ee0-444e-b16e-8fbdae4ed33f&nbsp;<br />
+      &nbsp;b40b2ef5-23e9-4305-8372-35e891e55fc5&nbsp;
+    </td>
+    <td align="left" valign="top">
+      &nbsp;AutoDock&nbsp;Vina&nbsp;Launch&nbsp;at&nbsp;Boot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+      &nbsp;AutoDock&nbsp;Vina&nbsp;with&nbsp;ChemBridge&nbsp;Data&nbsp;<br />
+      &nbsp;BioLinux&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+<p>
+If not, check your setup.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">3.4</span> Working with Jetstream API to Create VMs</h3>
+<div class="outline-text-3" id="text-3-4">
+</div><div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9"><span class="section-number-4">3.4.1</span> IP Numbers</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+We are ready to fire up VMs. First create an IP number which we will be using shortly:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">nova floating-ip-create public
+nova floating-ip-list
+</pre>
+</div>
+
+<p>
+or you can just <code>nova floating-ip-list</code> if you have IP numbers left around from previous VMs.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-4">
+<h4 id="orgheadline10"><span class="section-number-4">3.4.2</span> Boot VM</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+Now you can boot up a VM with something like the following command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">boot.sh -n unicloud -s m1.medium -ip 149.165.157.137
+</pre>
+</div>
+
+<p>
+The <code>boot.sh</code> command takes a VM name, size, and IP number created earlier. See <code>boot.sh -h</code> and <code>nova flavor-list</code> for more information.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-4">
+<h4 id="orgheadline11"><span class="section-number-4">3.4.3</span> Create and Attach Data Volumes</h4>
+<div class="outline-text-4" id="text-3-4-3">
+<p>
+Also, create and attach <code>/data</code> and <code>/repository</code>  volumes which we will be using shortly via the openstack API:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-:eval">cinder create 750 --display-name data
+cinder create 100 --display-name repository
+
+cinder list &amp;&amp; nova list
+
+nova volume-attach &lt;vm-uid-number&gt; &lt;volume-uid-number&gt; auto
+nova volume-attach &lt;vm-uid-number&gt; &lt;volume-uid-number&gt; auto
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline12" class="outline-4">
+<h4 id="orgheadline12"><span class="section-number-4">3.4.4</span> ssh Into New VM</h4>
+<div class="outline-text-4" id="text-3-4-4">
+<p>
+<code>ssh</code> into that new minted VM:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-:eval">ssh ubuntu@149.165.157.137
+</pre>
+</div>
+
+<p>
+If you are having trouble logging in remember to delete the <code>~/.ssh/known_hosts</code> file. If still have trouble, try <code>nova stop &lt;vm-uid-number&gt;</code> followed by <code>nova stop &lt;vm-uid-number&gt;</code>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">3.5</span> Set up VM to Run LDM, TDS, RAMADDA, ADDE</h3>
+<div class="outline-text-3" id="text-3-5">
+</div><div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14"><span class="section-number-4">3.5.1</span> VM maintenance and Install git</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+As root (<code>sudo su -</code>), update, upgrade and install <code>git</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">apt-get update &amp;&amp; apt-get -y upgrade &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y install git
+</pre>
+</div>
+
+<p>
+Create a <code>git</code> directory for the <code>Unidata-Dockerfiles</code> project.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/git
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15"><span class="section-number-4">3.5.2</span> Clone Unidata-Dockerfiles</h4>
+<div class="outline-text-4" id="text-3-5-2">
+<p>
+Clone the the <code>Unidata-Dockerfiles</code> project.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-:eval">git clone https://github.com/Unidata/Unidata-Dockerfiles ~/git/Unidata-Dockerfiles
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16"><span class="section-number-4">3.5.3</span> Run the VM Set Up Script and Reboot</h4>
+<div class="outline-text-4" id="text-3-5-3">
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span> <span style="color: #008000;">"$EUID"</span> -ne 0 <span style="color: #707183;">]</span>
+  <span style="color: #0000FF;">then </span><span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Please run as root"</span>
+  <span style="color: #0000FF;">exit</span>
+<span style="color: #0000FF;">fi</span>
+</pre>
+</div>
+
+<p>
+Install <code>Docker</code> and <code>docker-compose</code> and get the <code>ubuntu</code> user set up to run docker.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">bash ~/git/Unidata-Dockerfiles/docker-vm-setup/ubuntu/setup-ubuntu.sh -u ubuntu <span style="color: #008000;">\</span>
+     -dc 1.8.1
+</pre>
+</div>
+
+<p>
+Reboot
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-:eval">reboot now
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline17" class="outline-4">
+<h4 id="orgheadline17"><span class="section-number-4">3.5.4</span> Check Docker Installation</h4>
+<div class="outline-text-4" id="text-3-5-4">
+<p>
+Log back in to the VM as user <code>ubuntu</code>. Test <code>docker</code> with
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker run hello-world
+</pre>
+</div>
+
+<p>
+If docker gives an error
+</p>
+
+<pre class="example">
+docker: An error occurred trying to connect: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create: read unix @-&gt;/var/run/docker.sock: read: connection reset by peer.
+See 'docker run --help'.
+</pre>
+
+<p>
+Try as <b>root</b>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">service docker stop
+rm -rf /var/lib/docker/aufs
+service docker start
+</pre>
+</div>
+
+<p>
+If the <code>hello-world</code> container runs smoothly, continue.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18"><span class="section-number-4">3.5.5</span> Mount Data Volumes</h4>
+<div class="outline-text-4" id="text-3-5-5">
+<p>
+As root, run some convenience scripts to mount the data volumes for data being delivered via the LDM (<code>/data</code>) and RAMADDA (<code>/repository</code>).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #0000FF;">if</span> <span style="color: #707183;">[</span> <span style="color: #008000;">"$EUID"</span> -ne 0 <span style="color: #707183;">]</span>
+  <span style="color: #0000FF;">then </span><span style="color: #006FE0;">echo</span> <span style="color: #008000;">"Please run as root"</span>
+  <span style="color: #0000FF;">exit</span>
+<span style="color: #0000FF;">fi</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdb <span style="color: #008000;">\</span>
+     -d /data
+bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc <span style="color: #008000;">\</span>
+     -d /repository
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline19" class="outline-4">
+<h4 id="orgheadline19"><span class="section-number-4">3.5.6</span> Clone Unidata-Dockerfiles and TdsConfig Repositories</h4>
+<div class="outline-text-4" id="text-3-5-6">
+<p>
+We will again be cloning the <code>Unidata-Dockerfiles</code> repository, this time as user <code>ubuntu</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/git
+git clone https://github.com/Unidata/Unidata-Dockerfiles <span style="color: #008000;">\</span>
+    ~/git/Unidata-Dockerfiles
+git clone https://github.com/Unidata/TdsConfig ~/git/TdsConfig
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline20" class="outline-4">
+<h4 id="orgheadline20"><span class="section-number-4">3.5.7</span> Create Log Directories</h4>
+<div class="outline-text-4" id="text-3-5-7">
+<p>
+Create all log directories
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/logs/ldm/ ~/logs/ramadda-tomcat/ ~/logs/ramadda/ ~/logs/tds-tomcat/ <span style="color: #008000;">\</span>
+      ~/logs/tds/ ~/logs/traefik/ ~/logs/tdm/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline21" class="outline-4">
+<h4 id="orgheadline21"><span class="section-number-4">3.5.8</span> Configure the LDM</h4>
+<div class="outline-text-4" id="text-3-5-8">
+<p>
+Grab the ldm <code>etc</code> directory
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/etc
+cp -r ~/git/Unidata-Dockerfiles/jetstream/etc/* ~/etc/
+</pre>
+</div>
+
+<p>
+In the <code>~/etc</code> you will find the usual LDM configuration files (e.g., <code>ldmd.conf</code>, <code>registry.xml</code>). Configure them to your liking.
+</p>
+
+<p>
+In the <code>ldmd.conf</code> file we copied just a moment ago, there is a reference to a <code>pqact</code> file; <code>etc/TDS/pqact.forecastModels</code>. We need to ensure that file exists by doing the following instructions. Specifically, explode <code>~/git/TdsConfig/idd/config.zip</code> into <code>~/tdsconfig</code> and <code>cp -r</code> the <code>pqacts</code> directory into <code>~/etc/TDS</code>. <b>Note</b> do NOT use soft links. Docker does not like them. Be sure to edit <code>~/tdsconfig/threddsConfig.xml</code> for contact information in the <code>serverInformation</code> element.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23"><span class="section-number-4">3.5.9</span> Configure the TDS</h4>
+<div class="outline-text-4" id="text-3-5-9">
+<div class="org-src-container">
+
+<pre class="src src-sh">mkdir -p ~/tdsconfig/ ~/etc/TDS
+cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
+unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
+cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
+</pre>
+</div>
+</div>
+
+<ol class="org-ol"><li><a id="orgheadline22"></a>Edit ldmfile.sh<br  /><div class="outline-text-5" id="text-3-5-9-1">
+<p>
+Examine the <code>etc/TDS/util/ldmfile.sh</code> file. As the top of this file indicates, you must change the <code>logfile</code> to suit your needs. Change the 
+</p>
+
+<pre class="example">
+logfile=logs/ldm-mcidas.log
+</pre>
+
+<p>
+line to
+</p>
+
+<pre class="example">
+logfile=var/logs/ldm-mcidas.log
+</pre>
+
+<p>
+This will ensure <code>ldmfile.sh</code> can properly invoked from the <code>pqact</code> files.
+</p>
+
+<p>
+We can achieve this change with a bit of <code>sed</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">in place change of logs dir w/ sed</span>
+sed -i s/logs<span style="color: #008000;">\\</span>/ldm-mcidas.log/var<span style="color: #008000;">\\</span>/logs<span style="color: #008000;">\\</span>/ldm-mcidas<span style="color: #008000;">\\</span>.log/g <span style="color: #008000;">\</span>
+    ~/etc/TDS/util/ldmfile.sh
+</pre>
+</div>
+
+<p>
+Also ensure that <code>ldmfile.sh</code> is executable.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">chmod +x ~/etc/TDS/util/ldmfile.sh
+</pre>
+</div>
+</div></li></ol>
+</div>
+
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">3.5.10</span> Configure RAMADDA</h4>
+<div class="outline-text-4" id="text-3-5-10">
+<p>
+When you start RAMADDA for the very first time, you must have  a <code>password.properties</code> file in the RAMADDA home directory which is <code>/home/ubuntu/repository/</code>. See <a href="http://ramadda.org//repository/userguide/toc.html">RAMADDA documentation</a> for more details on setting up RAMADDA. Here is a <code>pw.properties</code> file to get you going. Change password below to something more secure!
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create RAMADDA default password</span>
+<span style="color: #006FE0;">echo</span> ramadda.install.password=changeme! | sudo tee --append <span style="color: #008000;">\</span>
+  /repository/pw.properties &gt; /dev/null
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25"><span class="section-number-4">3.5.11</span> Configure McIDAS ADDE</h4>
+<div class="outline-text-4" id="text-3-5-11">
+<div class="org-src-container">
+
+<pre class="src src-sh">cp ~/git/Unidata-Dockerfiles/jetstream/mcidas/pqact.conf_mcidasA ~/etc
+mkdir -p ~/mcidas/upcworkdata/ ~/mcidas/decoders/ ~/mcidas/util/
+cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/mcidas/upcworkdata/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">3.5.12</span> Create a Self-Signed Certificates</h4>
+<div class="outline-text-4" id="text-3-5-12">
+<p>
+In the <code>~/git/Unidata-Dockerfiles/jetstream/files/</code> directory, generate a self-signed certificate with <code>openssl</code> (or better yet, obtain a real certificate from a certificate authority).
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj <span style="color: #008000;">\</span>
+  <span style="color: #008000;">"/C=US/ST=Colorado/L=Boulder/O=Unidata/CN=tomcat.example.com"</span> <span style="color: #008000;">\</span>
+  -keyout ~/git/Unidata-Dockerfiles/jetstream/files/ssl.key <span style="color: #008000;">\</span>
+  -out ~/git/Unidata-Dockerfiles/jetstream/files/ssl.crt
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">3.5.13</span> TDS Host and TDM User</h4>
+<div class="outline-text-4" id="text-3-5-13">
+<p>
+Ensure the <code>TDS_HOST</code> URL (with a publicly accessible IP number of the docker host or DNS name) is correct in <code>/git/Unidata-Dockerfiles/jetstream/docker-compose.yml</code>. 
+</p>
+
+<p>
+In the same <code>docker-compose.yml</code> file, ensure the <code>TDM_PW</code> corresponds to the SHA digested password of the <code>tdm</code> user <code>/git/Unidata-Dockerfiles/jetstream/files/tomcat-users.xml</code> 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-:eval">docker run tomcat  /usr/local/tomcat/bin/digest.sh -a "SHA" mysupersecretpassword
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">3.5.14</span> Configure TDM</h4>
+<div class="outline-text-4" id="text-3-5-14">
+<p>
+<a href="https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container">TDM logging will not be configurable until TDS 5.0</a>. Until then:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar <span style="color: #008000;">\</span>
+     -o ~/logs/tdm/tdm.jar
+curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh <span style="color: #008000;">\</span>
+     -o ~/logs/tdm/tdm.sh
+chmod +x  ~/logs/tdm/tdm.sh
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">3.5.15</span> Start Everything</h4>
+<div class="outline-text-4" id="text-3-5-15">
+<p>
+Fire up The whole kit and caboodle with <code>docker-compose.yml</code> which will start:
+</p>
+
+<ul class="org-ul">
+<li>ldm</li>
+<li>traefik, a reverse proxy that will channel ramadda and tds http request to the right container</li>
+<li>ramadda</li>
+<li>thredds-production</li>
+<li>tdm</li>
+<li>McIDAS ADDE</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">3.5.16</span> Bootstrapping</h4>
+<div class="outline-text-4" id="text-3-5-16">
+<p>
+The problem at this point is that it will take a little while for the LDM to fill the <code>/data</code> directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up with:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #006FE0;">cd</span> ~/git/Unidata-Dockerfiles/jetstream/
+docker-compose stop &amp;&amp; docker-compose up -d
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Last updated on Tue Dec 13 14:19:00 2016
+</div>
+</body>
+</html>
