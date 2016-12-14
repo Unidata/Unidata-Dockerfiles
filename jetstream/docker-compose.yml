@@ -39,15 +39,17 @@ traefik:
 ###
 # NGINX
 ###
+
 nginx:
   image: nginx
   container_name: nginx
   volumes:
-    ./web/nginx.conf:/etc/nginx/nginx.conf:ro
-    ./web/publish/:/usr/share/nginx/html:ro
+    - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./web/publish/:/usr/share/nginx/html:ro
   labels:
     - "traefik.backend=nginx"
-    - "traefik.frontend.rule=PathPrefix: /"
+    - "traefik.frontend.rule=Host:jetstream.unidata.ucar.edu"
+    - "traefik.port=80"
 
 ###
 # RAMADDA
@@ -63,7 +65,7 @@ ramadda:
     - ~/logs/ramadda/:/data/repository/logs/
   labels:
     - "traefik.backend=ramadda"
-    - "traefik.frontend.rule=PathPrefix: /repository"
+    - "traefik.frontend.rule=Host:jetstream.unidata.ucar.edu;PathPrefix:/repository"
 
 ###
 # THREDDS
@@ -87,7 +89,7 @@ thredds-production:
     - ~/tdsconfig/:/usr/local/tomcat/content/thredds
   labels:
     - "traefik.backend=thredds"
-    - "traefik.frontend.rule=PathPrefix: /thredds"
+    - "traefik.frontend.rule=Host:jetstream.unidata.ucar.edu;PathPrefix:/thredds"
 
 ###
 # TDM
@@ -104,15 +106,16 @@ tdm:
     # change the password
     - TDM_PW=CHANGEME!
     # that trailing slash is important
-    - TDS_HOST=http://CHANGEME/
+    - TDS_HOST=http://jetstream.unidata.ucar.edu/
 
 ###
 # McIDAS
 ###
 # ADDE, licensing issues that do not allow us to distribute the software via the DockerHub registry. Contact ~support-mcidas@unidata.ucar.edu~ for more information about obtaining this image.
+
 # mcidas:
-#   container_name: mcidas
 #   image: unidata/mcidas
+#   container_name: mcidas
 #   volumes:
 #     # Directories outside of the container that need to be accessible
 #    - ~/mcidas/upcworkdata/:/home/mcidas/upcworkdata/
