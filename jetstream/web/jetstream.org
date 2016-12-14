@@ -2,10 +2,13 @@
 #+OPTIONS: creator:nil d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t
 #+OPTIONS: num:t p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t timestamp:t
 #+OPTIONS: title:t toc:t todo:t |:t
-#+TITLE: Jetstream Configuration
-#+DATE: <2016-12-13 Tue>
-#+AUTHOR: Julien Chastang
-#+EMAIL: chastang at ucar dot edu
+#+TITLE: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
+#+SUBTITLE: Unidata on the Jetstream Cloud
+#+DATE: 2017-01-25 Wed
+#+DESCRIPTION: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
+#+KEYWORDS:  ADDE RAMADDA TDS LDM Unidata Docker
+#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy
+#+EMAIL: chastang@ucar.edu
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
