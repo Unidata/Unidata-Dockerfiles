@@ -7,7 +7,7 @@
 #+DATE: 2017-01-25 Wed
 #+DESCRIPTION: Geoscientific Data Distribution in the XSEDE Jetstream Cloud 
 #+KEYWORDS:  ADDE RAMADDA TDS LDM Unidata Docker
-#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy
+#+AUTHOR: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy, Tom Yoksas
 #+EMAIL: chastang@ucar.edu
 #+LANGUAGE: en
 #+SELECT_TAGS: export
@@ -27,7 +27,7 @@
 # latex header
 #+LATEX_HEADER: \usepackage{fancyhdr}
 #+LATEX_HEADER: \pagestyle{fancyplain}
-#+LATEX_HEADER: \lhead{\textbf{13B.5}}
+#+LATEX_HEADER: \lhead{\textbf{J10.4}}
 
 # latex footnotes
 #+LATEX_HEADER: \usepackage{bigfoot}
@@ -50,6 +50,15 @@
 #+LATEX_HEADER: \usepackage[htt]{hyphenat}
 #+LATEX_HEADER: \sloppy
 
+# code listings
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \lstnewenvironment{common-lispcode}
+#+LaTeX_HEADER: {\lstset{language={Lisp},basicstyle={\ttfamily\footnotesize},frame=single,breaklines=true}}
+#+LaTeX_HEADER: {}
+#+LaTeX_HEADER: \newcommand{\python}[1]{\lstset{language={Python},basicstyle={\ttfamily\small}}\lstinline{#1}}
+
+
 #+PROPERTY: header-args :tangle no
 
 * Org Export Set up (Internal Only)                                :noexport:
@@ -61,6 +70,43 @@
   (setq org-export-babel-evaluate nil)
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defun jetstream/org-save-and-export ()
+    (interactive)
+    (when (eq major-mode 'org-mode)
+        (progn
+          (org-html-export-to-html)
+          ;;(org-gfm-export-to-markdown)
+          (org-latex-export-to-pdf)
+          (org-ascii-export-to-ascii))))
+
+  (add-hook 'after-save-hook 'jetstream/org-save-and-export nil t)
+#+END_SRC
+
+#+NAME: listings
+#+BEGIN_SRC emacs-lisp :exports both :results silent
+  (setq org-latex-listings 'listings)
+  (setq org-latex-custom-lang-environments
+        '((emacs-lisp "common-lispcode")))
+  (setq org-latex-listings-options
+        '(("frame" "lines")
+          ("basicstyle" "\\footnotesize")
+          ("numbers" "left")
+          ("numberstyle" "\\tiny")))
+  (setq org-latex-to-pdf-process
+        '("pdflatex -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+END_SRC
+
 * Introduction
 
 This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfiles/tree/master/jetstream/readme][(available in HTML, Markdown, text, PDF)]] to a 2017 American Meteorological Society oral presentation, [[https://ams.confex.com/ams/97Annual/webprogram/Paper315508.html][/Geoscientific Data Distribution in the XSEDE Jetstream Cloud/]]. It describes how to configure the [[http://www.unidata.ucar.edu/software/ldm/][LDM]], [[http://www.unidata.ucar.edu/software/thredds/current/tds/][TDS]], [[http://sourceforge.net/projects/ramadda/][RAMADDA]], and [[https://www.ssec.wisc.edu/mcidas/][McIDAS ADDE]] on [[https://www.xsede.org/jump-on-jetstream][XSEDE Jetstream VMs]]. It assumes you have access to Jetstream resources though these instructions should be fairly similar on other cloud providers (e.g., Amazon). These instructions also require familiarity with Unix, Docker, and Unidata technology in general. We will also be making use of the [[https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API][Jetstream API]]. Obtain permission from the XSEDE Jetstream team to use Jetstream API. You must be comfortable entering commands at the Unix command line. We will be using Docker images available at the [[https://github.com/Unidata][Unidata Github account]] in addition to a configuration specifically planned for an [[http://jetstream.unidata.ucar.edu][AMS 2017 demonstration]]. 
@@ -69,7 +115,7 @@ This guide is a companion document [[https://github.com/Unidata/Unidata-Dockerfi
 
 [[https://www.xsede.org/jump-on-jetstream][Apply for cloud resource allocations on Jetstream]].
 
-* Setup on Jetstream
+* Configure Jetstream to Run Unidata Docker Containers
 ** Clone the Unidata-Dockerfiles Repository
 
 We will be making heavy use of the ~Unidata/Unidata-Dockerfiles~ git repository. [[https://www.git-scm.com/book/en/v2/Getting-Started-Installing-Git][Install git]] and clone that repository first:

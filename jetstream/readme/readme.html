@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-12-16 Fri 10:00 -->
+<!-- 2016-12-14 Wed 16:39 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Geoscientific Data Distribution in the XSEDE Jetstream Cloud</title>
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy" />
+<meta  name="author" content="Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy, Tom Yoksas" />
 <meta  name="description" content="Geoscientific Data Distribution in the XSEDE Jetstream Cloud"
  />
 <meta  name="keywords" content="ADDE RAMADDA TDS LDM Unidata Docker" />
@@ -97,136 +97,52 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
 
-    <link href='https://fonts.googleapis.com/css?family=Gentium+Book+Basic:400,400i,700' rel='stylesheet' />
-    <style type='text/css'>
-      body {
-        color: #111;
-        font-family: 'Gentium Book Basic', serif;
-        font-size: 16px;
-        line-height: 24px;
-        margin: 0 auto;
-        max-width: 672px;
-        padding: 0 32px;
-      }
-      
-      a:link,
-      a:visited {
-        background-color: #eee;
-        border-bottom: solid #333 1px;
-        color: #111;
-        padding: 0 .2em;
-        text-decoration: none;
-      }
-      
-      a:hover {
-        background-color: #333;
-        color: #eee;
-      }
-      
-      a:active {
-        border-bottom: solid #f00 1px;
-      }
-      
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'helvetica neue', 'arial', sans-serif;
-        font-weight: normal;
-        line-height: 1.2em;
-      }
-      
-      h1.title {
-        border-bottom: solid #d4d4d4 1px;
-        padding-bottom: .2em;
-      }
-      
-      #postamble {
-        border-top: solid #d4d4d4 1px;
-        color: #999;
-        font-style: italic;
-        text-align: right;
-        margin-top: 1em;
-      }
-      
-      #postamble a.source-link:link,
-      #postamble a.source-link:visited {
-        color: #000;
-        float: left;
-        font-family: monospace;
-        font-style: normal;
-        text-transform: lowercase;
-      }
-      
-      #postamble a.source-link:hover,
-      #postamble a.source-link:active {
-        background-color: #000;
-        color: #fff;
-      }
-      
-      #postamble a:link, #postamble a:visited {
-        background-color: transparent;
-        border-bottom: none;
-        color: #999;
-      }
-      
-      #postamble a:hover {
-        background-color: #777;
-        color: #fff;
-      }
-      
-      #postamble a:active {
-       border-bottom: solid 1px #f00;
-      }
-      
-      code {
-        background-color: #eee;
-        border-top: solid #d4d4d4 1px;
-        border-bottom: solid #d4d4d4 1px;
-        padding: 0 .2em;
-      }
-      
-      pre.src, pre.example {
-        background-color: #eee;
-        border-top: solid #d4d4d4 1px;
-        border-bottom: solid #d4d4d4 1px;
-        border-left: none;
-        border-right: none;
-        box-shadow: none;
-        font-size: 14px;
-        line-height: 20px;
-        padding: 1em;
-        margin: 0;
-        overflow: auto;
-        max-width: 100%;
-      }
-      
-      pre.src:before {
-        background-color: transparent;
-        border: none;
-        top: 0;
-        right: 0;
-      }
-      
-      sup {
-        line-height: 0;
-      }
-      
-      hr {
-        border-top: solid 1px #d4d4d4;
-        border-bottom: none;
-      }
-      
-      li p {
-        margin: 0;
-      }
-      
-      .footpara {
-        margin: 0;
-      }
-      
-      .footnotes {
-        margin-top: 1em;
-      }
-    </style>
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="content">
@@ -240,7 +156,7 @@
 <ul>
 <li><a href="#orgheadline1">1. Introduction</a></li>
 <li><a href="#orgheadline2">2. Obtain Jetstream Resources</a></li>
-<li><a href="#orgheadline33">3. Configure Jetstream to Run Unidata Docker Containers</a>
+<li><a href="#orgheadline33">3. Configure Jetstream to Run Docker Containers</a>
 <ul>
 <li><a href="#orgheadline3">3.1. Clone the Unidata-Dockerfiles Repository</a></li>
 <li><a href="#orgheadline7">3.2. Build and Start the Jetstream API Docker Container</a>
@@ -305,7 +221,7 @@ This guide is a companion document <a href="https://github.com/Unidata/Unidata-D
 </div>
 
 <div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33"><span class="section-number-2">3</span> Configure Jetstream to Run Unidata Docker Containers</h2>
+<h2 id="orgheadline33"><span class="section-number-2">3</span> Configure Jetstream to Run Docker Containers</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-orgheadline3" class="outline-3">
 <h3 id="orgheadline3"><span class="section-number-3">3.1</span> Clone the Unidata-Dockerfiles Repository</h3>
@@ -927,7 +843,10 @@ docker-compose stop &amp;&amp; docker-compose up -d
 </div>
 </div>
 <div id="postamble" class="status">
-Last updated on Fri Dec 16 10:00:38 2016
+<p class="date">Date: 2017-01-25 Wed</p>
+<p class="author">Author: Julien Chastang (UCAR, Boulder, CO USA), Mohan Ramamurthy, Tom Yoksas</p>
+<p class="date">Created: 2016-12-14 Wed 16:39</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
