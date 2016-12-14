@@ -5,6 +5,7 @@ ldm:
   # restart: always
   image: unidata/ldm-docker:6.13.5
   container_name: ldm
+  # restart: always
   volumes:
     - ~/etc/:/home/ldm/etc/
     - /data/:/home/ldm/var/data/
@@ -25,6 +26,7 @@ ldm:
 traefik:
   image: traefik
   container_name: traefik 
+  # restart: always
   command: --web --docker --docker.domain=localhost --accesslogsfile=/log/access_log 
   ports:
     - "80:80"
@@ -43,6 +45,7 @@ traefik:
 nginx:
   image: nginx
   container_name: nginx
+  # restart: always
   volumes:
     - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
     - ./web/publish/:/usr/share/nginx/html:ro
@@ -58,6 +61,7 @@ nginx:
 ramadda:
   image: unidata/ramadda-docker:2.2
   container_name: ramadda
+  # restart: always
   volumes:
     - /repository/:/data/repository/
     - /data/ldm/:/data/ldm/
@@ -74,6 +78,7 @@ ramadda:
 thredds-production:
   image: unidata/thredds-docker:4.6.6
   container_name: thredds
+  # restart: always
   ports:
     - "8443:8443"
   volumes:
@@ -98,6 +103,7 @@ thredds-production:
 tdm:
   image: unidata/thredds-docker:tdm-4.6
   container_name: tdm
+  # restart: always
   volumes:
       - /data/:/data/
       - ~/tdsconfig/:/usr/local/tomcat/content/thredds/
@@ -116,6 +122,7 @@ tdm:
 # mcidas:
 #   image: unidata/mcidas
 #   container_name: mcidas
+#   # restart: always
 #   volumes:
 #     # Directories outside of the container that need to be accessible
 #    - ~/mcidas/upcworkdata/:/home/mcidas/upcworkdata/
