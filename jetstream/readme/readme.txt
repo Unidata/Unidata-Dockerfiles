@@ -16,7 +16,7 @@ _________________
 
 1 Introduction
 2 Obtain Jetstream Resources
-3 Configure Jetstream to Run Docker Containers
+3 Configure Jetstream to Run Unidata Docker Containers
 .. 3.1 Clone the Unidata-Dockerfiles Repository
 .. 3.2 Build and Start the Jetstream API Docker Container
 ..... 3.2.1 Create ssh Keys
@@ -43,9 +43,9 @@ _________________
 ..... 3.5.12 Create a Self-Signed Certificates
 ..... 3.5.13 TDS Host and TDM User
 ..... 3.5.14 Configure TDM
-..... 3.5.15 chown for Good Measure
-..... 3.5.16 Start Everything
-..... 3.5.17 Bootstrapping
+.. 3.6 chown for Good Measure
+4 Start Everything
+.. 4.1 Bootstrapping
 
 
 
@@ -104,8 +104,8 @@ https://iujetstream.atlassian.net/wiki/display/JWT/Using+the+Jetstream+API
 https://www.xsede.org/jump-on-jetstream
 
 
-3 Configure Jetstream to Run Docker Containers
-==============================================
+3 Configure Jetstream to Run Unidata Docker Containers
+======================================================
 
 3.1 Clone the Unidata-Dockerfiles Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -455,6 +455,7 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
 
   ,----
   | # in place change of logs dir w/ sed
+  | 
   | sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
   |     ~/etc/TDS/util/ldmfile.sh
   `----
@@ -477,6 +478,7 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
 
   ,----
   | # Create RAMADDA default password
+  | 
   | echo ramadda.install.password=changeme! | sudo tee --append \
   |   /repository/pw.properties > /dev/null
   `----
@@ -533,7 +535,8 @@ http://ramadda.org//repository/userguide/toc.html
   [TDM logging will not be configurable until TDS 5.0]. Until then:
 
   ,----
-  | curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+  | curl -SL  \
+  |      https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
   |      -o ~/logs/tdm/tdm.jar
   | curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
   |      -o ~/logs/tdm/tdm.sh
@@ -545,8 +548,8 @@ http://ramadda.org//repository/userguide/toc.html
 https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container
 
 
-3.5.15 chown for Good Measure
------------------------------
+3.6 chown for Good Measure
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   As `root' ensure that permissions are as they should be:
 
@@ -555,8 +558,8 @@ https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-co
   `----
 
 
-3.5.16 Start Everything
------------------------
+4 Start Everything
+==================
 
   Fire up the whole kit and caboodle with `docker-compose.yml' which
   will start:
@@ -570,6 +573,8 @@ https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-co
   - TDM
   - McIDAS ADDE
 
+  As user `ubuntu':
+
   ,----
   | docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
   `----
@@ -577,9 +582,8 @@ https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-co
 
 [Traefik] https://traefik.io/
 
-
-3.5.17 Bootstrapping
---------------------
+4.1 Bootstrapping
+~~~~~~~~~~~~~~~~~
 
   The problem at this point is that it will take a little while for the
   LDM to fill the `/data' directory up with data. I don't believe the

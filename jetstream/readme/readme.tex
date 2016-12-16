@@ -1,4 +1,4 @@
-% Created 2016-12-14 Wed 16:45
+% Created 2016-12-16 Fri 10:41
 \documentclass[onecolumn,9pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -62,8 +62,8 @@ This guide is a companion document \href{https://github.com/Unidata/Unidata-Dock
 
 \href{https://www.xsede.org/jump-on-jetstream}{Apply for cloud resource allocations on Jetstream}.
 
-\section{Configure Jetstream to Run Docker Containers}
-\label{sec:orgheadline33}
+\section{Configure Jetstream to Run Unidata Docker Containers}
+\label{sec:orgheadline31}
 \subsection{Clone the Unidata-Dockerfiles Repository}
 \label{sec:orgheadline3}
 
@@ -217,7 +217,7 @@ ssh ubuntu@149.165.157.137
 If you are having trouble logging in, you may try to delete the \texttt{\textasciitilde{}/.ssh/known\_hosts} file. If you still have trouble, try \texttt{nova stop <vm-uid-number>} followed by \texttt{nova stop <vm-uid-number>}.
 
 \subsection{Set up VM to Run LDM, TDS, RAMADDA, ADDE}
-\label{sec:orgheadline32}
+\label{sec:orgheadline29}
 \subsubsection{VM Maintenance and Install git}
 \label{sec:orgheadline14}
 
@@ -377,6 +377,7 @@ We can achieve this change with a bit of \texttt{sed}:
 \lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
 \begin{lstlisting}
 # in place change of logs dir w/ sed
+
 sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
     ~/etc/TDS/util/ldmfile.sh
 \end{lstlisting}
@@ -397,6 +398,7 @@ When you start RAMADDA for the very first time, you must have  a \texttt{passwor
 \lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
 \begin{lstlisting}
 # Create RAMADDA default password
+
 echo ramadda.install.password=changeme! | sudo tee --append \
   /repository/pw.properties > /dev/null
 \end{lstlisting}
@@ -443,15 +445,16 @@ docker run tomcat  /usr/local/tomcat/bin/digest.sh -a "SHA" mysupersecretpasswor
 
 \lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
 \begin{lstlisting}
-curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+curl -SL  \
+     https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
      -o ~/logs/tdm/tdm.jar
 curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
      -o ~/logs/tdm/tdm.sh
 chmod +x  ~/logs/tdm/tdm.sh
 \end{lstlisting}
 
-\subsubsection{chown for Good Measure}
-\label{sec:orgheadline29}
+\subsection{chown for Good Measure}
+\label{sec:orgheadline30}
 
 As \texttt{root} ensure that permissions are as they should be:
 
@@ -460,8 +463,8 @@ As \texttt{root} ensure that permissions are as they should be:
 chown -R ubuntu:docker /data /repository ~ubuntu
 \end{lstlisting}
 
-\subsubsection{Start Everything}
-\label{sec:orgheadline30}
+\section{Start Everything}
+\label{sec:orgheadline33}
 
 Fire up the whole kit and caboodle with \texttt{docker-compose.yml} which will start:
 
@@ -475,13 +478,15 @@ Fire up the whole kit and caboodle with \texttt{docker-compose.yml} which will s
 \item McIDAS ADDE
 \end{itemize}
 
+As user \texttt{ubuntu}:
+
 \lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
 \begin{lstlisting}
 docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
 \end{lstlisting}
 
-\subsubsection{Bootstrapping}
-\label{sec:orgheadline31}
+\subsection{Bootstrapping}
+\label{sec:orgheadline32}
 
 The problem at this point is that it will take a little while for the LDM to fill the \texttt{/data} directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up a few times as the \texttt{/data} directory fills up with:
 

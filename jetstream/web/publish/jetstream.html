@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-12-16 Fri 10:00 -->
+<!-- 2016-12-16 Fri 10:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Geoscientific Data Distribution in the XSEDE Jetstream Cloud</title>
@@ -240,7 +240,7 @@
 <ul>
 <li><a href="#orgheadline1">1. Introduction</a></li>
 <li><a href="#orgheadline2">2. Obtain Jetstream Resources</a></li>
-<li><a href="#orgheadline33">3. Configure Jetstream to Run Unidata Docker Containers</a>
+<li><a href="#orgheadline31">3. Configure Jetstream to Run Unidata Docker Containers</a>
 <ul>
 <li><a href="#orgheadline3">3.1. Clone the Unidata-Dockerfiles Repository</a></li>
 <li><a href="#orgheadline7">3.2. Build and Start the Jetstream API Docker Container</a>
@@ -259,7 +259,7 @@
 <li><a href="#orgheadline12">3.4.4. ssh Into New VM</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline32">3.5. Set up VM to Run LDM, TDS, RAMADDA, ADDE</a>
+<li><a href="#orgheadline29">3.5. Set up VM to Run LDM, TDS, RAMADDA, ADDE</a>
 <ul>
 <li><a href="#orgheadline14">3.5.1. VM Maintenance and Install git</a></li>
 <li><a href="#orgheadline15">3.5.2. Clone Unidata-Dockerfiles</a></li>
@@ -275,11 +275,14 @@
 <li><a href="#orgheadline26">3.5.12. Create a Self-Signed Certificates</a></li>
 <li><a href="#orgheadline27">3.5.13. TDS Host and TDM User</a></li>
 <li><a href="#orgheadline28">3.5.14. Configure TDM</a></li>
-<li><a href="#orgheadline29">3.5.15. chown for Good Measure</a></li>
-<li><a href="#orgheadline30">3.5.16. Start Everything</a></li>
-<li><a href="#orgheadline31">3.5.17. Bootstrapping</a></li>
 </ul>
 </li>
+<li><a href="#orgheadline30">3.6. chown for Good Measure</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline33">4. Start Everything</a>
+<ul>
+<li><a href="#orgheadline32">4.1. Bootstrapping</a></li>
 </ul>
 </li>
 </ul>
@@ -304,8 +307,8 @@ This guide is a companion document <a href="https://github.com/Unidata/Unidata-D
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33"><span class="section-number-2">3</span> Configure Jetstream to Run Unidata Docker Containers</h2>
+<div id="outline-container-orgheadline31" class="outline-2">
+<h2 id="orgheadline31"><span class="section-number-2">3</span> Configure Jetstream to Run Unidata Docker Containers</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-orgheadline3" class="outline-3">
 <h3 id="orgheadline3"><span class="section-number-3">3.1</span> Clone the Unidata-Dockerfiles Repository</h3>
@@ -539,8 +542,8 @@ If you are having trouble logging in, you may try to delete the <code>~/.ssh/kno
 </div>
 </div>
 
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">3.5</span> Set up VM to Run LDM, TDS, RAMADDA, ADDE</h3>
+<div id="outline-container-orgheadline29" class="outline-3">
+<h3 id="orgheadline29"><span class="section-number-3">3.5</span> Set up VM to Run LDM, TDS, RAMADDA, ADDE</h3>
 <div class="outline-text-3" id="text-3-5">
 </div><div id="outline-container-orgheadline14" class="outline-4">
 <h4 id="orgheadline14"><span class="section-number-4">3.5.1</span> VM Maintenance and Install git</h4>
@@ -765,6 +768,7 @@ We can achieve this change with a bit of <code>sed</code>:
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">in place change of logs dir w/ sed</span>
+
 sed -i s/logs<span style="color: #008000;">\\</span>/ldm-mcidas.log/var<span style="color: #008000;">\\</span>/logs<span style="color: #008000;">\\</span>/ldm-mcidas<span style="color: #008000;">\\</span>.log/g <span style="color: #008000;">\</span>
     ~/etc/TDS/util/ldmfile.sh
 </pre>
@@ -792,6 +796,7 @@ When you start RAMADDA for the very first time, you must have  a <code>password.
 <div class="org-src-container">
 
 <pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create RAMADDA default password</span>
+
 <span style="color: #006FE0;">echo</span> ramadda.install.password=changeme! | sudo tee --append <span style="color: #008000;">\</span>
   /repository/pw.properties &gt; /dev/null
 </pre>
@@ -858,7 +863,8 @@ In the same <code>docker-compose.yml</code> file, ensure the <code>TDM_PW</code>
 
 <div class="org-src-container">
 
-<pre class="src src-sh">curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar <span style="color: #008000;">\</span>
+<pre class="src src-sh">curl -SL  <span style="color: #008000;">\</span>
+     https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar <span style="color: #008000;">\</span>
      -o ~/logs/tdm/tdm.jar
 curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh <span style="color: #008000;">\</span>
      -o ~/logs/tdm/tdm.sh
@@ -867,10 +873,11 @@ chmod +x  ~/logs/tdm/tdm.sh
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgheadline29" class="outline-4">
-<h4 id="orgheadline29"><span class="section-number-4">3.5.15</span> chown for Good Measure</h4>
-<div class="outline-text-4" id="text-3-5-15">
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">3.6</span> chown for Good Measure</h3>
+<div class="outline-text-3" id="text-3-6">
 <p>
 As <code>root</code> ensure that permissions are as they should be:
 </p>
@@ -882,10 +889,11 @@ As <code>root</code> ensure that permissions are as they should be:
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orgheadline30" class="outline-4">
-<h4 id="orgheadline30"><span class="section-number-4">3.5.16</span> Start Everything</h4>
-<div class="outline-text-4" id="text-3-5-16">
+<div id="outline-container-orgheadline33" class="outline-2">
+<h2 id="orgheadline33"><span class="section-number-2">4</span> Start Everything</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Fire up the whole kit and caboodle with <code>docker-compose.yml</code> which will start:
 </p>
@@ -900,17 +908,20 @@ Fire up the whole kit and caboodle with <code>docker-compose.yml</code> which wi
 <li>McIDAS ADDE</li>
 </ul>
 
+<p>
+As user <code>ubuntu</code>:
+</p>
+
 <div class="org-src-container">
 
 <pre class="src src-sh">docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
 </pre>
 </div>
 </div>
-</div>
 
-<div id="outline-container-orgheadline31" class="outline-4">
-<h4 id="orgheadline31"><span class="section-number-4">3.5.17</span> Bootstrapping</h4>
-<div class="outline-text-4" id="text-3-5-17">
+<div id="outline-container-orgheadline32" class="outline-3">
+<h3 id="orgheadline32"><span class="section-number-3">4.1</span> Bootstrapping</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 The problem at this point is that it will take a little while for the LDM to fill the <code>/data</code> directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up a few times as the <code>/data</code> directory fills up with:
 </p>
@@ -925,9 +936,8 @@ docker-compose stop &amp;&amp; docker-compose up -d
 </div>
 </div>
 </div>
-</div>
 <div id="postamble" class="status">
-Last updated on Fri Dec 16 10:00:38 2016
+Last updated on Fri Dec 16 10:41:55 2016
 </div>
 </body>
 </html>

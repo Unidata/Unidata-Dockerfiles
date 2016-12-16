@@ -424,6 +424,7 @@ We can achieve this change with a bit of ~sed~:
 
 #+BEGIN_SRC sh :tangle ../jetstream-3.sh
   # in place change of logs dir w/ sed
+
   sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
       ~/etc/TDS/util/ldmfile.sh
 #+END_SRC
@@ -440,6 +441,7 @@ When you start RAMADDA for the very first time, you must have  a =password.prope
 
 #+BEGIN_SRC sh :tangle ../jetstream-3.sh
   # Create RAMADDA default password
+
   echo ramadda.install.password=changeme! | sudo tee --append \
     /repository/pw.properties > /dev/null
 #+END_SRC
@@ -478,14 +480,15 @@ In the same ~docker-compose.yml~ file, ensure the ~TDM_PW~ corresponds to the SH
 [[https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container][TDM logging will not be configurable until TDS 5.0]]. Until then:
 
 #+BEGIN_SRC sh :tangle ../jetstream-3.sh
-  curl -SL  https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+  curl -SL  \
+       https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
        -o ~/logs/tdm/tdm.jar
   curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
        -o ~/logs/tdm/tdm.sh
   chmod +x  ~/logs/tdm/tdm.sh
 #+END_SRC
 
-*** chown for Good Measure
+** chown for Good Measure
 
 As ~root~ ensure that permissions are as they should be:
 
@@ -493,7 +496,7 @@ As ~root~ ensure that permissions are as they should be:
  chown -R ubuntu:docker /data /repository ~ubuntu
 #+END_SRC
 
-*** Start Everything
+* Start Everything
     
 Fire up the whole kit and caboodle with ~docker-compose.yml~ which will start:
 
@@ -505,11 +508,13 @@ Fire up the whole kit and caboodle with ~docker-compose.yml~ which will start:
 - TDM
 - McIDAS ADDE
 
+As user ~ubuntu~:
+
 #+BEGIN_SRC sh :eval no
   docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
 #+END_SRC
 
-*** Bootstrapping
+** Bootstrapping
 
 The problem at this point is that it will take a little while for the LDM to fill the =/data= directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up a few times as the =/data= directory fills up with:
 
