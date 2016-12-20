@@ -279,7 +279,7 @@ Host <<myvm>>
 As ~root~ (~sudo su -~), update, upgrade and install ~git~:
 
 #+BEGIN_SRC sh :eval no :results none
-  apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git
+  apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git ntp
 #+END_SRC
 
 Create a =git= directory for the ~Unidata-Dockerfiles~ project.
@@ -392,6 +392,15 @@ Grab the ldm ~etc~ directory
 #+END_SRC
 
 In the =~/etc= you will find the usual LDM configuration files (e.g., =ldmd.conf=, =registry.xml=). Configure them to your liking.
+
+**** NTP
+As root, you also want to ensure the network time protocol configuration file accesses ~timeserver.unidata.ucar.edu~.
+
+#+BEGIN_SRC sh :tangle ../jetstream-3.sh
+  sed -i \
+      s/server\ 0.ubuntu.pool.ntp.org/server\ timeserver.unidata.ucar.edu\\nserver\ 0.ubuntu.pool.ntp.org/g \
+      /etc/ntp.conf
+#+END_SRC
 
 *** Configure the TDS
 
