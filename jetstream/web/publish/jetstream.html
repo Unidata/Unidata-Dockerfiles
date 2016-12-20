@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-12-16 Fri 10:41 -->
+<!-- 2016-12-20 Tue 16:11 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Geoscientific Data Distribution in the XSEDE Jetstream Cloud</title>
@@ -240,7 +240,7 @@
 <ul>
 <li><a href="#orgheadline1">1. Introduction</a></li>
 <li><a href="#orgheadline2">2. Obtain Jetstream Resources</a></li>
-<li><a href="#orgheadline31">3. Configure Jetstream to Run Unidata Docker Containers</a>
+<li><a href="#orgheadline32">3. Configure Jetstream to Run Unidata Docker Containers</a>
 <ul>
 <li><a href="#orgheadline3">3.1. Clone the Unidata-Dockerfiles Repository</a></li>
 <li><a href="#orgheadline7">3.2. Build and Start the Jetstream API Docker Container</a>
@@ -259,7 +259,7 @@
 <li><a href="#orgheadline12">3.4.4. ssh Into New VM</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline29">3.5. Set up VM to Run LDM, TDS, RAMADDA, ADDE</a>
+<li><a href="#orgheadline30">3.5. Set up VM to Run LDM, TDS, RAMADDA, ADDE</a>
 <ul>
 <li><a href="#orgheadline14">3.5.1. VM Maintenance and Install git</a></li>
 <li><a href="#orgheadline15">3.5.2. Clone Unidata-Dockerfiles</a></li>
@@ -268,23 +268,25 @@
 <li><a href="#orgheadline18">3.5.5. Mount Data Volumes</a></li>
 <li><a href="#orgheadline19">3.5.6. Clone Unidata-Dockerfiles and TdsConfig Repositories</a></li>
 <li><a href="#orgheadline20">3.5.7. Create Log Directories</a></li>
-<li><a href="#orgheadline21">3.5.8. Configure the LDM</a></li>
-<li><a href="#orgheadline23">3.5.9. Configure the TDS</a></li>
-<li><a href="#orgheadline24">3.5.10. Configure RAMADDA</a></li>
-<li><a href="#orgheadline25">3.5.11. Configure McIDAS ADDE</a></li>
-<li><a href="#orgheadline26">3.5.12. Create a Self-Signed Certificates</a></li>
-<li><a href="#orgheadline27">3.5.13. TDS Host and TDM User</a></li>
-<li><a href="#orgheadline28">3.5.14. Configure TDM</a></li>
+<li><a href="#orgheadline22">3.5.8. Configure the LDM</a></li>
+<li><a href="#orgheadline24">3.5.9. Configure the TDS</a></li>
+<li><a href="#orgheadline25">3.5.10. Configure RAMADDA</a></li>
+<li><a href="#orgheadline26">3.5.11. Configure McIDAS ADDE</a></li>
+<li><a href="#orgheadline27">3.5.12. Create a Self-Signed Certificates</a></li>
+<li><a href="#orgheadline28">3.5.13. TDS Host and TDM User</a></li>
+<li><a href="#orgheadline29">3.5.14. Configure TDM</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline30">3.6. chown for Good Measure</a></li>
+<li><a href="#orgheadline31">3.6. chown for Good Measure</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline33">4. Start Everything</a>
+<li><a href="#orgheadline34">4. Start Everything</a>
 <ul>
-<li><a href="#orgheadline32">4.1. Bootstrapping</a></li>
+<li><a href="#orgheadline33">4.1. Bootstrapping</a></li>
 </ul>
 </li>
+<li><a href="#orgheadline35">5. References</a></li>
+<li><a href="#orgheadline36">6. Acknowledgments</a></li>
 </ul>
 </div>
 </div>
@@ -307,8 +309,8 @@ This guide is a companion document <a href="https://github.com/Unidata/Unidata-D
 </div>
 </div>
 
-<div id="outline-container-orgheadline31" class="outline-2">
-<h2 id="orgheadline31"><span class="section-number-2">3</span> Configure Jetstream to Run Unidata Docker Containers</h2>
+<div id="outline-container-orgheadline32" class="outline-2">
+<h2 id="orgheadline32"><span class="section-number-2">3</span> Configure Jetstream to Run Unidata Docker Containers</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-orgheadline3" class="outline-3">
 <h3 id="orgheadline3"><span class="section-number-3">3.1</span> Clone the Unidata-Dockerfiles Repository</h3>
@@ -542,8 +544,8 @@ If you are having trouble logging in, you may try to delete the <code>~/.ssh/kno
 </div>
 </div>
 
-<div id="outline-container-orgheadline29" class="outline-3">
-<h3 id="orgheadline29"><span class="section-number-3">3.5</span> Set up VM to Run LDM, TDS, RAMADDA, ADDE</h3>
+<div id="outline-container-orgheadline30" class="outline-3">
+<h3 id="orgheadline30"><span class="section-number-3">3.5</span> Set up VM to Run LDM, TDS, RAMADDA, ADDE</h3>
 <div class="outline-text-3" id="text-3-5">
 </div><div id="outline-container-orgheadline14" class="outline-4">
 <h4 id="orgheadline14"><span class="section-number-4">3.5.1</span> VM Maintenance and Install git</h4>
@@ -554,7 +556,7 @@ As <code>root</code> (<code>sudo su -</code>), update, upgrade and install <code
 
 <div class="org-src-container">
 
-<pre class="src src-sh">apt-get update &amp;&amp; apt-get -y upgrade &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y install git
+<pre class="src src-sh">apt-get update &amp;&amp; apt-get -y upgrade &amp;&amp; apt-get -y dist-upgrade &amp;&amp; apt-get -y install git ntp
 </pre>
 </div>
 
@@ -664,6 +666,10 @@ As <code>root</code>, run some convenience scripts to mount the data volumes for
      -d /data
 bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc <span style="color: #008000;">\</span>
      -d /repository
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">ensure disks reappear on startup</span>
+<span style="color: #006FE0;">echo</span> /dev/sdb   /data   ext4  rw      0 0 | tee --append /etc/fstab &gt; /dev/null
+<span style="color: #006FE0;">echo</span> /dev/sdc   /repository   ext4  rw      0 0 | tee --append /etc/fstab &gt; /dev/null
 </pre>
 </div>
 </div>
@@ -703,8 +709,8 @@ Create all log directories
 </div>
 </div>
 
-<div id="outline-container-orgheadline21" class="outline-4">
-<h4 id="orgheadline21"><span class="section-number-4">3.5.8</span> Configure the LDM</h4>
+<div id="outline-container-orgheadline22" class="outline-4">
+<h4 id="orgheadline22"><span class="section-number-4">3.5.8</span> Configure the LDM</h4>
 <div class="outline-text-4" id="text-3-5-8">
 <p>
 Grab the ldm <code>etc</code> directory
@@ -721,10 +727,24 @@ cp -r ~/git/Unidata-Dockerfiles/jetstream/etc/* ~/etc/
 In the <code>~/etc</code> you will find the usual LDM configuration files (e.g., <code>ldmd.conf</code>, <code>registry.xml</code>). Configure them to your liking.
 </p>
 </div>
+
+<ol class="org-ol"><li><a id="orgheadline21"></a>NTP<br  /><div class="outline-text-5" id="text-3-5-8-1">
+<p>
+As root, you also want to ensure the network time protocol configuration file accesses <code>timeserver.unidata.ucar.edu</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">sed -i <span style="color: #008000;">\</span>
+    s/server<span style="color: #008000;">\ </span>0.ubuntu.pool.ntp.org/server<span style="color: #008000;">\ </span>timeserver.unidata.ucar.edu<span style="color: #008000;">\\</span>nserver<span style="color: #008000;">\ </span>0.ubuntu.pool.ntp.org/g <span style="color: #008000;">\</span>
+    /etc/ntp.conf
+</pre>
+</div>
+</div></li></ol>
 </div>
 
-<div id="outline-container-orgheadline23" class="outline-4">
-<h4 id="orgheadline23"><span class="section-number-4">3.5.9</span> Configure the TDS</h4>
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">3.5.9</span> Configure the TDS</h4>
 <div class="outline-text-4" id="text-3-5-9">
 <p>
 In the <code>ldmd.conf</code> file we copied just a moment ago, there is a reference to a <code>pqact</code> file; <code>etc/TDS/pqact.forecastModels</code>. We need to ensure that file exists by doing the following instructions. Specifically, explode <code>~/git/TdsConfig/idd/config.zip</code> into <code>~/tdsconfig</code> and <code>cp -r</code> the <code>pqacts</code> directory into <code>~/etc/TDS</code>. <b>Note</b> do NOT use soft links. Docker does not like them. Be sure to edit <code>~/tdsconfig/threddsConfig.xml</code> for contact information in the <code>serverInformation</code> element.
@@ -740,7 +760,7 @@ cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
 </div>
 </div>
 
-<ol class="org-ol"><li><a id="orgheadline22"></a>Edit ldmfile.sh<br  /><div class="outline-text-5" id="text-3-5-9-1">
+<ol class="org-ol"><li><a id="orgheadline23"></a>Edit ldmfile.sh<br  /><div class="outline-text-5" id="text-3-5-9-1">
 <p>
 Examine the <code>etc/TDS/util/ldmfile.sh</code> file. As the top of this file indicates, you must change the <code>logfile</code> to suit your needs. Change the 
 </p>
@@ -786,8 +806,8 @@ Also ensure that <code>ldmfile.sh</code> is executable.
 </div></li></ol>
 </div>
 
-<div id="outline-container-orgheadline24" class="outline-4">
-<h4 id="orgheadline24"><span class="section-number-4">3.5.10</span> Configure RAMADDA</h4>
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25"><span class="section-number-4">3.5.10</span> Configure RAMADDA</h4>
 <div class="outline-text-4" id="text-3-5-10">
 <p>
 When you start RAMADDA for the very first time, you must have  a <code>password.properties</code> file in the RAMADDA home directory which is <code>/repository/</code>. See <a href="http://ramadda.org//repository/userguide/toc.html">RAMADDA documentation</a> for more details on setting up RAMADDA. Here is a <code>pw.properties</code> file to get you going. Change password below to something more secure!
@@ -797,15 +817,15 @@ When you start RAMADDA for the very first time, you must have  a <code>password.
 
 <pre class="src src-sh"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Create RAMADDA default password</span>
 
-<span style="color: #006FE0;">echo</span> ramadda.install.password=changeme! | sudo tee --append <span style="color: #008000;">\</span>
+<span style="color: #006FE0;">echo</span> ramadda.install.password=changeme! | tee --append <span style="color: #008000;">\</span>
   /repository/pw.properties &gt; /dev/null
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgheadline25" class="outline-4">
-<h4 id="orgheadline25"><span class="section-number-4">3.5.11</span> Configure McIDAS ADDE</h4>
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">3.5.11</span> Configure McIDAS ADDE</h4>
 <div class="outline-text-4" id="text-3-5-11">
 <div class="org-src-container">
 
@@ -817,8 +837,8 @@ cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/mcidas/upcworkdata/
 </div>
 </div>
 
-<div id="outline-container-orgheadline26" class="outline-4">
-<h4 id="orgheadline26"><span class="section-number-4">3.5.12</span> Create a Self-Signed Certificates</h4>
+<div id="outline-container-orgheadline27" class="outline-4">
+<h4 id="orgheadline27"><span class="section-number-4">3.5.12</span> Create a Self-Signed Certificates</h4>
 <div class="outline-text-4" id="text-3-5-12">
 <p>
 In the <code>~/git/Unidata-Dockerfiles/jetstream/files/</code> directory, generate a self-signed certificate with <code>openssl</code> (or better yet, obtain a real certificate from a certificate authority).
@@ -835,8 +855,8 @@ In the <code>~/git/Unidata-Dockerfiles/jetstream/files/</code> directory, genera
 </div>
 </div>
 
-<div id="outline-container-orgheadline27" class="outline-4">
-<h4 id="orgheadline27"><span class="section-number-4">3.5.13</span> TDS Host and TDM User</h4>
+<div id="outline-container-orgheadline28" class="outline-4">
+<h4 id="orgheadline28"><span class="section-number-4">3.5.13</span> TDS Host and TDM User</h4>
 <div class="outline-text-4" id="text-3-5-13">
 <p>
 Ensure the <code>TDS_HOST</code> URL (with a publicly accessible IP number of the docker host or DNS name) is correct in <code>/git/Unidata-Dockerfiles/jetstream/docker-compose.yml</code>. 
@@ -854,8 +874,8 @@ In the same <code>docker-compose.yml</code> file, ensure the <code>TDM_PW</code>
 </div>
 </div>
 
-<div id="outline-container-orgheadline28" class="outline-4">
-<h4 id="orgheadline28"><span class="section-number-4">3.5.14</span> Configure TDM</h4>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">3.5.14</span> Configure TDM</h4>
 <div class="outline-text-4" id="text-3-5-14">
 <p>
 <a href="https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container">TDM logging will not be configurable until TDS 5.0</a>. Until then:
@@ -875,8 +895,8 @@ chmod +x  ~/logs/tdm/tdm.sh
 </div>
 </div>
 
-<div id="outline-container-orgheadline30" class="outline-3">
-<h3 id="orgheadline30"><span class="section-number-3">3.6</span> chown for Good Measure</h3>
+<div id="outline-container-orgheadline31" class="outline-3">
+<h3 id="orgheadline31"><span class="section-number-3">3.6</span> chown for Good Measure</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 As <code>root</code> ensure that permissions are as they should be:
@@ -891,8 +911,8 @@ As <code>root</code> ensure that permissions are as they should be:
 </div>
 </div>
 
-<div id="outline-container-orgheadline33" class="outline-2">
-<h2 id="orgheadline33"><span class="section-number-2">4</span> Start Everything</h2>
+<div id="outline-container-orgheadline34" class="outline-2">
+<h2 id="orgheadline34"><span class="section-number-2">4</span> Start Everything</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Fire up the whole kit and caboodle with <code>docker-compose.yml</code> which will start:
@@ -919,8 +939,8 @@ As user <code>ubuntu</code>:
 </div>
 </div>
 
-<div id="outline-container-orgheadline32" class="outline-3">
-<h3 id="orgheadline32"><span class="section-number-3">4.1</span> Bootstrapping</h3>
+<div id="outline-container-orgheadline33" class="outline-3">
+<h3 id="orgheadline33"><span class="section-number-3">4.1</span> Bootstrapping</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The problem at this point is that it will take a little while for the LDM to fill the <code>/data</code> directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up a few times as the <code>/data</code> directory fills up with:
@@ -935,9 +955,31 @@ docker-compose stop &amp;&amp; docker-compose up -d
 </div>
 </div>
 </div>
+
+<div id="outline-container-orgheadline35" class="outline-2">
+<h2 id="orgheadline35"><span class="section-number-2">5</span> References</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Stewart, C.A., Cockerill, T.M., Foster, I., Hancock, D., Merchant, N., Skidmore, E., Stanzione, D., Taylor, J., Tuecke, S., Turner, G., Vaughn, M., and Gaffney, N.I., Jetstream: a self-provisioned, scalable science and engineering cloud environment. 2015, In Proceedings of the 2015 XSEDE Conference: Scientific Advancements Enabled by Enhanced Cyberinfrastructure. St. Louis, Missouri. ACM: 2792774. p. 1-8. <a href="http://dx.doi.org/10.1145/2792745.2792774">http://dx.doi.org/10.1145/2792745.2792774</a>
+</p>
+
+<p>
+John Towns, Timothy Cockerill, Maytal Dahan, Ian Foster, Kelly Gaither, Andrew Grimshaw, Victor Hazlewood, Scott Lathrop, Dave Lifka, Gregory D. Peterson, Ralph Roskies, J. Ray Scott, Nancy Wilkins-Diehr, "XSEDE: Accelerating Scientific Discovery", Computing in Science &amp; Engineering, vol.16, no. 5, pp. 62-74, Sept.-Oct. 2014, <a href="10.1109/MCSE.2014.80">10.1109/MCSE.2014.80</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline36" class="outline-2">
+<h2 id="orgheadline36"><span class="section-number-2">6</span> Acknowledgments</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+We thank Jeremy Fischer, Marlon Pierce, Suresh Marru, George Wm Turner, Brian Beck, Craig Alan Stewart, Victor Hazlewood and Peg Lindenlaub for their assistance with this effort, which was made possible through the XSEDE Extended Collaborative Support Service (ECSS) program.
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-Last updated on Fri Dec 16 10:41:55 2016
+Last updated on Tue Dec 20 16:11:12 2016
 </div>
 </body>
 </html>

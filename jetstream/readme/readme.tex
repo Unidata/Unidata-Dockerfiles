@@ -1,4 +1,4 @@
-% Created 2016-12-16 Fri 10:41
+% Created 2016-12-20 Tue 16:06
 \documentclass[onecolumn,9pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -63,36 +63,33 @@ This guide is a companion document \href{https://github.com/Unidata/Unidata-Dock
 \href{https://www.xsede.org/jump-on-jetstream}{Apply for cloud resource allocations on Jetstream}.
 
 \section{Configure Jetstream to Run Unidata Docker Containers}
-\label{sec:orgheadline31}
+\label{sec:orgheadline32}
 \subsection{Clone the Unidata-Dockerfiles Repository}
 \label{sec:orgheadline3}
 
 We will be making heavy use of the \texttt{Unidata/Unidata-Dockerfiles} git repository. \href{https://www.git-scm.com/book/en/v2/Getting-Started-Installing-Git}{Install git} and clone that repository first:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 git clone https://github.com/Unidata/Unidata-Dockerfiles
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Build and Start the Jetstream API Docker Container}
 \label{sec:orgheadline7}
 
 We will be using the Jetstream API directly and via convenience scripts. Install Docker (e.g., \href{https://docs.docker.com/machine/}{docker-machine}) on your local computing environment because we will be interacting with the Jetstream API in a Docker container.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 cd Unidata-Dockerfiles/jetstream/openstack
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Create ssh Keys}
 \label{sec:orgheadline4}
 
 Create an \texttt{.ssh} directory for your ssh keys:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p .ssh && ssh-keygen -b 2048 -t rsa -f .ssh/id_rsa -P ""
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Download openrc.sh}
 \label{sec:orgheadline5}
@@ -101,40 +98,36 @@ Download the \texttt{openrc.sh} file into the \texttt{Unidata-Dockerfiles/jetstr
 
 Edit the \texttt{openrc.sh} file and the supply the TACC resource \texttt{OS\_PASSWORD}:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 export OS_PASSWORD="changeme!"
-\end{lstlisting}
+\end{verbatim}
 
 Comment out
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 # echo "Please enter your OpenStack Password: "
 # read -sr OS_PASSWORD_INPUT
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Build the openstack-client Container}
 \label{sec:orgheadline6}
 
 Build the \texttt{openstack-client} container, here done via \texttt{docker-machine}.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 docker-machine create --driver virtualbox openstack
 eval "$(docker-machine env openstack)"
 docker build -t openstack-client .
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Set Up Jetstream API to Create VMs}
 \label{sec:orgheadline8}
 
 Start the \texttt{openstack-client} container with
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 sh os.sh
-\end{lstlisting}
+\end{verbatim}
 
 You should be inside the container which has been configured to run openstack \texttt{nova} and \texttt{neutron} commands. \href{https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line}{Go though the following Jetstream API sections}:
 
@@ -168,11 +161,10 @@ If not, check your setup.
 
 We are ready to fire up VMs. First create an IP number which we will be using shortly:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 nova floating-ip-create public
 nova floating-ip-list
-\end{lstlisting}
+\end{verbatim}
 
 or you can just \texttt{nova floating-ip-list} if you have IP numbers left around from previous VMs.
 
@@ -181,10 +173,9 @@ or you can just \texttt{nova floating-ip-list} if you have IP numbers left aroun
 
 Now you can boot up a VM with something like the following command:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 boot.sh -n unicloud -s m1.medium -ip 149.165.157.137
-\end{lstlisting}
+\end{verbatim}
 
 The \texttt{boot.sh} command takes a VM name, size, and IP number created earlier. See \texttt{boot.sh -h} and \texttt{nova flavor-list} for more information.
 
@@ -193,8 +184,7 @@ The \texttt{boot.sh} command takes a VM name, size, and IP number created earlie
 
 Also, create and attach \texttt{/data} and \texttt{/repository}  volumes which we will be using shortly via the openstack API:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=:eval,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 cinder create 750 --display-name data
 cinder create 100 --display-name repository
 
@@ -202,76 +192,69 @@ cinder list && nova list
 
 nova volume-attach <vm-uid-number> <volume-uid-number> auto
 nova volume-attach <vm-uid-number> <volume-uid-number> auto
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{ssh Into New VM}
 \label{sec:orgheadline12}
 
 \texttt{ssh} into that newly minted VM:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=:eval,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 ssh ubuntu@149.165.157.137
-\end{lstlisting}
+\end{verbatim}
 
 If you are having trouble logging in, you may try to delete the \texttt{\textasciitilde{}/.ssh/known\_hosts} file. If you still have trouble, try \texttt{nova stop <vm-uid-number>} followed by \texttt{nova stop <vm-uid-number>}.
 
 \subsection{Set up VM to Run LDM, TDS, RAMADDA, ADDE}
-\label{sec:orgheadline29}
+\label{sec:orgheadline30}
 \subsubsection{VM Maintenance and Install git}
 \label{sec:orgheadline14}
 
 As \texttt{root} (\texttt{sudo su -}), update, upgrade and install \texttt{git}:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
-apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git
-\end{lstlisting}
+\begin{verbatim}
+apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git ntp
+\end{verbatim}
 
 Create a \texttt{git} directory for the \texttt{Unidata-Dockerfiles} project.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p ~/git
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Clone Unidata-Dockerfiles}
 \label{sec:orgheadline15}
 
 Clone the the \texttt{Unidata-Dockerfiles} project.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=:eval,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 git clone https://github.com/Unidata/Unidata-Dockerfiles ~/git/Unidata-Dockerfiles
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Run the VM Set Up Script and Reboot}
 \label{sec:orgheadline16}
 
 Install \texttt{Docker} and \texttt{docker-compose} and get the \texttt{ubuntu} user set up to run docker.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 bash ~/git/Unidata-Dockerfiles/docker-vm-setup/ubuntu/setup-ubuntu.sh -u ubuntu \
      -dc 1.8.1
-\end{lstlisting}
+\end{verbatim}
 
 Reboot
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=:eval,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 reboot now
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Check Docker Installation}
 \label{sec:orgheadline17}
 
 Log back in to the VM as user \texttt{ubuntu}. Test \texttt{docker} with
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 docker run hello-world
-\end{lstlisting}
+\end{verbatim}
 
 If docker gives an error
 
@@ -282,12 +265,11 @@ See 'docker run --help'.
 
 Try as \texttt{root}
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 service docker stop
 rm -rf /var/lib/docker/aufs #always think hard before rm -rf
 service docker start
-\end{lstlisting}
+\end{verbatim}
 
 If the \texttt{hello-world} container runs smoothly, continue.
 
@@ -296,67 +278,78 @@ If the \texttt{hello-world} container runs smoothly, continue.
 
 As \texttt{root}, run some convenience scripts to mount the data volumes for data being delivered via the LDM (\texttt{/data}) and RAMADDA (\texttt{/repository}).
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdb \
      -d /data
 bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
      -d /repository
-\end{lstlisting}
+
+# ensure disks reappear on startup
+echo /dev/sdb   /data   ext4  rw      0 0 | tee --append /etc/fstab > /dev/null
+echo /dev/sdc   /repository   ext4  rw      0 0 | tee --append /etc/fstab > /dev/null
+\end{verbatim}
 
 \subsubsection{Clone Unidata-Dockerfiles and TdsConfig Repositories}
 \label{sec:orgheadline19}
 
 We will again be cloning the \texttt{Unidata-Dockerfiles} repository, this time as user \texttt{ubuntu}.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p ~/git
 git clone https://github.com/Unidata/Unidata-Dockerfiles \
     ~/git/Unidata-Dockerfiles
 git clone https://github.com/Unidata/TdsConfig ~/git/TdsConfig
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Create Log Directories}
 \label{sec:orgheadline20}
 
 Create all log directories
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p ~/logs/ldm/ ~/logs/ramadda-tomcat/ ~/logs/ramadda/ ~/logs/tds-tomcat/ \
       ~/logs/tds/ ~/logs/traefik/ ~/logs/tdm/
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Configure the LDM}
-\label{sec:orgheadline21}
+\label{sec:orgheadline22}
 
 Grab the ldm \texttt{etc} directory
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p ~/etc
 cp -r ~/git/Unidata-Dockerfiles/jetstream/etc/* ~/etc/
-\end{lstlisting}
+\end{verbatim}
 
 In the \texttt{\textasciitilde{}/etc} you will find the usual LDM configuration files (e.g., \texttt{ldmd.conf}, \texttt{registry.xml}). Configure them to your liking.
 
+\begin{enumerate}
+\item NTP
+\label{sec:orgheadline21}
+As root, you also want to ensure the network time protocol configuration file accesses \texttt{timeserver.unidata.ucar.edu}.
+
+\begin{verbatim}
+sed -i \
+    s/server\ 0.ubuntu.pool.ntp.org/server\ timeserver.unidata.ucar.edu\\nserver\ 0.ubuntu.pool.ntp.org/g \
+    /etc/ntp.conf
+\end{verbatim}
+\end{enumerate}
+
 \subsubsection{Configure the TDS}
-\label{sec:orgheadline23}
+\label{sec:orgheadline24}
 
 In the \texttt{ldmd.conf} file we copied just a moment ago, there is a reference to a \texttt{pqact} file; \texttt{etc/TDS/pqact.forecastModels}. We need to ensure that file exists by doing the following instructions. Specifically, explode \texttt{\textasciitilde{}/git/TdsConfig/idd/config.zip} into \texttt{\textasciitilde{}/tdsconfig} and \texttt{cp -r} the \texttt{pqacts} directory into \texttt{\textasciitilde{}/etc/TDS}. \textbf{Note} do NOT use soft links. Docker does not like them. Be sure to edit \texttt{\textasciitilde{}/tdsconfig/threddsConfig.xml} for contact information in the \texttt{serverInformation} element.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 mkdir -p ~/tdsconfig/ ~/etc/TDS
 cp ~/git/TdsConfig/idd/config.zip ~/tdsconfig/
 unzip ~/tdsconfig/config.zip -d ~/tdsconfig/
 cp -r ~/tdsconfig/pqacts/* ~/etc/TDS
-\end{lstlisting}
+\end{verbatim}
 
 \begin{enumerate}
 \item Edit ldmfile.sh
-\label{sec:orgheadline22}
+\label{sec:orgheadline23}
 
 Examine the \texttt{etc/TDS/util/ldmfile.sh} file. As the top of this file indicates, you must change the \texttt{logfile} to suit your needs. Change the 
 
@@ -374,97 +367,89 @@ This will ensure \texttt{ldmfile.sh} can properly invoked from the \texttt{pqact
 
 We can achieve this change with a bit of \texttt{sed}:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 # in place change of logs dir w/ sed
 
 sed -i s/logs\\/ldm-mcidas.log/var\\/logs\\/ldm-mcidas\\.log/g \
     ~/etc/TDS/util/ldmfile.sh
-\end{lstlisting}
+\end{verbatim}
 
 Also ensure that \texttt{ldmfile.sh} is executable.
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 chmod +x ~/etc/TDS/util/ldmfile.sh
-\end{lstlisting}
+\end{verbatim}
 \end{enumerate}
 
 \subsubsection{Configure RAMADDA}
-\label{sec:orgheadline24}
+\label{sec:orgheadline25}
 
 When you start RAMADDA for the very first time, you must have  a \texttt{password.properties} file in the RAMADDA home directory which is \texttt{/repository/}. See \href{http://ramadda.org//repository/userguide/toc.html}{RAMADDA documentation} for more details on setting up RAMADDA. Here is a \texttt{pw.properties} file to get you going. Change password below to something more secure!
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 # Create RAMADDA default password
 
-echo ramadda.install.password=changeme! | sudo tee --append \
+echo ramadda.install.password=changeme! | tee --append \
   /repository/pw.properties > /dev/null
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Configure McIDAS ADDE}
-\label{sec:orgheadline25}
+\label{sec:orgheadline26}
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 cp ~/git/Unidata-Dockerfiles/jetstream/mcidas/pqact.conf_mcidasA ~/etc
 mkdir -p ~/mcidas/upcworkdata/ ~/mcidas/decoders/ ~/mcidas/util/
 cp ~/git/Unidata-Dockerfiles/mcidas/RESOLV.SRV ~/mcidas/upcworkdata/
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Create a Self-Signed Certificates}
-\label{sec:orgheadline26}
+\label{sec:orgheadline27}
 
 In the \texttt{\textasciitilde{}/git/Unidata-Dockerfiles/jetstream/files/} directory, generate a self-signed certificate with \texttt{openssl} (or better yet, obtain a real certificate from a certificate authority).
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj \
   "/C=US/ST=Colorado/L=Boulder/O=Unidata/CN=tomcat.example.com" \
   -keyout ~/git/Unidata-Dockerfiles/jetstream/files/ssl.key \
   -out ~/git/Unidata-Dockerfiles/jetstream/files/ssl.crt
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{TDS Host and TDM User}
-\label{sec:orgheadline27}
+\label{sec:orgheadline28}
 
 Ensure the \texttt{TDS\_HOST} URL (with a publicly accessible IP number of the docker host or DNS name) is correct in \texttt{/git/Unidata-Dockerfiles/jetstream/docker-compose.yml}. 
 
 In the same \texttt{docker-compose.yml} file, ensure the \texttt{TDM\_PW} corresponds to the SHA digested password of the \texttt{tdm} user \texttt{/git/Unidata-Dockerfiles/jetstream/files/tomcat-users.xml} 
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=:eval,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 docker run tomcat  /usr/local/tomcat/bin/digest.sh -a "SHA" mysupersecretpassword
-\end{lstlisting}
+\end{verbatim}
 
 \subsubsection{Configure TDM}
-\label{sec:orgheadline28}
+\label{sec:orgheadline29}
 
 \href{https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-container}{TDM logging will not be configurable until TDS 5.0}. Until then:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 curl -SL  \
      https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
      -o ~/logs/tdm/tdm.jar
 curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
      -o ~/logs/tdm/tdm.sh
 chmod +x  ~/logs/tdm/tdm.sh
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{chown for Good Measure}
-\label{sec:orgheadline30}
+\label{sec:orgheadline31}
 
 As \texttt{root} ensure that permissions are as they should be:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 chown -R ubuntu:docker /data /repository ~ubuntu
-\end{lstlisting}
+\end{verbatim}
 
 \section{Start Everything}
-\label{sec:orgheadline33}
+\label{sec:orgheadline34}
 
 Fire up the whole kit and caboodle with \texttt{docker-compose.yml} which will start:
 
@@ -480,19 +465,29 @@ Fire up the whole kit and caboodle with \texttt{docker-compose.yml} which will s
 
 As user \texttt{ubuntu}:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 docker-compose -f ~/git/Unidata-Dockerfiles/jetstream/docker-compose.yml up -d
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{Bootstrapping}
-\label{sec:orgheadline32}
+\label{sec:orgheadline33}
 
 The problem at this point is that it will take a little while for the LDM to fill the \texttt{/data} directory up with data. I don't believe the TDS/TDM can "see" directories created after start up. Therefore, you may have to bootstrap this set up a few times as the \texttt{/data} directory fills up with:
 
-\lstset{frame=lines,basicstyle=\footnotesize,numbers=left,numberstyle=\tiny,language=sh,label= ,caption= ,captionpos=b}
-\begin{lstlisting}
+\begin{verbatim}
 cd ~/git/Unidata-Dockerfiles/jetstream/
 docker-compose stop && docker-compose up -d
-\end{lstlisting}
+\end{verbatim}
+
+\section{References}
+\label{sec:orgheadline35}
+
+Stewart, C.A., Cockerill, T.M., Foster, I., Hancock, D., Merchant, N., Skidmore, E., Stanzione, D., Taylor, J., Tuecke, S., Turner, G., Vaughn, M., and Gaffney, N.I., Jetstream: a self-provisioned, scalable science and engineering cloud environment. 2015, In Proceedings of the 2015 XSEDE Conference: Scientific Advancements Enabled by Enhanced Cyberinfrastructure. St. Louis, Missouri. ACM: 2792774. p. 1-8. \url{http://dx.doi.org/10.1145/2792745.2792774}
+
+John Towns, Timothy Cockerill, Maytal Dahan, Ian Foster, Kelly Gaither, Andrew Grimshaw, Victor Hazlewood, Scott Lathrop, Dave Lifka, Gregory D. Peterson, Ralph Roskies, J. Ray Scott, Nancy Wilkins-Diehr, "XSEDE: Accelerating Scientific Discovery", Computing in Science \& Engineering, vol.16, no. 5, pp. 62-74, Sept.-Oct. 2014, \url{doi:10.1109/MCSE.2014.80}
+
+\section{Acknowledgments}
+\label{sec:orgheadline36}
+
+We thank Jeremy Fischer, Marlon Pierce, Suresh Marru, George Wm Turner, Brian Beck, Craig Alan Stewart, Victor Hazlewood and Peg Lindenlaub for their assistance with this effort, which was made possible through the XSEDE Extended Collaborative Support Service (ECSS) program.
 \end{document}

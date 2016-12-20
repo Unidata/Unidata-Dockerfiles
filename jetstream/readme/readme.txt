@@ -46,6 +46,8 @@ _________________
 .. 3.6 chown for Good Measure
 4 Start Everything
 .. 4.1 Bootstrapping
+5 References
+6 Acknowledgments
 
 
 
@@ -293,7 +295,7 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
   As `root' (`sudo su -'), update, upgrade and install `git':
 
   ,----
-  | apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git
+  | apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git ntp
   `----
 
   Create a `git' directory for the `Unidata-Dockerfiles' project.
@@ -370,6 +372,10 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
   |      -d /data
   | bash ~/git/Unidata-Dockerfiles/jetstream/openstack/mount.sh -m /dev/sdc \
   |      -d /repository
+  | 
+  | # ensure disks reappear on startup
+  | echo /dev/sdb   /data   ext4  rw      0 0 | tee --append /etc/fstab > /dev/null
+  | echo /dev/sdc   /repository   ext4  rw      0 0 | tee --append /etc/fstab > /dev/null
   `----
 
 
@@ -410,6 +416,18 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
 
   In the `~/etc' you will find the usual LDM configuration files (e.g.,
   `ldmd.conf', `registry.xml'). Configure them to your liking.
+
+
+* 3.5.8.1 NTP
+
+  As root, you also want to ensure the network time protocol
+  configuration file accesses `timeserver.unidata.ucar.edu'.
+
+  ,----
+  | sed -i \
+  |     s/server\ 0.ubuntu.pool.ntp.org/server\ timeserver.unidata.ucar.edu\\nserver\ 0.ubuntu.pool.ntp.org/g \
+  |     /etc/ntp.conf
+  `----
 
 
 3.5.9 Configure the TDS
@@ -479,7 +497,7 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
   ,----
   | # Create RAMADDA default password
   | 
-  | echo ramadda.install.password=changeme! | sudo tee --append \
+  | echo ramadda.install.password=changeme! | tee --append \
   |   /repository/pw.properties > /dev/null
   `----
 
@@ -595,3 +613,32 @@ https://github.com/Unidata/thredds-docker#capturing-tdm-log-files-outside-the-co
   | cd ~/git/Unidata-Dockerfiles/jetstream/
   | docker-compose stop && docker-compose up -d
   `----
+
+
+5 References
+============
+
+  Stewart, C.A., Cockerill, T.M., Foster, I., Hancock, D., Merchant, N.,
+  Skidmore, E., Stanzione, D., Taylor, J., Tuecke, S., Turner, G.,
+  Vaughn, M., and Gaffney, N.I., Jetstream: a self-provisioned, scalable
+  science and engineering cloud environment. 2015, In Proceedings of the
+  2015 XSEDE Conference: Scientific Advancements Enabled by Enhanced
+  Cyberinfrastructure. St. Louis, Missouri. ACM:
+  2792774. p. 1-8. [http://dx.doi.org/10.1145/2792745.2792774]
+
+  John Towns, Timothy Cockerill, Maytal Dahan, Ian Foster, Kelly
+  Gaither, Andrew Grimshaw, Victor Hazlewood, Scott Lathrop, Dave Lifka,
+  Gregory D. Peterson, Ralph Roskies, J. Ray Scott, Nancy Wilkins-Diehr,
+  "XSEDE: Accelerating Scientific Discovery", Computing in Science &
+  Engineering, vol.16, no. 5, pp. 62-74, Sept.-Oct. 2014,
+  [doi:10.1109/MCSE.2014.80]
+
+
+6 Acknowledgments
+=================
+
+  We thank Jeremy Fischer, Marlon Pierce, Suresh Marru, George Wm
+  Turner, Brian Beck, Craig Alan Stewart, Victor Hazlewood and Peg
+  Lindenlaub for their assistance with this effort, which was made
+  possible through the XSEDE Extended Collaborative Support Service
+  (ECSS) program.
