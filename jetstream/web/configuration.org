@@ -11,6 +11,16 @@
 #+EXCLUDE_TAGS: noexport
 #+CREATOR: Emacs 25.1.2 (Org mode 8.3.6)
 
+* Org Set Up (Internal Only)                                       :noexport:
+
+# org-mode stuff. Don't want confirmation for babel exec, nor should babel block be evaluated during export.
+
+#+BEGIN_SRC emacs-lisp :results silent :exports none 
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-export-babel-evaluate nil)
+#+END_SRC
+
+
 * Imports
 #+BEGIN_SRC emacs-lisp :results none
   (require 'ob-css)
