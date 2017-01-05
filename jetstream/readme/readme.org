@@ -279,7 +279,8 @@ Host <<myvm>>
 As ~root~ (~sudo su -~), update, upgrade and install ~git~:
 
 #+BEGIN_SRC sh :eval no :results none
-  apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git ntp
+  apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && \
+      apt-get -y install git ntp
 #+END_SRC
 
 Create a =git= directory for the ~Unidata-Dockerfiles~ project.
