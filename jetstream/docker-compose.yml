@@ -16,8 +16,8 @@ ldm:
     - "388:388"
   ulimits:
     nofile:
-      soft: 1024
-      hard: 1024
+      soft: 64
+      hard: 64
 
 ###
 # Reverse proxy for TDS and RAMADDA
