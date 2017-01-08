@@ -76,7 +76,7 @@ ramadda:
 ###
 
 thredds-production:
-  image: unidata/thredds-docker:4.6.7
+  image: unidata/thredds-docker:4.6.8
   container_name: thredds
   # restart: always
   ports:
