@@ -495,7 +495,7 @@ In the same ~docker-compose.yml~ file, ensure the ~TDM_PW~ corresponds to the SH
 
 #+BEGIN_SRC sh :tangle ../jetstream-3.sh
   curl -SL  \
-       https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+       https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.8/tdmFat-4.6.8.jar \
        -o ~/logs/tdm/tdm.jar
   curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
        -o ~/logs/tdm/tdm.sh
