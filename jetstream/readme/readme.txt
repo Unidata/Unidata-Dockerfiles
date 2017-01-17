@@ -209,13 +209,11 @@ https://iujetstream.atlassian.net/wiki/display/JWT/Setting+up+openrc.sh
   At this point, you should be able to run `glance image-list' which
   should yield something like:
 
-  +--------------------------------------+------------------------------------+
-  | ID                                   | Name                               |
-  +--------------------------------------+------------------------------------+
-  | fd4bf587-39e6-4640-b459-96471c9edb5c | AutoDock Vina Launch at Boot       |
-  | 02217ab0-3ee0-444e-b16e-8fbdae4ed33f | AutoDock Vina with ChemBridge Data |
-  | b40b2ef5-23e9-4305-8372-35e891e55fc5 | BioLinux 8                         |
-  +--------------------------------------+------------------------------------+
+   ID                                    Name                               
+  --------------------------------------------------------------------------
+   fd4bf587-39e6-4640-b459-96471c9edb5c  AutoDock Vina Launch at Boot       
+   02217ab0-3ee0-444e-b16e-8fbdae4ed33f  AutoDock Vina with ChemBridge Data 
+   b40b2ef5-23e9-4305-8372-35e891e55fc5  BioLinux 8                         
 
   If not, check your setup.
 
@@ -295,7 +293,8 @@ https://iujetstream.atlassian.net/wiki/display/JWT/OpenStack+command+line
   As `root' (`sudo su -'), update, upgrade and install `git':
 
   ,----
-  | apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && apt-get -y install git ntp
+  | apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade && \
+  |     apt-get -y install git ntp
   `----
 
   Create a `git' directory for the `Unidata-Dockerfiles' project.
@@ -554,7 +553,7 @@ http://ramadda.org//repository/userguide/toc.html
 
   ,----
   | curl -SL  \
-  |      https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.6/tdmFat-4.6.6.jar \
+  |      https://artifacts.unidata.ucar.edu/content/repositories/unidata-releases/edu/ucar/tdmFat/4.6.8/tdmFat-4.6.8.jar \
   |      -o ~/logs/tdm/tdm.jar
   | curl -SL https://raw.githubusercontent.com/Unidata/thredds-docker/master/tdm/tdm.sh \
   |      -o ~/logs/tdm/tdm.sh
