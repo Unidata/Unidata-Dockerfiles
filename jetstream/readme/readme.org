@@ -237,7 +237,7 @@ Also, create and attach =/data= and =/repository=  volumes which we will be usin
   ssh ubuntu@149.165.157.137
 #+END_SRC
 
-If you are having trouble logging in, you may try to delete the =~/.ssh/known_hosts= file. If you still have trouble, try ~nova stop <vm-uid-number>~ followed by ~nova stop <vm-uid-number>~.
+If you are having trouble logging in, you may try to delete the =~/.ssh/known_hosts= file. If you still have trouble, try ~nova stop <vm-uid-number>~ followed by ~nova start <vm-uid-number>~.
 
 ** Internal org-babel Emacs Tramp Configuration                    :noexport:
 

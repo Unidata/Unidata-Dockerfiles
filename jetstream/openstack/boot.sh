@@ -70,7 +70,6 @@ nova add-secgroup ${MACHINE_NAME} global-ssh
 nova add-secgroup ${MACHINE_NAME} global-http
 nova add-secgroup ${MACHINE_NAME} global-ldm
 nova add-secgroup ${MACHINE_NAME} global-adde
-nova add-secgroup ${MACHINE_NAME} global-ssh
 nova add-secgroup ${MACHINE_NAME} global-ssl
 nova add-secgroup ${MACHINE_NAME} global-tomcat-http
 nova add-secgroup ${MACHINE_NAME} global-tomcat-ssl
