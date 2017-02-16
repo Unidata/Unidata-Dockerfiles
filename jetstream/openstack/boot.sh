@@ -60,18 +60,18 @@ nova boot ${MACHINE_NAME} \
 --flavor ${VM_SIZE} \
 --image 1c997f2c-bae9-4b53-9197-2948cd449405 \
 --key-name ${OS_PROJECT_NAME}-api-key \
---security-groups global-ssh \
+--security-groups global-ssh-22 \
 --nic net-name=${OS_PROJECT_NAME}-api-net
 
 # give chance for VM to fire up
 echo sleep 30 && sleep 30
 
-nova add-secgroup ${MACHINE_NAME} global-ssh
-nova add-secgroup ${MACHINE_NAME} global-http
-nova add-secgroup ${MACHINE_NAME} global-ldm
-nova add-secgroup ${MACHINE_NAME} global-adde
-nova add-secgroup ${MACHINE_NAME} global-ssl
-nova add-secgroup ${MACHINE_NAME} global-tomcat-http
-nova add-secgroup ${MACHINE_NAME} global-tomcat-ssl
+nova add-secgroup ${MACHINE_NAME} global-ssh-22
+nova add-secgroup ${MACHINE_NAME} global-http-80
+nova add-secgroup ${MACHINE_NAME} global-ldm-388
+nova add-secgroup ${MACHINE_NAME} global-adde-112
+nova add-secgroup ${MACHINE_NAME} global-ssl-443
+nova add-secgroup ${MACHINE_NAME} global-tomcat-http-8080
+nova add-secgroup ${MACHINE_NAME} global-tomcat-ssl-8443
 
 nova floating-ip-associate ${MACHINE_NAME} ${IP}

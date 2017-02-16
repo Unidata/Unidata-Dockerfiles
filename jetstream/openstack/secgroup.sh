@@ -3,7 +3,8 @@
 usage="$(basename "$0") [-h] [-n, --name secgroup name] [-p, --port secgroup port] -- 
 script to setup secgroups.:\n
     -h  show this help text\n
-    -n, --name secgroup name.\n
+    -l, --list secgroup list\n
+    -n, --name secgroup name\n
     -p, --port secgroup port\n"
 
 while [[ $# > 0 ]]
@@ -17,6 +18,10 @@ do
         -p|--port)
             SECGROUP_PORT="$2"
             shift # past argument
+            ;;
+        -l|--list)
+            nova secgroup-list
+            exit
             ;;
         -h|--help)
             echo -e $usage

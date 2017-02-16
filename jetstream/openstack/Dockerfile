@@ -24,6 +24,8 @@ ADD boot.sh $HOME/bin
 
 ADD teardown.sh $HOME/bin
 
+ADD unidata-ports.sh $HOME/bin
+
 RUN chmod +x $HOME/bin/*.sh
 
 ADD .bashrc $HOME/
